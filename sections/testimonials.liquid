@@ -1,280 +1,760 @@
-{%- if section.blocks.size > 0 -%}
-  {%- render 'section-spacing-collapsing' -%}
+{%- render 'section-spacing-collapsing' -%}
 
-  <style>
-    #shopify-section-{{ section.id }} {
-      --testimonial-list-items-per-row: 1;
-      --testimonial-list-carousel-item-width: 74vw;
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+CSS
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+<style>
+  #shopify-section-{{ section.id }} {
+    --testimonials-background: {{ section.settings.background_color }};
+    --section-spacing-inline: 0;
+  }
 
-      --testimonial-list-grid: {% if section.settings.stack_testimonials %}auto / repeat(var(--testimonial-list-items-per-row), minmax(0, 1fr)){% else %}auto / auto-flow var(--testimonial-list-carousel-item-width){% endif %};
+  #shopify-section-{{ section.id }} .testimonials {
+    background: var(--testimonials-background);
+    padding: {{ section.settings.padding_mobile }}px 0;
+  }
+
+  #shopify-section-{{ section.id }} > div {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  #shopify-section-{{ section.id }} .testimonials__header {
+    text-align: center;
+    margin-bottom: {{ section.settings.header_spacing_mobile }}px;
+    padding: 0 var(--container-gutter);
+  }
+
+  #shopify-section-{{ section.id }} .testimonials__title {
+    font-family: var(--heading-font-family);
+    font-size: {{ section.settings.title_font_size_mobile }}px;
+    font-weight: {{ section.settings.title_font_weight }};
+    line-height: 1.2;
+    color: {{ section.settings.title_color }};
+    margin: 0;
+    font-style: {{ section.settings.title_font_style }} !important;
+  }
+
+  #shopify-section-{{ section.id }} .testimonials__title em {
+    font-style: italic;
+  }
+
+  #shopify-section-{{ section.id }} .testimonials__slider-wrapper {
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .testimonials__slider {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc((100vw - 60px) * 0.85);
+    gap: var(--spacing-4);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: calc((100vw - (100vw - 60px) * 0.85) / 2);
+    padding-inline: calc((100vw - (100vw - 60px) * 0.85) / 2);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  #shopify-section-{{ section.id }} .testimonials__slider::-webkit-scrollbar {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .testimonial-card {
+    scroll-snap-align: start;
+    border-radius: {{ section.settings.card_border_radius }}px;
+    padding: {{ section.settings.card_padding_mobile }}px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  {%- for block in section.blocks -%}
+    #shopify-section-{{ section.id }} .testimonial-card[data-block-id="{{ block.id }}"] {
+      background: {{ block.settings.card_background }};
+    }
+    #shopify-section-{{ section.id }} .testimonial-card[data-block-id="{{ block.id }}"] .testimonial-card__quote {
+      color: {{ block.settings.heading_color }};
+    }
+    #shopify-section-{{ section.id }} .testimonial-card[data-block-id="{{ block.id }}"] .testimonial-card__heading {
+      color: {{ block.settings.heading_color }};
+    }
+  {%- endfor -%}
+
+  #shopify-section-{{ section.id }} .testimonial-card__quote {
+    font-size: 30px;
+    line-height: 1;
+    margin: 0;
+    font-family: var(--text-font-family) !important;
+    font-style: italic;
+  }
+
+  #shopify-section-{{ section.id }} .testimonial-card__heading {
+    font-size: {{ section.settings.heading_size_mobile }}px;
+    font-weight: {{ section.settings.heading_weight }};
+    margin: 0 0 12px 0;
+    line-height: 1.3;
+    font-family: var(--text-font-family) !important;
+  }
+
+  #shopify-section-{{ section.id }} .testimonial-card__text {
+    font-size: {{ section.settings.text_size_mobile }}px;
+    line-height: 1.6;
+    color: {{ section.settings.text_color }};
+    margin: 0;
+    font-family: var(--text-font-family);
+  }
+
+  #shopify-section-{{ section.id }} .testimonial-card__text em {
+    font-style: italic;
+    font-family: var(--text-font-family);
+  }
+
+  #shopify-section-{{ section.id }} .testimonial-card__footer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .testimonial-card__image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  #shopify-section-{{ section.id }} .testimonial-card__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #shopify-section-{{ section.id }} .testimonial-card__author {
+    flex: 1;
+  }
+
+  #shopify-section-{{ section.id }} .testimonial-card__name {
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0 0 4px 0;
+    color: {{ section.settings.author_color }};
+  }
+
+  #shopify-section-{{ section.id }} .testimonial-card__meta {
+    font-size: 14px;
+    color: {{ section.settings.meta_color }};
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .testimonial-card--clone {
+    pointer-events: none;
+  }
+
+  /* Scallop button styling */
+  #shopify-section-{{ section.id }} .circle-button.testimonials-scallop-button {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none !important;
+    width: 51px !important;
+    height: 51px !important;
+    min-width: 51px !important;
+    min-height: 51px !important;
+  }
+
+  #shopify-section-{{ section.id }} .circle-button.testimonials-scallop-button svg {
+    width: 51px !important;
+    height: 51px !important;
+    display: block;
+    transition: transform 0.2s ease;
+  }
+
+  #shopify-section-{{ section.id }} .circle-button.testimonials-scallop-button:hover svg {
+    transform: scale(1.1);
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .testimonials {
+      padding: {{ section.settings.padding_desktop }}px 0;
     }
 
-    #shopify-section-{{ section.id }} .scrollbar {
-      {%- assign controls_color = section.settings.text_color | default: section.settings.heading_color | default: settings.text_color -%}
-      --text-color: {{ controls_color.rgb }};
+    #shopify-section-{{ section.id }} .testimonials__header {
+      margin-bottom: {{ section.settings.header_spacing_desktop }}px;
     }
 
-    @media screen and (min-width: 700px) {
-      #shopify-section-{{ section.id }} {
-        --testimonial-list-items-per-row: 2;
-        --testimonial-list-carousel-item-width: 52vw;
+    #shopify-section-{{ section.id }} .testimonials__title {
+      font-size: {{ section.settings.title_font_size_desktop }}px;
+    }
+
+    #shopify-section-{{ section.id }} .testimonials__slider {
+      grid-auto-columns: calc((100vw - 120px - (var(--spacing-5) * 2)) / 3);
+      gap: var(--spacing-5);
+      scroll-padding-inline: 60px;
+      padding-inline: 60px;
+    }
+
+    #shopify-section-{{ section.id }} .testimonial-card {
+      padding: {{ section.settings.card_padding_desktop }}px;
+    }
+
+    #shopify-section-{{ section.id }} .testimonial-card__quote {
+      font-size: {{ section.settings.quote_size_desktop }}px;
+    }
+
+    #shopify-section-{{ section.id }} .testimonial-card__heading {
+      font-size: {{ section.settings.heading_size_desktop }}px;
+    }
+
+    #shopify-section-{{ section.id }} .testimonial-card__text {
+      font-size: {{ section.settings.text_size_desktop }}px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const carousel = document.querySelector('#shopify-section-{{ section.id }} .testimonials__slider');
+    if (!carousel) return;
+
+    const totalBlocks = {{ section.blocks.size }};
+    const cloneCount = Math.min(3, totalBlocks);
+    
+    if (totalBlocks <= 3) return; // No need for infinite scroll with 3 or fewer items
+
+    let isScrolling = false;
+    let scrollTimeout;
+
+    function getItemOffset() {
+      const items = carousel.querySelectorAll('.scroll-area__item:not(.testimonial-card--clone)');
+      const itemWidth = items[0]?.offsetWidth || 0;
+      const gap = parseFloat(getComputedStyle(carousel).gap) || 0;
+      return itemWidth + gap;
+    }
+
+    function scrollToOriginalPosition() {
+      const items = carousel.querySelectorAll('.scroll-area__item');
+      const itemWidth = items[0]?.offsetWidth || 0;
+      const gap = parseFloat(getComputedStyle(carousel).gap) || 0;
+      carousel.scrollLeft = cloneCount * (itemWidth + gap);
+    }
+
+    carousel.addEventListener('scroll', function() {
+      if (isScrolling) return;
+
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(function() {
+        const scrollLeft = carousel.scrollLeft;
+        const scrollWidth = carousel.scrollWidth;
+        const clientWidth = carousel.clientWidth;
+        const itemOffset = getItemOffset();
+        const threshold = itemOffset * 0.5;
+
+        // If scrolled to clones at the end, jump to beginning of original slides
+        if (scrollLeft + clientWidth >= scrollWidth - threshold) {
+          isScrolling = true;
+          const currentIndex = Math.round(scrollLeft / itemOffset) - cloneCount;
+          const newScrollLeft = (cloneCount + (currentIndex % totalBlocks)) * itemOffset;
+          carousel.scrollLeft = newScrollLeft;
+          setTimeout(() => { isScrolling = false; }, 50);
+        }
+        // If scrolled to clones at the beginning, jump to end of original slides  
+        else if (scrollLeft <= threshold) {
+          isScrolling = true;
+          const currentIndex = Math.round(scrollLeft / itemOffset);
+          const targetIndex = totalBlocks + currentIndex;
+          carousel.scrollLeft = targetIndex * itemOffset;
+          setTimeout(() => { isScrolling = false; }, 50);
+        }
+      }, 150);
+    });
+
+    // Start at the first original slide (after clones)
+    scrollToOriginalPosition();
+
+    // Recalculate position on window resize
+    window.addEventListener('resize', function() {
+      if (!isScrolling) {
+        scrollToOriginalPosition();
       }
-    }
+    });
+  });
+</script>
 
-    @media screen and (min-width: 1000px) {
-      #shopify-section-{{ section.id }} {
-        --testimonial-list-carousel-item-width: 36vw;
-      }
-    }
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+LIQUID
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
 
-    @media screen and (min-width: 1150px) {
-      #shopify-section-{{ section.id }} {
-        --testimonial-list-items-per-row: 3;
-        --testimonial-list-carousel-item-width: calc(100% / 3 - (var(--grid-gutter) / 3 * 2));
-      }
-    }
-  </style>
+<div {% render 'section-properties' %}>
+  <div class="testimonials">
+    {%- if section.settings.title != blank -%}
+      <div class="testimonials__header">
+        <h2 class="testimonials__title">{{ section.settings.title }}</h2>
+      </div>
+    {%- endif -%}
 
-  <div {% render 'section-properties' %}>
-    <div class="section-stack">
-      {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: section.settings.link_url -%}
-
-      <div class="scrollable-with-controls">
-        {%- assign scroll_area_id = 'scroll-area-' | append: section.id -%}
-
-        <scroll-carousel id="{{ scroll_area_id }}" class="testimonial-list scroll-area bleed {% if section.blocks.size > 3 %}is-scrollable{% endif %}">
-          {%- for block in section.blocks -%}
-            <div {% render 'surface', class: 'testimonial rounded-sm', background: section.settings.testimonial_card_background, text_color: section.settings.testimonial_card_text_color, background_fallback: 'bg-secondary' %} {{ block.shopify_attributes }}>
-              {%- if block.settings.image != blank or block.settings.author != blank or block.settings.show_rating -%}
-                {%- liquid
-                  assign loading_strategy = nil
-        
-                  if section.index > 3 or forloop.index > 3
-                    assign loading_strategy = 'lazy'
-                  endif
-                -%}
-
-                <div class="h-stack align-start gap-4 sm:gap-6">
-                  {%- if block.settings.image != blank -%}
-                    {%- capture image_class -%}testimonial__image {% if block.settings.round_avatar %}rounded-full{% endif %}{%- endcapture -%}
-                    {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: loading_strategy, sizes: '(max-width: 699px) 40px, 56px', widths: '40,56,80,112,120,168', class: image_class -}}
-                  {%- endif -%}
-
-                  <div class="v-stack gap-2 sm:gap-2.5">
-                    {%- if block.settings.show_rating -%}
-                      <div class="rating">
-                        <div class="rating__stars" role="img" aria-label="{{ 'general.rating.info' | t: rating_value: block.settings.rating, rating_max: 5 }}">
-                          {%- for i in (1..5) -%}
-                            {%- if i <= block.settings.rating -%}
-                              {%- render 'icon' with 'rating-star', class: 'rating__star rating__star--full' -%}
-                            {%- else -%}
-                              {%- render 'icon' with 'rating-star', class: 'rating__star rating__star--empty' -%}
-                            {%- endif -%}
-                          {%- endfor -%}
-                        </div>
-                      </div>
-                    {%- endif -%}
-
-                    {%- if block.settings.author != blank -%}
-                      <p class="text-subdued">{{ block.settings.author | escape }}</p>
-                    {%- endif -%}
-                  </div>
-                </div>
+    <div class="testimonials__slider-wrapper floating-controls-container">
+      {%- assign slider_id = 'testimonials-' | append: section.id -%}
+      
+      <scroll-carousel id="{{ slider_id }}" class="testimonials__slider scroll-area is-scrollable" reveal-on-scroll="false">
+        {%- comment -%} Duplicate slides at the beginning for infinite scroll effect {%- endcomment -%}
+        {%- if section.blocks.size > 3 -%}
+          {%- for block in section.blocks limit: 3 -%}
+            <div class="testimonial-card scroll-area__item testimonial-card--clone" data-block-id="{{ block.id }}">
+              {%- if block.settings.quote != blank -%}
+                <div class="testimonial-card__quote">"</div>
               {%- endif -%}
 
-              {%- if block.settings.title != blank or block.settings.content != blank -%}
-                <div class="v-stack gap-2 sm:gap-2.5">
-                  {%- if block.settings.title != blank -%}
-                    <p class="bold">{{ block.settings.title | escape }}</p>
+              <div class="testimonial-card__content">
+                {%- if block.settings.heading != blank -%}
+                  <h3 class="testimonial-card__heading">{{ block.settings.heading }}</h3>
+                {%- endif -%}
+
+                {%- if block.settings.text != blank -%}
+                  <div class="testimonial-card__text">
+                    {{ block.settings.text }}
+                  </div>
+                {%- endif -%}
+              </div>
+
+              <div class="testimonial-card__footer">
+                {%- if block.settings.image != blank -%}
+                  <div class="testimonial-card__image">
+                    {{- block.settings.image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60,120' -}}
+                  </div>
+                {%- endif -%}
+
+                <div class="testimonial-card__author">
+                  {%- if block.settings.author_name != blank -%}
+                    <p class="testimonial-card__name">{{ block.settings.author_name }}</p>
                   {%- endif -%}
 
-                  {{- block.settings.content -}}
+                  {%- if block.settings.author_meta != blank -%}
+                    <p class="testimonial-card__meta">{{ block.settings.author_meta }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- comment -%} Original slides {%- endcomment -%}
+        {%- for block in section.blocks -%}
+          <div class="testimonial-card scroll-area__item" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.quote != blank -%}
+              <div class="testimonial-card__quote">"</div>
+            {%- endif -%}
+
+            <div class="testimonial-card__content">
+              {%- if block.settings.heading != blank -%}
+                <h3 class="testimonial-card__heading">{{ block.settings.heading }}</h3>
+              {%- endif -%}
+
+              {%- if block.settings.text != blank -%}
+                <div class="testimonial-card__text">
+                  {{ block.settings.text }}
                 </div>
               {%- endif -%}
             </div>
-          {%- endfor -%}
-        </scroll-carousel>
 
-        {%- unless section.settings.stack_testimonials -%}
-          {%- assign default_progress = 3.0 | divided_by: section.blocks.size -%}
-          {%- render 'scrollbar', observes: scroll_area_id, default_progress: default_progress, show_buttons: true -%}
-        {%- endunless -%}
-      </div>
+            <div class="testimonial-card__footer">
+              {%- if block.settings.image != blank -%}
+                <div class="testimonial-card__image">
+                  {{- block.settings.image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60,120' -}}
+                </div>
+              {%- endif -%}
+
+              <div class="testimonial-card__author">
+                {%- if block.settings.author_name != blank -%}
+                  <p class="testimonial-card__name">{{ block.settings.author_name }}</p>
+                {%- endif -%}
+
+                {%- if block.settings.author_meta != blank -%}
+                  <p class="testimonial-card__meta">{{ block.settings.author_meta }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        {%- endfor -%}
+
+        {%- comment -%} Duplicate slides at the end for infinite scroll effect {%- endcomment -%}
+        {%- if section.blocks.size > 3 -%}
+          {%- for block in section.blocks limit: 3 -%}
+            <div class="testimonial-card scroll-area__item testimonial-card--clone" data-block-id="{{ block.id }}">
+              {%- if block.settings.quote != blank -%}
+                <div class="testimonial-card__quote">"</div>
+              {%- endif -%}
+
+              <div class="testimonial-card__content">
+                {%- if block.settings.heading != blank -%}
+                  <h3 class="testimonial-card__heading">{{ block.settings.heading }}</h3>
+                {%- endif -%}
+
+                {%- if block.settings.text != blank -%}
+                  <div class="testimonial-card__text">
+                    {{ block.settings.text }}
+                  </div>
+                {%- endif -%}
+              </div>
+
+              <div class="testimonial-card__footer">
+                {%- if block.settings.image != blank -%}
+                  <div class="testimonial-card__image">
+                    {{- block.settings.image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60,120' -}}
+                  </div>
+                {%- endif -%}
+
+                <div class="testimonial-card__author">
+                  {%- if block.settings.author_name != blank -%}
+                    <p class="testimonial-card__name">{{ block.settings.author_name }}</p>
+                  {%- endif -%}
+
+                  {%- if block.settings.author_meta != blank -%}
+                    <p class="testimonial-card__meta">{{ block.settings.author_meta }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        {%- endif -%}
+      </scroll-carousel>
+
+      <button is="prev-button" class="circle-button testimonials-scallop-button" aria-controls="{{ slider_id }}">
+        <span class="sr-only">{{ 'general.accessibility.previous' | t }}</span>
+        {%- render 'icon-arrow-left-scallop' -%}
+      </button>
+
+      <button is="next-button" class="circle-button testimonials-scallop-button" aria-controls="{{ slider_id }}">
+        <span class="sr-only">{{ 'general.accessibility.next' | t }}</span>
+        {%- render 'icon-arrow-right-scallop' -%}
+      </button>
     </div>
   </div>
-{%- endif -%}
+</div>
 
 {% schema %}
 {
   "name": "Testimonials",
   "class": "shopify-section--testimonials",
+  "tag": "section",
   "disabled_on": {
+    "templates": ["password"],
     "groups": ["header", "custom.overlay"]
   },
-  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section title"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "They say it <em>better</em> than we do."
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Title font size (mobile)",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_desktop",
+      "label": "Title font size (desktop)",
+      "min": 32,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "title_font_weight",
+      "label": "Title font weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 400
+    },
+    {
+      "type": "select",
+      "id": "title_font_style",
+      "label": "Title font style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "italic",
+          "label": "Italic"
+        }
+      ],
+      "default": "normal"
+    },
+    {
+      "type": "header",
+      "content": "Card styling"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "card_padding_mobile",
+      "label": "Card padding (mobile)",
+      "min": 20,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "card_padding_desktop",
+      "label": "Card padding (desktop)",
+      "min": 32,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Card content"
+    },
+    {
+      "type": "range",
+      "id": "quote_size_mobile",
+      "label": "Quote size (mobile)",
+      "min": 40,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "quote_size_desktop",
+      "label": "Quote size (desktop)",
+      "min": 60,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (mobile)",
+      "min": 16,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size (desktop)",
+      "min": 20,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "heading_weight",
+      "label": "Heading font weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "label": "Text size (mobile)",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_size_desktop",
+      "label": "Text size (desktop)",
+      "min": 16,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "author_color",
+      "label": "Author name color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "meta_color",
+      "label": "Meta text color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Section padding (mobile)",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "label": "Section padding (desktop)",
+      "min": 60,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "header_spacing_mobile",
+      "label": "Header spacing (mobile)",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "header_spacing_desktop",
+      "label": "Header spacing (desktop)",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    }
+  ],
   "blocks": [
     {
       "type": "testimonial",
       "name": "Testimonial",
       "settings": [
         {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Avatar",
-          "info": "250 x 250px .jpg recommended"
+          "type": "color",
+          "id": "card_background",
+          "label": "Card background color",
+          "default": "#E8D5F2"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading color",
+          "default": "#E07A5F"
         },
         {
           "type": "checkbox",
-          "id": "round_avatar",
-          "label": "Round avatar",
+          "id": "quote",
+          "label": "Show quote mark",
           "default": true
         },
         {
-          "type": "checkbox",
-          "id": "show_rating",
-          "label": "Show rating",
-          "default": true
-        },
-        {
-          "type": "range",
-          "min": 0,
-          "max": 5,
-          "id": "rating",
-          "label": "Rating",
-          "default": 4,
-          "visible_if": "{{ block.settings.show_rating }}"
-        },
-        {
           "type": "text",
-          "id": "author",
-          "label": "Author"
-        },
-        {
-          "type": "text",
-          "id": "title",
+          "id": "heading",
           "label": "Heading",
-          "default": "Testimonial"
+          "default": "Finally a bra that fits me the right way."
         },
         {
           "type": "richtext",
-          "id": "content",
-          "label": "Content",
-          "default": "<p>Share what your customers are saying about your products, customer service or shipping rates.</p>"
+          "id": "text",
+          "label": "Text",
+          "default": "<p>It's supportive, doesn't dig into my skin and it looks great too. I've never felt more <em>confident</em>, or more <em>comfortable!</em></p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Author image"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author name",
+          "default": "Nita Sharma"
+        },
+        {
+          "type": "text",
+          "id": "author_meta",
+          "label": "Author meta",
+          "default": "Wore: 36D | Real Fit: 32G"
         }
       ]
-    }
-  ],
-  "settings": [
-    {
-      "type": "checkbox",
-      "id": "full_width",
-      "label": "Full width",
-      "default": true
-    },
-    {
-      "type": "checkbox",
-      "id": "stack_testimonials",
-      "label": "Stack testimonials",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "subheading",
-      "label": "Subheading"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Heading",
-      "default": "Testimonials"
-    },
-    {
-      "type": "richtext",
-      "id": "content",
-      "label": "Content"
-    },
-    {
-      "type": "url",
-      "id": "link_url",
-      "label": "Link URL"
-    },
-    {
-      "type": "text",
-      "id": "link_text",
-      "label": "Link text"
-    },
-    {
-      "type": "header",
-      "content": "Colors",
-      "info": "Gradient replaces solid colors when set."
-    },
-    {
-      "type": "color",
-      "id": "background",
-      "label": "Background"
-    },
-    {
-      "type": "color_background",
-      "id": "background_gradient",
-      "label": "Background gradient"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Text"
-    },
-    {
-      "type": "color",
-      "id": "heading_color",
-      "label": "Heading color"
-    },
-    {
-      "type": "color_background",
-      "id": "heading_gradient",
-      "label": "Heading gradient"
-    },
-    {
-      "type": "color",
-      "id": "testimonial_card_background",
-      "label": "Testimonial card background"
-    },
-    {
-      "type": "color",
-      "id": "testimonial_card_text_color",
-      "label": "Testimonial card text"
     }
   ],
   "presets": [
     {
       "name": "Testimonials",
-      "category": "Trust & social proof",
+      "category": "Content",
       "blocks": [
         {
-          "type": "testimonial",
-          "settings": {
-            "rating": 4,
-            "author": "John S.",
-            "title": "Testimonial 1",
-            "content": "<p>Share what your customers are saying about your products, customer service or shipping rates.</p>"
-          }
+          "type": "testimonial"
         },
         {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "author": "Mary U.",
-            "title": "Testimonial 2",
-            "content": "<p>Share what your customers are saying about your products, customer service or shipping rates.</p>"
-          }
+          "type": "testimonial"
         },
         {
-          "type": "testimonial",
-          "settings": {
-            "rating": 4,
-            "author": "Joshua A.",
-            "title": "Testimonial 3",
-            "content": "<p>Share what your customers are saying about your products, customer service or shipping rates.</p>"
-          }
+          "type": "testimonial"
         }
       ]
     }
