@@ -1,0 +1,498 @@
+{%- render 'section-spacing-collapsing' -%}
+
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+CSS
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+<style>
+  #shopify-section-{{ section.id }} {
+    --image-with-text-background: {{ section.settings.background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .image-with-text {
+    background: var(--image-with-text-background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: {{ section.settings.padding_mobile }}px;
+    gap: {{ section.settings.gap_mobile }}px;
+  }
+
+  #shopify-section-{{ section.id }} .image-with-text__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: {{ section.settings.gap_mobile }}px;
+  }
+
+  #shopify-section-{{ section.id }} .image-with-text__header,
+  #shopify-section-{{ section.id }} .image-with-text__footer {
+    text-align: center;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .image-with-text__image {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .image-with-text__image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Hide desktop image on mobile */
+  #shopify-section-{{ section.id }} .image-with-text__image--desktop {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .image-with-text__eyebrow {
+    font-size: {{ section.settings.eyebrow_font_size }}px;
+    font-weight: {{ section.settings.eyebrow_font_weight }};
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    color: {{ section.settings.eyebrow_color }};
+  }
+
+  #shopify-section-{{ section.id }} .image-with-text__heading {
+    font-family: var(--heading-font-family);
+    font-size: {{ section.settings.heading_font_size_mobile }}px;
+    font-weight: {{ section.settings.heading_font_weight }};
+    line-height: 1.2;
+    margin-bottom: 24px;
+    color: {{ section.settings.heading_color }};
+    font-style: {{ section.settings.heading_font_style }} !important;
+  }
+
+  #shopify-section-{{ section.id }} .image-with-text__text {
+    font-size: {{ section.settings.content_font_size }}px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    color: {{ section.settings.content_color }};
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .image-with-text {
+      flex-direction: {{ section.settings.desktop_layout }};
+      align-items: center;
+      padding: {{ section.settings.padding_desktop }}px;
+      gap: {{ section.settings.gap_desktop }}px;
+    }
+
+    #shopify-section-{{ section.id }} .image-with-text__content {
+      flex: 1;
+      text-align: {{ section.settings.desktop_text_align }};
+    }
+
+    #shopify-section-{{ section.id }} .image-with-text__header,
+    #shopify-section-{{ section.id }} .image-with-text__footer {
+      text-align: {{ section.settings.desktop_text_align }};
+    }
+
+    #shopify-section-{{ section.id }} .image-with-text__image--desktop {
+      display: block;
+      flex: 1;
+      max-width: {{ section.settings.image_max_width }}%;
+    }
+
+    /* Hide mobile image on desktop */
+    #shopify-section-{{ section.id }} .image-with-text__image--mobile {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .image-with-text__heading {
+      font-size: {{ section.settings.heading_font_size_desktop }}px;
+    }
+  }
+</style>
+
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+LIQUID
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+<div {% render 'section-properties' %}>
+  <div class="image-with-text">
+    <div class="image-with-text__content">
+      <div class="image-with-text__header">
+        {%- if section.settings.eyebrow_text != blank -%}
+          <p class="image-with-text__eyebrow">{{ section.settings.eyebrow_text }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="image-with-text__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+      </div>
+
+      <div class="image-with-text__image image-with-text__image--mobile">
+        {%- if section.settings.image != blank -%}
+          {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: loading: 'lazy', widths: '400,600,800,1000,1200,1400,1600,1800,2000' -}}
+        {%- else -%}
+          {{- 'image' | placeholder_svg_tag: 'placeholder' -}}
+        {%- endif -%}
+      </div>
+
+      <div class="image-with-text__footer">
+        {%- if section.settings.content != blank -%}
+          <div class="image-with-text__text">
+            {{ section.settings.content }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.button_text != blank -%}
+          {%- render 'button', 
+            content: section.settings.button_text, 
+            href: section.settings.button_link,
+            size: section.settings.button_size,
+            style: section.settings.button_style,
+            secondary: section.settings.button_secondary,
+            background: section.settings.button_background,
+            text_color: section.settings.button_text_color
+          -%}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="image-with-text__image image-with-text__image--desktop">
+      {%- if section.settings.image != blank -%}
+        {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: loading: 'lazy', widths: '400,600,800,1000,1200,1400,1600,1800,2000' -}}
+      {%- else -%}
+        {{- 'image' | placeholder_svg_tag: 'placeholder' -}}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Image with text",
+  "class": "shopify-section--image-with-text",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "label": "Image max width (desktop)",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Eyebrow text"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow text",
+      "default": "GIFT CARDS!"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "label": "Eyebrow font size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_weight",
+      "label": "Eyebrow font weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Looking for something for someone else?"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading font size (mobile)",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_desktop",
+      "label": "Heading font size (desktop)",
+      "min": 32,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 400
+    },
+    {
+      "type": "select",
+      "id": "heading_font_style",
+      "label": "Heading font style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "italic",
+          "label": "Italic"
+        }
+      ],
+      "default": "italic"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content",
+      "default": "<p>Look no further, grab a gift card of an amount you'd find fit. And we'll help you out with the right fit.</p>"
+    },
+    {
+      "type": "color",
+      "id": "content_color",
+      "label": "Content color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "content_font_size",
+      "label": "Content font size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "EXPLORE GIFTING"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "label": "Button size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "base",
+          "label": "Base"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "xl",
+          "label": "Extra Large"
+        }
+      ],
+      "default": "base"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "fill",
+          "label": "Fill"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_secondary",
+      "label": "Use secondary button style",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background (optional)",
+      "info": "Leave empty to use theme default"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color (optional)",
+      "info": "Leave empty to use theme default"
+    },
+    {
+      "type": "header",
+      "content": "Layout - Desktop"
+    },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Desktop layout",
+      "options": [
+        {
+          "value": "row-reverse",
+          "label": "Image on left"
+        },
+        {
+          "value": "row",
+          "label": "Image on right"
+        }
+      ],
+      "default": "row-reverse"
+    },
+    {
+      "type": "select",
+      "id": "desktop_text_align",
+      "label": "Desktop text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Layout - Mobile"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Padding (mobile)",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "label": "Padding (desktop)",
+      "min": 40,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "label": "Gap between image and text (mobile)",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "gap_desktop",
+      "label": "Gap between image and text (desktop)",
+      "min": 40,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image with text",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}
+

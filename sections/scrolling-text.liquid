@@ -1,0 +1,273 @@
+{%- if section.blocks.size > 0 -%}
+  {%- render 'section-spacing-collapsing' -%}
+
+  <style>
+    #shopify-section-{{ section.id }} {
+      --section-spacing-inline: 0;
+      --scrolling-text-font-size: 50px;
+      padding-top: 36px !important;
+      padding-bottom: 36px !important;
+    }
+    
+    #shopify-section-{{ section.id }} > div {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    #shopify-section-{{ section.id }} .scrolling-text {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #shopify-section-{{ section.id }} .scrolling-text__text {
+      font-family: var(--text-font-family);
+      display: inline-flex;
+      align-items: center;
+    }
+
+    #shopify-section-{{ section.id }} .scrolling-text__text .heading {
+      font-family: var(--text-font-family) !important;
+    }
+
+    #shopify-section-{{ section.id }} .scrolling-text__item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    #shopify-section-{{ section.id }} .scrolling-text__motif {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      line-height: 1 !important;
+      margin: 0 36px 0 36px !important;
+      margin-left: 36px !important;
+      margin-right: 36px !important;
+      padding: 0 !important;
+    }
+
+    #shopify-section-{{ section.id }} .scrolling-text__motif svg {
+      width: 0.8em;
+      height: 0.8em;
+      display: block;
+      flex-shrink: 0;
+    }
+    
+    @media screen and (min-width: 700px) {
+      #shopify-section-{{ section.id }} .scrolling-text__motif {
+        padding-inline-end: min(1.5em, 4rem);
+      }
+    }
+
+    @media screen and (min-width: 700px) {
+      #shopify-section-{{ section.id }} {
+        --scrolling-text-font-size: {% if section.settings.text_size == 'xsmall' %}1.5rem{% elsif section.settings.text_size == 'small' %}3.75rem{% elsif section.settings.text_size == 'medium' %}5rem{% elsif section.settings.text_size == 'large' %}8.75rem{% else %}12.5rem{% endif %};
+      }
+    }
+  </style>
+
+  {%- if section.settings.text_size == 'xsmall' -%}
+    {%- assign is_tight = true -%}
+  {%- endif -%}
+
+  <div {% render 'section-properties', tight: is_tight %}>
+    {%- capture section_content -%}
+      {%- for i in (1..10) -%}
+        <span class="scrolling-text__text {% unless forloop.first %}motion-reduce:hidden{% endunless %}" {% unless forloop.first %}aria-hidden="true"{% endunless %} style="padding: 0 !important;">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'text' -%}
+              <span class="heading" style="display: inline-block; padding-inline-start: min(1em, 2rem); padding-inline-end: min(1em, 2rem);">
+                {%- render 'styled-text', content: block.settings.text, gradient: section.settings.text_gradient, style: section.settings.text_style -%}
+              </span>
+            {%- elsif block.type == 'motif' -%}
+              {%- if block.settings.motif_svg != blank -%}
+                <span class="scrolling-text__motif" style="color: {{ block.settings.motif_color }}; display: inline-flex; align-items: center; padding: 0; margin: 0 36px 0 36px;">
+                  {{- block.settings.motif_svg -}}
+                </span>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </span>
+      {%- endfor -%}
+    {%- endcapture -%}
+
+    <div class="scrolling-text {% if section.settings.scrolling_mode == 'scroll' %}scrolling-text--scroll{% else %}scrolling-text--auto{% endif %}">
+      {%- if section.settings.scrolling_mode == 'scroll' -%}
+        <scrolling-text class="scrolling-text__wrapper">
+          {{- section_content -}}
+        </scrolling-text>
+       {%- else -%}
+         <marquee-text scrolling-speed="{{ section.settings.scrolling_speed }}" class="scrolling-text__wrapper">
+           {{- section_content -}}
+         </marquee-text>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Scrolling text",
+  "class": "shopify-section--scrolling-text",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "text_size",
+      "label": "Text size",
+      "options": [
+        {
+          "value": "xsmall",
+          "label": "X-Small"
+        },
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "xlarge",
+          "label": "X-Large"
+        }
+      ],
+      "default": "large"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "label": "Text style",
+      "options": [
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "fill",
+          "label": "Fill"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "select",
+      "id": "scrolling_mode",
+      "label": "Scrolling mode",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Automatic"
+        },
+        {
+          "value": "scroll",
+          "label": "On scroll"
+        }
+      ],
+      "default": "auto"
+    },
+    {
+      "type": "range",
+      "id": "scrolling_speed",
+      "min": 10,
+      "max": 120,
+      "step": 5,
+      "unit": "s",
+      "label": "Automatic scrolling speed",
+      "info": "Higher number = slower scroll",
+      "default": 40,
+      "visible_if": "{{ section.settings.scrolling_mode == 'auto' }}"
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set. Gradient text outline and gradient background cannot be combined."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    },
+    {
+      "type": "color_background",
+      "id": "text_gradient",
+      "label": "Text gradient"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Real sizes for real bodies."
+        }
+      ]
+    },
+    {
+      "type": "motif",
+      "name": "Motif",
+      "settings": [
+        {
+          "type": "html",
+          "id": "motif_svg",
+          "label": "SVG code",
+          "info": "Paste your SVG code here. Use fill=\"currentColor\" or stroke=\"currentColor\" for color control."
+        },
+        {
+          "type": "color",
+          "id": "motif_color",
+          "label": "Motif color",
+          "default": "#F9CEC6"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scrolling text",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "text",
+          "settings": {
+            "text": "Real sizes for real bodies."
+          }
+        },
+        {
+          "type": "motif"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

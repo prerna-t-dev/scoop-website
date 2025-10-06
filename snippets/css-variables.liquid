@@ -1,0 +1,655 @@
+{%- comment -%}
+This file defines all the CSS variables used throughout the theme. Feel free to adjust them at your own need, but
+note that this may have impact on different places.
+{%- endcomment -%}
+
+{%- capture direction -%}{% render 'direction' %}{%- endcapture -%}
+
+<style>
+  {%- comment -%}Design System Fonts - Old Standard & Inter{%- endcomment -%}
+  /* Typography (heading) - Old Standard */
+  @font-face {
+    font-family: 'Old Standard TT';
+    font-style: normal;
+    font-weight: 400;
+    font-display: fallback;
+    src: url('https://fonts.gstatic.com/s/oldstandardtt/v18/MwQrbHw1cFzegS3g9BBWkCOHpIHmOynS4r0A.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  @font-face {
+    font-family: 'Old Standard TT';
+    font-style: italic;
+    font-weight: 400;
+    font-display: fallback;
+    src: url('https://fonts.gstatic.com/s/oldstandardtt/v18/MwQrbHw1cFzegS3g9BBWkCOHpIHmOynS4r0A.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  /* Typography (body) - Inter */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: fallback;
+    src: url('https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: fallback;
+    src: url('https://fonts.gstatic.com/s/inter/v18/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+  :root {
+    /**
+     * ---------------------------------------------------------------------
+     * SPACING VARIABLES
+     *
+     * We are using a spacing inspired from frameworks like Tailwind CSS.
+     * ---------------------------------------------------------------------
+     */
+    --spacing-0-5: 0.125rem; /* 2px */
+    --spacing-1: 0.25rem; /* 4px */
+    --spacing-1-5: 0.375rem; /* 6px */
+    --spacing-2: 0.5rem; /* 8px */
+    --spacing-2-5: 0.625rem; /* 10px */
+    --spacing-3: 0.75rem; /* 12px */
+    --spacing-3-5: 0.875rem; /* 14px */
+    --spacing-4: 1rem; /* 16px */
+    --spacing-4-5: 1.125rem; /* 18px */
+    --spacing-5: 1.25rem; /* 20px */
+    --spacing-5-5: 1.375rem; /* 22px */
+    --spacing-6: 1.5rem; /* 24px */
+    --spacing-6-5: 1.625rem; /* 26px */
+    --spacing-7: 1.75rem; /* 28px */
+    --spacing-7-5: 1.875rem; /* 30px */
+    --spacing-8: 2rem; /* 32px */
+    --spacing-8-5: 2.125rem; /* 34px */
+    --spacing-9: 2.25rem; /* 36px */
+    --spacing-9-5: 2.375rem; /* 38px */
+    --spacing-10: 2.5rem; /* 40px */
+    --spacing-11: 2.75rem; /* 44px */
+    --spacing-12: 3rem; /* 48px */
+    --spacing-14: 3.5rem; /* 56px */
+    --spacing-16: 4rem; /* 64px */
+    --spacing-18: 4.5rem; /* 72px */
+    --spacing-20: 5rem; /* 80px */
+    --spacing-24: 6rem; /* 96px */
+    --spacing-28: 7rem; /* 112px */
+    --spacing-32: 8rem; /* 128px */
+    --spacing-36: 9rem; /* 144px */
+    --spacing-40: 10rem; /* 160px */
+    --spacing-44: 11rem; /* 176px */
+    --spacing-48: 12rem; /* 192px */
+    --spacing-52: 13rem; /* 208px */
+    --spacing-56: 14rem; /* 224px */
+    --spacing-60: 15rem; /* 240px */
+    --spacing-64: 16rem; /* 256px */
+    --spacing-72: 18rem; /* 288px */
+    --spacing-80: 20rem; /* 320px */
+    --spacing-96: 24rem; /* 384px */
+
+    /* Container */
+    --container-max-width: {{ settings.page_width }}px;
+    --container-narrow-max-width: {{ settings.page_width | minus: 250 }}px;
+    --container-gutter: var(--spacing-5);
+    --section-outer-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-8){% elsif settings.section_vertical_spacing == 'small' %}var(--spacing-10){% elsif settings.section_vertical_spacing == 'medium' %}var(--spacing-12){% else %}var(--spacing-14){% endif %};
+    --section-inner-max-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-8){% elsif settings.section_vertical_spacing == 'small' %}var(--spacing-9){% elsif settings.section_vertical_spacing == 'medium' %}var(--spacing-10){% else %}var(--spacing-12){% endif %};
+    --section-inner-spacing-inline: var(--container-gutter);
+    --section-stack-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-8){% elsif settings.section_vertical_spacing == 'small' %}var(--spacing-8){% elsif settings.section_vertical_spacing == 'medium' %}var(--spacing-8){% else %}var(--spacing-10){% endif %};
+
+    /* Grid gutter */
+    --grid-gutter: var(--spacing-5);
+
+    /* Product list settings */
+    --product-list-row-gap: var(--spacing-8);
+    --product-list-column-gap: var(--grid-gutter);
+
+    /* Form settings */
+    --input-gap: var(--spacing-2);
+    --input-height: 2.625rem;
+    --input-padding-inline: var(--spacing-4);
+
+    /* Other sizes */
+    --sticky-area-height: calc(var(--sticky-announcement-bar-enabled, 0) * var(--announcement-bar-height, 0px) + var(--sticky-header-enabled, 0) * var(--header-height, 0px));
+
+    /* RTL support */
+    --transform-logical-flip: 1;
+    --transform-origin-start: left;
+    --transform-origin-end: right;
+
+    /**
+     * ---------------------------------------------------------------------
+     * TYPOGRAPHY
+     * ---------------------------------------------------------------------
+     */
+
+    /* Font properties - Design System */
+    --heading-font-family: 'Old Standard TT', serif;
+    --heading-font-weight: 400;
+    --heading-font-style: normal;
+    --heading-text-transform: {{ settings.heading_text_transform }};
+    --heading-letter-spacing: {% if direction == 'rtl' %}0{% else %}{{ settings.heading_letter_spacing | divided_by: 100.0 }}em{% endif %};
+    --text-font-family: 'Inter', sans-serif;
+    --text-font-weight: 400;
+    --text-font-style: normal;
+    --text-letter-spacing: {% if direction == 'rtl' %}0{% else %}{{ settings.text_font_letter_spacing | divided_by: 100.0 }}em{% endif %};
+    
+    /* Design System Font Variants */
+    --font-inter-semibold: 'Inter', sans-serif;
+    --font-inter-semibold-weight: 600;
+    --font-old-standard-italic: 'Old Standard TT', serif;
+    --font-old-standard-italic-style: italic;
+
+    /* Design System Heading Sizes - Mobile First */
+    --heading-xx-large: 60px;    /* XX-large mobile */
+    --heading-x-large: 45px;     /* X-large mobile */
+    --heading-large: 35px;       /* large mobile */
+    --heading-medium: 30px;      /* Medium mobile */
+    --heading-small: 24px;       /* small mobile */
+    --heading-x-small: 18px;     /* x-small mobile */
+    --heading-xx-small: 14px;    /* xx-small mobile */
+    
+    /* Legacy heading variables mapped to design system */
+    --text-h0: var(--heading-xx-large);
+    --text-h1: var(--heading-x-large);
+    --text-h2: var(--heading-large);
+    --text-h3: var(--heading-medium);
+    --text-h4: var(--heading-small);
+    --text-h5: var(--heading-x-small);
+    --text-h6: var(--heading-xx-small);
+    
+    /* Body text sizes - Design System */
+    --text-xs: 14px; /* Small text */
+    --text-sm: 16px; /* Small-medium text */
+    --text-base: 18px; /* Default body text - Mobile */
+    --text-lg: 20px; /* Large text */
+    
+    /* Body text typography */
+    --body-font-size: 18px; /* Mobile default */
+    --body-line-height: 130%; /* 1.3 */
+    --body-font-weight: 400; /* Regular */
+
+    /**
+     * ---------------------------------------------------------------------
+     * DESIGN SYSTEM COLORS
+     * ---------------------------------------------------------------------
+     */
+    
+    /* Primary Colours */
+    --color-coral-red: #FF615C;
+    --color-soft-lilac: #CCA7FC;
+    --color-muted-plum: #A073B7;
+    --color-sand-beige: #F8EEEC;
+    
+    /* Secondary Colours */
+    --color-light-coral: #FF978B;
+    --color-calm-tangerine: #FFB455;
+    --color-beige-gradient: linear-gradient(180deg, #F8EEEC 0%, #FFFFFF 100%);
+    
+    /* RGB values for CSS color functions */
+    --color-coral-red-rgb: 255, 97, 92;
+    --color-soft-lilac-rgb: 204, 167, 252;
+    --color-muted-plum-rgb: 160, 115, 183;
+    --color-sand-beige-rgb: 248, 238, 236;
+    --color-light-coral-rgb: 255, 151, 139;
+    --color-calm-tangerine-rgb: 255, 180, 85;
+
+    /**
+     * ---------------------------------------------------------------------
+     * THEME COLORS (using design system colors)
+     * ---------------------------------------------------------------------
+     */
+
+    /* Color settings */
+    {%- assign success_background = settings.success_color | color_mix: '#ffffff', 12 -%}
+    {%- assign warning_background = settings.warning_color | color_mix: '#ffffff', 12 -%}
+    {%- assign error_background = settings.error_color | color_mix: '#ffffff', 12 -%}
+    {%- assign product_on_sale_accent_brightness = settings.product_on_sale_accent | color_brightness -%}
+    {%- assign product_sold_out_badge_brightness = settings.product_sold_out_badge_background | color_brightness -%}
+    {%- assign product_primary_badge_brightness = settings.product_primary_badge_background | color_brightness -%}
+
+    --accent: {{ settings.primary_button_background.rgb | default: 'var(--color-coral-red-rgb)' }};
+    --text-primary: {{ settings.text_color.rgb | default: 'var(--color-muted-plum-rgb)' }};
+    --background-primary: 255 255 255;
+    --dialog-background: {{ settings.dialog_background.rgb | default: 'var(--color-sand-beige-rgb)' }};
+    --border-color: var(--text-color, var(--text-primary)) / 0.12;
+
+    /* Button colors - using design system colors */
+    --button-background-primary: {{ settings.primary_button_background.rgb | default: 'var(--color-coral-red-rgb)' }};
+    --button-text-primary: {{ settings.primary_button_text_color.rgb | default: '255, 255, 255' }};
+    --button-background-secondary: {{ settings.secondary_button_background.rgb | default: 'var(--color-sand-beige-rgb)' }};
+    --button-text-secondary: {{ settings.secondary_button_text_color.rgb | default: 'var(--color-muted-plum-rgb)' }};
+
+    /* Status colors */
+    --success-background: {{ success_background.rgb }};
+    --success-text: {{ settings.success_color.rgb }};
+    --warning-background: {{ warning_background.rgb }};
+    --warning-text: {{ settings.warning_color.rgb }};
+    --error-background: {{ error_background.rgb }};
+    --error-text: {{ settings.error_color.rgb }};
+
+    /* Product colors */
+    --on-sale-text: {{ settings.product_on_sale_accent.rgb }};
+    --on-sale-badge-background: {{ settings.product_on_sale_accent.rgb }};
+    --on-sale-badge-text: {% if product_on_sale_accent_brightness < 150 %}255 255 255{% else %}0 0 0{% endif %};
+    --sold-out-badge-background: {{ settings.product_sold_out_badge_background.rgb }};
+    --sold-out-badge-text: {% if product_sold_out_badge_brightness < 150 %}255 255 255{% else %}0 0 0{% endif %};
+    --primary-badge-background: {{ settings.product_primary_badge_background.rgb }};
+    --primary-badge-text: {% if product_primary_badge_brightness < 150 %}255 255 255{% else %}0 0 0{% endif %};
+    --star-color: {{ settings.product_rating_color.rgb }};
+    --product-card-background: {{ settings.product_card_background.rgb }};
+    --product-card-text: {{ settings.product_card_text_color.rgb }};
+
+    /* Header colors */
+    --header-background: {{ settings.header_background.rgb }};
+    --header-text: {{ settings.header_text_color.rgb }};
+
+    /* Footer colors */
+    --footer-background: {{ settings.footer_background.rgb }};
+    --footer-text: {{ settings.footer_text_color.rgb }};
+
+    /* Rounded variables (used for border radius) */
+    --rounded-xs: {{ settings.block_border_radius | at_most: 4 | divided_by: 16.0 }}rem;
+    --rounded-sm: {{ settings.block_border_radius | divided_by: 16.0 | divided_by: 4.0 }}rem;
+    --rounded: {{ settings.block_border_radius | divided_by: 16.0 | divided_by: 2.0 }}rem;
+    --rounded-lg: {{ settings.block_border_radius | divided_by: 16.0 }}rem;
+    --rounded-full: 9999px;
+
+    --rounded-button: {{ settings.button_border_radius | divided_by: 16.0 }}rem;
+    --rounded-input: {{ settings.input_border_radius | divided_by: 16.0 }}rem;
+
+    /* Box shadow */
+    --shadow-sm: 0 2px 8px rgb(var(--text-primary) / {{ settings.block_shadow_opacity | divided_by: 100.0 }});
+    --shadow: 0 5px 15px rgb(var(--text-primary) / {{ settings.block_shadow_opacity | divided_by: 100.0 }});
+    --shadow-md: 0 5px 30px rgb(var(--text-primary) / {{ settings.block_shadow_opacity | divided_by: 100.0 }});
+    --shadow-block: {{ settings.block_shadow_horizontal_offset }}px {{ settings.block_shadow_vertical_offset }}px {{ settings.block_shadow_blur }}px rgb(var(--text-primary) / {{ settings.block_shadow_opacity | divided_by: 100.0 }});
+
+    /**
+     * ---------------------------------------------------------------------
+     * OTHER
+     * ---------------------------------------------------------------------
+     */
+
+    --stagger-products-reveal-opacity: {% if settings.stagger_products_apparition %}0{% else %}1{% endif %};
+    --cursor-close-svg-url: url({{ 'cursor-close.svg' | asset_url }});
+    --cursor-zoom-in-svg-url: url({{ 'cursor-zoom-in.svg' | asset_url }});
+    --cursor-zoom-out-svg-url: url({{ 'cursor-zoom-out.svg' | asset_url }});
+    --checkmark-svg-url: url({{ 'checkmark.svg' | asset_url }});
+  }
+
+  [dir="rtl"]:root {
+    /* RTL support */
+    --transform-logical-flip: -1;
+    --transform-origin-start: right;
+    --transform-origin-end: left;
+  }
+
+  /* Global body background */
+  body {
+    background-color: #FFFFFF !important;
+  }
+
+  /* Button Typography & Styling - Mobile Design System Specs */
+  .button, .btn, button, a.button, a.btn {
+    font-family: var(--text-font-family) !important; /* Inter */
+    font-weight: 500 !important; /* Medium */
+    font-size: 10px !important; /* Mobile font size */
+    line-height: 90% !important; /* 0.9 */
+    letter-spacing: 6% !important; /* 0.06em */
+    text-transform: uppercase !important;
+    vertical-align: middle;
+    padding: 11.5px 20px !important; /* Mobile padding */
+    box-shadow: none !important;
+  }
+
+  @media screen and (min-width: 700px) {
+    :root {
+      /* Design System Heading Sizes - Desktop */
+      --heading-xx-large: 75px;    /* XX-large desktop */
+      --heading-x-large: 56px;     /* X-large desktop */
+      --heading-large: 42px;       /* large desktop */
+      --heading-medium: 36px;      /* Medium desktop */
+      --heading-small: 30px;       /* small desktop */
+      --heading-x-small: 22px;     /* x-small desktop */
+      --heading-xx-small: 18px;    /* xx-small desktop */
+      
+      /* Body text sizes - Design System Desktop */
+      --text-xs: 16px; /* Small text */
+      --text-sm: 18px; /* Small-medium text */
+      --text-base: 22px; /* Default body text - Desktop */
+      --text-lg: 24px; /* Large text */
+      
+      /* Body text typography - Desktop */
+      --body-font-size: 22px; /* Desktop default */
+    }
+    
+    /* Button Typography & Styling - Desktop Design System Specs */
+    .button, .btn, button, a.button, a.btn {
+      font-family: var(--text-font-family) !important; /* Inter */
+      font-weight: 600 !important; /* Semi Bold */
+      font-size: 13px !important; /* Desktop font size */
+      line-height: 180% !important; /* 1.8 */
+      letter-spacing: 6% !important; /* 0.06em */
+      text-transform: uppercase !important;
+      vertical-align: middle;
+      padding: 8.5px 24.5px !important; /* Desktop padding */
+      box-shadow: none !important;
+    }
+    
+    /* Override specific button size classes for desktop */
+    .button--xl, a.button--xl {
+      font-size: 13px !important;
+      padding: 8.5px 24.5px !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+      transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    }
+    
+    .button--xl:hover, a.button--xl:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2) !important;
+    }
+    
+    .button--lg, a.button--lg {
+      font-size: 13px !important;
+      padding: 8.5px 24.5px !important;
+    }
+    
+    .button--sm, a.button--sm {
+      font-size: 13px !important;
+      padding: 8.5px 24.5px !important;
+    }
+
+      /* Spacing */
+      --container-gutter: 2rem;
+      --section-outer-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-12){% elsif settings.section_vertical_spacing == 'small' %}var(--spacing-14){% elsif settings.section_vertical_spacing == 'medium' %}var(--spacing-16){% else %}var(--spacing-20){% endif %};
+      --section-inner-max-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-10){% elsif settings.section_vertical_spacing == 'small' %}var(--spacing-10){% elsif settings.section_vertical_spacing == 'medium' %}var(--spacing-12){% else %}var(--spacing-14){% endif %};
+      --section-inner-spacing-inline: {% if settings.section_boxed_horizontal_spacing == 'xsmall' %}var(--spacing-10){% elsif settings.section_boxed_horizontal_spacing == 'small' %}var(--spacing-10){% elsif settings.section_boxed_horizontal_spacing == 'medium' %}var(--spacing-12){% else %}var(--spacing-14){% endif %};
+      --section-stack-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-10){% else %}var(--spacing-12){% endif %};
+
+      /* Grid gutter */
+      --grid-gutter: var(--spacing-6);
+
+      /* Product list settings */
+      --product-list-row-gap: var(--spacing-12);
+
+      /* Form settings */
+      --input-gap: 1rem;
+      --input-height: 3.125rem;
+      --input-padding-inline: var(--spacing-5);
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    :root {
+      /* Spacing settings */
+      --container-gutter: 100px;
+      --section-outer-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-14){% elsif settings.section_vertical_spacing == 'small' %}var(--spacing-16){% elsif settings.section_vertical_spacing == 'medium' %}var(--spacing-18){% else %}var(--spacing-20){% endif %};
+      --section-inner-max-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-12){% elsif settings.section_vertical_spacing == 'small' %}var(--spacing-14){% elsif settings.section_vertical_spacing == 'medium' %}var(--spacing-16){% else %}var(--spacing-18){% endif %};
+      --section-inner-spacing-inline: {% if settings.section_boxed_horizontal_spacing == 'xsmall' %}var(--spacing-12){% elsif settings.section_boxed_horizontal_spacing == 'small' %}var(--spacing-14){% elsif settings.section_boxed_horizontal_spacing == 'medium' %}var(--spacing-16){% else %}var(--spacing-18){% endif %};
+      --section-stack-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-10){% else %}var(--spacing-12){% endif %};
+    }
+  }
+
+  @media screen and (min-width: 1150px) {
+    :root {
+      /* Spacing settings */
+      --container-gutter: 100px;
+      --section-outer-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-14){% elsif settings.section_vertical_spacing == 'small' %}var(--spacing-16){% elsif settings.section_vertical_spacing == 'medium' %}var(--spacing-20){% else %}var(--spacing-24){% endif %};
+      --section-inner-max-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-12){% elsif settings.section_vertical_spacing == 'small' %}var(--spacing-14){% elsif settings.section_vertical_spacing == 'medium' %}var(--spacing-16){% else %}var(--spacing-18){% endif %};
+      --section-inner-spacing-inline: {% if settings.section_boxed_horizontal_spacing == 'xsmall' %}var(--spacing-12){% elsif settings.section_boxed_horizontal_spacing == 'small' %}var(--spacing-14){% elsif settings.section_boxed_horizontal_spacing == 'medium' %}var(--spacing-16){% else %}var(--spacing-18){% endif %};
+      --section-stack-spacing-block: var(--spacing-12);
+    }
+  }
+
+  @media screen and (min-width: 1400px) {
+    :root {
+      /* Font sizes remain the same as desktop (700px+) */
+
+      --section-outer-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-16){% elsif settings.section_vertical_spacing == 'small' %}var(--spacing-20){% elsif settings.section_vertical_spacing == 'medium' %}var(--spacing-24){% else %}var(--spacing-28){% endif %};
+      --section-inner-max-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-14){% elsif settings.section_vertical_spacing == 'small' %}var(--spacing-16){% elsif settings.section_vertical_spacing == 'medium' %}var(--spacing-18){% else %}var(--spacing-20){% endif %};
+      --section-inner-spacing-inline: {% if settings.section_boxed_horizontal_spacing == 'xsmall' %}var(--spacing-14){% elsif settings.section_boxed_horizontal_spacing == 'small' %}var(--spacing-16){% elsif settings.section_boxed_horizontal_spacing == 'medium' %}var(--spacing-18){% else %}var(--spacing-20){% endif %};
+    }
+  }
+
+  @media screen and (min-width: 1600px) {
+    :root {
+      --section-outer-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-16){% elsif settings.section_vertical_spacing == 'small' %}var(--spacing-20){% elsif settings.section_vertical_spacing == 'medium' %}var(--spacing-24){% else %}var(--spacing-32){% endif %};
+      --section-inner-max-spacing-block: {% if settings.section_vertical_spacing == 'xsmall' %}var(--spacing-16){% elsif settings.section_vertical_spacing == 'small' %}var(--spacing-18){% elsif settings.section_vertical_spacing == 'medium' %}var(--spacing-20){% else %}var(--spacing-24){% endif %};
+      --section-inner-spacing-inline: {% if settings.section_boxed_horizontal_spacing == 'xsmall' %}var(--spacing-16){% elsif settings.section_boxed_horizontal_spacing == 'small' %}var(--spacing-18){% elsif settings.section_boxed_horizontal_spacing == 'medium' %}var(--spacing-20){% else %}var(--spacing-24){% endif %};
+    }
+  }
+
+  /**
+   * ---------------------------------------------------------------------
+   * LIQUID DEPENDANT CSS
+   *
+   * Our main CSS is Liquid free, but some very specific features depend on
+   * theme settings, so we have them here
+   * ---------------------------------------------------------------------
+   */
+
+  {%- case settings.button_hover_effect -%}
+    {%- when 'fade' -%}
+      @media screen and (pointer: fine) {
+        .button:not([disabled]):hover, .btn:not([disabled]):hover, .shopify-payment-button__button--unbranded:not([disabled]):hover {
+          --button-background-opacity: 0.85;
+        }
+
+        .button--subdued:not([disabled]):hover {
+          --button-background: var(--text-color) / .05 !important;
+        }
+      }
+
+    {%- when 'reverse' -%}
+      @media screen and (pointer: fine) {
+        /* The !important are for the Shopify Payment button to ensure we override the default from Shopify styles */
+        .button:not([disabled]):not(.button--outline):hover, .btn:not([disabled]):hover, .shopify-payment-button__button--unbranded:not([disabled]):hover {
+          background-color: transparent !important;
+          color: rgb(var(--button-outline-color) / var(--button-background-opacity, 1)) !important;
+          box-shadow: inset 0 0 0 2px currentColor !important;
+        }
+
+        .button--outline:not([disabled]):hover {
+          background: rgb(var(--button-background));
+          color: rgb(var(--button-text-color));
+          box-shadow: inset 0 0 0 2px rgb(var(--button-background));
+        }
+      }
+
+  {%- endcase -%}
+
+  /**
+   * ---------------------------------------------------------------------
+   * DESIGN SYSTEM TYPOGRAPHY CLASSES
+   * 
+   * Based on the design system typography guide:
+   * - Old Standard & OS Italic: Mostly for headings & in text italics (words needing emphasis)
+   * - Inter Regular & Semi Bold: Mostly for sub-heading and body copy
+   * - Inter ALL CAPS: Buttons, small subheadings/captions, any special text
+   * ---------------------------------------------------------------------
+   */
+  
+  /* Design System Font Classes */
+  .font-old-standard {
+    font-family: var(--heading-font-family);
+    font-weight: var(--heading-font-weight);
+    font-style: var(--heading-font-style);
+  }
+  
+  .font-old-standard-italic {
+    font-family: var(--font-old-standard-italic);
+    font-weight: var(--heading-font-weight);
+    font-style: var(--font-old-standard-italic-style);
+  }
+  
+  .font-inter {
+    font-family: var(--text-font-family);
+    font-weight: var(--text-font-weight);
+    font-style: var(--text-font-style);
+  }
+
+  p, .prose p {
+    font-weight: 400 !important;
+  }
+  
+  .font-inter-semibold {
+    font-family: var(--font-inter-semibold);
+    font-weight: var(--font-inter-semibold-weight);
+    font-style: var(--text-font-style);
+  }
+  
+  .font-inter-caps {
+    font-family: var(--text-font-family);
+    font-weight: var(--text-font-weight);
+    font-style: var(--text-font-style);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+    /* Apply design system fonts to existing elements */
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--heading-font-family);
+      font-weight: var(--heading-font-weight);
+    }
+    
+    /* Body text styling - Design System */
+    body {
+      font-size: var(--body-font-size) !important;
+      line-height: var(--body-line-height) !important;
+      font-weight: var(--body-font-weight) !important;
+    }
+  
+  /* Emphasis text uses Old Standard Italic */
+  em, .emphasis {
+    font-family: var(--font-old-standard-italic);
+    font-style: var(--font-old-standard-italic-style);
+  }
+  
+    /* Small subheadings and captions use Inter ALL CAPS */
+    .caption, .subheading-small {
+      font-family: var(--text-font-family);
+      font-weight: var(--text-font-weight);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.875rem;
+    }
+    
+    /* Hot spot dot styling - ensure perfect circle and centered plus */
+    .hot-spot__dot {
+      border-radius: 50% !important;
+      display: grid !important;
+      place-items: center !important;
+      padding: 0 !important;
+      aspect-ratio: 1 / 1 !important;
+    }
+    
+    .hot-spot__dot svg {
+      position: relative;
+      z-index: 1;
+      margin: 0 !important;
+    }
+    
+    /**
+     * ---------------------------------------------------------------------
+     * DESIGN SYSTEM COLOR UTILITY CLASSES
+     * ---------------------------------------------------------------------
+     */
+    
+    /* Primary Color Classes */
+    .color-coral-red { color: var(--color-coral-red); }
+    .bg-coral-red { background-color: var(--color-coral-red); }
+    .border-coral-red { border-color: var(--color-coral-red); }
+    
+    .color-soft-lilac { color: var(--color-soft-lilac); }
+    .bg-soft-lilac { background-color: var(--color-soft-lilac); }
+    .border-soft-lilac { border-color: var(--color-soft-lilac); }
+    
+    .color-muted-plum { color: var(--color-muted-plum); }
+    .bg-muted-plum { background-color: var(--color-muted-plum); }
+    .border-muted-plum { border-color: var(--color-muted-plum); }
+    
+    .color-sand-beige { color: var(--color-sand-beige); }
+    .bg-sand-beige { background-color: var(--color-sand-beige); }
+    .border-sand-beige { border-color: var(--color-sand-beige); }
+    
+    /* Secondary Color Classes */
+    .color-light-coral { color: var(--color-light-coral); }
+    .bg-light-coral { background-color: var(--color-light-coral); }
+    .border-light-coral { border-color: var(--color-light-coral); }
+    
+    .color-calm-tangerine { color: var(--color-calm-tangerine); }
+    .bg-calm-tangerine { background-color: var(--color-calm-tangerine); }
+    .border-calm-tangerine { border-color: var(--color-calm-tangerine); }
+    
+    /* Gradient Class */
+    .bg-beige-gradient { background: var(--color-beige-gradient); }
+    
+    /* Text Color Utilities */
+    .text-coral-red { color: var(--color-coral-red); }
+    .text-soft-lilac { color: var(--color-soft-lilac); }
+    .text-muted-plum { color: var(--color-muted-plum); }
+    .text-sand-beige { color: var(--color-sand-beige); }
+    .text-light-coral { color: var(--color-light-coral); }
+    .text-calm-tangerine { color: var(--color-calm-tangerine); }
+    
+    /**
+     * ---------------------------------------------------------------------
+     * DESIGN SYSTEM HEADING SIZE UTILITY CLASSES
+     * ---------------------------------------------------------------------
+     */
+    
+    /* Heading Size Classes - Design System Hierarchy */
+    .heading-xx-large { font-size: var(--heading-xx-large); font-family: var(--heading-font-family); }
+    .heading-x-large { font-size: var(--heading-x-large); font-family: var(--heading-font-family); }
+    .heading-large { font-size: var(--heading-large); font-family: var(--heading-font-family); }
+    .heading-medium { font-size: var(--heading-medium); font-family: var(--heading-font-family); }
+    .heading-small { font-size: var(--heading-small); font-family: var(--heading-font-family); }
+    .heading-x-small { font-size: var(--heading-x-small); font-family: var(--heading-font-family); }
+    .heading-xx-small { font-size: var(--heading-xx-small); font-family: var(--heading-font-family); }
+    
+    /**
+     * ---------------------------------------------------------------------
+     * SLIDESHOW ADDITIONAL TITLE STYLING
+     * ---------------------------------------------------------------------
+     */
+    
+    .slideshow-additional-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      grid-area: 3 / 1 / auto / span 3;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, min(var(--container-max-width), 100% - var(--content-over-media-gap, var(--content-over-media-column-gap, 100px)) * 2)) minmax(0, 1fr);
+      padding-bottom: 46px;
+    }
+    
+    .additional-title-text {
+      font-family: var(--heading-font-family); /* Old Standard TT */
+      font-size: var(--heading-large); /* 35px mobile, 42px desktop */
+      font-weight: var(--heading-font-weight);
+      color: white;
+      margin: 0;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      font-style: italic;
+      grid-column: 2;
+      align-self: end;
+    }
+    
+    @media screen and (min-width: 700px) {
+      .slideshow-additional-title {
+        padding-bottom: 46px;
+      }
+      
+      .additional-title-text {
+        font-size: var(--heading-large); /* Uses desktop size (42px) */
+      }
+    }
+</style>
