@@ -600,6 +600,141 @@
         "header_spacing_desktop": 60
       }
     },
+    "brand_usp_bEaKCC": {
+      "type": "brand-usp",
+      "blocks": {
+        "usp_item_ipdWTr": {
+          "type": "usp_item",
+          "settings": {
+            "image": "shopify://shop_images/Icon.svg",
+            "image_width": 105,
+            "title": "<p>Centring </p><p>Fuller-Busts</p>",
+            "description": "Thoughtfully curated for fuller busts."
+          }
+        },
+        "usp_item_pYHm6R": {
+          "type": "usp_item",
+          "settings": {
+            "image": "shopify://shop_images/Icon_1.svg",
+            "image_width": 105,
+            "title": "<p>Fit-First </p><p>Guarantee</p>",
+            "description": "Every piece chosen with your fit in mind."
+          }
+        },
+        "usp_item_KtwaeG": {
+          "type": "usp_item",
+          "settings": {
+            "image": "shopify://shop_images/Icon_2.svg",
+            "image_width": 110,
+            "title": "<p>Real Body </p><p>Fittings</p>",
+            "description": "Guidance that meets you, as you are."
+          }
+        },
+        "usp_item_idkrNN": {
+          "type": "usp_item",
+          "settings": {
+            "image": "shopify://shop_images/Icon_3.svg",
+            "image_width": 105,
+            "title": "<p>No Judgement </p><p>Returns</p>",
+            "description": "Send it back, no questions asked."
+          }
+        }
+      },
+      "block_order": [
+        "usp_item_ipdWTr",
+        "usp_item_pYHm6R",
+        "usp_item_KtwaeG",
+        "usp_item_idkrNN"
+      ],
+      "name": "Brand USP",
+      "settings": {
+        "heading": "OUR PROMISES",
+        "heading_color": "#000000",
+        "heading_size_mobile": 12,
+        "heading_size_desktop": 12,
+        "heading_weight": 600,
+        "heading_letter_spacing": 1,
+        "columns_desktop": 4,
+        "column_gap_desktop": 40,
+        "item_gap_mobile": 20,
+        "item_gap_desktop": 24,
+        "title_color": "#000000",
+        "title_size_mobile": 24,
+        "title_size_desktop": 28,
+        "title_weight": 400,
+        "description_color": "#666666",
+        "description_size_mobile": 14,
+        "description_size_desktop": 16,
+        "background_color": "#f8eeec",
+        "padding_mobile": 40,
+        "padding_desktop": 80,
+        "header_spacing_mobile": 32,
+        "header_spacing_desktop": 50,
+        "controls_spacing_mobile": 30,
+        "dot_color": "#000000"
+      }
+    },
+    "ig_carousel_CeJ3Nz": {
+      "type": "ig-carousel",
+      "blocks": {
+        "image_card_zNWfTL": {
+          "type": "image_card",
+          "settings": {
+            "image": "shopify://shop_images/flare_amethystpurple-3_2_1.png",
+            "link": "",
+            "background_color": "#f5f5f5"
+          }
+        },
+        "image_card_TCXkET": {
+          "type": "image_card",
+          "settings": {
+            "image": "shopify://shop_images/Group_1000006461_1.png",
+            "link": "",
+            "background_color": "#f5f5f5"
+          }
+        },
+        "image_card_BnPKy7": {
+          "type": "image_card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000003605.png",
+            "link": "",
+            "background_color": "#f5f5f5"
+          }
+        },
+        "image_card_WtNiD9": {
+          "type": "image_card",
+          "settings": {
+            "image": "shopify://shop_images/Group_1000006462_1.png",
+            "link": "",
+            "background_color": "#ff978b"
+          }
+        }
+      },
+      "block_order": [
+        "image_card_zNWfTL",
+        "image_card_TCXkET",
+        "image_card_BnPKy7",
+        "image_card_WtNiD9"
+      ],
+      "name": "IG Carousel",
+      "settings": {
+        "title": "Strap on",
+        "title_color": "#000000",
+        "title_size_mobile": 32,
+        "title_size_desktop": 48,
+        "title_weight": 400,
+        "instagram_handle": "@shop_scoop_studio.in",
+        "instagram_url": "",
+        "handle_color": "#999999",
+        "handle_size_mobile": 14,
+        "handle_size_desktop": 18,
+        "card_border_radius": 24,
+        "gap_mobile": 16,
+        "gap_desktop": 24,
+        "header_spacing_mobile": 32,
+        "header_spacing_desktop": 50
+      }
+    },
     "section-5": {
       "type": "featured-collection",
       "disabled": true,
@@ -930,6 +1065,8 @@
     "image_with_text_YLax3E",
     "section-7",
     "testimonials_WWkzAN",
+    "brand_usp_bEaKCC",
+    "ig_carousel_CeJ3Nz",
     "section-5",
     "section-6",
     "section-8",
