@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-{
+ {
   "type": "header",
   "name": "Header group",
   "sections": {
@@ -17,7 +17,7 @@
         "message": {
           "type": "message",
           "settings": {
-            "text": "Announce something here",
+            "text": "GET UP TO 10% OFF ON YOUR FIRST ORDER",
             "url": ""
           }
         }
@@ -27,12 +27,12 @@
       ],
       "settings": {
         "enable_sticky": false,
-        "navigation_mode": "scrolling",
+        "navigation_mode": "arrows",
         "autoplay": false,
         "cycle_speed": 6,
         "scrolling_speed": 10,
         "text_size": "text-xs",
-        "background": "#1a1a1a",
+        "background": "#a073b7",
         "background_gradient": "",
         "text_color": "#ffffff"
       }
@@ -41,9 +41,9 @@
       "type": "header",
       "settings": {
         "enable_sticky": true,
-        "hide_on_scroll": false,
+        "hide_on_scroll": true,
         "logo": "shopify://shop_images/Logo_1.png",
-        "logo_max_width": 120,
+        "logo_max_width": 145,
         "logo_mobile_max_width": 100,
         "menu": "main-menu",
         "sidebar_menu": "",
@@ -57,7 +57,7 @@
         "show_country_flag": true,
         "show_country_name": false,
         "transparent_header_text_color": "#ffffff",
-        "reduce_padding": false,
+        "reduce_padding": true,
         "background_opacity": 100,
         "background_blur_radius": 0
       }
