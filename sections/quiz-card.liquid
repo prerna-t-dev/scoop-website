@@ -14,17 +14,35 @@ CSS
     background: var(--quiz-card-background);
     border-radius: {{ section.settings.border_radius }}px;
     padding: {{ section.settings.padding_mobile }}px;
-    text-align: center;
+    text-align: left;
     position: relative;
     overflow: hidden;
     max-width: 780px;
     margin-left: auto;
     margin-right: auto;
+    z-index: 1;
   }
+
+  {%- if section.settings.background_image_mobile != blank -%}
+    #shopify-section-{{ section.id }} .quiz-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('{{ section.settings.background_image_mobile | image_url: width: 800 }}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -1;
+      opacity: {{ section.settings.background_opacity_mobile | divided_by: 100.0 }};
+    }
+  {%- endif -%}
 
   #shopify-section-{{ section.id }} .quiz-card__eyebrow {
     font-size: {{ section.settings.eyebrow_font_size }}px;
-    font-weight: {{ section.settings.eyebrow_font_weight }};
+    font-weight: {{ section.settings.eyebrow_font_weight }} !important;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin-bottom: 16px;
@@ -35,8 +53,8 @@ CSS
     font-family: var(--heading-font-family);
     font-size: {{ section.settings.heading_font_size_mobile }}px;
     font-weight: {{ section.settings.heading_font_weight }};
-    line-height: 1.2;
-    margin-bottom: 24px;
+    line-height: 1;
+    margin-bottom: 16px;
     color: {{ section.settings.heading_color }};
     font-style: {{ section.settings.heading_font_style }} !important;
   }
@@ -44,11 +62,11 @@ CSS
   #shopify-section-{{ section.id }} .quiz-card__icon {
     width: {{ section.settings.icon_size }}px;
     height: {{ section.settings.icon_size }}px;
-    margin: 0 auto 24px;
+    margin: 0 0 14px 0;
     color: {{ section.settings.icon_color }};
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   #shopify-section-{{ section.id }} .quiz-card__icon svg {
@@ -62,19 +80,37 @@ CSS
     margin-bottom: 32px;
     color: {{ section.settings.content_color }};
     max-width: {{ section.settings.content_max_width }}px;
-    margin-left: auto;
-    margin-right: auto;
   }
 
 
   @media screen and (min-width: 700px) {
     #shopify-section-{{ section.id }} .quiz-card {
       padding: {{ section.settings.padding_desktop }}px;
+      text-align: center;
     }
 
     #shopify-section-{{ section.id }} .quiz-card__heading {
       font-size: {{ section.settings.heading_font_size_desktop }}px;
     }
+
+    #shopify-section-{{ section.id }} .quiz-card__content {
+      font-size: 18px;
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card__icon {
+      margin: 0 auto 14px;
+      justify-content: center;
+    }
+
+    {%- if section.settings.background_image_desktop != blank -%}
+      #shopify-section-{{ section.id }} .quiz-card::before {
+        background-image: url('{{ section.settings.background_image_desktop | image_url: width: 1200 }}');
+        opacity: {{ section.settings.background_opacity_desktop | divided_by: 100.0 }};
+      }
+    {%- endif -%}
   }
 </style>
 
@@ -372,6 +408,42 @@ LIQUID
       "id": "background_color",
       "label": "Background color",
       "default": "#C8B3E6"
+    },
+    {
+      "type": "header",
+      "content": "Background image overlay"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image (mobile)",
+      "info": "Image will be displayed as background overlay on mobile devices"
+    },
+    {
+      "type": "range",
+      "id": "background_opacity_mobile",
+      "label": "Background opacity (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_desktop",
+      "label": "Background image (desktop)",
+      "info": "Image will be displayed as background overlay on desktop devices"
+    },
+    {
+      "type": "range",
+      "id": "background_opacity_desktop",
+      "label": "Background opacity (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30
     },
     {
       "type": "range",

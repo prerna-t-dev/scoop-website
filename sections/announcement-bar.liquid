@@ -9,6 +9,11 @@
       --sticky-announcement-bar-enabled: {%- if section.settings.enable_sticky -%}1{% else %}0{% endif %};
     }
 
+    #shopify-section-{{ section.id }} .announcement-bar p,
+    #shopify-section-{{ section.id }} .announcement-bar a {
+      font-weight: 600 !important;
+    }
+
     {%- if section.settings.enable_sticky -%}
       #shopify-section-{{ section.id }} {
         position: sticky;

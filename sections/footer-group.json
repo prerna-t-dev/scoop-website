@@ -92,9 +92,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "title": "About",
-            "content": "<p>Use this text area to tell your customers about your brand and vision. You can change it in the theme editor.</p>",
-            "enable_follow_on_shop": true
+            "content": "<p>A premium lingerie studio where fuller busts find their perfect fit. Thoughtfully crafted innerwear designed and curated with you in mind.</p>"
           }
         },
         "links": {
@@ -113,13 +111,18 @@
             "menu_title": ""
           }
         },
+        "policy_links_TaA4jz": {
+          "type": "policy_links",
+          "settings": {
+            "menu": "policy"
+          }
+        },
         "newsletter": {
           "type": "newsletter",
           "settings": {
-            "image_width": 150,
-            "heading_size": "h3",
-            "title": "Sign up for new stories and personal offers",
-            "content": ""
+            "title": "GET THE INSIDE SCOOP",
+            "placeholder": "EMAIL ID",
+            "button_text": "SIGN UP"
           }
         }
       },
@@ -127,20 +130,19 @@
         "text",
         "links",
         "links_yKB49P",
+        "policy_links_TaA4jz",
         "newsletter"
       ],
       "settings": {
         "logo": "shopify://shop_images/Group_1000005800.png",
         "logo_width": 110,
+        "bottom_logo": "shopify://shop_images/Logo.svg",
+        "bottom_logo_width": 200,
         "background_color": "#cca7fc",
         "max_width": 990,
         "show_social_media": true,
         "show_payment_icons": true,
-        "show_policy_links": false,
-        "show_country_selector": true,
-        "show_country_flag": true,
-        "show_country_name": true,
-        "show_locale_selector": true
+        "payment_protection_text": "100% PAYMENT PROTECTION. EASY RETURN POLICY"
       }
     }
   },
