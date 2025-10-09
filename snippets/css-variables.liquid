@@ -46,6 +46,15 @@ note that this may have impact on different places.
   }
 
   :root {
+    /* Font smoothing */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    
+    /* Hide skip to content button */
+    .skip-to-content {
+      opacity: 0 !important;
+    }
+
     /**
      * ---------------------------------------------------------------------
      * SPACING VARIABLES
@@ -149,7 +158,7 @@ note that this may have impact on different places.
     /* Design System Heading Sizes - Mobile First */
     --heading-xx-large: 60px;    /* XX-large mobile */
     --heading-x-large: 45px;     /* X-large mobile */
-    --heading-large: 35px;       /* large mobile */
+    --heading-large: 45px;       /* large mobile */
     --heading-medium: 30px;      /* Medium mobile */
     --heading-small: 24px;       /* small mobile */
     --heading-x-small: 18px;     /* x-small mobile */
@@ -165,15 +174,15 @@ note that this may have impact on different places.
     --text-h6: var(--heading-xx-small);
     
     /* Body text sizes - Design System */
-    --text-xs: 14px; /* Small text */
+    --text-xs: 12px; /* Small text */
     --text-sm: 16px; /* Small-medium text */
-    --text-base: 18px; /* Default body text - Mobile */
+    --text-base: 14px; /* Default body text - Mobile */
     --text-lg: 20px; /* Large text */
     
     /* Body text typography */
     --body-font-size: 18px; /* Mobile default */
     --body-line-height: 130%; /* 1.3 */
-    --body-font-weight: 400; /* Regular */
+    --body-font-weight: 400; /* Normal weight for paragraphs */
 
     /**
      * ---------------------------------------------------------------------
@@ -304,8 +313,12 @@ note that this may have impact on different places.
     letter-spacing: 6% !important; /* 0.06em */
     text-transform: uppercase !important;
     vertical-align: middle;
-    padding: 11.5px 20px !important; /* Mobile padding */
+    padding: 0;
     box-shadow: none !important;
+  }
+
+  .btn, .button{
+    padding: 11.5px 20px !important;  /* Mobile padding */
   }
 
   @media screen and (min-width: 700px) {
@@ -313,14 +326,14 @@ note that this may have impact on different places.
       /* Design System Heading Sizes - Desktop */
       --heading-xx-large: 75px;    /* XX-large desktop */
       --heading-x-large: 56px;     /* X-large desktop */
-      --heading-large: 42px;       /* large desktop */
+      --heading-large: 56px;       /* large desktop */
       --heading-medium: 36px;      /* Medium desktop */
       --heading-small: 30px;       /* small desktop */
       --heading-x-small: 22px;     /* x-small desktop */
       --heading-xx-small: 18px;    /* xx-small desktop */
       
       /* Body text sizes - Design System Desktop */
-      --text-xs: 16px; /* Small text */
+      --text-xs: 14px; /* Small text */
       --text-sm: 18px; /* Small-medium text */
       --text-base: 22px; /* Default body text - Desktop */
       --text-lg: 24px; /* Large text */
@@ -613,22 +626,46 @@ note that this may have impact on different places.
     .heading-x-small { font-size: var(--heading-x-small); font-family: var(--heading-font-family); }
     .heading-xx-small { font-size: var(--heading-xx-small); font-family: var(--heading-font-family); }
     
+    /* Paragraph styling */
+    p {
+      font-weight: var(--body-font-weight);
+    }
+    
     /**
      * ---------------------------------------------------------------------
      * SLIDESHOW ADDITIONAL TITLE STYLING
      * ---------------------------------------------------------------------
      */
     
+    /* Make surface and prose containers full width and height on mobile to allow absolute positioning */
+    .content-over-media > div[class*="surface"]:has(.slideshow-additional-title) {
+      height: 100% !important;
+    }
+    
+    .content-over-media .prose:has(.slideshow-additional-title) {
+      grid-column: 1 / -1 !important;
+      height: 100%;
+    }
+    
     .slideshow-additional-title {
       position: absolute;
-      bottom: 0;
+      bottom: 0px;
       left: 0;
-      right: 0;
-      z-index: 10;
-      grid-area: 3 / 1 / auto / span 3;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, min(var(--container-max-width), 100% - var(--content-over-media-gap, var(--content-over-media-column-gap, 100px)) * 2)) minmax(0, 1fr);
-      padding-bottom: 46px;
+      right: var(--container-gutter);
+    }
+    
+    @media screen and (min-width: 700px) {
+      .content-over-media .prose:has(.slideshow-additional-title) {
+        grid-column: 2 !important;
+        height: auto;
+      }
+      
+      .slideshow-additional-title {
+        position: static;
+        width: 100%;
+        left: auto;
+        right: auto;
+      }
     }
     
     .additional-title-text {
@@ -639,15 +676,9 @@ note that this may have impact on different places.
       margin: 0;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
       font-style: italic;
-      grid-column: 2;
-      align-self: end;
     }
     
     @media screen and (min-width: 700px) {
-      .slideshow-additional-title {
-        padding-bottom: 46px;
-      }
-      
       .additional-title-text {
         font-size: var(--heading-large); /* Uses desktop size (42px) */
       }

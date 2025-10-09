@@ -19,14 +19,15 @@
             "mobile_image": "shopify://shop_images/image_63_1.png",
             "content_max_width": 1200,
             "mobile_text_position": "place-self-start text-start",
-            "desktop_text_position": "sm:place-self-center-start sm:text-start",
+            "desktop_text_position": "sm:place-self-end-start sm:text-start",
             "subheading": "You set your own standards",
-            "title": "Fits for <br>\nFuller Busts",
+            "title": "Fits for\nFuller Busts",
             "additionaltitle": "Finally.",
             "heading_tag": "h1",
             "button_text": "SHOP NOW",
             "button_link": "shopify://collections",
-            "text_color": "#ffffff",
+            "text_color": "#cccccc",
+            "heading_color": "#ffffff",
             "button_background": "#ffffff",
             "button_text_color": "#000000",
             "overlay_color": "#000000",
@@ -41,15 +42,16 @@
             "image": "shopify://shop_images/image_93_1.png",
             "mobile_image": "shopify://shop_images/image_63_1.png",
             "content_max_width": 780,
-            "mobile_text_position": "place-self-center text-center",
-            "desktop_text_position": "sm:place-self-center sm:text-center",
-            "subheading": "Tell your story",
-            "title": "Slide 2",
-            "additionaltitle": "Finally.",
+            "mobile_text_position": "place-self-start text-start",
+            "desktop_text_position": "sm:place-self-center-start sm:text-start",
+            "subheading": "Lorem Ipsum",
+            "title": "Dolor Sit\nAmet Lorem",
+            "additionaltitle": "",
             "heading_tag": "h1",
             "button_text": "",
             "button_link": "",
-            "text_color": "#ffffff",
+            "text_color": "#cccccc",
+            "heading_color": "#ffffff",
             "button_background": "#ffffff",
             "button_text_color": "#000000",
             "overlay_color": "#000000",
@@ -72,6 +74,7 @@
             "button_text": "",
             "button_link": "",
             "text_color": "#ffffff",
+            "heading_color": "#f9cec6",
             "button_background": "#ffffff",
             "button_text_color": "#000000",
             "overlay_color": "#000000",
@@ -87,7 +90,9 @@
         "block-3"
       ],
       "custom_css": [
-        ".content-over-media {border-radius: 0 0 24px 24px;}"
+        ".content-over-media {border-radius: 0 0 12px 12px;}",
+        "h1 {color: #f9cec6;}",
+        "@media (min-width: 700px) {}"
       ],
       "name": "Slideshow",
       "settings": {
@@ -95,10 +100,12 @@
         "allow_transparent_header": false,
         "show_initial_transition": true,
         "image_size": "auto",
+        "min_height": 600,
+        "additional_title_padding_top": 100,
         "controls_type": "outline_arrows",
         "transition_type": "fade_with_text",
         "autoplay": true,
-        "cycle_speed": 10,
+        "cycle_speed": 20,
         "background": "rgba(0,0,0,0)",
         "background_gradient": "transparent"
       }
@@ -158,65 +165,85 @@
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/smoothie_spacer-black-bra_4.png",
+            "graphic": "shopify://shop_images/Frame_1000006300.svg",
+            "hover_graphic": "shopify://shop_images/Frame_1000006301.svg",
             "stretch_image": true,
             "link_text": "Plunge",
+            "link_subtext": "<p>Deep necklines, </p><p>effortless glam.</p>",
             "link_url": "",
             "background": "#f8eeec",
             "text_color": "#000000",
             "overlay_color": "#000000",
-            "overlay_opacity": 0
+            "overlay_opacity": 0,
+            "hover_background_color": "#f9cec6"
           }
         },
         "item_tiWi6g": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/smoothie_spacer-black-bra_4_1.png",
+            "graphic": "shopify://shop_images/Frame_1000006302.svg",
+            "hover_graphic": "shopify://shop_images/Frame_1000006303.svg",
             "stretch_image": true,
             "link_text": "Full Cup",
+            "link_subtext": "<p>Total coverage, </p><p>all-day support.</p>",
             "link_url": "",
             "background": "#f9cec6",
             "text_color": "#000000",
             "overlay_color": "#000000",
-            "overlay_opacity": 0
+            "overlay_opacity": 0,
+            "hover_background_color": "#f8eeec"
           }
         },
         "item_mW3na9": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/smoothie_spacer-black-bra_4_2.png",
+            "graphic": "shopify://shop_images/Frame_1000006300.svg",
+            "hover_graphic": "shopify://shop_images/Frame_1000006301.svg",
             "stretch_image": true,
             "link_text": "Balcony",
+            "link_subtext": "<p>Wide-set straps, </p><p>lifted rounded </p><p>shape.</p>",
             "link_url": "",
             "background": "#f8eeec",
             "text_color": "#000000",
             "overlay_color": "#000000",
-            "overlay_opacity": 0
+            "overlay_opacity": 0,
+            "hover_background_color": "#f9cec6"
           }
         },
         "block-2": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/smoothie_spacer-black-bra_5.png",
+            "graphic": "shopify://shop_images/Frame_1000006302.svg",
+            "hover_graphic": "shopify://shop_images/Frame_1000006303.svg",
             "stretch_image": true,
             "link_text": "Sports",
+            "link_subtext": "<p>Bounce control, </p><p>powered for </p><p>every move.</p>",
             "link_url": "",
             "background": "#f9cec6",
             "text_color": "#000000",
             "overlay_color": "#000000",
-            "overlay_opacity": 0
+            "overlay_opacity": 0,
+            "hover_background_color": "#f8eeec"
           }
         },
         "block-5": {
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/luxe-latte-1_2.png",
+            "graphic": "shopify://shop_images/Frame_1000006300.svg",
+            "hover_graphic": "shopify://shop_images/Frame_1000006301.svg",
             "stretch_image": true,
             "link_text": "Strapless",
+            "link_subtext": "<p>Stay-put support, </p><p>invisible under </p><p>outfits.</p>",
             "link_url": "",
             "background": "#f8eeec",
             "text_color": "#000000",
             "overlay_color": "#000000",
-            "overlay_opacity": 0
+            "overlay_opacity": 0,
+            "hover_background_color": "#f9cec6"
           }
         }
       },
@@ -228,7 +255,7 @@
         "block-5"
       ],
       "custom_css": [
-        "section {margin-top: 36px;}"
+        "section {padding-top: 44px;}"
       ],
       "name": "Image link blocks",
       "settings": {
@@ -266,7 +293,7 @@
         "content": "<p>Do your bras pinch, shift or slip off your shoulder? Let's nip those problems in the cup and find you your best fit yet.</p>",
         "content_color": "#000000",
         "content_font_size": 16,
-        "content_max_width": 600,
+        "content_max_width": 780,
         "button_text": "BRA SIZE QUIZ",
         "button_link": "",
         "button_size": "base",
@@ -275,6 +302,10 @@
         "button_background": "#ffffff",
         "button_text_color": "#000000",
         "background_color": "#e0cef8",
+        "background_image_mobile": "shopify://shop_images/Frame_1000003720.svg",
+        "background_opacity_mobile": 100,
+        "background_image_desktop": "shopify://shop_images/Frame_1000003980.svg",
+        "background_opacity_desktop": 100,
         "border_radius": 16,
         "padding_mobile": 40,
         "padding_desktop": 64
@@ -287,13 +318,14 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/Frame_1000003701.png",
+            "image": "shopify://shop_images/Frame_1000003704.png",
+            "image_mobile": "shopify://shop_images/Frame_1000003719.png",
             "subheading": "",
             "title": "",
             "url": "",
             "heading_tag": "h3",
-            "text_position": "place-self-end-start text-start",
-            "text_color": "#ffffff",
+            "text_position": "place-self-start text-start",
+            "text_color": "#000000",
             "overlay_color": "#000000",
             "overlay_opacity": 0
           }
@@ -302,13 +334,14 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/Frame_1000003703.png",
+            "image": "shopify://shop_images/Frame_1000003705.png",
+            "image_mobile": "shopify://shop_images/Frame_1000003703_1.png",
             "subheading": "",
             "title": "",
             "url": "",
             "heading_tag": "h3",
-            "text_position": "place-self-end-start text-start",
-            "text_color": "#ffffff",
+            "text_position": "place-self-start text-start",
+            "text_color": "#000000",
             "overlay_color": "#000000",
             "overlay_opacity": 0
           }
@@ -317,13 +350,14 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/Frame_1000003702.png",
+            "image": "shopify://shop_images/Frame_1000003706.png",
+            "image_mobile": "shopify://shop_images/Frame_1000003701_1.png",
             "subheading": "",
             "title": "",
             "url": "",
             "heading_tag": "h3",
-            "text_position": "place-self-end-start text-start",
-            "text_color": "#ffffff",
+            "text_position": "place-self-start text-start",
+            "text_color": "#000000",
             "overlay_color": "#000000",
             "overlay_opacity": 0
           }
@@ -336,7 +370,7 @@
       ],
       "settings": {
         "full_width": true,
-        "stack_collections": false,
+        "stack_collections": true,
         "collections_per_row_mobile": "1",
         "collections_per_row": 3,
         "show_progress_bar": false,
@@ -345,7 +379,7 @@
         "content": "<p>Three ways to get the fit you've always wanted. Expert guidance, wherever you're most comfortable.</p>",
         "link_url": "",
         "link_text": "",
-        "background": "",
+        "background": "#ffffff",
         "background_gradient": "",
         "text_color": "",
         "heading_color": "",
@@ -735,197 +769,6 @@
         "header_spacing_desktop": 50
       }
     },
-    "section-5": {
-      "type": "featured-collection",
-      "disabled": true,
-      "settings": {
-        "collection": "",
-        "products": [],
-        "full_width": true,
-        "stack_products": false,
-        "show_progress_bar": false,
-        "products_count": 6,
-        "products_per_row_mobile": "2",
-        "products_per_row_desktop": 4,
-        "subheading": "",
-        "title": "Best sellers",
-        "content": "",
-        "link_url": "shopify://collections/all",
-        "link_text": "View all",
-        "background": "",
-        "background_gradient": "",
-        "text_color": "",
-        "heading_color": "",
-        "heading_gradient": "",
-        "product_card_background": "",
-        "product_card_text_color": ""
-      }
-    },
-    "section-6": {
-      "type": "impact-text",
-      "blocks": {
-        "block-1": {
-          "type": "item",
-          "settings": {
-            "title": "Text",
-            "subheading": "Share content",
-            "content": "<p>Use this section to share helpful information with your customers. Tell a story, explain a detail, or highlight a unique feature. This is your space to connect and add personality to your store.</p>",
-            "button_text": "Shop all",
-            "button_url": "shopify://collections/all",
-            "animate_impact_text": false,
-            "animate_impact_text_duration": 2
-          }
-        }
-      },
-      "block_order": [
-        "block-1"
-      ],
-      "disabled": true,
-      "settings": {
-        "full_width": true,
-        "stack_mobile": true,
-        "text_alignment": "center",
-        "impact_text_style": "fill",
-        "text_divider": "none",
-        "impact_text_size_ratio": 1,
-        "background": "",
-        "background_gradient": "",
-        "heading_text_color": "",
-        "heading_gradient": "linear-gradient(180deg, rgba(26, 26, 26, 0.2), rgba(26, 26, 26, 0) 100%)",
-        "text_color": "",
-        "button_background": "",
-        "button_text_color": ""
-      }
-    },
-    "section-8": {
-      "type": "media-grid",
-      "blocks": {
-        "block-1": {
-          "type": "video",
-          "settings": {
-            "external_video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-            "show_video_controls": false,
-            "title": "Video",
-            "heading_tag": "h3",
-            "link_url": "",
-            "link_text": "",
-            "mobile_text_position": "place-self-center text-center",
-            "desktop_column_span": 2,
-            "desktop_row_span": 2,
-            "desktop_text_position": "sm:place-self-end-start sm:text-start",
-            "background": "#000000",
-            "background_gradient": "",
-            "text_color": "#ffffff",
-            "text_gradient": "",
-            "button_background": "#000000",
-            "button_text_color": "#ffffff",
-            "overlay_color": "#000000",
-            "overlay_opacity": 0
-          }
-        },
-        "block-2": {
-          "type": "image",
-          "settings": {
-            "title": "Image 1",
-            "heading_tag": "h5",
-            "link_url": "",
-            "link_text": "",
-            "mobile_text_position": "place-self-end-start text-start",
-            "desktop_column_span": 1,
-            "desktop_row_span": 1,
-            "desktop_text_position": "sm:place-self-end-start sm:text-start",
-            "background": "#000000",
-            "background_gradient": "",
-            "text_color": "#ffffff",
-            "text_gradient": "",
-            "button_background": "#000000",
-            "button_text_color": "#ffffff",
-            "overlay_color": "#000000",
-            "overlay_opacity": 0
-          }
-        },
-        "block-3": {
-          "type": "image",
-          "settings": {
-            "title": "Image 2",
-            "heading_tag": "h5",
-            "link_url": "",
-            "link_text": "",
-            "mobile_text_position": "place-self-end-start text-start",
-            "desktop_column_span": 1,
-            "desktop_row_span": 1,
-            "desktop_text_position": "sm:place-self-end-start sm:text-start",
-            "background": "#000000",
-            "background_gradient": "",
-            "text_color": "#ffffff",
-            "text_gradient": "",
-            "button_background": "#000000",
-            "button_text_color": "#ffffff",
-            "overlay_color": "#000000",
-            "overlay_opacity": 0
-          }
-        },
-        "block-4": {
-          "type": "image",
-          "settings": {
-            "title": "Image 3",
-            "heading_tag": "h3",
-            "link_url": "",
-            "link_text": "",
-            "mobile_text_position": "place-self-end-start text-start",
-            "desktop_column_span": 2,
-            "desktop_row_span": 1,
-            "desktop_text_position": "sm:place-self-end-start sm:text-start",
-            "background": "#000000",
-            "background_gradient": "",
-            "text_color": "#ffffff",
-            "text_gradient": "",
-            "button_background": "#000000",
-            "button_text_color": "#ffffff",
-            "overlay_color": "#000000",
-            "overlay_opacity": 0
-          }
-        }
-      },
-      "block_order": [
-        "block-1",
-        "block-2",
-        "block-3",
-        "block-4"
-      ],
-      "disabled": true,
-      "settings": {
-        "full_width": true,
-        "reduce_width": false,
-        "desktop_row_height": 290,
-        "mobile_row_height": 150,
-        "background": "",
-        "background_gradient": ""
-      }
-    },
-    "section-9": {
-      "type": "before-after-image",
-      "disabled": true,
-      "settings": {
-        "full_width": false,
-        "subheading": "Before/after",
-        "title": "Compare images",
-        "content": "<p>Show how your product transforms experiences with a powerful before-and-after.</p>",
-        "expand_image": false,
-        "text_position": "center",
-        "before_after_text_position": "bottom",
-        "before_text": "Before",
-        "after_text": "After",
-        "drag_initial_position": 39,
-        "background": "rgba(0,0,0,0)",
-        "background_gradient": "",
-        "text_color": "",
-        "before_text_color": "#ffffff",
-        "after_text_color": "#ffffff",
-        "drag_cursor_background": "#ffffff",
-        "drag_cursor_color": "#000000"
-      }
-    },
     "section-15": {
       "type": "feature-chart",
       "blocks": {
@@ -1042,17 +885,6 @@
         "chart_text_color": "",
         "chart_true_false_color": ""
       }
-    },
-    "section-16": {
-      "type": "revealed-image-on-scroll",
-      "disabled": true,
-      "settings": {
-        "subheading": "",
-        "title": "Outstanding products with exceptional brands",
-        "background": "",
-        "text_color_inside": "#ffffff",
-        "text_color_outside": "#000000"
-      }
     }
   },
   "order": [
@@ -1067,11 +899,6 @@
     "testimonials_WWkzAN",
     "brand_usp_bEaKCC",
     "ig_carousel_CeJ3Nz",
-    "section-5",
-    "section-6",
-    "section-8",
-    "section-9",
-    "section-15",
-    "section-16"
+    "section-15"
   ]
 }

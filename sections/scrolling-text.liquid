@@ -8,6 +8,12 @@
       padding-top: 36px !important;
       padding-bottom: 36px !important;
     }
+
+    @media screen and (min-width: 700px) {
+      #shopify-section-{{ section.id }} {
+        --scrolling-text-font-size: 62px;
+      }
+    }
     
     #shopify-section-{{ section.id }} > div {
       padding-top: 0 !important;
@@ -28,6 +34,7 @@
 
     #shopify-section-{{ section.id }} .scrolling-text__text .heading {
       font-family: var(--text-font-family) !important;
+      font-weight: 600 !important;
     }
 
     #shopify-section-{{ section.id }} .scrolling-text__item {
@@ -60,11 +67,6 @@
       }
     }
 
-    @media screen and (min-width: 700px) {
-      #shopify-section-{{ section.id }} {
-        --scrolling-text-font-size: {% if section.settings.text_size == 'xsmall' %}1.5rem{% elsif section.settings.text_size == 'small' %}3.75rem{% elsif section.settings.text_size == 'medium' %}5rem{% elsif section.settings.text_size == 'large' %}8.75rem{% else %}12.5rem{% endif %};
-      }
-    }
   </style>
 
   {%- if section.settings.text_size == 'xsmall' -%}

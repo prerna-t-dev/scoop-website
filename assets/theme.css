@@ -4450,8 +4450,8 @@ product-rerender {
 }
 
 .announcement-bar {
-  padding-block-start: var(--spacing-2-5);
-  padding-block-end: var(--spacing-2-5);
+  padding-block-start: 8px;
+  padding-block-end: 8px;
 }
 
 .announcement-bar__wrapper {
@@ -4487,8 +4487,8 @@ product-rerender {
 
 @media screen and (min-width: 700px) {
   .announcement-bar {
-    padding-block-start: var(--spacing-3-5);
-    padding-block-end: var(--spacing-3-5);
+    padding-block-start: 14px;
+    padding-block-end: 14px;
   }
 
   .announcement-bar__item {
@@ -6163,8 +6163,26 @@ product-rerender {
 
 .header__icon-list {
   align-items: center;
-  gap: var(--header-icon-list-spacing);
+  gap: 11px;
   display: flex;
+}
+
+.header__icon-list button{
+  padding: 0 !important;
+}
+
+.header__icon-list .icon {
+  transform: scale(0.8);
+}
+
+@media screen and (min-width: 1150px) {
+
+  .header__icon-list{
+    gap: 32px;
+  }
+  .header__icon-list .icon {
+    transform: scale(1);
+  }
 }
 
 .header__cart-count {

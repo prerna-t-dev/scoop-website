@@ -15,11 +15,51 @@ CSS
     --slideshow-background: {{ section.blocks.first.settings.background_gradient | default: section.blocks.first.settings.background | default: section.settings.background_gradient | default: section.settings.background }};
     --slideshow-controls-background: {{ controls_background.rgb }};
     --slideshow-controls-color: {{ controls_color.rgb }};
+    --slideshow-min-height: {{ section.settings.min_height }}px;
 
     {%- if section.settings.allow_transparent_header -%}
       margin-block-start: calc(-1 * var(--header-height) * var(--section-is-first));
     {%- endif -%}
   }
+
+  #shopify-section-{{ section.id }} .slideshow__carousel {
+    min-height: var(--slideshow-min-height);
+  }
+
+  #shopify-section-{{ section.id }} .slideshow__slide {
+    min-height: var(--slideshow-min-height);
+  }
+
+  #shopify-section-{{ section.id }} .content-over-media {
+    min-height: var(--slideshow-min-height);
+    grid-template: 30px minmax(0, 1fr) 30px / minmax(0, 1fr) minmax(0, min(var(--container-max-width), 100% - var(--content-over-media-gap, var(--content-over-media-column-gap, var(--container-gutter))) * 2)) minmax(0, 1fr);
+    row-gap: 0 !important;
+    position: relative;
+  }
+
+  #shopify-section-{{ section.id }} .place-self-start{
+    height: 100%;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .content-over-media {
+      grid-template: 46px minmax(0, 1fr) 46px / minmax(0, 1fr) minmax(0, min(var(--container-max-width), 100% - var(--content-over-media-gap, var(--content-over-media-column-gap, var(--container-gutter))) * 2)) minmax(0, 1fr);
+    }
+
+    #shopify-section-{{ section.id }} .place-self-start{
+      height: auto;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .slideshow-additional-title {
+    padding-top: {{ section.settings.additional_title_padding_top }}px;
+  }
+
+  {%- for block in section.blocks -%}
+    #block-{{ block.id }} .prose p.{{ block.settings.heading_tag }} {
+      color: {{ block.settings.heading_color | default: '#F9CEC6' }};
+    }
+  {%- endfor -%}
 
   {%- for block in section.blocks -%}
     #block-{{ block.id }} {
@@ -40,7 +80,7 @@ CSS
   .slideshow-scallop-button {
     background: transparent;
     border: none;
-    padding: 0;
+    padding: 0 !important;
     cursor: pointer;
     color: rgb(var(--slideshow-controls-color));
     transition: transform 0.2s ease, opacity 0.2s ease;
@@ -56,10 +96,17 @@ CSS
   }
 
   .slideshow-scallop-button svg {
-    width: 51px;
-    height: 51px;
+    width: 40.8px;
+    height: 40.8px;
     display: block;
     filter: none;
+  }
+
+  @media screen and (min-width: 700px) {
+    .slideshow-scallop-button svg {
+      width: 51px;
+      height: 51px;
+    }
   }
 </style>
 
@@ -146,7 +193,7 @@ LIQUID
 
               {%- if block.settings.title != blank -%}
                 <p class="{{ block.settings.heading_tag }}" data-sequence="heading">
-                  {%- render 'styled-text', content: block.settings.title, apparition_effect: true -%}
+                  {{ block.settings.title | newline_to_br }}
                 </p>
               {%- endif -%}
 
@@ -159,15 +206,15 @@ LIQUID
               {%- if block.settings.button_text != blank -%}
                 {%- render 'button', href: block.settings.button_link, content: block.settings.button_text, size: 'xl', background: block.settings.button_background, text_color: block.settings.button_text_color -%}
               {%- endif -%}
+
+              {%- if block.settings.additionaltitle != blank -%}
+                <div class="slideshow-additional-title">
+                  <p class="additional-title-text">{{ block.settings.additionaltitle | escape }}</p>
+                </div>
+              {%- endif -%}
             </div>
           </div>
         </div>
-        
-        {%- if block.settings.additionaltitle != blank -%}
-          <div class="slideshow-additional-title">
-            <p class="additional-title-text">{{ block.settings.additionaltitle | escape }}</p>
-          </div>
-        {%- endif -%}
       {%- endcapture -%}
 
       {%- if block.settings.button_link != blank and block.settings.button_text == blank -%}
@@ -290,6 +337,26 @@ LIQUID
       ],
       "info": "Choose \"Original media ratio\" to not cut media. [Learn more](https://help.shopify.com/en/manual/online-store/images/theme-images#best-practices-for-slideshows-and-full-width-images)",
       "default": "auto"
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Minimum height",
+      "min": 300,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "additional_title_padding_top",
+      "label": "Additional title top padding",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 100
     },
     {
       "type": "select",
@@ -558,6 +625,12 @@ LIQUID
         },
         {
           "type": "color",
+          "id": "heading_color",
+          "label": "Heading color",
+          "default": "#F9CEC6"
+        },
+        {
+          "type": "color",
           "id": "button_background",
           "label": "Button background",
           "default": "#ffffff"
@@ -788,6 +861,12 @@ LIQUID
           "id": "text_color",
           "label": "Text",
           "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "heading_color",
+          "label": "Heading color",
+          "default": "#F9CEC6"
         },
         {
           "type": "color",

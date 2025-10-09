@@ -78,40 +78,29 @@
       </svg>
 
     {%- when 'hamburger' -%}
-      <svg role="presentation" stroke-width="{{ stroke_width | default: settings.icon_stroke_width }}" focusable="false" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" class="{{ class | strip }}" viewBox="0 0 22 22">
-        <path d="M1 5h20M1 11h20M1 17h20" stroke="currentColor" stroke-linecap="round"></path>
+      <svg role="presentation" focusable="false" width="{{ width | default: 17 }}" height="{{ height | default: 18 }}" class="{{ class | strip }}" viewBox="0 0 17 18" fill="none">
+        <path d="M0.785156 0.883301H15.8418" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M0.785156 8.8833H15.8418" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M0.785156 16.8833H15.8418" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
       </svg>
 
     {%- when 'account' -%}
-      <svg role="presentation" stroke-width="{{ stroke_width | default: settings.icon_stroke_width }}" focusable="false" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" class="{{ class | strip }}" viewBox="0 0 22 22">
-        <circle cx="11" cy="7" r="4" fill="none" stroke="currentColor"></circle>
-        <path d="M3.5 19c1.421-2.974 4.247-5 7.5-5s6.079 2.026 7.5 5" fill="none" stroke="currentColor" stroke-linecap="round"></path>
+      <svg role="presentation" focusable="false" width="{{ width | default: 24 }}" height="{{ height | default: 28 }}" class="{{ class | strip }}" viewBox="0 0 24 28" fill="none">
+        <circle cx="11.8724" cy="8.61946" r="7.22981" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M22.1443 26.1225C22.1443 20.4486 17.5448 15.8491 11.871 15.8491C6.19718 15.8491 1.59766 20.4486 1.59766 26.1225" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
 
     {%- when 'search' -%}
-      <svg role="presentation" stroke-width="{{ stroke_width | default: settings.icon_stroke_width }}" focusable="false" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" class="{{ class | strip }}" viewBox="0 0 22 22">
-        <circle cx="11" cy="10" r="7" fill="none" stroke="currentColor"></circle>
-        <path d="m16 15 3 3" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+      <svg role="presentation" focusable="false" width="{{ width | default: 26 }}" height="{{ height | default: 27 }}" class="{{ class | strip }}" viewBox="0 0 26 27" fill="none">
+        <path d="M24.5977 25.2207L19.0393 19.4207M22.0421 11.8874C22.0421 17.7784 17.4655 22.554 11.8199 22.554C6.1743 22.554 1.59766 17.7784 1.59766 11.8874C1.59766 5.99633 6.1743 1.2207 11.8199 1.2207C17.4655 1.2207 22.0421 5.99633 22.0421 11.8874Z" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
 
     {%- when 'cart' -%}
-      {%- case settings.cart_icon -%}
-        {%- when 'shopping_basket' -%}
-          <svg role="presentation" stroke-width="{{ stroke_width | default: settings.icon_stroke_width }}" focusable="false" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" class="{{ class | strip }}" viewBox="0 0 22 22">
-            <path d="M11 7H3.577A2 2 0 0 0 1.64 9.497l2.051 8A2 2 0 0 0 5.63 19H16.37a2 2 0 0 0 1.937-1.503l2.052-8A2 2 0 0 0 18.422 7H11Zm0 0V1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-
-        {%- when 'tote_bag' -%}
-          <svg role="presentation" stroke-width="{{ stroke_width | default: settings.icon_stroke_width }}" focusable="false" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" class="{{ class | strip }}" viewBox="0 0 22 22">
-            <path d="M14.666 7.333a3.666 3.666 0 1 1-7.333 0M3.33 6.785l-.642 7.7c-.137 1.654-.206 2.48.073 3.119a2.75 2.75 0 0 0 1.21 1.314c.612.332 1.442.332 3.102.332h7.853c1.66 0 2.49 0 3.103-.332a2.75 2.75 0 0 0 1.21-1.314c.279-.638.21-1.465.072-3.12l-.642-7.7c-.118-1.423-.178-2.134-.493-2.673A2.75 2.75 0 0 0 16.99 3.02c-.563-.269-1.277-.269-2.705-.269h-6.57c-1.428 0-2.142 0-2.705.27A2.75 2.75 0 0 0 3.823 4.11c-.315.539-.374 1.25-.493 2.674Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-
-        {%- when 'shopping_cart' -%}
-          <svg role="presentation" stroke-width="{{ stroke_width | default: settings.icon_stroke_width }}" focusable="false" width="{{ width | default: 22 }}" height="{{ height | default: 22 }}" class="{{ class | strip }}" viewBox="0 0 22 22">
-            <path d="M9.182 18.454a.91.91 0 1 1-1.818 0 .91.91 0 0 1 1.818 0Zm7.272 0a.91.91 0 1 1-1.818 0 .91.91 0 0 1 1.819 0Z" fill="currentColor"></path>
-            <path d="M5.336 6.636H21l-3.636 8.182H6.909L4.636 3H1m8.182 15.454a.91.91 0 1 1-1.818 0 .91.91 0 0 1 1.818 0Zm7.272 0a.91.91 0 1 1-1.818 0 .91.91 0 0 1 1.819 0Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-      {%- endcase -%}
+      <svg role="presentation" focusable="false" width="{{ width | default: 30 }}" height="{{ height | default: 27 }}" class="{{ class | strip }}" viewBox="0 0 30 27" fill="none">
+        <path d="M11.5509 25.1015C12.2003 25.1015 12.7267 24.596 12.7267 23.9724C12.7267 23.3488 12.2003 22.8432 11.5509 22.8432C10.9015 22.8432 10.3751 23.3488 10.3751 23.9724C10.3751 24.596 10.9015 25.1015 11.5509 25.1015Z" fill="white"/>
+        <path d="M24.4847 25.1015C25.134 25.1015 25.6605 24.596 25.6605 23.9724C25.6605 23.3488 25.134 22.8432 24.4847 22.8432C23.8353 22.8432 23.3089 23.3488 23.3089 23.9724C23.3089 24.596 23.8353 25.1015 24.4847 25.1015Z" fill="white"/>
+        <path d="M2.14453 1.38965H6.84772L9.99885 16.5088C10.1064 17.0286 10.4009 17.4956 10.8308 17.8279C11.2607 18.1603 11.7986 18.3368 12.3504 18.3267H23.7792C24.331 18.3368 24.8689 18.1603 25.2988 17.8279C25.7288 17.4956 26.0232 17.0286 26.1308 16.5088L28.012 7.03533H8.02351M12.7267 23.9724C12.7267 24.596 12.2003 25.1015 11.5509 25.1015C10.9015 25.1015 10.3751 24.596 10.3751 23.9724C10.3751 23.3488 10.9015 22.8432 11.5509 22.8432C12.2003 22.8432 12.7267 23.3488 12.7267 23.9724ZM25.6605 23.9724C25.6605 24.596 25.134 25.1015 24.4847 25.1015C23.8353 25.1015 23.3089 24.596 23.3089 23.9724C23.3089 23.3488 23.8353 22.8432 24.4847 22.8432C25.134 22.8432 25.6605 23.3488 25.6605 23.9724Z" stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
 
     {%- when 'quick-buy-cart' -%}
       {%- case settings.cart_icon -%}
