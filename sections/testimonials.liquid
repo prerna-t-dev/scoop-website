@@ -27,6 +27,21 @@ CSS
     padding: 0 var(--container-gutter);
   }
 
+  #shopify-section-{{ section.id }} .testimonials__title-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  #shopify-section-{{ section.id }} .testimonials__title-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 139px;
+    height: 143px;
+  }
+
   #shopify-section-{{ section.id }} .testimonials__title {
     font-family: var(--heading-font-family);
     font-size: {{ section.settings.title_font_size_mobile }}px;
@@ -35,6 +50,8 @@ CSS
     color: {{ section.settings.title_color }};
     margin: 0;
     font-style: {{ section.settings.title_font_style }} !important;
+    position: relative;
+    z-index: 1;
   }
 
   #shopify-section-{{ section.id }} .testimonials__title em {
@@ -193,13 +210,6 @@ CSS
       font-size: {{ section.settings.title_font_size_desktop }}px;
     }
 
-    #shopify-section-{{ section.id }} .testimonials__slider {
-      grid-auto-columns: calc((100vw - 120px - (var(--spacing-5) * 2)) / 3);
-      gap: var(--spacing-5);
-      scroll-padding-inline: 60px;
-      padding-inline: 60px;
-    }
-
     #shopify-section-{{ section.id }} .testimonial-card {
       padding: {{ section.settings.card_padding_desktop }}px;
     }
@@ -214,6 +224,15 @@ CSS
 
     #shopify-section-{{ section.id }} .testimonial-card__text {
       font-size: {{ section.settings.text_size_desktop }}px;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .testimonials__slider {
+      grid-auto-columns: calc((100vw - 120px - (var(--spacing-5) * 2)) / 3);
+      gap: var(--spacing-5);
+      scroll-padding-inline: 60px;
+      padding-inline: 60px;
     }
   }
 </style>
@@ -297,7 +316,12 @@ LIQUID
   <div class="testimonials">
     {%- if section.settings.title != blank -%}
       <div class="testimonials__header">
-        <h2 class="testimonials__title">{{ section.settings.title }}</h2>
+        <div class="testimonials__title-wrapper">
+          <svg class="testimonials__title-bg" width="139" height="143" viewBox="0 0 139 143" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M70.195 0.416504C81.5271 0.416504 90.8155 9.17888 91.6748 20.3078C95.3326 17.4397 99.9395 15.7302 104.945 15.7302C116.844 15.7302 126.49 25.3912 126.49 37.3087C126.49 41.942 125.031 46.2336 122.549 49.7497C131.99 52.042 139 60.5608 139 70.7204C139 81.5748 130.998 90.5543 120.58 92.0705C124.243 95.9386 126.49 101.165 126.49 106.917C126.49 118.834 116.844 128.495 104.945 128.495C99.8753 128.495 95.215 126.741 91.535 123.806C90.0909 134.319 81.0885 142.417 70.195 142.417C59.3014 142.417 50.2976 134.319 48.8536 123.806C45.1738 126.74 40.5143 128.495 35.445 128.495C23.546 128.495 13.9 118.834 13.9 106.917C13.9 101.237 16.0912 96.0691 19.6731 92.2159C8.65073 91.2657 0 82.0061 0 70.7204C0 60.1309 7.61605 51.3228 17.6614 49.4914C15.2891 46.0243 13.9 41.8292 13.9 37.3087C13.9 25.3912 23.546 15.7302 35.445 15.7302C40.4501 15.7302 45.0562 17.4401 48.7138 20.3078C49.5731 9.17883 58.8629 0.416504 70.195 0.416504Z" fill="#F9CEC6"/>
+          </svg>
+          <h2 class="testimonials__title">{{ section.settings.title }}</h2>
+        </div>
       </div>
     {%- endif -%}
 
@@ -310,7 +334,7 @@ LIQUID
           {%- for block in section.blocks limit: 3 -%}
             <div class="testimonial-card scroll-area__item testimonial-card--clone" data-block-id="{{ block.id }}">
               {%- if block.settings.quote != blank -%}
-                <div class="testimonial-card__quote">"</div>
+                <div class="testimonial-card__quote">“</div>
               {%- endif -%}
 
               <div class="testimonial-card__content">
@@ -350,7 +374,7 @@ LIQUID
         {%- for block in section.blocks -%}
           <div class="testimonial-card scroll-area__item" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
             {%- if block.settings.quote != blank -%}
-              <div class="testimonial-card__quote">"</div>
+              <div class="testimonial-card__quote">“</div>
             {%- endif -%}
 
             <div class="testimonial-card__content">
@@ -390,7 +414,7 @@ LIQUID
           {%- for block in section.blocks limit: 3 -%}
             <div class="testimonial-card scroll-area__item testimonial-card--clone" data-block-id="{{ block.id }}">
               {%- if block.settings.quote != blank -%}
-                <div class="testimonial-card__quote">"</div>
+                <div class="testimonial-card__quote">“</div>
               {%- endif -%}
 
               <div class="testimonial-card__content">
@@ -455,10 +479,9 @@ LIQUID
       "content": "Section title"
     },
     {
-      "type": "inline_richtext",
+      "type": "richtext",
       "id": "title",
-      "label": "Title",
-      "default": "They say it <em>better</em> than we do."
+      "label": "Title"
     },
     {
       "type": "color",
@@ -553,7 +576,7 @@ LIQUID
       "type": "range",
       "id": "quote_size_mobile",
       "label": "Quote size (mobile)",
-      "min": 40,
+      "min": 20,
       "max": 100,
       "step": 4,
       "unit": "px",
@@ -563,7 +586,7 @@ LIQUID
       "type": "range",
       "id": "quote_size_desktop",
       "label": "Quote size (desktop)",
-      "min": 60,
+      "min": 20,
       "max": 120,
       "step": 4,
       "unit": "px",
