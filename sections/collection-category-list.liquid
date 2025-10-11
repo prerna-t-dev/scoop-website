@@ -1,0 +1,294 @@
+{%- render 'section-spacing-collapsing' -%}
+
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+CSS
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+<style>
+  #shopify-section-{{ section.id }} {
+    padding-top: 44px !important;
+  }
+
+  #shopify-section-{{ section.id }} .section-header h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 100%;
+    color: {{ section.settings.heading_color | default: '#7E7E7E' }};
+    margin: 0;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .section-header h2 {
+      font-size: 22px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .collection-category-list {
+    --category-item-width: calc((100vw - var(--container-gutter) * 2) / 2.5);
+    --category-grid: auto / auto-flow var(--category-item-width);
+    --content-over-media-gap: var(--grid-gutter);
+  }
+
+  /* Mobile Grid */
+  #shopify-section-{{ section.id }} .collection-category-list {
+    display: grid;
+    grid: var(--category-grid);
+    gap: var(--spacing-4);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  #shopify-section-{{ section.id }} .collection-category-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .collection-category-list__item {
+    scroll-snap-align: start;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  {%- for block in section.blocks -%}
+    #block-{{ block.id }}.collection-category-list__item {
+      background-color: {{ block.settings.background | default: '#E0D9F2' }} !important;
+    }
+  {%- endfor -%}
+
+  #shopify-section-{{ section.id }} .collection-category-list__item .category-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .collection-category-list__item .collection-category-list__text {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+    z-index: 2;
+    font-family: var(--heading-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #654392;
+    margin: 0;
+    text-align: left;
+  }
+
+  #shopify-section-{{ section.id }} .collection-category-list__item .category-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .collection-category-list {
+      --category-item-width: calc((100vw - var(--container-gutter) * 2) / 5.5);
+    }
+
+    #shopify-section-{{ section.id }} .collection-category-list__text {
+      font-size: 30px;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .collection-category-list {
+      --category-item-width: calc(var(--container-inner-width) / 5.5);
+      gap: 66px;
+    }
+  }
+
+  /* Scallop button styling - inherits from circle-button positioning and hover behavior */
+  #shopify-section-{{ section.id }} .circle-button.category-scallop-button {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none !important;
+    width: 51px !important;
+    height: 51px !important;
+    min-width: 51px !important;
+    min-height: 51px !important;
+  }
+
+  #shopify-section-{{ section.id }} .circle-button.category-scallop-button svg {
+    width: 51px !important;
+    height: 51px !important;
+    display: block;
+    filter: none !important;
+  }
+</style>
+
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+LIQUID
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+<div {% render 'section-properties' %}>
+  <div class="section-stack">
+    {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color -%}
+
+    <div class="floating-controls-container">
+      {%- assign scroll_area_id = 'scroll-area-' | append: section.id -%}
+
+      <scroll-carousel id="{{ scroll_area_id }}" class="collection-category-list scroll-area bleed">
+        {%- for block in section.blocks -%}
+          <div id="block-{{ block.id }}" class="scroll-area__item collection-category-list__item group" {{ block.shopify_attributes }}>
+            {%- if block.settings.pattern_image != blank -%}
+              {{ block.settings.pattern_image | image_url: width: 400 | image_tag: class: 'category-image', loading: 'lazy' }}
+            {%- endif -%}
+
+            {%- if block.settings.text != blank -%}
+              <div class="collection-category-list__text">
+                {{ block.settings.text | newline_to_br }}
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.link_url != blank -%}
+              <a href="{{ block.settings.link_url }}" class="category-link"></a>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </scroll-carousel>
+
+      <button is="prev-button" class="circle-button category-scallop-button" aria-controls="{{ scroll_area_id }}" disabled>
+        <span class="sr-only">{{ 'general.accessibility.previous' | t }}</span>
+        {%- render 'icon-arrow-left-scallop' -%}
+      </button>
+
+      <button is="next-button" class="circle-button category-scallop-button" aria-controls="{{ scroll_area_id }}">
+        <span class="sr-only">{{ 'general.accessibility.next' | t }}</span>
+        {%- render 'icon-arrow-right-scallop' -%}
+      </button>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection category list",
+  "class": "shopify-section--collection-category-list",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section header"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop By"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#7E7E7E"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "color",
+          "id": "background",
+          "label": "Background color",
+          "default": "#E0D9F2"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text color",
+          "default": "#654392"
+        },
+        {
+          "type": "image_picker",
+          "id": "pattern_image",
+          "label": "Pattern image",
+          "info": "Optional decorative pattern overlay"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Category Name"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection category list",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "text": "New\nArrivals"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "text": "By\nSize"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "text": "By\nStyle"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "text": "By\nFeature"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "text": "Sale"
+          }
+        },
+        {
+          "type": "category",
+          "settings": {
+            "text": "Gifting"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
