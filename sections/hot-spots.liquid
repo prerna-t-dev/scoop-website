@@ -21,6 +21,32 @@
     overflow: visible; /* allows dot to show outside */
   }
 
+  #shopify-section-{{ section.id }} .section-header h2 {
+    font-size: 35px;
+  }
+
+  #shopify-section-{{ section.id }} .section-header h2 p {
+    margin-top: 0 !important;
+  }
+
+  #shopify-section-{{ section.id }} .section-header .prose .content p {
+    font-size: 14px;
+  }
+
+  @media screen and (min-width: 1150px) {
+    #shopify-section-{{ section.id }} .section-header .prose .content p {
+      font-size: 22px;
+    }
+
+    #shopify-section-{{ section.id }} .section-header {
+      display: none !important;
+    }
+
+    #shopify-section-{{ section.id }} .content-over-media > div[class*="place-self"] {
+      display: block !important;
+    }
+  }
+
   {%- if section.settings.full_width -%}
     @media screen and (min-width: 1000px) {
       #shopify-section-{{ section.id }} {
@@ -42,18 +68,72 @@
       }
     }
   {%- endfor -%}
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .prose h2{
+      margin-bottom: 16px;
+    }
+    #shopify-section-{{ section.id }} .prose *+p {
+      margin-block-start: 0 !important;
+    }
+  }
+
+  .hot-spot-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hot-spot-text {
+    flex: 1;
+  }
+
+  .hot-spot-image {
+    flex-shrink: 0;
+    margin-top: 0;
+  }
+
+  .h6 {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600 !important;
+    margin-bottom: 10px;
+  }
+
+  .hot-spot-text .hot-spot-content-text {
+    font-size: 12px;
+    line-height: 140%;
+    margin-top: 10px;
+  }
+
+  @media screen and (min-width: 1150px) {
+    .hot-spot-popover::part(body) {
+      width: 280px;
+      padding: 16px 22px;
+    }
+  }
+
+  @media screen and (max-width: 699px) {
+    .hot-spot-popover::part(body) {
+      width: auto;
+      padding: 16px 22px;
+    }
+  }
 </style>
 
 <div {% render 'section-properties' %}>
   <div class="section-stack">
     {%- if section.settings.title != blank or section.settings.content != blank -%}
-      <div class="section-header md:hidden">
+      <div class="section-header" style="display: block;">
         <div class="prose">
           {%- if section.settings.title != blank -%}
-            <h2 class="h2">{{ section.settings.title | escape }}</h2>
+            <h2 class="h2">{{ section.settings.title }}</h2>
           {%- endif -%}
 
-          {{- section.settings.content -}}
+          <div class="content"> 
+            {{- section.settings.content -}}
+            
+          </div>
 
           {%- if section.settings.button_text != blank -%}
             {%- render 'button', size: 'lg', content: section.settings.button_text, href: section.settings.button_url -%}
@@ -69,7 +149,7 @@
         <picture>
           {%- if section.settings.mobile_image != blank -%}
             <source
-              media="(max-width: 699px)"
+              media="(max-width: 1149px)"
               srcset="{{ section.settings.mobile_image | image_url: width: 400 }} 400w, {{ section.settings.mobile_image | image_url: width: 600 }} 600w, {{ section.settings.mobile_image | image_url: width: 800 }} 800w, {{ section.settings.mobile_image | image_url: width: 1000 }} 1000w, {{ section.settings.mobile_image | image_url: width: 1200 }} 1200w"
               width="{{ section.settings.mobile_image.width }}"
               height="{{ section.settings.mobile_image.height }}"
@@ -83,10 +163,10 @@
       {%- endif -%}
 
       {%- if section.settings.title != blank or section.settings.content != blank -%}
-        <div class="{{ section.settings.desktop_text_position }} hidden md:block">
+        <div class="{{ section.settings.desktop_text_position }}" style="display: none;">
           <div class="prose">
             {%- if section.settings.title != blank -%}
-              <h2 class="h2">{{ section.settings.title | escape }}</h2>
+              <h2 class="h2">{{ section.settings.title }}</h2>
             {%- endif -%}
 
             {{- section.settings.content -}}
@@ -119,18 +199,26 @@
 
           <x-popover id="{{ popover_id }}" class="hot-spot-popover popover" anchor-vertical="center" anchor-horizontal="{{ anchor_horizontal }}" {{ block.shopify_attributes }}>
             <div class="prose">
-              {%- if block.settings.icon != blank -%}
-                {%- capture sizes -%}{{ block.settings.icon_width }}px{%- endcapture -%}
-                {%- capture widths -%}{{ block.settings.icon_width }}, {{ block.settings.icon_width | times: 2 | at_most: block.settings.icon.width }}{%- endcapture -%}
-                {%- capture style -%}width: {{ block.settings.icon_width }}px{%- endcapture -%}
-                {{- block.settings.icon | image_url: width: block.settings.icon.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, style: style -}}
-              {%- endif -%}
+              <div class="hot-spot-content">
+                <div class="hot-spot-text">
+                  {%- if block.settings.title != blank -%}
+                    <p class="h6">{{ block.settings.title | escape }}</p>
+                  {%- endif -%}
 
-              {%- if block.settings.title != blank -%}
-                <p class="h6">{{ block.settings.title | escape }}</p>
-              {%- endif -%}
+                  <div class="hot-spot-content-text">
+                    {{- block.settings.content -}}
+                  </div>
+                </div>
 
-              {{- block.settings.content -}}
+                {%- if block.settings.icon != blank -%}
+                  <div class="hot-spot-image">
+                    {%- capture sizes -%}{{ block.settings.icon_width }}px{%- endcapture -%}
+                    {%- capture widths -%}{{ block.settings.icon_width }}, {{ block.settings.icon_width | times: 2 | at_most: block.settings.icon.width }}{%- endcapture -%}
+                    {%- capture style -%}width: {{ block.settings.icon_width }}px{%- endcapture -%}
+                    {{- block.settings.icon | image_url: width: block.settings.icon.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, style: style -}}
+                  </div>
+                {%- endif -%}
+              </div>
             </div>
           </x-popover>
         </div>
@@ -169,7 +257,7 @@
       "info": "1500 x 1900px .jpg recommended. Default to desktop image."
     },
     {
-      "type": "text",
+      "type": "richtext",
       "id": "title",
       "label": "Heading"
     },

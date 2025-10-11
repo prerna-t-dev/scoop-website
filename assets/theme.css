@@ -1148,7 +1148,7 @@ scroll-carousel {
   max-width: var(--popover-content-max-width);
   background: rgb(var(--dialog-background));
   color: rgb(var(--text-color));
-  border-radius: 8px;
+  border-radius: 16px !important;
   flex-direction: column;
   display: flex;
   position: relative;
@@ -5844,9 +5844,9 @@ product-rerender {
     display: flex;
   }
 
-  .footer__copyright {
+  /* .footer__copyright {
     order: -1;
-  }
+  } */
 }
 
 @media screen and (min-width: 1000px) {

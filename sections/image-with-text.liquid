@@ -51,7 +51,7 @@ CSS
 
   #shopify-section-{{ section.id }} .image-with-text__eyebrow {
     font-size: {{ section.settings.eyebrow_font_size }}px;
-    font-weight: {{ section.settings.eyebrow_font_weight }};
+    font-weight: {{ section.settings.eyebrow_font_weight }} !important;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin-bottom: 16px;
@@ -73,7 +73,7 @@ CSS
     font-size: {{ section.settings.content_font_size }}px;
     line-height: 1.6;
     margin-bottom: 32px;
-    color: {{ section.settings.content_color }};
+    color: #828282;
   }
 
   @media screen and (min-width: 700px) {
@@ -87,6 +87,7 @@ CSS
     #shopify-section-{{ section.id }} .image-with-text__content {
       flex: 1;
       text-align: {{ section.settings.desktop_text_align }};
+      padding-left: {{ section.settings.text_padding_left_desktop }}px;
     }
 
     #shopify-section-{{ section.id }} .image-with-text__header,
@@ -471,7 +472,7 @@ LIQUID
       "type": "range",
       "id": "gap_mobile",
       "label": "Gap between image and text (mobile)",
-      "min": 20,
+      "min": 8,
       "max": 80,
       "step": 4,
       "unit": "px",
@@ -486,6 +487,16 @@ LIQUID
       "step": 8,
       "unit": "px",
       "default": 80
+    },
+    {
+      "type": "range",
+      "id": "text_padding_left_desktop",
+      "label": "Text padding left (desktop)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 0
     }
   ],
   "presets": [

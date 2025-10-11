@@ -14,6 +14,28 @@
       margin-block-start: calc(-1 * var(--header-height) * var(--section-is-first));
     {%- endif -%}
   }
+
+  #shopify-section-{{ section.id }} .content-over-media > :not(img, video, iframe, svg, video-media, picture) {
+    position: static !important;
+  }
+
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'svg' -%}
+      #block-{{ block.id }}.svg-block {
+        position: absolute;
+        left: {{ block.settings.left_position_mobile | default: 0 }}%;
+        top: {{ block.settings.top_position_mobile | default: 0 }}%;
+        z-index: 10;
+      }
+
+      @media screen and (min-width: 700px) {
+        #block-{{ block.id }}.svg-block {
+          left: {{ block.settings.left_position_desktop | default: 0 }}%;
+          top: {{ block.settings.top_position_desktop | default: 0 }}%;
+        }
+      }
+    {%- endif -%}
+  {%- endfor -%}
 </style>
 
 <div {% render 'section-properties' %} {% if section.settings.allow_transparent_header %}allow-transparent-header{% endif %}>
@@ -53,7 +75,7 @@
               {%- when 'heading' -%}
                 {%- if block.settings.text != blank -%}
                   <p class="{{ block.settings.heading_tag }}" {% if settings.heading_apparition != 'none' %}reveal-on-scroll="true"{% endif %} {{ block.shopify_attributes }}>
-                    {%- render 'styled-text', content: block.settings.text, apparition_effect: true -%}
+                    {{ block.settings.text | newline_to_br }}
                   </p>
                 {%- endif -%}
 
@@ -74,6 +96,13 @@
               {%- when 'button' -%}
                 {%- if block.settings.text != blank -%}
                   {% render 'button', content: block.settings.text, href: block.settings.url, size: block.settings.size, style: block.settings.style, background: block.settings.background, text_color: block.settings.text_color, block: block %}
+                {%- endif -%}
+
+              {%- when 'svg' -%}
+                {%- if block.settings.svg_code != blank -%}
+                  <div id="block-{{ block.id }}" class="svg-block" {{ block.shopify_attributes }}>
+                    {{ block.settings.svg_code }}
+                  </div>
                 {%- endif -%}
             {%- endcase -%}
           {%- endfor -%}
@@ -288,10 +317,9 @@
       "name": "Heading",
       "settings": [
         {
-          "type": "text",
+          "type": "textarea",
           "id": "text",
-          "label": "Text",
-          "default": "Heading"
+          "label": "Text" 
         },
         {
           "type": "select",
@@ -419,6 +447,65 @@
           "type": "color",
           "id": "text_color",
           "label": "Text"
+        }
+      ]
+    },
+    {
+      "name": "SVG",
+      "type": "svg",
+      "settings": [
+        {
+          "type": "html",
+          "id": "svg_code",
+          "label": "SVG Code"
+        },
+        {
+          "type": "header",
+          "content": "Mobile Position"
+        },
+        {
+          "type": "range",
+          "id": "left_position_mobile",
+          "label": "Left position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "top_position_mobile",
+          "label": "Top position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Desktop Position"
+        },
+        {
+          "type": "range",
+          "id": "left_position_desktop",
+          "label": "Left position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "top_position_desktop",
+          "label": "Top position",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
         }
       ]
     }

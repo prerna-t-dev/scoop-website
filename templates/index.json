@@ -394,11 +394,12 @@
           "settings": {
             "horizontal_position": 85,
             "vertical_position": 64,
-            "horizontal_position_mobile": 83,
-            "vertical_position_mobile": 74,
-            "icon_width": 32,
-            "title": "Premium materials",
-            "content": "<p>Built to last with carefully selected, high-quality components.</p>"
+            "horizontal_position_mobile": 81,
+            "vertical_position_mobile": 49,
+            "icon": "shopify://shop_images/Group_1000006463.png",
+            "icon_width": 96,
+            "title": "Graphic Stretch Lace",
+            "content": "<p>Fuller coverage cup and underwires give great support while the graphic smooth lace adds style.</p>"
           }
         },
         "block-2": {
@@ -407,10 +408,11 @@
             "horizontal_position": 70,
             "vertical_position": 43,
             "horizontal_position_mobile": 43,
-            "vertical_position_mobile": 24,
-            "icon_width": 32,
-            "title": "Thoughtful design",
-            "content": "<p>Every detail is crafted to enhance usability and style.<br/></p>"
+            "vertical_position_mobile": 34,
+            "icon": "shopify://shop_images/Group_1000006463.png",
+            "icon_width": 96,
+            "title": "Adjustable Straps",
+            "content": "<p>Fully adjustable straps with elegant lace build-up on the apex.<br/></p>"
           }
         },
         "block-3": {
@@ -418,11 +420,12 @@
           "settings": {
             "horizontal_position": 60,
             "vertical_position": 50,
-            "horizontal_position_mobile": 47,
+            "horizontal_position_mobile": 13,
             "vertical_position_mobile": 51,
-            "icon_width": 32,
-            "title": "Seamless integration",
-            "content": "<p>Works effortlessly with your lifestyle or existing setup.</p>"
+            "icon": "shopify://shop_images/Group_1000006463.png",
+            "icon_width": 96,
+            "title": "Side Support",
+            "content": "<p>Inner sling provides side support for projection and uplift.</p>"
           }
         }
       },
@@ -435,11 +438,11 @@
         "full_width": false,
         "image": "shopify://shop_images/lovelace_coral-1_4.png",
         "mobile_image": "shopify://shop_images/Screenshot_2025-08-23_at_12.46.13_PM_1.png",
-        "title": "Lingerie that loves curves",
+        "title": "<p>Lingerie that </p><p>loves curves</p>",
         "content": "<p>With a size range of D-K cups, our collection lifts more than just your spirits.</p>",
         "button_text": "",
         "button_url": "",
-        "desktop_text_position": "place-self-start text-start",
+        "desktop_text_position": "place-self-center-start text-start",
         "image_background": "",
         "image_background_gradient": "linear-gradient(90deg, rgba(77, 82, 60, 1), rgba(133, 141, 103, 1) 100%)",
         "overlay_color": "#000000",
@@ -467,8 +470,8 @@
         "eyebrow_font_weight": 600,
         "heading": "Looking for something for someone else?",
         "heading_color": "#000000",
-        "heading_font_size_mobile": 32,
-        "heading_font_size_desktop": 48,
+        "heading_font_size_mobile": 34,
+        "heading_font_size_desktop": 42,
         "heading_font_weight": 400,
         "heading_font_style": "normal",
         "content": "<p>Look no further, grab a gift card of an amount you'd find fit. And we'll help you out with the right fit.</p>",
@@ -484,10 +487,11 @@
         "desktop_layout": "row-reverse",
         "desktop_text_align": "left",
         "background_color": "#ffffff",
-        "padding_mobile": 40,
-        "padding_desktop": 80,
-        "gap_mobile": 40,
-        "gap_desktop": 80
+        "padding_mobile": 20,
+        "padding_desktop": 40,
+        "gap_mobile": 8,
+        "gap_desktop": 40,
+        "text_padding_left_desktop": 140
       }
     },
     "section-7": {
@@ -496,7 +500,7 @@
         "block-2": {
           "type": "heading",
           "settings": {
-            "text": "Every curve deserves the right fit.",
+            "text": "Every curve \ndeserves the \nright fit.",
             "heading_tag": "h1"
           }
         },
@@ -510,16 +514,38 @@
             "background": "",
             "text_color": ""
           }
+        },
+        "svg_e8LQyt": {
+          "type": "svg",
+          "settings": {
+            "svg_code": "<svg width=\"64\" height=\"65\" viewbox=\"0 0 64 65\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M53.3305 50.1532C50.8773 58.0912 42.4392 62.5331 34.4835 60.0743C30.5793 58.8678 27.517 56.2234 25.7003 52.9051C22.3281 54.6198 18.3078 55.0752 14.4036 53.8687C6.4479 51.4099 1.98727 42.9817 4.44052 35.0437C5.6529 31.1208 8.32714 28.0521 11.6823 26.2478C9.93018 22.8651 9.45365 18.8227 10.666 14.8997C13.1193 6.96175 21.5574 2.51992 29.5131 4.97864C33.4173 6.18521 36.4796 8.8294 38.2964 12.1477C41.6686 10.433 45.6888 9.97775 49.593 11.1843C57.5487 13.643 62.0093 22.0712 59.5561 30.0092C58.3437 33.9321 55.6696 37.0009 52.3145 38.8052C54.0665 42.1879 54.5429 46.2304 53.3305 50.1532Z\" fill=\"white\"></path>\n<g clip-path=\"url(#clip0_477_2963)\">\n<path d=\"M48.6304 27.1882C47.73 25.0962 46.0563 23.4795 43.917 22.6455C41.7801 21.8462 39.4551 21.858 37.3671 22.7871L35.6636 23.5511L34.8796 21.8567C33.9224 19.8037 32.1943 18.2608 30.03 17.4626C27.8685 16.688 25.5447 16.8095 23.4925 17.7971C19.47 19.7278 17.7994 24.7077 19.7624 28.8997L27.0201 44.4209C27.146 44.6902 27.3728 44.8955 27.6559 45.0014C27.939 45.1073 28.2439 45.0933 28.5166 44.9806L44.1787 38.0321C48.412 36.154 50.4221 31.2935 48.6481 27.2024L48.6316 27.1849L48.6304 27.1882Z\" fill=\"#FF615C\"></path>\n</g>\n<defs>\n<clippath id=\"clip0_477_2963\">\n<rect width=\"31.2683\" height=\"26.6359\" fill=\"white\" transform=\"translate(22.3418 14.5762) rotate(20.5073)\"></rect>\n</clippath>\n</defs>\n</svg>",
+            "left_position_mobile": 82,
+            "top_position_mobile": 0,
+            "left_position_desktop": 76,
+            "top_position_desktop": 23
+          }
+        },
+        "svg_cLDaMR": {
+          "type": "svg",
+          "settings": {
+            "svg_code": "<svg width=\"131\" height=\"103\" viewbox=\"0 0 131 103\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M52.4947 28.2308C64.8608 21.5329 79.3813 20.0222 92.8616 24.0301C106.342 28.038 117.678 37.237 124.376 49.6031L101.297 62.1029C97.9147 55.8578 92.1899 51.212 85.3821 49.1879C78.5742 47.1638 71.241 47.9273 64.9958 51.3099C58.7507 54.6925 54.105 60.4174 52.0808 67.2252C50.0567 74.0331 50.8193 81.3667 54.202 87.6119L31.1238 100.113C24.4258 87.7465 22.9138 73.2256 26.9217 59.7453C30.9296 46.265 40.1287 34.9289 52.4947 28.2308Z\" fill=\"#FF615C\"></path>\n<path d=\"M35.6958 83.3151C35.4183 83.3802 35.216 83.5282 35.0852 83.7523C34.9598 83.978 34.9214 84.2758 34.9753 84.6474C35.01 84.8928 35.0729 85.0923 35.1606 85.2477C35.2483 85.4032 35.3556 85.5129 35.4789 85.5788C35.6022 85.6447 35.7383 85.6686 35.8817 85.649C35.9994 85.6387 36.1007 85.5976 36.1838 85.5311C36.2669 85.4645 36.3338 85.3758 36.3845 85.2651C36.4386 85.1525 36.4782 85.0212 36.5087 84.8729C36.5374 84.7211 36.5587 84.5556 36.5725 84.3678L36.6256 83.6705C36.6524 83.2689 36.7132 82.9062 36.81 82.5859C36.9068 82.2656 37.036 81.9895 37.2012 81.7558C37.3664 81.522 37.5659 81.3359 37.8065 81.1937C38.0471 81.0515 38.3203 80.9536 38.6382 80.9064C39.1359 80.8333 39.5803 80.8988 39.9745 81.0923C40.3686 81.2859 40.6935 81.6047 40.954 82.0415C41.2146 82.4784 41.3898 83.027 41.4899 83.6818C41.5884 84.3419 41.5739 84.9305 41.4515 85.4494C41.3257 85.9701 41.0827 86.3952 40.7224 86.7247C40.3621 87.0542 39.8721 87.2728 39.2587 87.3683L38.9867 85.547C39.2403 85.4947 39.4388 85.3971 39.5925 85.2487C39.7428 85.1022 39.847 84.9188 39.9031 84.6951C39.9592 84.4714 39.9642 84.2179 39.925 83.9396C39.8882 83.6821 39.818 83.4689 39.723 83.2998C39.6279 83.1307 39.5115 83.0039 39.3722 82.9245C39.2329 82.8452 39.0863 82.8181 38.9255 82.8383C38.7771 82.865 38.6574 82.9292 38.5632 83.0325C38.4707 83.1392 38.3969 83.2888 38.3487 83.4863C38.2971 83.6855 38.2606 83.9295 38.2361 84.2287L38.1649 85.081C38.112 85.787 37.9357 86.3612 37.6445 86.8033C37.3534 87.2453 36.9063 87.5114 36.3101 87.5977C35.8229 87.674 35.3767 87.6051 34.9699 87.3962C34.5632 87.1874 34.2225 86.8638 33.9499 86.4291C33.6773 85.9943 33.4926 85.4772 33.4044 84.8776C33.3142 84.2659 33.3387 83.7203 33.4778 83.2409C33.6169 82.7615 33.8556 82.3695 34.1888 82.0633C34.5238 81.7605 34.9366 81.5701 35.422 81.4904L35.694 83.3117L35.6958 83.3151Z\" fill=\"white\"></path>\n<path d=\"M40.8347 77.6303L32.9219 76.7754L33.1297 74.8641L36.3063 75.2079L36.6447 72.0869L33.4681 71.7432L33.6725 69.8338L41.5853 70.6888L41.3809 72.5982L38.199 72.2528L37.8607 75.3738L41.0425 75.7191L40.8365 77.6338L40.8347 77.6303Z\" fill=\"white\"></path>\n<path d=\"M35.5115 63.3112L43.0923 65.7391L42.504 67.5726L34.9231 65.1448L35.5115 63.3112Z\" fill=\"white\"></path>\n<path d=\"M40.5296 52.8591L47.4769 56.7487L46.6792 58.1752L41.1219 58.6937L41.0972 58.7378L45.1068 60.9806L44.167 62.6592L37.2197 58.7696L38.029 57.3238L43.561 56.832L43.5924 56.7756L39.588 54.5344L40.5244 52.8576L40.5296 52.8591Z\" fill=\"white\"></path>\n<path d=\"M49.4194 54.2295L43.6419 48.7537L47.4598 44.7272L48.5957 45.8038L46.0987 48.4359L47.2828 49.5615L49.5827 47.1363L50.7186 48.2129L48.4187 50.6381L49.6063 51.7619L52.1033 49.1298L53.2374 50.203L49.416 54.2314L49.4194 54.2295Z\" fill=\"white\"></path>\n<path d=\"M64.5205 38.7857C64.8883 39.5787 65.05 40.3238 65.0037 41.0175C64.954 41.713 64.7406 42.3247 64.3513 42.8545C63.9654 43.3826 63.4497 43.7998 62.8005 44.0993C62.1532 44.4023 61.4991 44.5284 60.8488 44.4809C60.1984 44.4334 59.5881 44.206 59.0265 43.7986C58.4648 43.3911 58.0018 42.7899 57.6306 41.9987C57.2594 41.2076 57.0977 40.4625 57.144 39.7688C57.1902 39.0751 57.4071 38.4616 57.793 37.9336C58.1788 37.4055 58.6945 36.9883 59.3437 36.6888C59.9876 36.3877 60.6399 36.2581 61.2937 36.3038C61.9474 36.3495 62.5559 36.5734 63.1194 36.9843C63.6829 37.3952 64.1493 37.9946 64.5189 38.791L64.5205 38.7857ZM62.7394 39.6171C62.5196 39.1496 62.2697 38.7819 61.9847 38.521C61.6997 38.2601 61.395 38.1022 61.0725 38.0506C60.7466 38.0008 60.4097 38.0537 60.0621 38.218C59.7179 38.3805 59.4587 38.603 59.288 38.8838C59.1172 39.1645 59.0417 39.4998 59.0596 39.8863C59.0775 40.2728 59.1972 40.7014 59.417 41.1689C59.6367 41.6364 59.8866 42.0042 60.1716 42.2651C60.4567 42.526 60.7614 42.6839 61.0873 42.7337C61.4132 42.7834 61.7501 42.7305 62.0943 42.568C62.4419 42.4037 62.7029 42.1846 62.8718 41.9004C63.0426 41.6197 63.1181 41.2844 63.1002 40.8979C63.0823 40.5115 62.9626 40.0828 62.7428 39.6153L62.7394 39.6171Z\" fill=\"white\"></path>\n<path d=\"M74.5286 32.578L75.8289 40.4314L74.2157 40.6976L70.338 36.681L70.2896 36.6893L71.0395 41.2249L69.1396 41.5391L67.8393 33.6856L69.4732 33.4172L73.3144 37.4313L73.3783 37.4191L72.6287 32.8922L74.5234 32.5764L74.5286 32.578Z\" fill=\"white\"></path>\n<path d=\"M84.8865 32.7916L86.984 33.2648L87.8935 36.8831L87.9633 36.8985L90.3371 34.0201L92.4346 34.4933L88.4297 39.0249L87.8438 41.6184L85.9768 41.1976L86.5627 38.6041L84.8865 32.7916Z\" fill=\"white\"></path>\n<path d=\"M101.753 43.2864C101.34 44.0581 100.839 44.6346 100.256 45.0086C99.6698 45.3844 99.0524 45.5789 98.3949 45.5837C97.7392 45.5918 97.0993 45.4243 96.4703 45.0881C95.8394 44.7486 95.3461 44.3044 94.9939 43.7539C94.6398 43.2 94.4574 42.5805 94.4498 41.8848C94.4422 41.1892 94.6454 40.4598 95.0557 39.6899C95.4693 38.9181 95.9667 38.3435 96.5511 37.9643C97.1356 37.585 97.7549 37.3939 98.4071 37.3876C99.0628 37.3794 99.7027 37.5469 100.332 37.8831C100.961 38.2193 101.451 38.6652 101.806 39.2139C102.162 39.7626 102.346 40.3855 102.354 41.0811C102.361 41.7768 102.16 42.5096 101.746 43.2813L101.753 43.2864ZM100.02 42.3586C100.263 41.9022 100.408 41.4816 100.447 41.0953C100.486 40.7089 100.43 40.3739 100.278 40.0815C100.122 39.7909 99.8759 39.5532 99.541 39.3718C99.2062 39.1904 98.8727 39.1183 98.5422 39.1503C98.2116 39.1822 97.8998 39.3229 97.5996 39.5674C97.3012 39.8154 97.0299 40.1632 96.7861 40.6195C96.5422 41.0759 96.3979 41.4964 96.3586 41.8828C96.3192 42.2691 96.3755 42.6042 96.5331 42.8982C96.6889 43.1888 96.9351 43.4264 97.2699 43.6078C97.6082 43.7874 97.9401 43.8647 98.2688 43.8294C98.5993 43.7975 98.9111 43.6567 99.2061 43.4106C99.5045 43.1627 99.7757 42.8149 100.02 42.3586Z\" fill=\"white\"></path>\n<path d=\"M111.296 46.2083L112.685 47.5363L109.139 51.2497C108.732 51.6795 108.271 51.9528 107.764 52.0748C107.257 52.1967 106.738 52.1716 106.207 51.994C105.676 51.8164 105.167 51.4994 104.686 51.0359C104.197 50.5673 103.853 50.0738 103.653 49.552C103.452 49.0302 103.403 48.511 103.505 48.0031C103.605 47.4918 103.861 47.0247 104.272 46.5931L107.817 42.8798L109.207 44.2078L105.776 47.7982C105.587 47.9961 105.461 48.2131 105.397 48.4544C105.333 48.6957 105.341 48.9332 105.415 49.1706C105.49 49.4079 105.63 49.6278 105.837 49.825C106.045 50.0256 106.268 50.1529 106.509 50.2172C106.75 50.2815 106.988 50.273 107.227 50.202C107.463 50.1329 107.676 49.9967 107.868 49.7969L111.299 46.2065L111.296 46.2083Z\" fill=\"white\"></path>\n</svg>",
+            "left_position_mobile": 0,
+            "top_position_mobile": 74,
+            "left_position_desktop": 30,
+            "top_position_desktop": 66
+          }
         }
       },
       "block_order": [
         "block-2",
-        "button_qGfRFD"
+        "button_qGfRFD",
+        "svg_e8LQyt",
+        "svg_cLDaMR"
       ],
       "settings": {
         "full_width": true,
         "allow_transparent_header": false,
-        "enable_parallax": true,
+        "enable_parallax": false,
         "image_size": "auto",
         "image": "shopify://shop_images/Screenshot_2025-08-14_at_6.04.41_PM_4.png",
         "mobile_image": "shopify://shop_images/Screenshot_2025-08-14_at_6.04.41_PM_1.png",
@@ -608,7 +634,7 @@
       ],
       "name": "Testimonials",
       "settings": {
-        "title": "They say it <em>better</em> than we do.",
+        "title": "<p>They say it <em>better</em> </p><p>than we do.</p>",
         "title_color": "#000000",
         "title_font_size_mobile": 32,
         "title_font_size_desktop": 48,
@@ -617,21 +643,21 @@
         "card_border_radius": 24,
         "card_padding_mobile": 32,
         "card_padding_desktop": 40,
-        "quote_size_mobile": 60,
-        "quote_size_desktop": 80,
-        "heading_size_mobile": 20,
-        "heading_size_desktop": 24,
+        "quote_size_mobile": 40,
+        "quote_size_desktop": 40,
+        "heading_size_mobile": 24,
+        "heading_size_desktop": 30,
         "heading_weight": 600,
         "text_color": "#000000",
-        "text_size_mobile": 16,
+        "text_size_mobile": 14,
         "text_size_desktop": 18,
         "author_color": "#000000",
         "meta_color": "#666666",
         "background_color": "#ffffff",
-        "padding_mobile": 60,
-        "padding_desktop": 100,
+        "padding_mobile": 70,
+        "padding_desktop": 60,
         "header_spacing_mobile": 40,
-        "header_spacing_desktop": 60
+        "header_spacing_desktop": 84
       }
     },
     "brand_usp_bEaKCC": {
@@ -693,8 +719,8 @@
         "item_gap_mobile": 20,
         "item_gap_desktop": 24,
         "title_color": "#000000",
-        "title_size_mobile": 24,
-        "title_size_desktop": 28,
+        "title_size_mobile": 34,
+        "title_size_desktop": 42,
         "title_weight": 400,
         "description_color": "#666666",
         "description_size_mobile": 14,
@@ -714,7 +740,7 @@
         "image_card_zNWfTL": {
           "type": "image_card",
           "settings": {
-            "image": "shopify://shop_images/flare_amethystpurple-3_2_1.png",
+            "image": "shopify://shop_images/Frame_1000003625.png",
             "link": "",
             "background_color": "#f5f5f5"
           }
@@ -722,7 +748,7 @@
         "image_card_TCXkET": {
           "type": "image_card",
           "settings": {
-            "image": "shopify://shop_images/Group_1000006461_1.png",
+            "image": "shopify://shop_images/Frame_1000003626.png",
             "link": "",
             "background_color": "#f5f5f5"
           }
@@ -730,7 +756,7 @@
         "image_card_BnPKy7": {
           "type": "image_card",
           "settings": {
-            "image": "shopify://shop_images/Frame_1000003605.png",
+            "image": "shopify://shop_images/Frame_1000003605_1.png",
             "link": "",
             "background_color": "#f5f5f5"
           }
@@ -738,7 +764,7 @@
         "image_card_WtNiD9": {
           "type": "image_card",
           "settings": {
-            "image": "shopify://shop_images/Group_1000006462_1.png",
+            "image": "shopify://shop_images/Frame_1000003628.png",
             "link": "",
             "background_color": "#ff978b"
           }
@@ -758,8 +784,8 @@
         "title_size_desktop": 48,
         "title_weight": 400,
         "instagram_handle": "@shop_scoop_studio.in",
-        "instagram_url": "",
-        "handle_color": "#999999",
+        "instagram_url": "https://instagram.com/shop_scoop_studio",
+        "handle_color": "#828282",
         "handle_size_mobile": 14,
         "handle_size_desktop": 18,
         "card_border_radius": 24,
