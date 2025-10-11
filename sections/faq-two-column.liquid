@@ -1,0 +1,398 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    padding-top: 64px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    max-width: {{ section.settings.max_width | default: 1000 }}px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .section {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
+  #shopify-section-{{ section.id }} .faq-two-column {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .faq-two-column {
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    #shopify-section-{{ section.id }} .faq-intro {
+      padding-right: {{ section.settings.intro_padding_right | default: 0 }}px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .faq-intro h2 {
+    font-family: var(--heading-font-family);
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 100%;
+    color: #000000;
+    margin: 0 0 20px 0;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .faq-intro h2 {
+      font-size: 36px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .faq-intro .prose p {
+    font-size: 14px;
+    line-height: 140%;
+    color: #828282;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .faq-intro .prose p {
+      font-size: 16px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .faq-accordion-container {
+    background-color: {{ section.settings.faq_background | default: '#F8EEEC' }};
+    border-radius: 8px;
+    padding: 24px;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .faq-accordion-container {
+      padding: 32px;
+      border-radius: 16px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .accordion-item {
+    border-bottom: 1px solid #7E7E7E;
+    padding: 20px 0;
+  }
+
+  #shopify-section-{{ section.id }} .accordion-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  #shopify-section-{{ section.id }} .accordion-item:first-child {
+    padding-top: 0;
+  }
+
+  #shopify-section-{{ section.id }} .accordion-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0 !important;
+    cursor: pointer;
+    font-family: var(--heading-font-family);
+    font-size: 18px;
+    font-weight: 400;
+    color: #000000;
+    text-align: left;
+  }
+
+  #shopify-section-{{ section.id }} .accordion-trigger span{
+    text-transform: math-auto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 140%;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .accordion-trigger {
+      font-size: 18px;
+    }
+
+    #shopify-section-{{ section.id }} .accordion-trigger span{
+      font-size: 18px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .accordion-icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .accordion-trigger[aria-expanded="true"] .accordion-icon {
+    transform: rotate(180deg);
+  }
+
+  #shopify-section-{{ section.id }} .accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  #shopify-section-{{ section.id }} .accordion-content[aria-hidden="false"] {
+    max-height: 200px;
+  }
+
+  #shopify-section-{{ section.id }} .accordion-content .prose {
+    padding-top: 12px;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .accordion-content .prose p {
+    font-size: 12px;
+    line-height: 140%;
+    color: #7E7E7E;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .accordion-content .prose p {
+      font-size: 15px;
+    }
+  }
+</style>
+
+<div {% render 'section-properties' %}>
+  <div class="faq-two-column">
+    <!-- Left Column: Intro Text -->
+    <div class="faq-intro">
+      {%- if section.settings.subheading != blank -%}
+        <p class="subheading">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.title != blank -%}
+        <h2 class="h2">
+          {{ section.settings.title }}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.content != blank -%}
+        <div class="prose">
+          {{ section.settings.content }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Right Column: FAQ Accordion -->
+    {%- if section.blocks.size > 0 -%}
+      <div class="faq-accordion-container">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.title != blank and block.settings.content != blank -%}
+            <div class="accordion-item" {{ block.shopify_attributes }}>
+              <button class="accordion-trigger" aria-expanded="false" aria-controls="accordion-content-{{ block.id }}">
+                <span>{{ block.settings.title }}</span>
+                <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="accordion-content" id="accordion-content-{{ block.id }}" aria-hidden="true">
+                <div class="prose">{{ block.settings.content }}</div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const accordionTriggers = document.querySelectorAll('#shopify-section-{{ section.id }} .accordion-trigger');
+    
+    accordionTriggers.forEach(trigger => {
+      trigger.addEventListener('click', function() {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        const content = document.getElementById(this.getAttribute('aria-controls'));
+        
+        // Close all other accordions
+        accordionTriggers.forEach(otherTrigger => {
+          if (otherTrigger !== this) {
+            otherTrigger.setAttribute('aria-expanded', 'false');
+            const otherContent = document.getElementById(otherTrigger.getAttribute('aria-controls'));
+            otherContent.setAttribute('aria-hidden', 'true');
+          }
+        });
+        
+        // Toggle current accordion
+        this.setAttribute('aria-expanded', !isExpanded);
+        content.setAttribute('aria-hidden', isExpanded);
+      });
+    });
+  });
+</script>
+
+{%- comment -%}On the FAQ page, we also output the content with JSON microdata for SEO{%- endcomment -%}
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {%- for block in section.blocks -%}
+        {
+          "@type": "Question",
+          "name": {{ block.settings.title | json }},
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": {{ block.settings.content | json }}
+          }
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Two Column",
+  "class": "shopify-section--faq-two-column",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "blocks": [
+    {
+      "name": "Item",
+      "type": "item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Question",
+          "default": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Answer",
+          "default": "<p>Write content to answer to common questions your customers may have about your products, shipping policies..</p>"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Structured data is automatically created on FAQ page to improve SEO. [Learn more](https://developers.google.com/search/docs/advanced/structured-data/faqpage)"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "<p>Have a question? We're here to help!</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content",
+      "default": "<p>Use this text to share information about your product or shipping policies.</p>"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "label": "Section max width",
+      "default": 1000
+    },
+    {
+      "type": "range",
+      "id": "intro_padding_right",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Intro padding right (desktop)",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color"
+    },
+    {
+      "type": "color_background",
+      "id": "heading_gradient",
+      "label": "Heading gradient"
+    },
+    {
+      "type": "color",
+      "id": "faq_background",
+      "label": "FAQ background",
+      "default": "#F8EEEC"
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Two Column",
+      "category": "Trust & social proof",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "title": "Do you ship overseas?",
+            "content": "<p>Yes, we ship all over the world. Shipping costs will apply, and will be added at checkout. We run discounts and promotions all year, so stay tuned for exclusive deals.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "title": "How long will it take to get my orders?",
+            "content": "<p>It depends on where you are. Orders processed here will take 5-7 business days to arrive. Overseas deliveries can take anywhere from 7-16 days. Delivery details will be provided in your confirmation email.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "title": "Any question?",
+            "content": "<p>You can contact us through our contact page! We will be happy to assist you.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

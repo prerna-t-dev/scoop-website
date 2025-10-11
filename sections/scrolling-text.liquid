@@ -1,7 +1,16 @@
 {%- if section.blocks.size > 0 -%}
-  {%- render 'section-spacing-collapsing' -%}
+  {% comment %} {%- render 'section-spacing-collapsing' -%} {% endcomment %}
 
   <style>
+    {%- if section.settings.hide_on_desktop -%}
+      @media (min-width: 700px) {
+        #shopify-section-{{ section.id }} {
+          display: none;
+          height: 0;
+        }
+      }
+    {%- endif -%}
+
     #shopify-section-{{ section.id }} {
       --section-spacing-inline: 0;
       --scrolling-text-font-size: 50px;
@@ -60,6 +69,55 @@
       display: block;
       flex-shrink: 0;
     }
+
+    #shopify-section-{{ section.id }} .scrolling-text__image {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      line-height: 1 !important;
+      margin: 0 36px 0 36px !important;
+      margin-left: 36px !important;
+      margin-right: 36px !important;
+      padding: 0 !important;
+    }
+
+    #shopify-section-{{ section.id }} .scrolling-text__image img {
+      width: {{ section.settings.image_width_mobile | default: 250 }}px;
+      height: auto;
+      display: block;
+      flex-shrink: 0;
+    }
+
+    @media screen and (min-width: 700px) {
+      #shopify-section-{{ section.id }} .scrolling-text__image img {
+        width: {{ section.settings.image_width_desktop | default: 250 }}px;
+      }
+    }
+
+    #shopify-section-{{ section.id }} .scrolling-text-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    #shopify-section-{{ section.id }} .scrolling-text-title {
+      font-family: var(--heading-font-family);
+      font-size: 28px;
+      font-weight: 400;
+      line-height: 100%;
+      color: #000000;
+      margin: 0;
+    }
+
+    @media screen and (min-width: 700px) {
+      #shopify-section-{{ section.id }} .scrolling-text-title {
+        font-size: 36px;
+      }
+    }
+
+    #shopify-section-{{ section.id }} .scrolling-text-cta {
+      text-align: center;
+      margin-top: 40px;
+    }
     
     @media screen and (min-width: 700px) {
       #shopify-section-{{ section.id }} .scrolling-text__motif {
@@ -74,6 +132,15 @@
   {%- endif -%}
 
   <div {% render 'section-properties', tight: is_tight %}>
+    <!-- Title Section -->
+    {%- if section.settings.title != blank -%}
+      <div class="scrolling-text-header">
+        <h2 class="scrolling-text-title">
+          {{ section.settings.title }}
+        </h2>
+      </div>
+    {%- endif -%}
+
     {%- capture section_content -%}
       {%- for i in (1..10) -%}
         <span class="scrolling-text__text {% unless forloop.first %}motion-reduce:hidden{% endunless %}" {% unless forloop.first %}aria-hidden="true"{% endunless %} style="padding: 0 !important;">
@@ -86,6 +153,12 @@
               {%- if block.settings.motif_svg != blank -%}
                 <span class="scrolling-text__motif" style="color: {{ block.settings.motif_color }}; display: inline-flex; align-items: center; padding: 0; margin: 0 36px 0 36px;">
                   {{- block.settings.motif_svg -}}
+                </span>
+              {%- endif -%}
+            {%- elsif block.type == 'image' -%}
+              {%- if block.settings.image != blank -%}
+                <span class="scrolling-text__image" style="display: inline-flex; align-items: center; padding: 0; margin: 0 36px 0 36px;">
+                  {{ block.settings.image | image_url: width: 500 | image_tag: loading: 'lazy' }}
                 </span>
               {%- endif -%}
             {%- endif -%}
@@ -105,6 +178,21 @@
          </marquee-text>
       {%- endif -%}
     </div>
+
+    <!-- CTA Section -->
+    {%- if section.settings.cta_text != blank -%}
+      <div class="scrolling-text-cta">
+        {%- render 'button', 
+          content: section.settings.cta_text, 
+          href: section.settings.cta_url,
+          size: section.settings.cta_button_size,
+          style: section.settings.cta_button_style,
+          secondary: section.settings.cta_button_secondary,
+          background: section.settings.cta_button_background,
+          text_color: section.settings.cta_button_text_color
+        -%}
+      </div>
+    {%- endif -%}
   </div>
 {%- endif -%}
 
@@ -123,6 +211,85 @@
       "id": "full_width",
       "label": "Full width",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_desktop",
+      "label": "Hide on desktop",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA link"
+    },
+    {
+      "type": "select",
+      "id": "cta_button_size",
+      "label": "CTA button size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "base",
+          "label": "Base"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "xl",
+          "label": "Extra Large"
+        }
+      ],
+      "default": "base"
+    },
+    {
+      "type": "select",
+      "id": "cta_button_style",
+      "label": "CTA button style",
+      "options": [
+        {
+          "value": "fill",
+          "label": "Fill"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "checkbox",
+      "id": "cta_button_secondary",
+      "label": "Use secondary button style",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "cta_button_background",
+      "label": "CTA button background (optional)",
+      "info": "Leave empty to use theme default"
+    },
+    {
+      "type": "color",
+      "id": "cta_button_text_color",
+      "label": "CTA button text color (optional)",
+      "info": "Leave empty to use theme default"
     },
     {
       "type": "select",
@@ -197,6 +364,26 @@
       "visible_if": "{{ section.settings.scrolling_mode == 'auto' }}"
     },
     {
+      "type": "range",
+      "id": "image_width_mobile",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Image width (mobile)",
+      "default": 250
+    },
+    {
+      "type": "range",
+      "id": "image_width_desktop",
+      "min": 50,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Image width (desktop)",
+      "default": 250
+    },
+    {
       "type": "header",
       "content": "Colors",
       "info": "Gradient replaces solid colors when set. Gradient text outline and gradient background cannot be combined."
@@ -250,6 +437,17 @@
           "id": "motif_color",
           "label": "Motif color",
           "default": "#F9CEC6"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
         }
       ]
     }

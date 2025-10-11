@@ -7,19 +7,270 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-{
+ {
   "sections": {
     "banner": {
       "type": "collection-banner",
-      "settings": {}
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": false,
+        "enable_parallax": true,
+        "show_collection_title": true,
+        "show_collection_description": true,
+        "show_collection_image": true,
+        "collection_title_size": "h0",
+        "custom_title": "<p>Celebrating you, </p><p><em>everyday. </em></p>",
+        "title_color": "#000000",
+        "title_font_size_mobile": 20,
+        "title_font_size_desktop": 36,
+        "title_font_weight": 400,
+        "image_size": "auto",
+        "image": "shopify://shop_images/04_1.png",
+        "mobile_image": "shopify://shop_images/Screenshot_2025-08-27_at_7.07.04_PM_2.png",
+        "mobile_text_position": "place-self-center-start text-start",
+        "desktop_text_position": "sm:place-self-center-start sm:text-start",
+        "featured_product": "",
+        "featured_product_heading": "",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "collection_category_list_KF7HeP": {
+      "type": "collection-category-list",
+      "blocks": {
+        "category_KgHWft": {
+          "type": "category",
+          "settings": {
+            "background": "#e0d9f2",
+            "text_color": "#654392",
+            "pattern_image": "shopify://shop_images/Frame_1000003927_2.png",
+            "text": "New\nArrivals",
+            "link_url": ""
+          }
+        },
+        "category_VLw3qP": {
+          "type": "category",
+          "settings": {
+            "background": "#e0d9f2",
+            "text_color": "#654392",
+            "pattern_image": "shopify://shop_images/Frame_1000003928.png",
+            "text": "By\nSize",
+            "link_url": ""
+          }
+        },
+        "category_HmteRp": {
+          "type": "category",
+          "settings": {
+            "background": "#e0d9f2",
+            "text_color": "#654392",
+            "pattern_image": "shopify://shop_images/Frame_1000003929.png",
+            "text": "By\nStyle",
+            "link_url": ""
+          }
+        },
+        "category_bzwgwa": {
+          "type": "category",
+          "settings": {
+            "background": "#e0d9f2",
+            "text_color": "#654392",
+            "pattern_image": "shopify://shop_images/Frame_1000003927_2.png",
+            "text": "By\nFeature",
+            "link_url": ""
+          }
+        },
+        "category_mKApXP": {
+          "type": "category",
+          "settings": {
+            "background": "#e0d9f2",
+            "text_color": "#654392",
+            "pattern_image": "shopify://shop_images/Frame_1000003928.png",
+            "text": "Sale",
+            "link_url": ""
+          }
+        },
+        "category_fU6era": {
+          "type": "category",
+          "settings": {
+            "background": "#e0d9f2",
+            "text_color": "#654392",
+            "pattern_image": "shopify://shop_images/Frame_1000003929.png",
+            "text": "Gifting",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_KgHWft",
+        "category_VLw3qP",
+        "category_HmteRp",
+        "category_bzwgwa",
+        "category_mKApXP",
+        "category_fU6era"
+      ],
+      "custom_css": [
+        ".section-full {padding-top: 50px;}",
+        "@media (max-width: 700px) {.section-full {padding-top: 30px; }}"
+      ],
+      "name": "Collection category list",
+      "settings": {
+        "subheading": "",
+        "title": "Shop By",
+        "heading_color": "#7e7e7e"
+      }
     },
     "main": {
       "type": "main-collection",
-      "settings": {}
+      "settings": {
+        "products_per_page": 24,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 3,
+        "filter_layout": "sidebar",
+        "show_sort_by": true,
+        "show_filters": true,
+        "show_filter_group_name": false,
+        "show_filter_values_count": true,
+        "open_first_filter_group": false
+      }
+    },
+    "image_with_text_fbX7dj": {
+      "type": "image-with-text",
+      "custom_css": [
+        ".section-full {padding-top: 0; padding-bottom: 0; display: none;}",
+        "@media (min-width: 700px) {.section-full {display: block; }}"
+      ],
+      "name": "Image with text",
+      "settings": {
+        "image": "shopify://shop_images/Group_1000006128.png",
+        "image_max_width": 50,
+        "eyebrow_text": "",
+        "eyebrow_color": "#000000",
+        "eyebrow_font_size": 12,
+        "eyebrow_font_weight": 600,
+        "heading": "Shop Gift Card",
+        "heading_color": "#000000",
+        "heading_font_size_mobile": 32,
+        "heading_font_size_desktop": 48,
+        "heading_font_weight": 400,
+        "heading_font_style": "normal",
+        "content": "<p>Look no further, grab a gift card of an amount you’d find fit. And we’ll help you out with the right fit.</p>",
+        "content_color": "#000000",
+        "content_font_size": 16,
+        "button_text": "EXPLORE GIFTING",
+        "button_link": "",
+        "button_size": "base",
+        "button_style": "fill",
+        "button_secondary": false,
+        "button_background": "",
+        "button_text_color": "",
+        "desktop_layout": "row-reverse",
+        "desktop_text_align": "left",
+        "background_color": "#ffffff",
+        "padding_mobile": 20,
+        "padding_desktop": 40,
+        "gap_mobile": 40,
+        "gap_desktop": 80,
+        "text_padding_left_desktop": 0
+      }
+    },
+    "scrolling_text_KeNXnt": {
+      "type": "scrolling-text",
+      "blocks": {
+        "image_FYKzgD": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/gift-card--red.png"
+          }
+        },
+        "image_69zW3X": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/gift-card--purple.png"
+          }
+        }
+      },
+      "block_order": [
+        "image_FYKzgD",
+        "image_69zW3X"
+      ],
+      "custom_css": [],
+      "name": "Scrolling text",
+      "settings": {
+        "full_width": true,
+        "hide_on_desktop": true,
+        "title": "Shop Gift Card",
+        "cta_text": "Explore Gifting",
+        "cta_url": "",
+        "cta_button_size": "base",
+        "cta_button_style": "fill",
+        "cta_button_secondary": false,
+        "cta_button_background": "",
+        "cta_button_text_color": "",
+        "text_size": "large",
+        "text_style": "fill",
+        "scrolling_mode": "auto",
+        "scrolling_speed": 40,
+        "image_width_mobile": 250,
+        "image_width_desktop": 250,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "text_gradient": ""
+      }
+    },
+    "faq_two_column_qaT99e": {
+      "type": "faq-two-column",
+      "blocks": {
+        "item_rzQwRk": {
+          "type": "item",
+          "settings": {
+            "title": "Do you ship overseas?",
+            "content": "<p>Yes, we ship all over the world. Shipping costs will apply, and will be added at checkout. We run discounts and promotions all year, so stay tuned for exclusive deals.</p>"
+          }
+        },
+        "item_WycMTg": {
+          "type": "item",
+          "settings": {
+            "title": "How long will it take to get my orders?",
+            "content": "<p>It depends on where you are. Orders processed here will take 5-7 business days to arrive. Overseas deliveries can take anywhere from 7-16 days. Delivery details will be provided in your confirmation email.</p>"
+          }
+        },
+        "item_gcmL3w": {
+          "type": "item",
+          "settings": {
+            "title": "Any question?",
+            "content": "<p>You can contact us through our contact page! We will be happy to assist you.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_rzQwRk",
+        "item_WycMTg",
+        "item_gcmL3w"
+      ],
+      "name": "FAQ Two Column",
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "<p>Have a question? </p><p>We're here to help!</p>",
+        "content": "<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.</p>",
+        "max_width": 1000,
+        "intro_padding_right": 75,
+        "background": "rgba(0,0,0,0)",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "faq_background": "#f8eeec"
+      }
     }
   },
   "order": [
     "banner",
-    "main"
+    "collection_category_list_KF7HeP",
+    "main",
+    "image_with_text_fbX7dj",
+    "scrolling_text_KeNXnt",
+    "faq_two_column_qaT99e"
   ]
 }

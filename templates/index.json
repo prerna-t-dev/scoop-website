@@ -92,7 +92,7 @@
       "custom_css": [
         ".content-over-media {border-radius: 0 0 12px 12px;}",
         "h1 {color: #f9cec6;}",
-        "@media (min-width: 700px) {}"
+        "@media (min-width: 700px) {.content-over-media {border-radius: 0 0 24px 24px; }}"
       ],
       "name": "Slideshow",
       "settings": {
