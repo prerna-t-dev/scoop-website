@@ -2,18 +2,34 @@
   #shopify-section-{{ section.id }} {
     --page-max-width: {{ section.settings.content_width }};
   }
+
+  {%- if section.settings.background != blank or section.settings.background_gradient != blank -%}
+    #shopify-section-{{ section.id }} {
+      {%- if section.settings.background_gradient != blank -%}
+        background: {{ section.settings.background_gradient }};
+      {%- elsif section.settings.background != blank -%}
+        background-color: {{ section.settings.background }};
+      {%- endif -%}
+    }
+  {%- endif -%}
 </style>
 
-<div class="container">
-  <div class="page-spacer">
-    <div class="page">
-      <h1 class="h1 text-center">{{ page.title }}</h1>
+<div {% render 'section-properties' %}>
+  {%- capture class -%}{% if section.settings.full_width %}full-bleed{% else %}shadow-block_ rounded-lg{% endif %}{%- endcapture -%}
+  
+  <div class="{{ class }}">
+    <div class="container">
+      <div class="page-spacer">
+        <div class="page">
+          <h1 class="h1 text-center">{{ page.title }}</h1>
 
-      {%- if page.content != empty -%}
-        <div class="prose">
-          {{ page.content }}
+          {%- if page.content != empty -%}
+            <div class="prose">
+              {{ page.content }}
+            </div>
+          {%- endif -%}
         </div>
-      {%- endif -%}
+      </div>
     </div>
   </div>
 </div>
@@ -24,6 +40,12 @@
   "class": "shopify-section--main-page",
   "tag": "section",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
     {
       "type": "select",
       "id": "content_width",
@@ -51,6 +73,21 @@
         }
       ],
       "default": "80ch"
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
     }
   ]
 }
