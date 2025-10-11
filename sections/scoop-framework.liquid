@@ -1,0 +1,430 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    max-width: {{ section.settings.max_width | default: 900 }}px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .section {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework__heading {
+    font-family: var(--heading-font-family);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: #000000;
+    text-align: center;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .scoop-framework__heading {
+      font-size: 42px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework__content {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .scoop-framework__content {
+      flex-direction: {% if section.settings.image_position == 'right' %}row-reverse{% else %}row{% endif %};
+      align-items: center;
+      gap: 60px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework__image {
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .scoop-framework__image {
+      width: {{ section.settings.image_width_desktop | default: 40 }}%;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework__image img {
+    width: 80%;
+    height: auto;
+    margin: auto;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework__text {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .scoop-framework__text {
+      width: {{ section.settings.text_width_desktop | default: 60 }}%;
+    }
+
+    #shopify-section-{{ section.id }} .scoop-framework__image img{
+        width: 100%;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework__list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework__item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework__left-column {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework__badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .scoop-framework__badges {
+      gap: 16px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework__badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework__badge--orange {
+    background-color: {{ section.settings.orange_badge_color | default: '#FF6B35' }};
+    color: #000000;
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework__badge--purple {
+    background: none;
+    padding: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework__badge--purple svg {
+    width: auto;
+    /* height: 25px; */
+  }
+
+
+  #shopify-section-{{ section.id }} .scoop-framework__term {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    line-height: 130% !important;
+    font-weight: 400;
+    line-height: 130%;
+    color: #000000;
+    text-decoration: underline;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .scoop-framework__term {
+      font-size: 22px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .scoop-framework__description {
+    font-size: 12px;
+    line-height: 140%;
+    color: #000000;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .scoop-framework__description {
+      font-size: 15px;
+    }
+  }
+</style>
+
+<div {% render 'section-properties' %}>
+  <div class="scoop-framework">
+    <!-- Heading -->
+    {%- if section.settings.heading != blank -%}
+      <h2 class="scoop-framework__heading">
+        {{ section.settings.heading }}
+      </h2>
+    {%- endif -%}
+
+    <!-- Content -->
+    <div class="scoop-framework__content">
+      <!-- Image -->
+      <div class="scoop-framework__image">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder' }}
+        {%- endif -%}
+      </div>
+
+      <!-- Text Content -->
+      <div class="scoop-framework__text">
+        <div class="scoop-framework__list">
+          {%- for block in section.blocks -%}
+            <div class="scoop-framework__item" {{ block.shopify_attributes }}>
+              <div class="scoop-framework__left-column">
+                <div class="scoop-framework__badges">
+                  <div class="scoop-framework__badge scoop-framework__badge--orange">
+                    {{ forloop.index }}
+                  </div>
+                  <div class="scoop-framework__badge scoop-framework__badge--purple">
+                    {%- if block.settings.purple_badge_svg != blank -%}
+                      {%- assign custom_svg = block.settings.purple_badge_svg | replace: '{{ letter }}', block.settings.acronym_letter -%}
+                      {{ custom_svg }}
+                    {%- else -%}
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="8" cy="8" r="8" fill="{{ section.settings.purple_badge_color | default: '#654392' }}"/>
+                        <text x="8" y="12" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10" font-weight="700">{{ block.settings.acronym_letter }}</text>
+                      </svg>
+                    {%- endif -%}
+                  </div>
+                </div>
+                <h3 class="scoop-framework__term">{{ block.settings.term }}</h3>
+              </div>
+              <div class="scoop-framework__right-column">
+                <p class="scoop-framework__description">{{ block.settings.description }}</p>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "SCOOP Framework",
+  "class": "shopify-section--scoop-framework",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 600,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Section max width",
+      "default": 900
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Our framework for a good fit.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "600 x 800px recommended"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position (desktop)",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "image_width_desktop",
+      "min": 30,
+      "max": 60,
+      "step": 5,
+      "unit": "%",
+      "label": "Image width (desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "text_width_desktop",
+      "min": 40,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "label": "Text width (desktop)",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color"
+    },
+    {
+      "type": "color",
+      "id": "orange_badge_color",
+      "label": "Orange badge color",
+      "default": "#FF6B35"
+    },
+    {
+      "type": "color",
+      "id": "purple_badge_color",
+      "label": "Purple badge color",
+      "default": "#654392"
+    },
+  ],
+  "blocks": [
+    {
+      "name": "Framework Point",
+      "type": "point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "acronym_letter",
+          "label": "Acronym letter",
+          "default": "S",
+          "info": "Single letter for SCOOP acronym"
+        },
+        {
+          "type": "html",
+          "id": "purple_badge_svg",
+          "label": "Purple badge SVG",
+          "info": "Custom SVG for purple badge. Use {{ letter }} placeholder for the letter. Leave empty to use default scoop SVG.",
+          "default": "<svg width=\"20\" height=\"25\" viewBox=\"0 0 20 25\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M14.5974 9.21773C15.0324 9.47501 15.5223 9.65845 16.0362 9.68306C17.8622 9.77031 19.4181 8.1864 19.6165 6.49734C19.8005 4.31611 18.1347 2.28701 16.1318 1.31384C12.6686 -0.364031 7.83349 -0.00832236 4.63319 2.03644C2.77611 3.22214 1.59303 5.02305 1.68146 7.15283C1.76751 9.22221 2.77133 11.0455 4.36073 12.4527C6.07918 13.9739 8.27087 14.8464 10.2953 15.9404C11.8584 16.7861 13.4597 17.8621 13.5481 19.7234C13.6294 21.4192 12.5204 23.1127 10.6275 23.3499C9.40376 23.502 7.69486 23.1306 6.91809 22.1418C6.03855 21.0232 6.85117 19.4527 7.08301 18.2693C7.518 16.0523 5.24505 14.1596 2.98405 15.1194C1.47353 15.71 0.770851 17.1418 0.813872 18.5937C0.821042 18.8666 0.878403 19.1373 0.969226 19.3968C3.91378 27.7526 23.0176 24.7839 17.8909 14.3006C16.8273 11.786 13.8803 10.4683 11.4568 9.34078C9.1767 8.28036 5.1375 7.04097 6.38272 3.92013C6.86073 2.72325 7.97928 1.72995 9.34162 1.49281C11.0194 1.19975 12.6662 2.19304 13.2781 3.6651C13.909 5.18413 12.7905 6.77475 13.6246 8.25575C13.8493 8.65397 14.1911 8.97836 14.5974 9.21773Z\" fill=\"#CCA7FC\"/></svg>"
+        },
+        {
+          "type": "text",
+          "id": "term",
+          "label": "Term",
+          "default": "Straps"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Snug, but never digging in."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SCOOP Framework",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "point",
+          "settings": {
+            "acronym_letter": "S",
+            "term": "Straps",
+            "description": "Snug, but never digging in."
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "acronym_letter": "C",
+            "term": "Centre Gore",
+            "description": "Lies flat against the chest."
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "acronym_letter": "O",
+            "term": "Outlines of wires",
+            "description": "Sits directly under and around the breast tissue, never on top."
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "acronym_letter": "O",
+            "term": "Overflow",
+            "description": "None! Breast tissue should be fully inside the cups."
+          }
+        },
+        {
+          "type": "point",
+          "settings": {
+            "acronym_letter": "P",
+            "term": "Parallel Band",
+            "description": "Band sits straight all around the body."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,338 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    max-width: {{ section.settings.max_width | default: 1000 }}px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .section {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  #shopify-section-{{ section.id }} .two-column-text-with-image {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .two-column-text-with-image {
+      grid-template-columns: 1fr 1fr;
+      gap: {{ section.settings.desktop_gap | default: 80 }}px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .two-column-text-with-image__column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .two-column-text-with-image__column:first-child {
+      width: {{ section.settings.left_column_width | default: 100 }}%;
+    }
+
+    #shopify-section-{{ section.id }} .two-column-text-with-image__column:last-child {
+      width: {{ section.settings.right_column_width | default: 100 }}%;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .two-column-text-with-image__image-wrapper {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .two-column-text-with-image__image-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .two-column-text-with-image__image-wrapper:nth-child(2) img {
+    width: {{ section.settings.left_image_1_width_mobile | default: 100 }}%;
+  }
+
+  #shopify-section-{{ section.id }} .two-column-text-with-image__image-wrapper:nth-child(3) img {
+    width: {{ section.settings.left_image_2_width_mobile | default: 100 }}%;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .two-column-text-with-image__image-wrapper:nth-child(2) img {
+      width: {{ section.settings.left_image_1_width_desktop | default: 100 }}%;
+    }
+
+    #shopify-section-{{ section.id }} .two-column-text-with-image__image-wrapper:nth-child(3) img {
+      width: {{ section.settings.left_image_2_width_desktop | default: 100 }}%;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose {
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose p {
+    font-size: 18px;
+    line-height: 130%;
+    letter-spacing: -2%;
+    color: #000000;
+    margin: 0 0 32px 0;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose p {
+      font-size: 22px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose h1,
+  #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose h2,
+  #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose h3,
+  #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose h4,
+  #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose h5,
+  #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose h6 {
+    font-family: var(--heading-font-family);
+    font-size: 45px;
+    font-weight: 400;
+    line-height: 1.2;
+    color: {{ section.settings.heading_color | default: '#654392' }};
+    margin: 0 0 16px 0;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose h1,
+    #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose h2,
+    #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose h3,
+    #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose h4,
+    #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose h5,
+    #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose h6 {
+      font-size: 56px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose strong {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 110%;
+    color: {{ section.settings.accent_color | default: '#654392' }};
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose strong {
+      font-size: 36px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .two-column-text-with-image__column .prose em {
+    font-style: italic;
+    font-family: inherit !important;
+  }
+</style>
+
+<div {% render 'section-properties' %}>
+  <div class="two-column-text-with-image">
+    <!-- Left Column -->
+    <div class="two-column-text-with-image__column">
+      {%- if section.settings.left_content != blank -%}
+        <div class="prose">
+          {{ section.settings.left_content }}
+        </div>
+      {%- endif -%}
+      
+      {%- if section.settings.left_image_1 != blank -%}
+        <div class="two-column-text-with-image__image-wrapper">
+          <img src="{{ section.settings.left_image_1 | image_url: width: 800 }}" 
+               alt="{{ section.settings.left_image_1.alt | escape }}" 
+               loading="lazy">
+        </div>
+      {%- endif -%}
+      
+      {%- if section.settings.left_image_2 != blank -%}
+        <div class="two-column-text-with-image__image-wrapper">
+          <img src="{{ section.settings.left_image_2 | image_url: width: 800 }}" 
+               alt="{{ section.settings.left_image_2.alt | escape }}" 
+               loading="lazy">
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Right Column -->
+    <div class="two-column-text-with-image__column">
+      {%- if section.settings.right_content != blank -%}
+        <div class="prose">
+          {{ section.settings.right_content }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Two Column Text + Image",
+  "class": "shopify-section--two-column-text-with-image",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 600,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "label": "Section max width",
+      "default": 1000
+    },
+    {
+      "type": "range",
+      "id": "desktop_gap",
+      "min": 40,
+      "max": 120,
+      "step": 10,
+      "unit": "px",
+      "label": "Gap between columns (desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "left_column_width",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Left column width (desktop)",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "right_column_width",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Right column width (desktop)",
+      "default": 50
+    },
+    {
+      "type": "header",
+      "content": "Left Column"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image_1",
+      "label": "Left column image 1"
+    },
+    {
+      "type": "range",
+      "id": "left_image_1_width_mobile",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Left image 1 width (mobile)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "left_image_1_width_desktop",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Left image 1 width (desktop)",
+      "default": 100
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image_2",
+      "label": "Left column image 2"
+    },
+    {
+      "type": "range",
+      "id": "left_image_2_width_mobile",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Left image 2 width (mobile)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "left_image_2_width_desktop",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Left image 2 width (desktop)",
+      "default": 100
+    },
+    {
+      "type": "richtext",
+      "id": "left_content",
+      "label": "Left column content",
+      "default": "<p>Bras that pinch, shift, slip or simply don't fit right; if you have a fuller bust, then this is probably how it's been for you.</p><p>Years of discomfort spent juggling sizes and solutions, with no clear end in sight. You've been <em>mislabeled, misinformed & misunderstood.</em></p>"
+    },
+    {
+      "type": "header",
+      "content": "Right Column"
+    },
+    {
+      "type": "richtext",
+      "id": "right_content",
+      "label": "Right column content",
+      "default": "<h3>But do you want the real Scoop on this?</h3><p>Your body isn't the problem. An outdated sizing system is. We're here to change that because we believe in <strong>real sizes for real bodies.</strong></p>"
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#654392"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#654392"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Two Column Text + Image",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}
