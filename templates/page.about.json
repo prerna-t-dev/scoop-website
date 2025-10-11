@@ -1,0 +1,522 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+ {
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "content_width": "80ch"
+      }
+    },
+    "image_with_text_overlay_kGJCxK": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_q7aARq": {
+          "type": "heading",
+          "settings": {
+            "text": "About Us",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_q7aARq"
+      ],
+      "name": "Image with text overlay",
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/about-us--main_1.png",
+        "mobile_image": "shopify://shop_images/Screenshot_2025-09-22_at_3.19.11_PM_1_1.png",
+        "mobile_text_position": "place-self-start-center text-center",
+        "desktop_text_position": "sm:place-self-start-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "two_column_text_VbUtfV": {
+      "type": "two-column-text",
+      "name": "Two Column Text",
+      "settings": {
+        "full_width": true,
+        "max_width": 1000,
+        "desktop_gap": 120,
+        "left_column_width": 85,
+        "right_column_width": 85,
+        "left_content": "<p>Bras that pinch, shift, slip or simply don't fit right; <em>if you have a fuller bust, then this is probably how it's been for you.</em></p><p>Years of discomfort spent juggling sizes and solutions, with no clear end in sight. You've been </p><h4>But do you want the real Scoop on this?</h4>",
+        "right_content": "<p><strong>But do you want the real Scoop on this?</strong></p><p>Your body isn't the problem. An outdated sizing system is. We're here to change that because we believe in real sizes for real bodies.</p>",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "#a073b7",
+        "accent_color": "#cca7fc"
+      }
+    },
+    "scrolling_text_rGh8yD": {
+      "type": "scrolling-text",
+      "blocks": {
+        "motif_mbfqwM": {
+          "type": "motif",
+          "settings": {
+            "motif_svg": "<svg width=\"56\" height=\"56\" viewbox=\"0 0 56 56\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M55.1536 40.41C55.1611 47.7906 49.0262 53.7664 41.462 53.7725C33.8978 53.7725 27.7611 47.7968 27.7537 40.4161L27.7539 41.7965C27.755 49.1711 21.6265 55.1468 14.0623 55.1468C10.2802 55.1468 6.85653 53.6559 4.37669 51.2386C1.89686 48.8214 0.360851 45.4838 0.360286 41.7904C0.35916 34.422 6.48767 28.4401 14.0456 28.434C6.48767 28.434 0.357329 22.4522 0.34991 15.0837C0.348782 7.7092 6.48359 1.72735 14.0478 1.72122C21.6121 1.72122 27.7487 7.70306 27.7498 15.0776L27.7496 13.7095C27.7559 13.642 27.7559 13.5745 27.7559 13.507C27.7559 13.507 27.7559 13.5029 27.7559 13.4947C27.868 6.21834 33.9525 0.346924 41.4475 0.346924C45.2297 0.346924 48.6533 1.83778 51.1331 4.25506C53.613 6.67234 55.149 10.0099 55.1496 13.7033C55.1507 21.0717 49.0222 27.0536 41.4642 27.0597C49.0222 27.0597 55.1525 33.0416 55.1536 40.41Z\" fill=\"#FF978B\"></path>\n</svg>",
+            "motif_color": "#ff978b"
+          }
+        },
+        "text_EfgaW9": {
+          "type": "text",
+          "settings": {
+            "text": "Real sizes for real bodies."
+          }
+        },
+        "motif_DfDTwF": {
+          "type": "motif",
+          "settings": {
+            "motif_svg": "<svg width=\"78\" height=\"78\" viewbox=\"0 0 78 78\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M67.0833 28.3265C72.3071 33.5406 72.1939 42.104 66.8492 47.4567C61.5 52.805 52.9353 52.9181 47.7115 47.704L48.6877 48.6801C53.9027 53.8943 53.794 62.4532 48.4448 67.8016C45.7703 70.4757 42.2951 71.8421 38.8323 71.8861C35.3695 71.9301 31.9235 70.6559 29.3116 68.0445C24.101 62.8346 24.2054 54.2713 29.5457 48.9231C24.201 54.267 15.6364 54.3713 10.4213 49.1659C5.20631 43.9517 5.31513 35.384 10.6599 30.0313C16.0091 24.683 24.5781 24.5742 29.7931 29.7884L28.8256 28.821C28.7823 28.7689 28.7346 28.7211 28.6869 28.6734C28.6869 28.6734 28.684 28.6705 28.6782 28.6648C23.6127 23.4399 23.764 14.9858 29.0642 9.68643C31.7388 7.01227 35.214 5.64585 38.6768 5.60188C42.1395 5.55792 45.5856 6.83207 48.1974 9.44351C53.4081 14.6534 53.3037 23.2167 47.9634 28.5649C53.3081 23.221 61.8727 23.1167 67.0833 28.3265Z\" fill=\"#FFB455\"></path>\n</svg>",
+            "motif_color": "#ffb455"
+          }
+        },
+        "text_BqwwmG": {
+          "type": "text",
+          "settings": {
+            "text": "Real sizes for real bodies."
+          }
+        }
+      },
+      "block_order": [
+        "motif_mbfqwM",
+        "text_EfgaW9",
+        "motif_DfDTwF",
+        "text_BqwwmG"
+      ],
+      "settings": {
+        "full_width": true,
+        "hide_on_desktop": false,
+        "title": "",
+        "cta_text": "",
+        "cta_url": "",
+        "cta_button_size": "base",
+        "cta_button_style": "fill",
+        "cta_button_secondary": false,
+        "cta_button_background": "",
+        "cta_button_text_color": "",
+        "text_size": "medium",
+        "text_style": "fill",
+        "scrolling_mode": "auto",
+        "scrolling_speed": 120,
+        "image_width_mobile": 250,
+        "image_width_desktop": 250,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "#ecd5d1",
+        "text_gradient": ""
+      }
+    },
+    "image_with_text_overlay_GRrXp7": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "liquid_3fwfP3": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<div class=\"svg-design--overlay\">\n<svg width=\"81\" height=\"83\" viewBox=\"0 0 81 83\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M40.8629 0.734375C47.4036 0.734375 52.7647 5.7971 53.2607 12.2272C55.3719 10.5701 58.0309 9.58234 60.92 9.58234C67.7878 9.58234 73.3554 15.1643 73.3554 22.0499C73.3554 24.727 72.5133 27.2066 71.0809 29.2381C76.5296 30.5626 80.5759 35.4846 80.5759 41.3546C80.5759 47.626 75.9571 52.8142 69.9441 53.6902C72.0582 55.9252 73.3554 58.9446 73.3554 62.268C73.3554 69.1536 67.7878 74.7356 60.92 74.7356C57.9938 74.7356 55.304 73.722 53.18 72.0264C52.3465 78.1005 47.1504 82.7792 40.8629 82.7792C34.5753 82.7792 29.3785 78.1006 28.545 72.0264C26.4211 73.7218 23.7317 74.7356 20.8058 74.7356C13.9379 74.7356 8.37043 69.1536 8.37043 62.268C8.37043 58.9862 9.63514 56.0006 11.7026 53.7743C5.34064 53.2253 0.347595 47.8753 0.347595 41.3546C0.347595 35.2362 4.74344 30.147 10.5414 29.0889C9.17218 27.0857 8.37043 24.6618 8.37043 22.0499C8.37043 15.1643 13.9379 9.58234 20.8058 9.58234C23.6947 9.58234 26.3532 10.5703 28.4643 12.2272C28.9603 5.79708 34.3222 0.734375 40.8629 0.734375Z\" fill=\"#FF978B\"/>\n</svg>\n\n</div>"
+          }
+        }
+      },
+      "block_order": [
+        "liquid_3fwfP3"
+      ],
+      "custom_css": [
+        ".svg-design--overlay {position: absolute; bottom: 0; left: 50%; transform: translate(-50%, 50%);}"
+      ],
+      "name": "Image with text overlay",
+      "settings": {
+        "full_width": true,
+        "allow_transparent_header": false,
+        "enable_parallax": true,
+        "image_size": "auto",
+        "image": "shopify://shop_images/about--img_1.png",
+        "mobile_image": "shopify://shop_images/Screenshot_2025-09-22_at_4.45.05_PM_1_1.png",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "rich_text_4ikUJz": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_4KteKi": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>With our body-aware <span style=\"text-decoration:underline\">bra size calculator</span> and our expert guidance, we want to help you take back control; of your body, and the stories you've been told about it. <br/><br/>We arenʼt just an alternative. We're the future. Come, dive in.<br/></p>"
+          }
+        },
+        "liquid_kDx8xF": {
+          "type": "liquid",
+          "settings": {
+            "liquid": "<div class=\"svg-design--overlay\">\n<svg width=\"81\" height=\"83\" viewBox=\"0 0 81 83\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M40.8629 0.734375C47.4036 0.734375 52.7647 5.7971 53.2607 12.2272C55.3719 10.5701 58.0309 9.58234 60.92 9.58234C67.7878 9.58234 73.3554 15.1643 73.3554 22.0499C73.3554 24.727 72.5133 27.2066 71.0809 29.2381C76.5296 30.5626 80.5759 35.4846 80.5759 41.3546C80.5759 47.626 75.9571 52.8142 69.9441 53.6902C72.0582 55.9252 73.3554 58.9446 73.3554 62.268C73.3554 69.1536 67.7878 74.7356 60.92 74.7356C57.9938 74.7356 55.304 73.722 53.18 72.0264C52.3465 78.1005 47.1504 82.7792 40.8629 82.7792C34.5753 82.7792 29.3785 78.1006 28.545 72.0264C26.4211 73.7218 23.7317 74.7356 20.8058 74.7356C13.9379 74.7356 8.37043 69.1536 8.37043 62.268C8.37043 58.9862 9.63514 56.0006 11.7026 53.7743C5.34064 53.2253 0.347595 47.8753 0.347595 41.3546C0.347595 35.2362 4.74344 30.147 10.5414 29.0889C9.17218 27.0857 8.37043 24.6618 8.37043 22.0499C8.37043 15.1643 13.9379 9.58234 20.8058 9.58234C23.6947 9.58234 26.3532 10.5703 28.4643 12.2272C28.9603 5.79708 34.3222 0.734375 40.8629 0.734375Z\" fill=\"#FF978B\"/>\n</svg>\n\n</div>"
+          }
+        }
+      },
+      "block_order": [
+        "richtext_4KteKi",
+        "liquid_kDx8xF"
+      ],
+      "custom_css": [
+        ".rich-text__wrapper .prose p {font-size: 14px; line-height: 130%;}",
+        "@media (min-width: 700px) {.rich-text__wrapper .prose p {font-size: 22px; } .section-full {padding-top: 88px; padding-bottom: 88px; }}",
+        ".svg-design--overlay {position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%);}"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "brand_usp_K4Cmca": {
+      "type": "brand-usp",
+      "blocks": {
+        "usp_item_FLdRwT": {
+          "type": "usp_item",
+          "settings": {
+            "image": "shopify://shop_images/Icon.svg",
+            "image_width": 105,
+            "title": "<p>Centring </p><p>Fuller-Busts</p>",
+            "description": "Thoughtfully curated for fuller busts."
+          }
+        },
+        "usp_item_9DDqpF": {
+          "type": "usp_item",
+          "settings": {
+            "image": "shopify://shop_images/Icon_1.svg",
+            "image_width": 105,
+            "title": "<p>Fit-First </p><p>Guarantee</p>",
+            "description": "Every piece chosen with your fit in mind."
+          }
+        },
+        "usp_item_9wAJ9t": {
+          "type": "usp_item",
+          "settings": {
+            "image": "shopify://shop_images/Icon_2.svg",
+            "image_width": 110,
+            "title": "<p>Real Body </p><p>Fittings</p>",
+            "description": "Guidance that meets you, as you are."
+          }
+        },
+        "usp_item_Ukj3Vg": {
+          "type": "usp_item",
+          "settings": {
+            "image": "shopify://shop_images/Icon_3.svg",
+            "image_width": 105,
+            "title": "<p>No Judgement </p><p>Returns</p>",
+            "description": "Send it back, no questions asked."
+          }
+        }
+      },
+      "block_order": [
+        "usp_item_FLdRwT",
+        "usp_item_9DDqpF",
+        "usp_item_9wAJ9t",
+        "usp_item_Ukj3Vg"
+      ],
+      "name": "Brand USP",
+      "settings": {
+        "heading": "OUR PROMISES",
+        "heading_color": "#000000",
+        "heading_size_mobile": 12,
+        "heading_size_desktop": 12,
+        "heading_weight": 600,
+        "heading_letter_spacing": 1,
+        "columns_desktop": 4,
+        "column_gap_desktop": 40,
+        "item_gap_mobile": 20,
+        "item_gap_desktop": 24,
+        "title_color": "#000000",
+        "title_size_mobile": 34,
+        "title_size_desktop": 42,
+        "title_weight": 400,
+        "description_color": "#666666",
+        "description_size_mobile": 14,
+        "description_size_desktop": 16,
+        "background_color": "#f8eeec",
+        "padding_mobile": 40,
+        "padding_desktop": 80,
+        "header_spacing_mobile": 32,
+        "header_spacing_desktop": 50,
+        "controls_spacing_mobile": 30,
+        "dot_color": "#000000"
+      }
+    },
+    "two_column_text_with_image_XYwnBF": {
+      "type": "two-column-text-with-image",
+      "name": "Two Column Text + Image",
+      "settings": {
+        "full_width": true,
+        "max_width": 1000,
+        "desktop_gap": 80,
+        "left_column_width": 100,
+        "right_column_width": 100,
+        "left_image_1": "shopify://shop_images/Hi_I_m_Rhea_The_founder_of_scoop.png",
+        "left_image_1_width_mobile": 100,
+        "left_image_1_width_desktop": 100,
+        "left_image_2": "shopify://shop_images/scoop-rhea.png",
+        "left_image_2_width_mobile": 65,
+        "left_image_2_width_desktop": 65,
+        "left_content": "<h4>About <em>our</em> founder</h4>",
+        "right_content": "<p>For over a decade, I've worked at the intersection of sexual and reproductive health, gender, body politics, and research. <br/><br/>That lens has deeply shaped how I approach retail, not just as a business, but as a space for conversation, care, and a gentle revolution.</p><p><br/><strong>This is personal. </strong></p><p>I was properly fit for a bra over ten years ago, and it changed my life. Not only did I go from a 34DD to a 32G, it transformed the way I dress, the way I stand, how I work out, and even how I feel about myself. It gave me a kind of ease I didnʼt know was possible. <br/></p>",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "#000000",
+        "accent_color": "#a073b7"
+      }
+    },
+    "media_with_text_RKB8Cf": {
+      "type": "media-with-text",
+      "blocks": {
+        "image_aAWRV8": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_171.png",
+            "media_width": 50,
+            "media_position": "start",
+            "text_position": "place-self-center text-center",
+            "icon": "none",
+            "icon_width": 48,
+            "subheading": "",
+            "title": "",
+            "content": "<p>Iʼve spoken with hundreds of women across ages and sizes about their bras. What I heard echoed my own past confusion: discomfort, judgment, and a retail landscape that rarely sees or serves fuller-busts. <br/><br/>I founded Scoop in response. <br/><br/>Because I believe the right fit can feel freeing. Because design should delight and support. And because your innerwear should affirm, not diminish, your relationship with your body. <br/><br/>This is my love letter to the fuller-busted community. Your fit is on its way. Finally.<br/><br/></p>",
+            "link_text": "",
+            "link_url": "",
+            "background": "#ff978b",
+            "background_gradient": "",
+            "text_color": "#ffffff",
+            "text_gradient": "",
+            "button_background": "",
+            "button_text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_aAWRV8"
+      ],
+      "custom_css": [
+        ".media-with-text__content .prose p {font-size: 14px; line-height: 140%;}",
+        "@media (min-width: 700px) {.media-with-text__content .prose p {font-size: 18px; }}"
+      ],
+      "name": "Media with text",
+      "settings": {
+        "full_width": false,
+        "alternate_media_position": false,
+        "spacing": "none"
+      }
+    },
+    "multi_column_rhTPtT": {
+      "type": "multi-column",
+      "blocks": {
+        "item_pRjxK3": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/fit-philosophy--1_1.png",
+            "show_controls": false,
+            "column_size": "3",
+            "title": "At Scoop, we go beyond size, colour, and style.",
+            "heading_tag": "h4",
+            "content": "<p>Every bra is categorised based on its unique pattern and features, with recommendations tailored to specific breast shapes, spacing, projection, and root widths.  <br/></p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_pHNFh7": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/fit-philosophy--2_1.png",
+            "show_controls": false,
+            "column_size": "3",
+            "title": "We don’t just calculate your size",
+            "heading_tag": "h4",
+            "content": "<p>When you share your body measurements and details with us through our bra size quiz, we use that information to understand your unique shape and recommend styles that are most likely to support, lift, and feel good on you.<br/></p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        },
+        "item_knxE6J": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/fit-philosophy--3_1.png",
+            "show_controls": false,
+            "column_size": "3",
+            "title": "Learning is an ongoing process, for us and our community.",
+            "heading_tag": "h4",
+            "content": "<p>If some of this feels a little technical, we’ve done the homework to make it easier. <span style=\"text-decoration:underline\">Our Real Talk Blog</span> and <span style=\"text-decoration:underline\">glossary</span> break down terms, shapes, and bra types so you can navigate the world of lingerie as an informed shopper.<br/></p>",
+            "link_url": "",
+            "link_text": "",
+            "link_style": "link"
+          }
+        }
+      },
+      "block_order": [
+        "item_pRjxK3",
+        "item_pHNFh7",
+        "item_knxE6J"
+      ],
+      "custom_css": [
+        ".section-stack .h4 {line-height: 120%;}",
+        ".section-stack .prose p {font-size: 14px; line-height: 140%; color: #7e7e7e;}",
+        "@media (min-width: 700px) {.section-header {justify-items: center; justify-content: center; text-align: center; } .section-stack .h4 {font-size: 28px; } .section-stack .prose p {font-size: 18px; }}"
+      ],
+      "name": "Multi-column",
+      "settings": {
+        "full_width": true,
+        "stack_on_mobile": false,
+        "gap": "medium",
+        "text_alignment": "start",
+        "subheading": "",
+        "title": "Fit Philosophy",
+        "content": "<p>We don’t believe in guesswork. We believe in mapping bras to the bodies they’re designed to support.  <br/></p>",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "rich_text_3fqBqX": {
+      "type": "rich-text",
+      "blocks": {
+        "richtext_tjXHFP": {
+          "type": "richtext",
+          "settings": {
+            "content": "<p>We encourage you to book a fitting to understanding your body and breasts is the first step to finding bras that truly work for you. </p>"
+          }
+        },
+        "button_xBnBmY": {
+          "type": "button",
+          "settings": {
+            "style": "fill",
+            "size": "xl",
+            "text": "BRA SIZE quiz",
+            "url": "",
+            "background": "",
+            "text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "richtext_tjXHFP",
+        "button_xBnBmY"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "full_width": true,
+        "content_width": "small",
+        "text_position": "center",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "scoop_framework_qaBHq4": {
+      "type": "scoop-framework",
+      "blocks": {
+        "point_nBGknR": {
+          "type": "point",
+          "settings": {
+            "acronym_letter": "S",
+            "purple_badge_svg": "<svg width=\"20\" height=\"25\" viewbox=\"0 0 20 25\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M14.5974 9.21773C15.0324 9.47501 15.5223 9.65845 16.0362 9.68306C17.8622 9.77031 19.4181 8.1864 19.6165 6.49734C19.8005 4.31611 18.1347 2.28701 16.1318 1.31384C12.6686 -0.364031 7.83349 -0.00832236 4.63319 2.03644C2.77611 3.22214 1.59303 5.02305 1.68146 7.15283C1.76751 9.22221 2.77133 11.0455 4.36073 12.4527C6.07918 13.9739 8.27087 14.8464 10.2953 15.9404C11.8584 16.7861 13.4597 17.8621 13.5481 19.7234C13.6294 21.4192 12.5204 23.1127 10.6275 23.3499C9.40376 23.502 7.69486 23.1306 6.91809 22.1418C6.03855 21.0232 6.85117 19.4527 7.08301 18.2693C7.518 16.0523 5.24505 14.1596 2.98405 15.1194C1.47353 15.71 0.770851 17.1418 0.813872 18.5937C0.821042 18.8666 0.878403 19.1373 0.969226 19.3968C3.91378 27.7526 23.0176 24.7839 17.8909 14.3006C16.8273 11.786 13.8803 10.4683 11.4568 9.34078C9.1767 8.28036 5.1375 7.04097 6.38272 3.92013C6.86073 2.72325 7.97928 1.72995 9.34162 1.49281C11.0194 1.19975 12.6662 2.19304 13.2781 3.6651C13.909 5.18413 12.7905 6.77475 13.6246 8.25575C13.8493 8.65397 14.1911 8.97836 14.5974 9.21773Z\" fill=\"#CCA7FC\"></path></svg>",
+            "term": "Straps",
+            "description": "Snug, but never digging in."
+          }
+        },
+        "point_EYqh4A": {
+          "type": "point",
+          "settings": {
+            "acronym_letter": "C",
+            "purple_badge_svg": "<svg width=\"22\" height=\"25\" viewbox=\"0 0 22 25\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M8.21264 15.0161C6.71407 11.3359 6.69017 5.43208 9.50567 2.28439C11.009 0.537167 14.3838 0.801152 15.0721 3.04726C15.3733 3.99358 14.9813 4.84594 14.6204 5.70277C14.1424 6.83254 14.2332 8.13233 14.967 9.13458C16.8981 11.7655 21.1381 9.85047 21.1381 6.50815C21.1381 5.45892 20.7198 4.26652 19.6802 3.03384C14.8522 -1.81856 5.31828 0.548353 2.39045 6.21956C1.03289 8.84598 0.50469 11.6044 0.987483 14.5127C1.45115 17.2711 2.77764 20.0005 5.05059 21.8596C7.72985 24.043 11.4536 24.5195 14.8379 23.6895C17.2877 23.0922 19.5153 21.7544 21.1381 19.9334V18.6962C17.0344 21.9356 10.0697 20.4904 8.21503 15.0161H8.21264Z\" fill=\"#CCA7FC\"></path>\n</svg>",
+            "term": "Centre Gore",
+            "description": "Lies flat against the chest."
+          }
+        },
+        "point_3yFwaD": {
+          "type": "point",
+          "settings": {
+            "acronym_letter": "O",
+            "purple_badge_svg": "<svg width=\"22\" height=\"25\" viewbox=\"0 0 22 25\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M11.4149 0.956854C-2.72229 0.607857 -2.72229 24.8743 11.4149 24.5298C25.4996 24.8587 25.4996 0.623517 11.4149 0.956854ZM9.20651 23.4135C8.49666 23.626 7.6936 23.4045 7.21559 22.8721C3.69025 18.9548 8.35804 3.59223 13.5875 2.03293C14.2973 1.8204 15.0956 2.02845 15.5784 2.55642C19.1277 6.43119 14.4073 21.8788 9.20651 23.4135Z\" fill=\"#CCA7FC\"></path>\n</svg>",
+            "term": "Outlines of wires",
+            "description": "Sits directly under and around the breast tissue, never on top."
+          }
+        },
+        "point_J9JEcF": {
+          "type": "point",
+          "settings": {
+            "acronym_letter": "O",
+            "purple_badge_svg": "<svg width=\"22\" height=\"25\" viewbox=\"0 0 22 25\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M11.4149 0.956854C-2.72229 0.607857 -2.72229 24.8743 11.4149 24.5298C25.4996 24.8587 25.4996 0.623517 11.4149 0.956854ZM9.20651 23.4135C8.49666 23.626 7.6936 23.4045 7.21559 22.8721C3.69025 18.9548 8.35804 3.59223 13.5875 2.03293C14.2973 1.8204 15.0956 2.02845 15.5784 2.55642C19.1277 6.43119 14.4073 21.8788 9.20651 23.4135Z\" fill=\"#CCA7FC\"></path>\n</svg>",
+            "term": "Overflow",
+            "description": "None! Breast tissue should be fully inside the cups."
+          }
+        },
+        "point_LCfYnK": {
+          "type": "point",
+          "settings": {
+            "acronym_letter": "P",
+            "purple_badge_svg": "<svg width=\"27\" height=\"35\" viewbox=\"0 0 27 35\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M26.216 13.8674C26.2949 11.3416 25.867 8.70847 24.5573 6.52948C24.4211 6.30353 24.2753 6.07981 24.1223 5.8628C23.5391 5.04177 22.8221 4.34153 22.0167 3.70618C19.6194 1.8113 15.7403 1.4377 12.6643 3.89858C12.1266 4.32587 10.3818 5.71068 10.3818 6.40196C10.377 5.93216 10.3364 0.851562 10.3364 0.851562H9.90859C8.54148 3.28559 3.51756 2.33928 0.812012 2.52272V2.96568C3.3407 3.34152 4.18678 4.57644 4.28717 7.00823V30.6707C4.2059 32.6193 2.96546 34.23 0.812012 34.192V34.6305H13.943V34.192C9.99942 34.0846 10.3986 31.711 10.3866 28.0868C10.3818 25.9458 10.3866 23.6348 10.3866 23.6348C10.3866 23.6348 10.7379 23.9122 10.879 24.0397C14.1223 26.9861 19.1462 26.2657 22.2294 23.5118C24.5477 21.4446 25.7308 18.5363 26.0822 15.6012C26.1515 15.0329 26.1969 14.4513 26.2136 13.8629L26.216 13.8674ZM13.8068 23.5319C13.0372 23.693 12.1481 23.4514 11.5936 22.9346C7.51614 19.1404 11.7585 5.16481 17.3967 3.97911C18.1615 3.81804 19.0506 4.0507 19.6099 4.56301C23.7088 8.31921 19.4139 22.3708 13.8068 23.5319Z\" fill=\"#CCA7FC\"></path>\n</svg>",
+            "term": "Parallel Band",
+            "description": "Band sits straight all around the body."
+          }
+        }
+      },
+      "block_order": [
+        "point_nBGknR",
+        "point_EYqh4A",
+        "point_3yFwaD",
+        "point_J9JEcF",
+        "point_LCfYnK"
+      ],
+      "name": "SCOOP Framework",
+      "settings": {
+        "full_width": true,
+        "max_width": 900,
+        "heading": "<p>Our framework for a <em>good</em> fit.</p>",
+        "image": "shopify://shop_images/Group_1000006318.png",
+        "image_position": "right",
+        "image_width_desktop": 40,
+        "text_width_desktop": 60,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "orange_badge_color": "#ffb455",
+        "purple_badge_color": "#654392"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_overlay_kGJCxK",
+    "two_column_text_VbUtfV",
+    "scrolling_text_rGh8yD",
+    "image_with_text_overlay_GRrXp7",
+    "rich_text_4ikUJz",
+    "brand_usp_K4Cmca",
+    "two_column_text_with_image_XYwnBF",
+    "media_with_text_RKB8Cf",
+    "multi_column_rhTPtT",
+    "rich_text_3fqBqX",
+    "scoop_framework_qaBHq4"
+  ]
+}
