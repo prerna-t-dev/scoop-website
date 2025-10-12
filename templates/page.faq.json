@@ -96,7 +96,7 @@
         "text_color": "",
         "heading_color": "",
         "heading_gradient": "",
-        "faq_background": "#F8EEEC"
+        "faq_background": "#f8eeec"
       }
     },
     "faq_two_column_hweteN": {
@@ -145,7 +145,7 @@
         "text_color": "",
         "heading_color": "",
         "heading_gradient": "",
-        "faq_background": "#F8EEEC"
+        "faq_background": "#f8eeec"
       }
     },
     "faq_two_column_RfPkhe": {
@@ -192,15 +192,19 @@
         "text_color": "",
         "heading_color": "",
         "heading_gradient": "",
-        "faq_background": "#F8EEEC"
+        "faq_background": "#f8eeec"
       }
     },
     "contact_tdAw9x": {
       "type": "contact",
+      "custom_css": [
+        ".section-boxed {box-shadow: none;}",
+        "@media (max-width: 700px) {.bg-custom {background-color: #ffffff !important; } .contact-form {background-color: #F5EDFE !important; }}"
+      ],
       "name": "Contact form",
       "settings": {
         "full_width": false,
-        "subheading": "Contact Us",
+        "subheading": "CONTACT US",
         "title": "Still couldn't find what you're looking for?",
         "content": "<p>If you do not find the answer to your question in our FAQ, you can send us a message by filling out the form below.</p>",
         "text_position": "start",
@@ -263,7 +267,7 @@
         "usp_item_8DyfPM"
       ],
       "custom_css": [
-        ".section-full {padding-bottom: 0;}"
+        ".section-full {padding-top: 0; padding-bottom: 0;}"
       ],
       "name": "Brand USP",
       "settings": {

@@ -1657,6 +1657,8 @@ scroll-carousel {
   border-width: 1px;
   padding-inline-start: var(--input-padding-inline);
   padding-inline-end: var(--input-padding-inline);
+  border-color: #828282;
+  font-size: 13px;
 }
 
 :is(.input:focus, .textarea:focus, .select:focus-visible) {
@@ -1717,7 +1719,8 @@ scroll-carousel {
 .floating-label {
   height: calc(var(--input-height)  + .625rem);
   top: 0;
-  opacity: .5;
+  /* opacity: .5; */
+  color: #828282;
   pointer-events: none;
   transform-origin: var(--transform-origin-start);
   grid-auto-flow: column;
@@ -1727,6 +1730,8 @@ scroll-carousel {
   transition: transform .2s ease-in-out;
   display: grid;
   position: absolute;
+  font-size: 13px;
+  text-transform: uppercase;
 }
 
 .floating-label:not(:lang(ae), :lang(ar), :lang(arc), :lang(bcc), :lang(bqi), :lang(ckb), :lang(dv), :lang(fa), :lang(glk), :lang(he), :lang(ku), :lang(mzn), :lang(nqo), :lang(pnb), :lang(ps), :lang(sd), :lang(ug), :lang(ur), :lang(yi)) {
@@ -8218,7 +8223,9 @@ product-rerender {
 }
 
 .search-input > input::placeholder {
-  color: rgb(var(--text-color) / .5);
+  color: #828282;
+  font-size: 13px;
+  text-transform: uppercase;
 }
 
 .search-input > input[type="search"]::-webkit-search-decoration {
