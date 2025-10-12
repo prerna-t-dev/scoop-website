@@ -7,20 +7,223 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-{
+ {
   "sections": {
     "main": {
       "type": "main-page",
       "disabled": true,
-      "settings": {}
+      "settings": {
+        "full_width": false,
+        "content_width": "80ch",
+        "background": "",
+        "background_gradient": ""
+      }
+    },
+    "image_with_text_overlay_tkxfdn": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_3eAeW9": {
+          "type": "heading",
+          "settings": {
+            "text": "Contact Us",
+            "heading_tag": "h1"
+          }
+        }
+      },
+      "block_order": [
+        "heading_3eAeW9"
+      ],
+      "custom_css": [
+        ".content-over-media > :is(picture, img, video, iframe, svg, video-media) {height: 250px;}",
+        "@media (max-width: 700px) {.content-over-media > :is(picture, img, video, iframe, svg, video-media) {height: 130px; } .section-full {padding: 0 !important; } .content-over-media {border-radius: 0 !important; }}"
+      ],
+      "name": "Image with text overlay",
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "mobile_text_position": "place-self-center-start text-start",
+        "desktop_text_position": "sm:place-self-center-start sm:text-start",
+        "text_color": "#000000",
+        "overlay_color": "#f5edfe",
+        "overlay_opacity": 100
+      }
     },
     "contact": {
       "type": "contact",
-      "settings": {}
+      "custom_css": [
+        ".contact-form {box-shadow: 0px 58px 58px 0px rgba(0, 0, 0, 0.09), 0px 14px 32px 0px rgba(0, 0, 0, 0.1);}",
+        ".section-stack {max-width: 1028px; margin: auto;}",
+        "@media (max-width: 1150px) {.section-full {padding-top: 48px; padding-bottom: 80px; }}"
+      ],
+      "settings": {
+        "full_width": false,
+        "subheading": "NEED ASSISTANCE?",
+        "title": "We’re here to help.",
+        "content": "<p>For general inquiries or questions regarding sales or press, please leave your contact information below and we will get back to you as soon as possible.</p>",
+        "text_position": "start",
+        "contact_form_size": "large",
+        "intro_padding_right": 40,
+        "name_label": "YOUR NAME",
+        "email_label": "",
+        "message_label": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "contact_background": "#ffffff",
+        "contact_text_color": "",
+        "button_background": "",
+        "button_text_color": ""
+      }
+    },
+    "contact_info_Etgczz": {
+      "type": "contact-info",
+      "custom_css": [
+        ".bg-custom {box-shadow: none;}",
+        "@media (max-width: 700px) {.contact-info__grid {gap: 0; }}",
+        "@media (min-width: 700px) {.contact-info__column:last-child{padding-left: 80px; }}"
+      ],
+      "name": "Contact Info",
+      "settings": {
+        "full_width": false,
+        "title": "",
+        "email": "email@scoopstudio.com",
+        "phone": "+91 1234567890",
+        "address": "Address Line 1\nAddress Line 2\nCity - Pincode\nIndia",
+        "background": "#f8eeec",
+        "background_gradient": ""
+      }
+    },
+    "contact_ep6LtL": {
+      "type": "contact",
+      "blocks": {
+        "text_KmrPzM": {
+          "type": "text",
+          "settings": {
+            "title": "Department",
+            "use_long_text": false,
+            "required": false
+          }
+        }
+      },
+      "block_order": [
+        "text_KmrPzM"
+      ],
+      "custom_css": [
+        ".contact-form {box-shadow: 0px 58px 58px 0px rgba(0, 0, 0, 0.09), 0px 14px 32px 0px rgba(0, 0, 0, 0.1);}",
+        ".section-stack {max-width: 1028px; margin: auto;}",
+        "@media (max-width: 700px) {.section-full {padding-top: 48px; padding-bottom: 80px; }}"
+      ],
+      "settings": {
+        "full_width": false,
+        "subheading": "WORK WITH SCOOP",
+        "title": "Join Us! We’re always looking for the right fit.",
+        "content": "<p>Fill up your details in the form and our team will reach out to you to take things ahead.</p>",
+        "text_position": "start",
+        "contact_form_size": "large",
+        "intro_padding_right": 40,
+        "name_label": "YOUR NAME",
+        "email_label": "",
+        "message_label": "HERE’S WHY I WANT TO BE A PART OF SCOOP",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "contact_background": "#ffffff",
+        "contact_text_color": "",
+        "button_background": "",
+        "button_text_color": ""
+      }
+    },
+    "custom_html_kBkqEn": {
+      "type": "custom-html",
+      "custom_css": [
+        "iframe {width: 100%; margin: auto;}"
+      ],
+      "name": "Custom HTML",
+      "settings": {
+        "full_width": false,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "html": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.0111369696815!2d77.26155107553058!3d28.569428286943424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce397e5e63977%3A0x42304fa951bbde40!2s9%2C%20Southern%20Ave%2C%20Block%20J%2C%20Maharani%20Bagh%2C%20New%20Friends%20Colony%2C%20New%20Delhi%2C%20Delhi%20110065!5e0!3m2!1sen!2sin!4v1760279785790!5m2!1sen!2sin\" width=\"1200\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "ig_carousel_UUgbMM": {
+      "type": "ig-carousel",
+      "blocks": {
+        "image_card_EBnXRg": {
+          "type": "image_card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000003625.png",
+            "link": "",
+            "background_color": "#f5f5f5"
+          }
+        },
+        "image_card_D6VDyN": {
+          "type": "image_card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000003626.png",
+            "link": "",
+            "background_color": "#f5f5f5"
+          }
+        },
+        "image_card_WGaJQA": {
+          "type": "image_card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000003605_1.png",
+            "link": "",
+            "background_color": "#f5f5f5"
+          }
+        },
+        "image_card_fXzPc7": {
+          "type": "image_card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000003628.png",
+            "link": "",
+            "background_color": "#ff978b"
+          }
+        }
+      },
+      "block_order": [
+        "image_card_EBnXRg",
+        "image_card_D6VDyN",
+        "image_card_WGaJQA",
+        "image_card_fXzPc7"
+      ],
+      "name": "IG Carousel",
+      "settings": {
+        "title": "Strap on",
+        "title_color": "#000000",
+        "title_size_mobile": 32,
+        "title_size_desktop": 48,
+        "title_weight": 400,
+        "instagram_handle": "@shop_scoop_studio.in",
+        "instagram_url": "https://instagram.com/shop_scoop_studio",
+        "handle_color": "#828282",
+        "handle_size_mobile": 14,
+        "handle_size_desktop": 18,
+        "card_border_radius": 24,
+        "gap_mobile": 16,
+        "gap_desktop": 24,
+        "header_spacing_mobile": 32,
+        "header_spacing_desktop": 50
+      }
     }
   },
   "order": [
     "main",
-    "contact"
+    "image_with_text_overlay_tkxfdn",
+    "contact",
+    "contact_info_Etgczz",
+    "contact_ep6LtL",
+    "custom_html_kBkqEn",
+    "ig_carousel_UUgbMM"
   ]
 }

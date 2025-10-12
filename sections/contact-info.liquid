@@ -1,0 +1,182 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  {%- if section.settings.background != blank or section.settings.background_gradient != blank -%}
+    #shopify-section-{{ section.id }} .bg-custom {
+      {%- if section.settings.background_gradient != blank -%}
+        background: {{ section.settings.background_gradient }};
+      {%- elsif section.settings.background != blank -%}
+        background-color: {{ section.settings.background }};
+      {%- endif -%}
+    }
+  {%- endif -%}
+
+  {%- unless section.settings.full_width -%}
+    #shopify-section-{{ section.id }} .container {
+      padding: var(--section-spacing-block) var(--section-spacing-inline);
+      border-radius: var(--border-radius);
+      background: inherit;
+    }
+  {%- endunless -%}
+
+  #shopify-section-{{ section.id }} .contact-info__heading {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: #000000;
+  }
+
+  #shopify-section-{{ section.id }} .contact-info__item {
+    margin-bottom: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .contact-info__label {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #000000;
+  }
+
+  #shopify-section-{{ section.id }} .contact-info__value {
+    font-size: 14px;
+    line-height: 140%;
+    color: #7E7E7E;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .contact-info__heading {
+      font-size: 30px;
+    }
+
+    #shopify-section-{{ section.id }} .contact-info__label {
+      font-size: 22px;
+    }
+
+    #shopify-section-{{ section.id }} .contact-info__value {
+      font-size: 18px;
+      line-height: 140%;
+      color: #7E7E7E;
+    }
+  }
+</style>
+
+<div {% render 'section-properties' %}>
+  {%- capture class -%}{% if section.settings.full_width %}full-bleed{% else %}rounded-lg{% endif %}{%- endcapture -%}
+  
+  <div class="{{ class }}">
+    <div class="container">
+      <div class="contact-info">
+        {%- if section.settings.title != blank -%}
+          <h2 class="contact-info__heading text-center">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        
+        <div class="contact-info__grid">
+          <div class="contact-info__column">
+            {%- if section.settings.email != blank -%}
+              <div class="contact-info__item">
+                <div class="contact-info__label">Email</div>
+                <div class="contact-info__value">{{ section.settings.email }}</div>
+              </div>
+            {%- endif -%}
+            
+            {%- if section.settings.phone != blank -%}
+              <div class="contact-info__item">
+                <div class="contact-info__label">Phone</div>
+                <div class="contact-info__value">{{ section.settings.phone }}</div>
+              </div>
+            {%- endif -%}
+          </div>
+          
+          <div class="contact-info__column">
+            {%- if section.settings.address != blank -%}
+              <div class="contact-info__item">
+                <div class="contact-info__label">Address</div>
+                <div class="contact-info__value">{{ section.settings.address | newline_to_br }}</div>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .contact-info__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  @media screen and (min-width: 700px) {
+    .contact-info__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Contact Info",
+  "class": "shopify-section--contact-info",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Contact Information"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "email@scoopstudio.com"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone",
+      "default": "+91 1234567890"
+    },
+    {
+      "type": "textarea",
+      "id": "address",
+      "label": "Address",
+      "default": "Address Line 1\nAddress Line 2\nCity - Pincode\nIndia"
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Info",
+      "category": "Contact",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}
