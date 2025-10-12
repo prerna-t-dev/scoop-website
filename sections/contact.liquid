@@ -40,6 +40,29 @@
     pointer-events: none;
   }
 
+  #shopify-section-{{ section.id }} .contact-form__svg{
+    display: none;
+  }
+
+  @media screen and (min-width: 1200px) {
+    #shopify-section-{{ section.id }} .section-boxed {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    #shopify-section-{{ section.id }} .contact-form__svg {
+      position: absolute;
+      left: 0;
+      bottom: -16px;
+      pointer-events: none;
+      z-index: -1;
+      display: block;
+    }
+  }
+
+  
+
 
   @media screen and (min-width: 700px) {
     #shopify-section-{{ section.id }} .section-stack__intro {
@@ -90,6 +113,12 @@
 
     <div class="section-stack__main">
       <div {% render 'surface', class: 'contact-form rounded', background: section.settings.contact_background, text_color: section.settings.contact_text_color, background_fallback: 'bg-secondary' %}>
+        {%- if section.settings.background_svg != blank -%}
+          <div class="contact-form__svg">
+            {{ section.settings.background_svg }}
+          </div>
+        {%- endif -%}
+        
         {%- capture contact_form_id -%}contact-form-{{ section.id }}{%- endcapture -%}
 
         {%- form 'contact', id: contact_form_id, class: 'form' -%}
@@ -270,6 +299,16 @@
       "id": "message_label",
       "label": "Message field label",
       "info": "Leave blank to use default label"
+    },
+    {
+      "type": "header",
+      "content": "Background SVG"
+    },
+    {
+      "type": "textarea",
+      "id": "background_svg",
+      "label": "Background SVG",
+      "info": "Paste SVG code here. Will be positioned at bottom-left of the form."
     },
     {
       "type": "header",

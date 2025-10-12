@@ -1,0 +1,229 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  {%- if section.settings.background != blank or section.settings.background_gradient != blank -%}
+    #shopify-section-{{ section.id }} .bg-custom {
+      {%- if section.settings.background_gradient != blank -%}
+        background: {{ section.settings.background_gradient }};
+      {%- elsif section.settings.background != blank -%}
+        background-color: {{ section.settings.background }};
+      {%- endif -%}
+    }
+  {%- endif -%}
+
+  {%- unless section.settings.full_width -%}
+    #shopify-section-{{ section.id }} .container {
+      padding: var(--section-spacing-block) var(--section-spacing-inline);
+      border-radius: var(--border-radius);
+      background: inherit;
+    }
+  {%- endunless -%}
+
+  #shopify-section-{{ section.id }} .policy-content__heading {
+    font-size: 35px;
+    font-weight: 400;
+    margin-bottom: 24px;
+    color: #000000;
+  }
+
+  #shopify-section-{{ section.id }} .policy-content__content {
+    font-size: 12px;
+    line-height: 140%;
+    color: #7E7E7E;
+  }
+
+  #shopify-section-{{ section.id }} .policy-content__content h1,
+  #shopify-section-{{ section.id }} .policy-content__content h2,
+  #shopify-section-{{ section.id }} .policy-content__content h3,
+  #shopify-section-{{ section.id }} .policy-content__content h4,
+  #shopify-section-{{ section.id }} .policy-content__content h5,
+  #shopify-section-{{ section.id }} .policy-content__content h6 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    margin-top: 32px;
+    color: #000000;
+    font-family: var(--body-font-family);
+  }
+
+  #shopify-section-{{ section.id }} .policy-content__content p {
+    margin-bottom: 12px;
+    line-height: 140%;
+    color: #7E7E7E;
+  }
+
+  #shopify-section-{{ section.id }} .policy-content__content p strong{
+    margin-bottom: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .policy-content__content ul,
+  #shopify-section-{{ section.id }} .policy-content__content ol {
+    margin-bottom: 16px;
+    padding-left: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .policy-content__content li {
+    margin-bottom: 8px;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .policy-content__heading {
+      font-size: 42px;
+    }
+
+    #shopify-section-{{ section.id }} .policy-content__content {
+      font-size: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .policy-content__content p {
+        font-size: 16px; 
+        line-height: 140%;
+    }
+
+    #shopify-section-{{ section.id }} .policy-content__content h1,
+    #shopify-section-{{ section.id }} .policy-content__content h2,
+    #shopify-section-{{ section.id }} .policy-content__content h3,
+    #shopify-section-{{ section.id }} .policy-content__content h4,
+    #shopify-section-{{ section.id }} .policy-content__content h5,
+    #shopify-section-{{ section.id }} .policy-content__content h6 {
+      font-size: 18px;
+      margin-top: 64px;
+    }
+  }
+</style>
+
+<div {% render 'section-properties' %}>
+  {%- capture class -%}{% if section.settings.full_width %}full-bleed{% else %}rounded-lg{% endif %}{%- endcapture -%}
+  
+  <div class="{{ class }}">
+    <div class="container">
+      <div class="policy-content">
+        {%- assign policy_content = blank -%}
+        {%- assign policy_title = blank -%}
+        
+        {%- comment -%}Auto-detect policy type based on page handle{%- endcomment -%}
+        {%- if page.handle contains 'privacy' -%}
+          {%- assign policy_content = shop.privacy_policy -%}
+          {%- assign policy_title = 'Privacy Policy' -%}
+        {%- elsif page.handle contains 'terms' -%}
+          {%- assign policy_content = shop.terms_of_service -%}
+          {%- assign policy_title = 'Terms of Service' -%}
+        {%- elsif page.handle contains 'return' -%}
+          {%- assign policy_content = shop.refund_policy -%}
+          {%- assign policy_title = 'Return Policy' -%}
+        {%- elsif page.handle contains 'shipping' -%}
+          {%- assign policy_content = shop.shipping_policy -%}
+          {%- assign policy_title = 'Shipping Policy' -%}
+        {%- else -%}
+          {%- comment -%}Fallback to manual selection{%- endcomment -%}
+          {%- case section.settings.policy_type -%}
+            {%- when 'privacy_policy' -%}
+              {%- assign policy_content = shop.privacy_policy -%}
+              {%- assign policy_title = 'Privacy Policy' -%}
+            {%- when 'terms_of_service' -%}
+              {%- assign policy_content = shop.terms_of_service -%}
+              {%- assign policy_title = 'Terms of Service' -%}
+            {%- when 'refund_policy' -%}
+              {%- assign policy_content = shop.refund_policy -%}
+              {%- assign policy_title = 'Refund Policy' -%}
+            {%- when 'shipping_policy' -%}
+              {%- assign policy_content = shop.shipping_policy -%}
+              {%- assign policy_title = 'Shipping Policy' -%}
+          {%- endcase -%}
+        {%- endif -%}
+        
+        {%- if section.settings.custom_title != blank -%}
+          {%- assign policy_title = section.settings.custom_title -%}
+        {%- endif -%}
+        
+        {%- if policy_title != blank -%}
+          <h1 class="policy-content__heading text-left">{{ policy_title }}</h1>
+        {%- endif -%}
+        
+        {%- if policy_content != blank -%}
+          <div class="policy-content__content prose">
+            {{ policy_content }}
+          </div>
+        {%- else -%}
+          <div class="policy-content__content prose">
+            <p>No policy content available. Please set up this policy in your Shopify admin under Settings > Legal.</p>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Policy Content",
+  "class": "shopify-section--policy-content",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "policy_type",
+      "label": "Policy Type (Fallback)",
+      "info": "Auto-detects based on page URL. Only used if page handle doesn't contain policy keywords.",
+      "options": [
+        {
+          "value": "privacy_policy",
+          "label": "Privacy Policy"
+        },
+        {
+          "value": "terms_of_service",
+          "label": "Terms of Service"
+        },
+        {
+          "value": "refund_policy",
+          "label": "Refund Policy"
+        },
+        {
+          "value": "shipping_policy",
+          "label": "Shipping Policy"
+        }
+      ],
+      "default": "privacy_policy"
+    },
+    {
+      "type": "text",
+      "id": "custom_title",
+      "label": "Custom Title",
+      "info": "Leave blank to use default policy title"
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Policy Content",
+      "category": "Content",
+      "settings": {
+        "policy_type": "privacy_policy"
+      }
+    }
+  ]
+}
+{% endschema %}
