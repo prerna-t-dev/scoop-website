@@ -8762,6 +8762,10 @@ shopify-accelerated-checkout, shopify-accelerated-checkout-cart {
   padding: var(--spacing-14) 0 !important;
 }
 
+.shopify-policy__container h1{
+  text-align: left;
+}
+
 @media screen and (min-width: 700px) {
   .shopify-policy__container, .shopify-challenge__container, .shopify-email-marketing-confirmation__container {
     padding-block-start: var(--spacing-16) !important;
