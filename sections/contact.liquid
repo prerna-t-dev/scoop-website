@@ -24,6 +24,23 @@
     color: #7E7E7E;
   }
 
+  #shopify-section-{{ section.id }} .field input[type="file"] {
+    position: relative;
+    padding-right: 40px;
+  }
+
+  #shopify-section-{{ section.id }} .field input[type="file"]::after {
+    content: "📎";
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 16px;
+    pointer-events: none;
+  }
+
+
   @media screen and (min-width: 700px) {
     #shopify-section-{{ section.id }} .section-stack__intro {
       padding-right: {{ section.settings.intro_padding_right }}px;
@@ -88,11 +105,11 @@
             {%- endif -%}
 
             <div class="input-row">
-              {%- capture label -%}{{ 'contact.form.name' | t }}{%- endcapture -%}
-              {%- render 'input', type: 'text', name: 'contact[name]', label: label, value: customer.name, required: true, autocomplete: 'name' -%}
+              {%- capture name_label -%}{% if section.settings.name_label != blank %}{{ section.settings.name_label }}{% else %}{{ 'contact.form.name' | t }}{% endif %}{%- endcapture -%}
+              {%- render 'input', type: 'text', name: 'contact[name]', label: name_label, value: customer.name, required: true, autocomplete: 'name' -%}
 
-              {%- capture label -%}{{ 'contact.form.email' | t }}{%- endcapture -%}
-              {%- render 'input', type: 'email', name: 'contact[email]', label: label, value: customer.email, required: true, autocomplete: 'email' -%}
+              {%- capture email_label -%}{% if section.settings.email_label != blank %}{{ section.settings.email_label }}{% else %}{{ 'contact.form.email' | t }}{% endif %}{%- endcapture -%}
+              {%- render 'input', type: 'email', name: 'contact[email]', label: email_label, value: customer.email, required: true, autocomplete: 'email' -%}
             </div>
 
             {%- for block in section.blocks -%}
@@ -121,11 +138,27 @@
                 {%- endcapture -%}
 
                 {%- render 'select', options: options, name: name, label: block.settings.title, required: true, block: block -%}
+              {%- elsif block.type == 'file_upload' -%}
+                {%- capture file_name -%}contact[{{ field_title | escape }}]{%- endcapture -%}
+                <div class="field">
+                  <label for="{{ file_name }}" class="field__label">
+                    {{ block.settings.title | escape }}
+                    {%- if block.settings.required -%}<span class="required">*</span>{%- endif -%}
+                  </label>
+                  <input 
+                    type="file" 
+                    id="{{ file_name }}" 
+                    name="{{ file_name }}" 
+                    class="field__input"
+                    {%- if block.settings.accept != blank -%}accept="{{ block.settings.accept }}"{%- endif -%}
+                    {%- if block.settings.required -%}required{%- endif -%}
+                  >
+                </div>
               {%- endif -%}
             {%- endfor -%}
 
-            {%- capture label -%}{{ 'contact.form.message' | t }}{%- endcapture -%}
-            {%- render 'input', name: 'contact[body]', label: label, multiline: 4, required: true -%}
+            {%- capture message_label -%}{% if section.settings.message_label != blank %}{{ section.settings.message_label }}{% else %}{{ 'contact.form.message' | t }}{% endif %}{%- endcapture -%}
+            {%- render 'input', name: 'contact[body]', label: message_label, multiline: 4, required: true -%}
           </div>
 
           <div class="{% if text_position == 'center' %}justify-self-center{% else%}justify-self-start{% endif %}">
@@ -215,6 +248,28 @@
       "step": 10,
       "unit": "px",
       "default": 120
+    },
+    {
+      "type": "header",
+      "content": "Form field labels"
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "Name field label",
+      "info": "Leave blank to use default label"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email field label",
+      "info": "Leave blank to use default label"
+    },
+    {
+      "type": "text",
+      "id": "message_label",
+      "label": "Message field label",
+      "info": "Leave blank to use default label"
     },
     {
       "type": "header",
@@ -313,6 +368,31 @@
           "label": "Values",
           "info": "Separate each value by a comma.",
           "default": "value 1, value 2, value 3"
+        }
+      ]
+    },
+    {
+      "type": "file_upload",
+      "name": "File Upload",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Label",
+          "default": "Attach File"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "Required",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "accept",
+          "label": "Accepted file types",
+          "info": "e.g., .pdf,.doc,.docx,.jpg,.png",
+          "default": ".pdf,.doc,.docx,.jpg,.png"
         }
       ]
     }
