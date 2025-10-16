@@ -7,58 +7,95 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-{
+ {
   "sections": {
     "main": {
       "type": "main-product",
       "blocks": {
         "vendor": {
           "type": "vendor",
+          "disabled": true,
           "settings": {}
         },
         "title": {
           "type": "title",
-          "settings": {}
+          "settings": {
+            "heading_tag": "h3"
+          }
         },
         "badges": {
           "type": "badges",
+          "disabled": true,
           "settings": {}
         },
         "price": {
           "type": "price",
-          "settings": {}
+          "settings": {
+            "show_taxes_notice": false
+          }
         },
         "rating": {
           "type": "rating",
-          "settings": {}
+          "disabled": true,
+          "settings": {
+            "show_empty": false
+          }
         },
         "payment_terms": {
           "type": "payment_terms",
+          "disabled": true,
           "settings": {}
         },
         "separator": {
           "type": "separator",
           "settings": {}
         },
-        "description": {
-          "type": "description",
-          "settings": {}
-        },
         "variant_picker": {
           "type": "variant_picker",
-          "settings": {}
+          "settings": {
+            "hide_sold_out_variants": false,
+            "stack_blocks": true,
+            "selector_style": "block",
+            "swatch_selector_style": "swatch",
+            "variant_image_options": "",
+            "size_chart_page": ""
+          }
         },
         "quantity_selector": {
           "type": "quantity_selector",
+          "disabled": true,
           "settings": {}
+        },
+        "button_pair_pC99Ht": {
+          "type": "button_pair",
+          "settings": {
+            "button1_link": "shopify://collections/frontpage",
+            "button1_text": "TAKE OUR BRA SIZE QUIZ",
+            "whatsapp_number": "+9407647720",
+            "button2_text": "TALK TO A FITTER",
+            "whatsapp_message": "Hi! I'd like to talk about bra fitting.",
+            "size": "base",
+            "stretch": true
+          }
         },
         "buy_buttons": {
           "type": "buy_buttons",
-          "settings": {}
+          "settings": {
+            "show_payment_button": false,
+            "show_gift_card_recipient": true,
+            "atc_button_background": "",
+            "atc_button_text_color": "",
+            "payment_button_background": "",
+            "payment_button_text_color": ""
+          }
         },
-        "pickup_availability": {
-          "type": "pickup_availability",
-          "settings": {}
+        "description": {
+          "type": "description",
+          "settings": {
+            "icon": "none",
+            "icon_width": 20,
+            "collapse_content": false
+          }
         }
       },
       "block_order": [
@@ -69,20 +106,384 @@
         "rating",
         "payment_terms",
         "separator",
-        "description",
         "variant_picker",
         "quantity_selector",
-        "buy_buttons"
+        "button_pair_pC99Ht",
+        "buy_buttons",
+        "description"
       ],
-      "settings": {}
+      "settings": {
+        "full_width": true,
+        "show_fixed_add_to_cart": false,
+        "desktop_media_width": 50,
+        "desktop_media_layout": "carousel_thumbnails_left",
+        "mobile_media_size": "contained",
+        "mobile_carousel_control": "dots",
+        "enable_video_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 3,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "input_background": "rgba(0,0,0,0)",
+        "input_text_color": ""
+      }
+    },
+    "accordion_content_jRzxt6": {
+      "type": "accordion-content",
+      "blocks": {
+        "item_xEUaT4": {
+          "type": "item",
+          "settings": {
+            "icon": "none",
+            "icon_width": 20,
+            "title": "Fit Recommendations",
+            "content": "<p>{{ product.metafields.custom.fit_recommendation_text.value }}</p>",
+            "page": ""
+          }
+        },
+        "item_xpLiKw": {
+          "type": "item",
+          "settings": {
+            "icon": "none",
+            "icon_width": 20,
+            "title": "Care Instructions",
+            "content": "<p>Write content to help your customers to better understand your products or policies.</p>",
+            "page": ""
+          }
+        },
+        "item_3Tq3V7": {
+          "type": "item",
+          "settings": {
+            "icon": "none",
+            "icon_width": 20,
+            "title": "Delivery & Returns",
+            "content": "<p>Write content to help your customers to better understand your products or policies.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_xEUaT4",
+        "item_xpLiKw",
+        "item_3Tq3V7"
+      ],
+      "name": "Accordion content",
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "button_text": "",
+        "button_url": "",
+        "text_position": "start",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "button_background": "",
+        "button_text_color": "",
+        "accordion_background": "#ffffff",
+        "accordion_text_color": ""
+      }
+    },
+    "pairs_well_with_enGdXb": {
+      "type": "pairs-well-with",
+      "name": "Pairs well with",
+      "settings": {
+        "subheading": "",
+        "title": "Pairs well with",
+        "heading_color": "#7e7e7e",
+        "collection": "bestsellers"
+      }
+    },
+    "info_card_CpBXb8": {
+      "type": "info-card",
+      "name": "Info card",
+      "settings": {
+        "eyebrow_text": "",
+        "eyebrow_color": "#000000",
+        "eyebrow_font_size": 14,
+        "eyebrow_font_weight": 600,
+        "heading_mobile": "<p>Inner wear </p><p>that is<br/>authentically </p><p><em>you</em></p>",
+        "heading_desktop": "<p>Inner wear that is<br/>authentically <em>you</em></p>",
+        "heading_color": "#000000",
+        "heading_font_size_mobile": 24,
+        "heading_font_size_desktop": 56,
+        "heading_font_weight": 400,
+        "heading_font_style": "normal",
+        "mobile_text_position": "place-self-start-end text-end",
+        "desktop_text_position": "sm:place-self-start-end sm:text-end",
+        "icon_svg": "",
+        "icon_color": "#6b4c9a",
+        "icon_size": 48,
+        "content": "",
+        "content_color": "#000000",
+        "content_font_size": 16,
+        "content_max_width": 600,
+        "button_text": "",
+        "button_link": "",
+        "button_size": "base",
+        "button_style": "fill",
+        "button_secondary": false,
+        "button_background": "",
+        "button_text_color": "",
+        "background_color": "#c8b3e6",
+        "min_height_mobile": 440,
+        "min_height_desktop": 580,
+        "background_image_mobile": "shopify://shop_images/Frame_1000003842.png",
+        "background_opacity_mobile": 100,
+        "background_image_desktop": "shopify://shop_images/Frame_1000006186.png",
+        "background_opacity_desktop": 100,
+        "border_radius": 24,
+        "padding_mobile": 40,
+        "padding_desktop": 80
+      }
+    },
+    "comparison_table_iPAUWF": {
+      "type": "comparison-table",
+      "blocks": {
+        "headings_4iWhVV": {
+          "type": "headings",
+          "settings": {
+            "heading_1": "Size Range Focus",
+            "heading_2": "Design Focus",
+            "heading_3": "Fitting Help",
+            "heading_4": "Construction",
+            "heading_5": "",
+            "heading_6": "",
+            "heading_7": "",
+            "heading_8": "",
+            "heading_9": "",
+            "heading_10": "",
+            "heading_11": "",
+            "heading_12": "",
+            "heading_13": "",
+            "heading_14": "",
+            "heading_15": "",
+            "heading_16": "",
+            "heading_17": "",
+            "heading_18": "",
+            "heading_19": "",
+            "heading_20": ""
+          }
+        },
+        "values_a6LbHL": {
+          "type": "values",
+          "settings": {
+            "product": "",
+            "value_1": "<p>Extended (D-K) Cups</p>",
+            "value_2": "<p>Celebrates styles and colours</p>",
+            "value_3": "<p>Expert Consultations</p>",
+            "value_4": "<p>Optimised for support and coverage</p>",
+            "value_5": "",
+            "value_6": "",
+            "value_7": "",
+            "value_8": "",
+            "value_9": "",
+            "value_10": "",
+            "value_11": "",
+            "value_12": "",
+            "value_13": "",
+            "value_14": "",
+            "value_15": "",
+            "value_16": "",
+            "value_17": "",
+            "value_18": "",
+            "value_19": "",
+            "value_20": "",
+            "view_button_background": "",
+            "view_button_text_color": ""
+          }
+        },
+        "values_gGEdN4": {
+          "type": "values",
+          "settings": {
+            "product": "",
+            "value_1": "<p>Stops at D or DD</p>",
+            "value_2": "<p>Limited choice in larger sizes</p>",
+            "value_3": "<p>Size chart only</p>",
+            "value_4": "<p>One pattern fits all</p>",
+            "value_5": "",
+            "value_6": "",
+            "value_7": "",
+            "value_8": "",
+            "value_9": "",
+            "value_10": "",
+            "value_11": "",
+            "value_12": "",
+            "value_13": "",
+            "value_14": "",
+            "value_15": "",
+            "value_16": "",
+            "value_17": "",
+            "value_18": "",
+            "value_19": "",
+            "value_20": "",
+            "view_button_background": "",
+            "view_button_text_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "headings_4iWhVV",
+        "values_a6LbHL",
+        "values_gGEdN4"
+      ],
+      "name": "Comparison table",
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "The Scoop Difference",
+        "content": "",
+        "button_text": "",
+        "button_url": "",
+        "scoop_image": "shopify://shop_images/Logo_6e04e44a-b152-43cd-9c24-c1efe26dc568.svg",
+        "scoop_header": "Scoop",
+        "others_header": "Others",
+        "text_position": "start",
+        "max_rows": 5,
+        "view_all_text": "View all",
+        "view_less_text": "View less",
+        "view_product": "View",
+        "show_product_info": false,
+        "show_product_image": false,
+        "show_product_swatch": false,
+        "viewing_product": "",
+        "background": "rgba(0,0,0,0)",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "button_background": "",
+        "button_text_color": "",
+        "chart_background": "",
+        "chart_text_color": "",
+        "chart_true_false_color": ""
+      }
+    },
+    "customer_ugc_YNdAHn": {
+      "type": "customer-ugc",
+      "blocks": {
+        "video_f3x9Yf": {
+          "type": "video",
+          "settings": {
+            "video_thumbnail": "shopify://shop_images/Screenshot_2025-10-16_at_1.30.20_AM.png",
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/192d4c6680ff4d48a4f1059cca9888ee.mp4"
+          }
+        },
+        "video_fmB3Fn": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_ynjeH3": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_f3x9Yf",
+        "video_fmB3Fn",
+        "video_ynjeH3"
+      ],
+      "name": "Customer UGC",
+      "settings": {
+        "heading": "Happy customers had something to share",
+        "full_width": false,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "faq_two_column_qTXqwf": {
+      "type": "faq-two-column",
+      "blocks": {
+        "item_dAyJML": {
+          "type": "item",
+          "settings": {
+            "title": "Do you ship overseas?",
+            "content": "<p>Yes, we ship all over the world. Shipping costs will apply, and will be added at checkout. We run discounts and promotions all year, so stay tuned for exclusive deals.</p>"
+          }
+        },
+        "item_7qAHrR": {
+          "type": "item",
+          "settings": {
+            "title": "How long will it take to get my orders?",
+            "content": "<p>It depends on where you are. Orders processed here will take 5-7 business days to arrive. Overseas deliveries can take anywhere from 7-16 days. Delivery details will be provided in your confirmation email.</p>"
+          }
+        },
+        "item_7ki94a": {
+          "type": "item",
+          "settings": {
+            "title": "Any question?",
+            "content": "<p>You can contact us through our contact page! We will be happy to assist you.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_dAyJML",
+        "item_7qAHrR",
+        "item_7ki94a"
+      ],
+      "name": "FAQ Two Column",
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "<p>Have a question? We’re here to help!</p>",
+        "content": "<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa.</p>",
+        "max_width": 1000,
+        "intro_padding_right": 100,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "faq_background": "#f8eeec"
+      }
     },
     "related-products": {
       "type": "related-products",
-      "settings": {}
+      "settings": {
+        "recommendations_count": 6,
+        "products": [
+          "lovelace-brazilian-brief",
+          "smoothie-spacer-tshirt-bra",
+          "lovelace-full-cup-bra",
+          "sample-prod",
+          "sample-prod-2"
+        ],
+        "full_width": true,
+        "stack_products": false,
+        "show_progress_bar": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "Bestsellers",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
     }
   },
   "order": [
     "main",
+    "accordion_content_jRzxt6",
+    "pairs_well_with_enGdXb",
+    "info_card_CpBXb8",
+    "comparison_table_iPAUWF",
+    "customer_ugc_YNdAHn",
+    "faq_two_column_qTXqwf",
     "related-products"
   ]
 }

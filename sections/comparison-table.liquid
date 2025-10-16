@@ -14,6 +14,82 @@ CSS
     --feature-chart-values-columns-count: {{ values_column_count }};
   }
 
+  #shopify-section-{{ section.id }} .bg-custom {
+    background-color: white !important;
+    padding: 0
+  }
+
+  #shopify-section-{{ section.id }} .h2 {
+    font-size: 35px;
+  }
+
+  #shopify-section-{{ section.id }} .feature-chart__table-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+    min-width: 0;
+  }
+
+  #shopify-section-{{ section.id }} .feature-chart__table-row--header {
+    font-weight: 600;
+    font-size: 18px;
+    padding: 16px 0;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .feature-chart__table-row--header .feature-chart__value {
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .feature-chart__table-row--header .feature-chart__value:nth-child(2) {
+    color: #6B4C9A;
+    font-weight: 700;
+  }
+
+  #shopify-section-{{ section.id }} .scoop-header-image {
+    width: 88px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .feature-chart__table-row--header .feature-chart__value:nth-child(3) {
+    color: #C7C7C7;
+    font-weight: 600;
+    font-size: 22px;
+  }
+
+  #shopify-section-{{ section.id }} .feature-chart__table-row:not(.feature-chart__table-row--header):not(.feature-chart__table-row--product) .feature-chart__value:nth-child(2) {
+    color: #6B4C9A;
+  }
+
+  #shopify-section-{{ section.id }} .feature-chart__table-row:not(.feature-chart__table-row--header):not(.feature-chart__table-row--product) .feature-chart__value:nth-child(3) {
+    color: #E74C3C;
+  }
+
+  #shopify-section-{{ section.id }} .feature-chart__heading {
+    font-size: 18px;
+    line-height: 130%;
+    min-width: 0;
+    word-wrap: break-word;
+  }
+
+  #shopify-section-{{ section.id }} .feature-chart__value {
+    min-width: 0;
+    word-wrap: break-word;
+    font-size: 14px;
+    line-height: 140%;
+  }
+
+  #shopify-section-{{ section.id }} .feature-chart,
+  #shopify-section-{{ section.id }} .feature-chart__table {
+    margin-inline-start: 0 !important;
+    margin-inline-end: 0 !important;
+    padding-inline-start: 0 !important;
+    padding-inline-end: 0 !important;
+  }
+
   @media screen and (min-width: 700px) {
     {%- if text_position == 'center' -%}
       #shopify-section-{{ section.id }} .section-stack__main {
@@ -25,6 +101,7 @@ CSS
       #shopify-section-{{ section.id }} .section-stack {
         flex-wrap: wrap;
         justify-content: start;
+        gap: 8px;
       }
 
       #shopify-section-{{ section.id }} .section-stack__intro {
@@ -39,6 +116,38 @@ CSS
         width: auto;
       }
     {%- endif -%}
+
+    #shopify-section-{{ section.id }} .h2 {
+      font-size: 42px;
+    }
+
+    #shopify-section-{{ section.id }} .feature-chart__table-row {
+      grid-template-columns: 3fr 1fr 1fr;
+      gap: 72px;
+    }
+
+    #shopify-section-{{ section.id }} .scoop-header-image {
+      width: 132px;
+    }
+
+    #shopify-section-{{ section.id }} .feature-chart__table-row--header .feature-chart__value:nth-child(3) {
+      font-size: 38px;
+    }
+
+    #shopify-section-{{ section.id }} .feature-chart__heading {
+      font-size: 22px;
+    }
+
+    #shopify-section-{{ section.id }} .feature-chart__value {
+      font-size: 18px;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    #shopify-section-{{ section.id }} .section-full {
+      padding-left: 212px !important;
+      padding-right: 212px !important;
+    }
   }
 </style>
 
@@ -186,6 +295,21 @@ LIQUID
             {%- endif -%}
           {%- endif -%}
 
+          {%- comment -%}Add header row with Scoop and Others labels{%- endcomment -%}
+          {%- if section.settings.scoop_image != blank or section.settings.others_header != blank -%}
+            <div class="feature-chart__table-row feature-chart__table-row--header">
+              <div class="feature-chart__heading"></div>
+              <div class="feature-chart__value">
+                {%- if section.settings.scoop_image != blank -%}
+                  {{ section.settings.scoop_image | image_url: width: 100 | image_tag: alt: 'Scoop', class: 'scoop-header-image' }}
+                {%- else -%}
+                  {{ section.settings.scoop_header | default: 'Scoop' }}
+                {%- endif -%}
+              </div>
+              <div class="feature-chart__value">{{ section.settings.others_header | default: 'Others' }}</div>
+            </div>
+          {%- endif -%}
+
           {%- for i in (1..20) -%}
             {%- assign heading_key = 'heading_' | append: i -%}
             {%- assign value_key = 'value_' | append: i -%}
@@ -196,7 +320,7 @@ LIQUID
             {%- if heading_value != blank and values_blocks[0].settings[value_key] != blank or values_blocks[1].settings[value_key] != blank or values_blocks[2].settings[value_key] != blank -%}
               <div class="feature-chart__table-row" {% if outputted_count >= section.settings.max_rows %}hidden{% else %}{% endif %}>
                 {%- if heading_value != blank -%}
-                  <div class="feature-chart__heading bold" {% if outputted_count == 0 %}{{ headings_block.shopify_attributes }}{% endif %}>{{ heading_value }}</div>
+                  <div class="feature-chart__heading" {% if outputted_count == 0 %}{{ headings_block.shopify_attributes }}{% endif %}>{{ heading_value }}</div>
                 {%- endif -%}
 
                 {%- for i in (0..2) -%}
@@ -285,6 +409,29 @@ LIQUID
       "type": "url",
       "id": "button_url",
       "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Table Headers"
+    },
+    {
+      "type": "image_picker",
+      "id": "scoop_image",
+      "label": "Scoop logo/image",
+      "info": "Upload the Scoop logo or image for the header"
+    },
+    {
+      "type": "text",
+      "id": "scoop_header",
+      "label": "Scoop header (fallback)",
+      "default": "Scoop",
+      "info": "Text fallback if no image is uploaded"
+    },
+    {
+      "type": "text",
+      "id": "others_header",
+      "label": "Others header",
+      "default": "Others"
     },
     {
       "type": "select",

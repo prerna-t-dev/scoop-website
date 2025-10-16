@@ -355,6 +355,24 @@ Supported variables
             </div>
           {%- endif -%}
 
+        {%- when 'button_pair' -%}
+          <div class="product-info__button-pair">
+            <div class="button-pair">
+              {%- if block.settings.button1_text != blank and block.settings.button1_link != blank -%}
+                <a href="{{ block.settings.button1_link }}" class="button-pair__button button-pair__button--primary" style="background-color: #CCA7FC; color: white;">
+                  {{ block.settings.button1_text }}
+                </a>
+              {%- endif -%}
+              
+              {%- if block.settings.button2_text != blank and block.settings.whatsapp_number != blank -%}
+                {%- capture whatsapp_url -%}https://wa.me/{{ block.settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-' }}{% if block.settings.whatsapp_message != blank %}?text={{ block.settings.whatsapp_message | url_encode }}{% endif %}{%- endcapture -%}
+                <a href="{{ whatsapp_url }}" target="_blank" class="button-pair__button button-pair__button--secondary" style="background-color: transparent; color: #A073B7; border: 1px solid #A073B7;">
+                  {{ block.settings.button2_text }}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+
         {%- when 'liquid' -%}
           {%- if block.settings.liquid != blank -%}
             <div class="product-info__liquid">

@@ -42,7 +42,10 @@ Supported parameters
         <span {% if size == 'lg' %}class="h6"{% endif %}>{{- title | escape -}}</span>
       {%- endif -%}
 
-      <span class="circle-chevron group-hover:colors group-expanded:colors group-expanded:rotate">{%- render 'icon' with 'chevron-bottom-small' -%}</span>
+      <span class="circle-chevron group-hover:colors group-expanded:colors">
+        <span class="accordion-icon accordion-icon--plus">+</span>
+        <span class="accordion-icon accordion-icon--minus">-</span>
+      </span>
     </div>
   </summary>
 

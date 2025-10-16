@@ -25,12 +25,12 @@ Supported variables
 
 <div class="checkbox-container" {{ block.shopify_attributes }}>
   {%- if switch -%}
-    <input id="{{ id }}" class="switch" type="{{ type | default: 'checkbox' }}" role="switch" name="{{ name }}" value="{{ value | default: 1 }}" {% if form %}form="{{ form }}"{% endif %} {% if disabled %}disabled{% endif %} {% if required %}required{% endif %} {% if checked %}checked{% endif %}>
+    <input id="{{ id }}" class="switch" type="{{ type | default: 'checkbox' }}" role="switch" name="{{ name }}" value="{{ value | default: 1 }}" data-filter-value="{{ value | default: 1 }}" {% if form %}form="{{ form }}"{% endif %} {% if disabled %}disabled{% endif %} {% if required %}required{% endif %} {% if checked %}checked{% endif %}>
   {%- else -%}
-    <input id="{{ id }}" class="checkbox" type="{{ type | default: 'checkbox' }}" name="{{ name }}" value="{{ value | default: 1 }}" {% if form %}form="{{ form }}"{% endif %} {% if disabled %}disabled{% endif %} {% if required %}required{% endif %} {% if checked %}checked{% endif %}>
+    <input id="{{ id }}" class="checkbox" type="{{ type | default: 'checkbox' }}" name="{{ name }}" value="{{ value | default: 1 }}" data-filter-value="{{ value | default: 1 }}" {% if form %}form="{{ form }}"{% endif %} {% if disabled %}disabled{% endif %} {% if required %}required{% endif %} {% if checked %}checked{% endif %}>
   {%- endif -%}
 
   {%- if label != blank -%}
-    <label for="{{ id }}">{{ label }}</label>
+    <label for="{{ id }}" data-filter-label-value="{{ value | default: 1 }}">{{ label }}</label>
   {%- endif -%}
 </div>

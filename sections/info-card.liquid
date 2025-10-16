@@ -1,0 +1,643 @@
+{%- render 'section-spacing-collapsing' -%}
+
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+CSS
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+<style>
+  #shopify-section-{{ section.id }} {
+    --info-card-background: {{ section.settings.background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .info-card {
+    background: var(--info-card-background);
+    border-radius: {{ section.settings.border_radius }}px;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1;
+    min-height: {{ section.settings.min_height_mobile }}px;
+  }
+
+  #shopify-section-{{ section.id }} .info-card__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: {{ section.settings.border_radius }}px;
+  }
+
+
+  #shopify-section-{{ section.id }} .info-card__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    padding: {{ section.settings.padding_mobile }}px;
+  }
+
+  #shopify-section-{{ section.id }} .info-card__eyebrow {
+    font-size: {{ section.settings.eyebrow_font_size }}px;
+    font-weight: {{ section.settings.eyebrow_font_weight }} !important;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    color: {{ section.settings.eyebrow_color }};
+  }
+
+  #shopify-section-{{ section.id }} .info-card__heading-mobile {
+    font-family: var(--heading-font-family);
+    font-size: {{ section.settings.heading_font_size_mobile }}px;
+    font-weight: {{ section.settings.heading_font_weight }};
+    line-height: 1;
+    margin-bottom: 16px;
+    color: {{ section.settings.heading_color }};
+    font-style: {{ section.settings.heading_font_style }} !important;
+  }
+
+  #shopify-section-{{ section.id }} .info-card__heading-desktop {
+    font-family: var(--heading-font-family);
+    font-size: {{ section.settings.heading_font_size_desktop }}px;
+    font-weight: {{ section.settings.heading_font_weight }};
+    line-height: 1;
+    margin-bottom: 16px;
+    color: {{ section.settings.heading_color }};
+    font-style: {{ section.settings.heading_font_style }} !important;
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .info-card__icon {
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    margin: 0 0 14px 0;
+    color: {{ section.settings.icon_color }};
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  #shopify-section-{{ section.id }} .info-card__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .info-card__content-text {
+    font-size: {{ section.settings.content_font_size }}px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    color: {{ section.settings.content_color }};
+    max-width: {{ section.settings.content_max_width }}px;
+  }
+
+  
+
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .info-card__content {
+      padding: {{ section.settings.padding_desktop }}px;
+    }
+
+    #shopify-section-{{ section.id }} .info-card__heading-mobile {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .info-card__heading-desktop {
+      display: block;
+    }
+
+    #shopify-section-{{ section.id }} .info-card__content-text {
+      font-size: 18px;
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #shopify-section-{{ section.id }} .info-card__icon {
+      margin: 0 auto 14px;
+      justify-content: center;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    #shopify-section-{{ section.id }} .section-full {
+      padding-left: 212px !important;
+      padding-right: 212px !important;
+    }
+  }
+</style>
+
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+LIQUID
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+<div {% render 'section-properties' %}>
+  <div class="section-stack">
+    <div class="info-card">
+      {%- if section.settings.background_image_mobile != blank or section.settings.background_image_desktop != blank -%}
+        <picture>
+          {%- if section.settings.background_image_desktop != blank -%}
+            <source media="(min-width: 700px)" srcset="{{ section.settings.background_image_desktop | image_url: width: 1200 }}">
+          {%- endif -%}
+          {%- if section.settings.background_image_mobile != blank -%}
+            <img src="{{ section.settings.background_image_mobile | image_url: width: 800 }}" class="info-card__image" alt="Background">
+          {%- elsif section.settings.background_image_desktop != blank -%}
+            <img src="{{ section.settings.background_image_desktop | image_url: width: 1200 }}" class="info-card__image" alt="Background">
+          {%- endif -%}
+        </picture>
+      {%- endif -%}
+      
+      <div class="info-card__content {{ section.settings.mobile_text_position }} {{ section.settings.desktop_text_position }}">
+        {%- if section.settings.eyebrow_text != blank -%}
+          <p class="info-card__eyebrow">{{ section.settings.eyebrow_text }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.heading_mobile != blank or section.settings.heading_desktop != blank -%}
+          <div class="info-card__heading">
+            {%- if section.settings.heading_mobile != blank -%}
+              <div class="info-card__heading-mobile">{{ section.settings.heading_mobile }}</div>
+            {%- endif -%}
+            {%- if section.settings.heading_desktop != blank -%}
+              <div class="info-card__heading-desktop">{{ section.settings.heading_desktop }}</div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.icon_svg != blank -%}
+          <div class="info-card__icon">
+            {{ section.settings.icon_svg }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.content != blank -%}
+          <div class="info-card__content-text">
+            {{ section.settings.content }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.button_text != blank -%}
+          {%- render 'button', 
+            content: section.settings.button_text, 
+            href: section.settings.button_link,
+            size: section.settings.button_size,
+            style: section.settings.button_style,
+            secondary: section.settings.button_secondary,
+            background: section.settings.button_background,
+            text_color: section.settings.button_text_color
+          -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Info card",
+  "class": "shopify-section--info-card",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Eyebrow text"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow text",
+      "default": "ONE SIZE DOESN'T FIT ALL"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "label": "Eyebrow font size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_weight",
+      "label": "Eyebrow font weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_mobile",
+      "label": "Heading (mobile)",
+      "default": "<p>Your best fit starts here.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "heading_desktop",
+      "label": "Heading (desktop)",
+      "default": "<p>Your best fit starts here.</p>"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading font size (mobile)",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_desktop",
+      "label": "Heading font size (desktop)",
+      "min": 32,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 400
+    },
+    {
+      "type": "select",
+      "id": "heading_font_style",
+      "label": "Heading font style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "italic",
+          "label": "Italic"
+        }
+      ],
+      "default": "italic"
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_position",
+      "label": "Mobile content position",
+      "options": [
+        {
+          "value": "place-self-start text-start",
+          "label": "Top left"
+        },
+        {
+          "value": "place-self-start-center text-center",
+          "label": "Top center"
+        },
+        {
+          "value": "place-self-start-end text-end",
+          "label": "Top right"
+        },
+        {
+          "value": "place-self-center-start text-start",
+          "label": "Middle left"
+        },
+        {
+          "value": "place-self-center text-center",
+          "label": "Middle center"
+        },
+        {
+          "value": "place-self-center-end text-end",
+          "label": "Middle right"
+        },
+        {
+          "value": "place-self-end-start text-start",
+          "label": "Bottom left"
+        },
+        {
+          "value": "place-self-end-center text-center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "place-self-end-end text-end",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "place-self-center text-center"
+    },
+    {
+      "type": "select",
+      "id": "desktop_text_position",
+      "label": "Desktop content position",
+      "options": [
+        {
+          "value": "sm:place-self-start sm:text-start",
+          "label": "Top left"
+        },
+        {
+          "value": "sm:place-self-start-center sm:text-center",
+          "label": "Top center"
+        },
+        {
+          "value": "sm:place-self-start-end sm:text-end",
+          "label": "Top right"
+        },
+        {
+          "value": "sm:place-self-center-start sm:text-start",
+          "label": "Middle left"
+        },
+        {
+          "value": "sm:place-self-center sm:text-center",
+          "label": "Middle center"
+        },
+        {
+          "value": "sm:place-self-center-end sm:text-end",
+          "label": "Middle right"
+        },
+        {
+          "value": "sm:place-self-end-start sm:text-start",
+          "label": "Bottom left"
+        },
+        {
+          "value": "sm:place-self-end-center sm:text-center",
+          "label": "Bottom center"
+        },
+        {
+          "value": "sm:place-self-end-end sm:text-end",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "sm:place-self-center sm:text-center"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "html",
+      "id": "icon_svg",
+      "label": "Icon SVG",
+      "info": "Paste your SVG code here. Use fill=\"currentColor\" or stroke=\"currentColor\" for color control."
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#6B4C9A"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content",
+      "default": "<p>Do your bras pinch, shift or slip off your shoulder? Let's nip those problems in the cup and find you your best fit yet.</p>"
+    },
+    {
+      "type": "color",
+      "id": "content_color",
+      "label": "Content color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "content_font_size",
+      "label": "Content font size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 400,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "BRA SIZE QUIZ"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "label": "Button size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "base",
+          "label": "Base"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "xl",
+          "label": "Extra Large"
+        }
+      ],
+      "default": "base"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "fill",
+          "label": "Fill"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_secondary",
+      "label": "Use secondary button style",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background (optional)",
+      "info": "Leave empty to use theme default"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color (optional)",
+      "info": "Leave empty to use theme default"
+    },
+    {
+      "type": "header",
+      "content": "Card styling"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#C8B3E6"
+    },
+    {
+      "type": "range",
+      "id": "min_height_mobile",
+      "label": "Minimum height (mobile)",
+      "min": 200,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "min_height_desktop",
+      "label": "Minimum height (desktop)",
+      "min": 300,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Background image overlay"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image (mobile)",
+      "info": "Image will be displayed as background overlay on mobile devices"
+    },
+    {
+      "type": "range",
+      "id": "background_opacity_mobile",
+      "label": "Background opacity (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_desktop",
+      "label": "Background image (desktop)",
+      "info": "Image will be displayed as background overlay on desktop devices"
+    },
+    {
+      "type": "range",
+      "id": "background_opacity_desktop",
+      "label": "Background opacity (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Card padding (mobile)",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "label": "Card padding (desktop)",
+      "min": 40,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Info card",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}
+
