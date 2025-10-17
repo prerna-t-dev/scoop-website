@@ -7,6 +7,17 @@
     --section-stack-intro: {% if text_position == 'center' %}66.6667%{% else %}50%{% endif %};
     --section-stack-main: 50%;
   }
+
+  @media screen and (min-width: 1200px) {
+    #shopify-section-{{ section.id }} .section-full {
+      padding-left: 212px !important;
+      padding-right: 212px !important;
+    }
+    
+    #shopify-section-{{ section.id }} .accordion-box{
+      padding: 0;
+    }
+  }
 </style>
 
 <div {% render 'section-properties' %}>

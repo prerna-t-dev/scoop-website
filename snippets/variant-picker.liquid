@@ -122,7 +122,7 @@ Supported variables
           </div>
         {%- else -%}
           <div {% unless block.settings.stack_blocks %}class="scroll-area bleed sm:unbleed"{% endunless %}>
-            <div class="variant-picker__option-values {% if block.settings.stack_blocks %}wrap{% else %}scroll-area bleed sm:unbleed{% endif %} {% if resolved_option_selector_style == 'swatch' and settings.color_swatch_style == 'rectangle' %}variant-picker__option-values--color gap-4{% else %}gap-2{% endif %}">
+            <div class="variant-picker__option-values {% if block.settings.stack_blocks %}wrap{% else %}scroll-area bleed sm:unbleed{% endif %} {% if resolved_option_selector_style == 'swatch' and settings.color_swatch_style == 'rectangle' %}variant-picker__option-values--color gap-4{% else %}gap-4{% endif %}">
               {% liquid
                 assign name = form_id | append: '-option' | append: option.position
 

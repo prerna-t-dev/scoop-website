@@ -1225,6 +1225,76 @@ quick buy information in a template, that will be extracted in JS, but ensure it
       ]
     },
     {
+      "type": "button_pair",
+      "name": "Button Pair",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Two buttons side by side - first is a regular link, second opens WhatsApp chat."
+        },
+        {
+          "type": "url",
+          "id": "button1_link",
+          "label": "First Button Link"
+        },
+        {
+          "type": "text",
+          "id": "button1_text",
+          "label": "First Button Text",
+          "default": "TAKE OUR BRA SIZE QUIZ"
+        },
+        {
+          "type": "text",
+          "id": "whatsapp_number",
+          "label": "WhatsApp Number",
+          "info": "Enter phone number with country code (e.g., +1234567890)"
+        },
+        {
+          "type": "text",
+          "id": "button2_text",
+          "label": "Second Button Text",
+          "default": "TALK TO A FITTER"
+        },
+        {
+          "type": "text",
+          "id": "whatsapp_message",
+          "label": "WhatsApp Message",
+          "info": "Optional pre-filled message for WhatsApp",
+          "default": "Hi! I'd like to talk about bra fitting."
+        },
+        {
+          "type": "select",
+          "id": "size",
+          "label": "Button Size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "Small"
+            },
+            {
+              "value": "base",
+              "label": "Medium"
+            },
+            {
+              "value": "lg",
+              "label": "Large"
+            },
+            {
+              "value": "xl",
+              "label": "X-Large"
+            }
+          ],
+          "default": "lg"
+        },
+        {
+          "type": "checkbox",
+          "id": "stretch",
+          "label": "Stretch buttons",
+          "default": true
+        }
+      ]
+    },
+    {
       "type": "liquid",
       "name": "Custom Liquid",
       "settings": [

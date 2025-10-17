@@ -139,6 +139,46 @@ Supported variables
   {%- endcomment -%}
 
   <div class="product-card__info {% if text_alignment == 'center' %}product-card__info--center{% endif %}">
+    {%- comment -%} Check for Cup Size option and metafields {%- endcomment -%}
+    {%- assign cup_size_option = product.options_by_name['Cup Size'] -%}
+    {%- assign collection_by_style = product.metafields.custom.collection_by_style -%}
+    {%- assign collection_by_feature = product.metafields.custom.collection_by_feature -%}
+    
+    {%- if cup_size_option != blank or collection_by_style != blank or collection_by_feature != blank -%}
+      <div class="product-card__metadata">
+        {%- if cup_size_option != blank -%}
+          {%- assign cup_values = cup_size_option.values | sort -%}
+          {%- assign cup_range = cup_values.first | append: '-' | append: cup_values.last -%}
+          <span class="product-card__metadata-item">{{ cup_range }}</span>
+        {%- endif -%}
+        
+        {%- if collection_by_style != blank -%}
+          {%- assign style_value = collection_by_style | strip -%}
+          {%- if style_value contains '[' and style_value contains ']' -%}
+            {%- assign style_clean = style_value | remove: '[' | remove: ']' | remove: '"' -%}
+            {%- assign style_values = style_clean | split: ',' -%}
+            {%- for style_item in style_values -%}
+              <span class="product-card__metadata-item">{{ style_item | strip }}</span>
+            {%- endfor -%}
+          {%- else -%}
+            <span class="product-card__metadata-item">{{ style_value }}</span>
+          {%- endif -%}
+        {%- endif -%}
+        
+        {%- if collection_by_feature != blank -%}
+          {%- assign feature_value = collection_by_feature | strip -%}
+          {%- if feature_value contains '[' and feature_value contains ']' -%}
+            {%- assign feature_clean = feature_value | remove: '[' | remove: ']' | remove: '"' -%}
+            {%- assign feature_values = feature_clean | split: ',' -%}
+            {%- for feature_item in feature_values -%}
+              <span class="product-card__metadata-item">{{ feature_item | strip }}</span>
+            {%- endfor -%}
+          {%- else -%}
+            <span class="product-card__metadata-item">{{ feature_value }}</span>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
     {%- if show_vendor and product.vendor != blank -%}
       {%- if show_rating and text_alignment != 'center' -%}
         <div class="rating-with-text w-full">

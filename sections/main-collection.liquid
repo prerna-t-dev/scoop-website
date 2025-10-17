@@ -6,6 +6,10 @@
   {%- assign show_filters = false -%}
 {%- endif -%}
 
+{%- comment -%} Check if this collection should show top filters {%- endcomment -%}
+{%- assign show_top_filters = collection.metafields.custom.show_top_filters -%}
+{%- assign filter_type = show_top_filters | downcase -%}
+
 <style>
   {%- assign card_blends = false -%}
 
@@ -58,7 +62,179 @@
       }
     {%- endfor -%}
   }
+
+  {%- comment -%} Custom top filters styling {%- endcomment -%}
+  #shopify-section-{{ section.id }} .collection-top-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding: 16px 20px;
+    width: 100%;
+    max-width: none;
+    background: #ffffff;
+  }
+
+  #shopify-section-{{ section.id }} .collection-top-filters__group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .collection-top-filters__group-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .collection-top-filters__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .collection-top-filters__button {
+    padding: 8px 16px;
+    border: 1px solid #D6D6D6;
+    border-radius: 6px;
+    background: white;
+    color: #000000;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    font-family: inherit;
+    outline: none;
+    box-shadow: none;
+  }
+
+  #shopify-section-{{ section.id }} .collection-top-filters__button:hover {
+    background: #F8F8F8;
+    border-color: #B0B0B0;
+  }
+
+  #shopify-section-{{ section.id }} .collection-top-filters__button.active {
+    background: #6B4C9A;
+    color: white;
+    border-color: #6B4C9A;
+  }
+
+  @media screen and (max-width: 699px) {
+    #shopify-section-{{ section.id }} .collection-top-filters {
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 12px 16px;
+    }
+    
+    #shopify-section-{{ section.id }} .collection-top-filters__group {
+      gap: 8px;
+    }
+    
+    #shopify-section-{{ section.id }} .collection-top-filters__group-title {
+      font-size: 14px;
+    }
+    
+    #shopify-section-{{ section.id }} .collection-top-filters__buttons {
+      gap: 6px;
+    }
+    
+    #shopify-section-{{ section.id }} .collection-top-filters__button {
+      padding: 6px 12px;
+      font-size: 12px;
+    }
+  }
 </style>
+
+{%- comment -%} Custom top filters for specific collections - Dynamic {%- endcomment -%}
+{%- if show_top_filters != blank -%}
+  {%- comment -%} Debug: Show available filters {%- endcomment -%}
+  {%- comment -%}
+  <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; font-size: 12px;">
+    <strong>Debug - Available Filters:</strong><br>
+    {%- for filter in collection.filters -%}
+      {{ filter.label }} ({{ filter.values.size }} values)<br>
+    {%- endfor -%}
+    <strong>Filter Type:</strong> {{ filter_type }}<br>
+    <strong>Show Top Filters:</strong> {{ show_top_filters }}
+  </div>
+  {%- endcomment -%}
+  
+  <div class="collection-top-filters">
+    {%- case filter_type -%}
+      {%- when 'style' -%}
+        {%- comment -%} Find the Style filter and display its values {%- endcomment -%}
+        {%- for filter in collection.filters -%}
+          {%- assign filter_label_downcase = filter.label | downcase -%}
+          {%- if filter_label_downcase contains 'style' -%}
+            {%- for filter_value in filter.values -%}
+              <button type="button" class="collection-top-filters__button {% if filter_value.active %}active{% endif %}" 
+                      data-filter-label-value="{{ filter_value.value }}">
+                {{ filter_value.label }}
+              </button>
+            {%- endfor -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- when 'size' -%}
+        {%- comment -%} Find Band Size and Cup Size filters {%- endcomment -%}
+        {%- assign band_size_filter = blank -%}
+        {%- assign cup_size_filter = blank -%}
+        {%- for filter in collection.filters -%}
+          {%- assign filter_label_downcase = filter.label | downcase -%}
+          {%- if filter_label_downcase contains 'band' -%}
+            {%- assign band_size_filter = filter -%}
+          {%- elsif filter_label_downcase contains 'cup' -%}
+            {%- assign cup_size_filter = filter -%}
+          {%- endif -%}
+        {%- endfor -%}
+        
+        {%- if band_size_filter != blank -%}
+          <div class="collection-top-filters__group">
+            <h4 class="collection-top-filters__group-title">{{ band_size_filter.label }}</h4>
+            <div class="collection-top-filters__buttons">
+              {%- for filter_value in band_size_filter.values -%}
+                <button type="button" class="collection-top-filters__button {% if filter_value.active %}active{% endif %}" 
+                        data-filter-label-value="{{ filter_value.value }}">
+                  {{ filter_value.label }} Band
+                </button>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+        
+        {%- if cup_size_filter != blank -%}
+          <div class="collection-top-filters__group">
+            <h4 class="collection-top-filters__group-title">{{ cup_size_filter.label }}</h4>
+            <div class="collection-top-filters__buttons">
+              {%- for filter_value in cup_size_filter.values -%}
+                <button type="button" class="collection-top-filters__button {% if filter_value.active %}active{% endif %}" 
+                        data-filter-label-value="{{ filter_value.value }}">
+                  {{ filter_value.label }} Cup
+                </button>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- when 'feature' -%}
+        {%- comment -%} Find the Feature filter and display its values {%- endcomment -%}
+        {%- for filter in collection.filters -%}
+          {%- assign filter_label_downcase = filter.label | downcase -%}
+          {%- if filter_label_downcase contains 'feature' -%}
+            {%- for filter_value in filter.values -%}
+              <button type="button" class="collection-top-filters__button {% if filter_value.active %}active{% endif %}" 
+                      data-filter-label-value="{{ filter_value.value }}">
+                {{ filter_value.label }}
+              </button>
+            {%- endfor -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+    {%- endcase -%}
+  </div>
+{%- endif -%}
 
 <div class="container">
   {%- if collection.all_products_count == 0 -%}
@@ -686,3 +862,27 @@
   ]
 }
 {% endschema %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Collection top filters script loaded');
+  
+  // Use event delegation to handle dynamically updated buttons
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('collection-top-filters__button')) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const filterValue = e.target.getAttribute('data-filter-label-value');
+      console.log('Top filter clicked:', filterValue);
+      
+      // Just click the filter - let Shopify handle the rest
+      document.querySelectorAll(`[data-filter-label-value="${filterValue}"]`).forEach(element => {
+        if (element !== e.target) { // Don't click ourselves
+          element.click();
+        }
+      });
+    }
+  });
+});
+</script>

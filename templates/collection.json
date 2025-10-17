@@ -124,11 +124,11 @@
       "settings": {
         "products_per_page": 24,
         "products_per_row_mobile": "2",
-        "products_per_row_desktop": 3,
+        "products_per_row_desktop": 4,
         "filter_layout": "sidebar",
         "show_sort_by": true,
         "show_filters": true,
-        "show_filter_group_name": false,
+        "show_filter_group_name": true,
         "show_filter_values_count": true,
         "open_first_filter_group": false
       }
