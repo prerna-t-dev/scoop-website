@@ -237,7 +237,11 @@
   
   #shopify-section-{{ section.id }} .sort-by-facet button:hover {
     background: #654392;
-    color: white;
+    color: white ! important;
+  }
+
+  #shopify-section-{{ section.id }} .sort-by-facet button:hover span{
+    color: white ! important;
   }
   
   #shopify-section-{{ section.id }} .popover-listbox__option {
