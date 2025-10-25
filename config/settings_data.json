@@ -36,7 +36,7 @@
     "heading_letter_spacing": -2,
     "text_font": "barlow_n4",
     "heading_apparition": "split_fade",
-    "color_swatch_config": "Latte: #FFDED5\nCoral: #FF5D5D",
+    "color_swatch_config": "Latte: #FFDED5\nCoral: #FF5D5D\nSapphire: #0f52ba\nAmethyst: #9966cc\nHoney: #F59E02\nCappuccino: #CBB19B",
     "show_quick_buy": true,
     "show_product_rating": true,
     "product_color_display": "swatch",

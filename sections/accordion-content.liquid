@@ -18,6 +18,73 @@
       padding: 0;
     }
   }
+
+  /* Fit Recommendation Scales */
+  .fit-recommendation-scales {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .scale-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .scale-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    text-decoration: underline;
+    margin-bottom: 4px;
+  }
+
+  .scale-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .scale-line {
+    position: relative;
+    width: 100%;
+    height: 2px;
+    background-color: #ddd;
+    margin-bottom: 8px;
+  }
+
+  .scale-dot {
+    position: absolute;
+    top: -6px;
+    width: 14px;
+    height: 14px;
+    background-color: #A073B7;
+    border-radius: 50%;
+    transform: translateX(-50%);
+  }
+
+  .scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #666;
+  }
+
+  .scale-label-left,
+  .scale-label-center,
+  .scale-label-right {
+    flex: 1;
+    text-align: center;
+  }
+
+  .scale-label-left {
+    text-align: left;
+  }
+
+  .scale-label-right {
+    text-align: right;
+  }
 </style>
 
 <div {% render 'section-properties' %}>
@@ -54,7 +121,87 @@
           {%- for block in section.blocks -%}
             {%- if block.settings.title != blank and block.settings.content != blank -%}
               {%- capture accordion_content -%}
-                <div class="prose">{{ block.settings.page.content | default: block.settings.content }}</div>
+                <div class="prose">
+                  {%- comment -%} Filter out metafield values from content {%- endcomment -%}
+                  {%- assign content_text = block.settings.page.content | default: block.settings.content -%}
+                  {%- if forloop.first and product -%}
+                    {%- assign spacing_value = product.metafields.custom.fit_recommendations_spacing -%}
+                    {%- assign projection_value = product.metafields.custom.fit_recommendations_projection -%}
+                    {%- assign roots_value = product.metafields.custom.fit_recommendations_roots -%}
+                    
+                    {%- comment -%} Remove metafield values from content text {%- endcomment -%}
+                    {%- if spacing_value != blank -%}
+                      {%- assign content_text = content_text | remove: spacing_value -%}
+                    {%- endif -%}
+                    {%- if projection_value != blank -%}
+                      {%- assign content_text = content_text | remove: projection_value -%}
+                    {%- endif -%}
+                    {%- if roots_value != blank -%}
+                      {%- assign content_text = content_text | remove: roots_value -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                  
+                  {{ content_text }}
+                  
+                  {%- comment -%} Check if this is the first accordion item and render scale for metafields {%- endcomment -%}
+                  {%- if forloop.first and product -%}
+                    {%- assign spacing_value = product.metafields.custom.fit_recommendations_spacing -%}
+                    {%- assign projection_value = product.metafields.custom.fit_recommendations_projection -%}
+                    {%- assign roots_value = product.metafields.custom.fit_recommendations_roots -%}
+                    
+                    {%- if spacing_value != blank or projection_value != blank or roots_value != blank -%}
+                      <div class="fit-recommendation-scales">
+                        {%- if spacing_value != blank -%}
+                          <div class="scale-item">
+                            <div class="scale-label">Spacing</div>
+                            <div class="scale-container">
+                              <div class="scale-line">
+                                <div class="scale-dot" style="left: {{ spacing_value | plus: 5 | times: 10 }}%;"></div>
+                              </div>
+                              <div class="scale-labels">
+                                <span class="scale-label-left">CLOSE-SET</span>
+                                <span class="scale-label-center">AVERAGE</span>
+                                <span class="scale-label-right">SIDE-SET</span>
+                              </div>
+                            </div>
+                          </div>
+                        {%- endif -%}
+                        
+                        {%- if projection_value != blank -%}
+                          <div class="scale-item">
+                            <div class="scale-label">Projection</div>
+                            <div class="scale-container">
+                              <div class="scale-line">
+                                <div class="scale-dot" style="left: {{ projection_value | plus: 5 | times: 10 }}%;"></div>
+                              </div>
+                              <div class="scale-labels">
+                                <span class="scale-label-left">SHALLOW</span>
+                                <span class="scale-label-center">AVERAGE</span>
+                                <span class="scale-label-right">PROJECTED</span>
+                              </div>
+                            </div>
+                          </div>
+                        {%- endif -%}
+                        
+                        {%- if roots_value != blank -%}
+                          <div class="scale-item">
+                            <div class="scale-label">Roots</div>
+                            <div class="scale-container">
+                              <div class="scale-line">
+                                <div class="scale-dot" style="left: {{ roots_value | plus: 5 | times: 10 }}%;"></div>
+                              </div>
+                              <div class="scale-labels">
+                                <span class="scale-label-left">NARROW</span>
+                                <span class="scale-label-center">AVERAGE</span>
+                                <span class="scale-label-right">WIDE</span>
+                              </div>
+                            </div>
+                          </div>
+                        {%- endif -%}
+                      </div>
+                    {%- endif -%}
+                  {%- endif -%}
+                </div>
               {%- endcapture -%}
 
               {%- assign icon = block.settings.custom_icon | default: block.settings.icon -%}
