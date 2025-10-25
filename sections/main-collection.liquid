@@ -24,32 +24,71 @@
     --product-list-promo-grid-column: span {{ section.settings.products_per_row_mobile }};
 
     --content-over-media-gap: var(--spacing-8);
+    overflow-x: hidden;
   }
 
   @media screen and (min-width: 700px) {
     #shopify-section-{{ section.id }} {
       --product-list-gap: var(--product-list-row-gap) var(--product-list-column-gap);
-      --product-list-items-per-row: 2;
+      --product-list-items-per-row: 4;
       --product-list-promo-grid-column: span 1;
+    }
+    
+    /* Hide sidebar by default */
+    #shopify-section-{{ section.id }} .collection--filters-sidebar {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    
+    #shopify-section-{{ section.id }} .collection__facets {
+      display: none;
+    }
+    
+    /* Show sidebar when active */
+    #shopify-section-{{ section.id }}.sidebar-active .collection--filters-sidebar {
+      grid-template-columns: var(--collection-sidebar-width) minmax(0, 1fr);
+    }
+    
+    #shopify-section-{{ section.id }}.sidebar-active .collection__facets {
+      display: block;
+    }
+    
+    /* Adjust grid when sidebar is active */
+    #shopify-section-{{ section.id }}.sidebar-active {
+      --product-list-items-per-row: 3;
     }
   }
 
   @media screen and (min-width: 1000px) {
     #shopify-section-{{ section.id }} {
-      --product-list-items-per-row: {% if section.settings.filter_layout == 'sidebar' %}2{% else %}{{ section.settings.products_per_row_desktop | at_most: 3 }}{% endif %};
+      --product-list-items-per-row: 4;
       --product-list-promo-grid-column: span 2;
+    }
+    
+    /* Adjust grid when sidebar is active */
+    #shopify-section-{{ section.id }}.sidebar-active {
+      --product-list-items-per-row: 3;
     }
   }
 
   @media screen and (min-width: 1200px) {
     #shopify-section-{{ section.id }} {
-      --product-list-items-per-row: {% if section.settings.filter_layout == 'sidebar' %}{{ section.settings.products_per_row_desktop | at_most: 3 }}{% else %}{{ section.settings.products_per_row_desktop }}{% endif %};
+      --product-list-items-per-row: 4;
+    }
+    
+    /* Adjust grid when sidebar is active */
+    #shopify-section-{{ section.id }}.sidebar-active {
+      --product-list-items-per-row: 3;
     }
   }
 
   @media screen and (min-width: 1400px) {
     #shopify-section-{{ section.id }} {
-      --product-list-items-per-row: {{ section.settings.products_per_row_desktop }};
+      --product-list-items-per-row: 4;
+    }
+    
+    /* Adjust grid when sidebar is active */
+    #shopify-section-{{ section.id }}.sidebar-active {
+      --product-list-items-per-row: 3;
     }
 
     {%- for block in section.blocks -%}
@@ -63,16 +102,247 @@
     {%- endfor -%}
   }
 
+  {%- comment -%} Collection top bar styling {%- endcomment -%}
+  #shopify-section-{{ section.id }} .collection__top-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  
+  #shopify-section-{{ section.id }} .collection__search {
+    width: 100%;
+  }
+  
+  #shopify-section-{{ section.id }} .search-form {
+    width: 100%;
+  }
+  
+  #shopify-section-{{ section.id }} .search-input-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  #shopify-section-{{ section.id }} .search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: #999;
+    pointer-events: none;
+  }
+  
+  #shopify-section-{{ section.id }} .search-input {
+    width: 100%;
+    padding: 16px 16px 16px 48px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    color: #333;
+  }
+  
+  #shopify-section-{{ section.id }} .search-input::placeholder {
+    color: #999;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+  
+  #shopify-section-{{ section.id }} .search-input:focus {
+    outline: none;
+    border-color: #654392;
+    box-shadow: 0 0 0 2px rgba(101, 67, 146, 0.1);
+  }
+  
+  #shopify-section-{{ section.id }} .search-loading {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e0e0e0;
+    border-top: 2px solid #654392;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+  }
+  
+  @keyframes spin {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+  }
+  
+  #shopify-section-{{ section.id }} .search-clear {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    background: #999;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+  }
+  
+  #shopify-section-{{ section.id }} .search-clear:hover {
+    background: #654392;
+  }
+  
+  #shopify-section-{{ section.id }} .collection__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  #shopify-section-{{ section.id }} .facets-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  #shopify-section-{{ section.id }} .sort-by-facet {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  #shopify-section-{{ section.id }} .sort-by-facet .bold {
+    display: none;
+  }
+  
+  #shopify-section-{{ section.id }} .sort-by-facet button {
+    padding: 12px 16px;
+    border: 1px solid #654392;
+    border-radius: 8px;
+    background: white;
+    color: #654392;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  #shopify-section-{{ section.id }} .sort-by-facet button:hover {
+    background: #654392;
+    color: white;
+  }
+  
+  #shopify-section-{{ section.id }} .popover-listbox__option {
+    border: none !important;
+    background: white !important;
+    color: #654392 !important;
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+    margin: 2px 0 !important;
+  }
+  
+  #shopify-section-{{ section.id }} .popover-listbox__option:hover {
+    background: #654392 !important;
+    color: white !important;
+  }
+  
+  #shopify-section-{{ section.id }} .popover-listbox__option[aria-selected="true"] {
+    background: #654392 !important;
+    color: white !important;
+  }
+  
+  #shopify-section-{{ section.id }} .sort-by-facet .circle-chevron {
+    margin-left: 8px;
+  }
+  
+  #shopify-section-{{ section.id }} #desktop-filter-toggle {
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #EBDCFF;
+    color: #654392;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+  }
+  
+  #shopify-section-{{ section.id }} #desktop-filter-toggle:hover {
+    background: #654392;
+    color: white;
+  }
+  
+  #shopify-section-{{ section.id }} #desktop-filter-toggle .icon-subdued {
+    color: inherit;
+  }
+  
+  /* Hide floating filter completely */
+  #shopify-section-{{ section.id }} .facets__floating-filter {
+    display: none !important;
+  }
+  
+  /* Style all filter text */
+  .facets__label,
+  .facets-summary,
+  .facets-summary *,
+  .checkbox__label,
+  .switch__label,
+  .facets__value,
+  .facets__value * {
+    color: #7E7E7E !important;
+    font-weight: 400 !important;
+  }
+
   {%- comment -%} Custom top filters styling {%- endcomment -%}
   #shopify-section-{{ section.id }} .collection-top-filters {
     display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+    flex-direction: column;
+    gap: 16px;
     margin-bottom: 24px;
-    padding: 16px 20px;
+    padding: 16px 0;
     width: 100%;
     max-width: none;
     background: #ffffff;
+  }
+  
+  #shopify-section-{{ section.id }} .collection-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #161616;
+  }
+  
+  
+  #shopify-section-{{ section.id }} .breadcrumb-separator {
+    color: #161616;
+  }
+  
+  #shopify-section-{{ section.id }} .breadcrumb-current {
+    color: #161616;
+    font-weight: 500;
+  }
+  
+  #shopify-section-{{ section.id }} .collection-title {
+    font-size: 32px;
+    font-weight: 400;
+    color: #654392;
+    margin: 0;
+    font-family: var(--heading-font-family);
   }
 
   #shopify-section-{{ section.id }} .collection-top-filters__group {
@@ -91,16 +361,31 @@
 
   #shopify-section-{{ section.id }} .collection-top-filters__buttons {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 8px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 4px;
+  }
+
+  #shopify-section-{{ section.id }} .collection-top-filters__buttons::-webkit-scrollbar {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .collection-top-filters__buttons::after {
+    content: '';
+    flex-shrink: 0;
+    width: 60px;
   }
 
   #shopify-section-{{ section.id }} .collection-top-filters__button {
     padding: 8px 16px;
-    border: 1px solid #D6D6D6;
+    /* border: 1px solid #D6D6D6; */
     border-radius: 6px;
-    background: white;
-    color: #000000;
+    background: #E0CEF8;
+    color: #FFFFFF;
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
@@ -109,24 +394,27 @@
     font-family: inherit;
     outline: none;
     box-shadow: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    scroll-snap-align: start;
   }
 
-  #shopify-section-{{ section.id }} .collection-top-filters__button:hover {
+  /* #shopify-section-{{ section.id }} .collection-top-filters__button:hover {
     background: #F8F8F8;
     border-color: #B0B0B0;
-  }
+  } */
 
   #shopify-section-{{ section.id }} .collection-top-filters__button.active {
-    background: #6B4C9A;
+    background: #CCA7FC;
     color: white;
-    border-color: #6B4C9A;
+    /* border-color: #6B4C9A; */
   }
 
   @media screen and (max-width: 699px) {
     #shopify-section-{{ section.id }} .collection-top-filters {
       gap: 8px;
       margin-bottom: 16px;
-      padding: 12px 16px;
+      /* padding: 12px 16px; */
     }
     
     #shopify-section-{{ section.id }} .collection-top-filters__group {
@@ -142,8 +430,8 @@
     }
     
     #shopify-section-{{ section.id }} .collection-top-filters__button {
-      padding: 6px 12px;
-      font-size: 12px;
+      padding: 8px 12px;
+      font-size: 14px;
     }
   }
 </style>
@@ -162,19 +450,33 @@
   </div>
   {%- endcomment -%}
   
-  <div class="collection-top-filters">
+  <div class="collection-top-filters container">
+    {%- comment -%} Breadcrumb {%- endcomment -%}
+    <nav class="collection-breadcrumb">
+      <span>Collection</span>
+      <span class="breadcrumb-separator">/</span>
+      <span>{{ collection.title }}</span>
+      <span class="breadcrumb-separator">/</span>
+      <span class="breadcrumb-current">All</span>
+    </nav>
+    
+    {%- comment -%} Collection Title {%- endcomment -%}
+    <h1 class="collection-title">{{ collection.title }}</h1>
+    
     {%- case filter_type -%}
       {%- when 'style' -%}
         {%- comment -%} Find the Style filter and display its values {%- endcomment -%}
         {%- for filter in collection.filters -%}
           {%- assign filter_label_downcase = filter.label | downcase -%}
           {%- if filter_label_downcase contains 'style' -%}
-            {%- for filter_value in filter.values -%}
-              <button type="button" class="collection-top-filters__button {% if filter_value.active %}active{% endif %}" 
-                      data-filter-label-value="{{ filter_value.value }}">
-                {{ filter_value.label }}
-              </button>
-            {%- endfor -%}
+            <div class="collection-top-filters__buttons">
+              {%- for filter_value in filter.values -%}
+                <button type="button" class="collection-top-filters__button {% if filter_value.active %}active{% endif %}" 
+                        data-filter-label-value="{{ filter_value.value }}">
+                  {{ filter_value.label }}
+                </button>
+              {%- endfor -%}
+            </div>
             {%- break -%}
           {%- endif -%}
         {%- endfor -%}
@@ -223,12 +525,14 @@
         {%- for filter in collection.filters -%}
           {%- assign filter_label_downcase = filter.label | downcase -%}
           {%- if filter_label_downcase contains 'feature' -%}
-            {%- for filter_value in filter.values -%}
-              <button type="button" class="collection-top-filters__button {% if filter_value.active %}active{% endif %}" 
-                      data-filter-label-value="{{ filter_value.value }}">
-                {{ filter_value.label }}
-              </button>
-            {%- endfor -%}
+            <div class="collection-top-filters__buttons">
+              {%- for filter_value in filter.values -%}
+                <button type="button" class="collection-top-filters__button {% if filter_value.active %}active{% endif %}" 
+                        data-filter-label-value="{{ filter_value.value }}">
+                  {{ filter_value.label }}
+                </button>
+              {%- endfor -%}
+            </div>
             {%- break -%}
           {%- endif -%}
         {%- endfor -%}
@@ -317,7 +621,7 @@
               <div class="v-stack gap-4 md:hidden">
                 {%- comment -%}We have to duplicate some information on mobile and tablet here{%- endcomment -%}
                 <p class="text-center">{{ 'collection.products_count' | t: count: collection.products_count }}</p>
-                {%- render 'active-facets', results: collection -%}
+                {% comment %} {%- render 'active-facets', results: collection -%} {% endcomment %}
               </div>
 
               <reveal-items selector=".product-list > *">
@@ -413,8 +717,266 @@
 
         {%- render 'pagination', paginate: paginate, facet: true, class: 'collection__pagination' -%}
       </div>
-    {%- endpaginate -%}
-  {%- endif -%}
+{%- endpaginate -%}
+{%- endif -%}
+
+<script>
+function initializeFilterToggle() {
+  const section = document.getElementById('shopify-section-{{ section.id }}');
+  if (!section) return;
+  
+  const filterButton = section.querySelector('#desktop-filter-toggle');
+  
+  if (filterButton) {
+    filterButton.onclick = function() {
+      // On mobile, trigger the floating filter button (drawer)
+      if (window.innerWidth < 700) {
+        const floatingButton = document.querySelector('.facets__floating-filter button');
+        if (floatingButton) {
+          floatingButton.click();
+        }
+      } else {
+        // On desktop, toggle the sidebar
+        const section = document.getElementById('shopify-section-{{ section.id }}');
+        if (section) {
+          section.classList.toggle('sidebar-active');
+        }
+      }
+    };
+  }
+}
+
+function initializeSearch() {
+  const section = document.getElementById('shopify-section-{{ section.id }}');
+  if (!section) return;
+  
+  const searchForm = section.querySelector('.search-form');
+  const searchInput = section.querySelector('.search-input');
+  const searchClear = section.querySelector('.search-clear');
+  const searchLoading = section.querySelector('.search-loading');
+  
+  if (searchForm && searchInput) {
+    // Remove any existing listeners to prevent duplicates
+    searchForm.removeEventListener('submit', handleSearchSubmit);
+    searchInput.removeEventListener('input', handleSearchInput);
+    if (searchClear) {
+      searchClear.removeEventListener('click', handleSearchClear);
+    }
+    
+    // Add form submit handler
+    searchForm.addEventListener('submit', handleSearchSubmit);
+    
+    // Add input handler for live search
+    searchInput.addEventListener('input', handleSearchInput);
+    
+    // Add clear button handler
+    if (searchClear) {
+      searchClear.addEventListener('click', handleSearchClear);
+    }
+    
+    // Update UI based on current search state
+    updateSearchUI(searchInput, searchClear, searchLoading);
+  }
+}
+
+function handleSearchClear() {
+  const section = document.getElementById('shopify-section-{{ section.id }}');
+  const searchInput = section?.querySelector('.search-input');
+  
+  if (searchInput) {
+    searchInput.value = '';
+    searchInput.focus();
+    performSearch(''); // Clear search results
+  }
+}
+
+function updateSearchUI(searchInput, searchClear, searchLoading) {
+  const hasValue = searchInput.value.trim().length > 0;
+  
+  if (searchClear) {
+    searchClear.style.display = hasValue ? 'flex' : 'none';
+  }
+  
+  if (searchLoading) {
+    searchLoading.style.display = 'none';
+  }
+}
+
+let searchTimeout;
+
+function handleSearchSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const searchTerm = form.querySelector('.search-input').value.trim();
+  
+  if (searchTerm) {
+    performSearch(searchTerm);
+  }
+}
+
+function handleSearchInput(e) {
+  const searchTerm = e.target.value.trim();
+  const section = document.getElementById('shopify-section-{{ section.id }}');
+  const searchClear = section?.querySelector('.search-clear');
+  const searchLoading = section?.querySelector('.search-loading');
+  
+  // Update UI immediately
+  updateSearchUI(e.target, searchClear, searchLoading);
+  
+  // Clear existing timeout
+  clearTimeout(searchTimeout);
+  
+  // Debounce search to avoid too many requests
+  searchTimeout = setTimeout(() => {
+    if (searchTerm.length >= 2 || searchTerm.length === 0) {
+      performSearch(searchTerm);
+    }
+  }, 300);
+}
+
+function performSearch(searchTerm) {
+  const section = document.getElementById('shopify-section-{{ section.id }}');
+  const productList = section?.querySelector('.product-list');
+  const emptyState = section?.querySelector('.empty-state');
+  const searchLoading = section?.querySelector('.search-loading');
+  
+  if (!productList) return;
+  
+  // Show loading state
+  productList.style.opacity = '0.5';
+  if (searchLoading) {
+    searchLoading.style.display = 'block';
+  }
+  
+  // Build search URL with current collection and search term
+  const currentUrl = new URL(window.location);
+  const searchUrl = new URL('/search', window.location.origin);
+  
+  // Preserve current collection context
+  if (currentUrl.pathname.includes('/collections/')) {
+    searchUrl.searchParams.set('type', 'product');
+    searchUrl.searchParams.set('options[unavailable_products]', 'last');
+    searchUrl.searchParams.set('options[prefix]', 'last');
+  }
+  
+  // Add search term
+  if (searchTerm) {
+    searchUrl.searchParams.set('q', searchTerm);
+  }
+  
+  // Fetch search results
+  fetch(searchUrl.toString())
+    .then(response => response.text())
+    .then(html => {
+      // Parse the response HTML
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      
+      // Extract product list from search results
+      const searchProductList = doc.querySelector('.product-list');
+      const searchEmptyState = doc.querySelector('.empty-state');
+      
+      if (searchProductList) {
+        // Replace current product list with search results
+        productList.innerHTML = searchProductList.innerHTML;
+        
+        // Update product count if available
+        const productCount = doc.querySelector('.collection__results .text-center');
+        if (productCount) {
+          const currentCount = section.querySelector('.collection__results .text-center');
+          if (currentCount) {
+            currentCount.textContent = productCount.textContent;
+          }
+        }
+        
+        // Hide empty state if it exists
+        if (emptyState) {
+          emptyState.style.display = 'none';
+        }
+      } else if (searchEmptyState) {
+        // Show empty state for no results
+        productList.innerHTML = '';
+        if (emptyState) {
+          emptyState.style.display = 'block';
+          emptyState.innerHTML = searchEmptyState.innerHTML;
+        }
+      }
+      
+      // Hide loading state
+      productList.style.opacity = '1';
+      if (searchLoading) {
+        searchLoading.style.display = 'none';
+      }
+      
+      // Trigger any necessary re-initializations
+      initializeFilterToggle();
+      
+      // Dispatch custom event for other components
+      document.dispatchEvent(new CustomEvent('search:completed', {
+        detail: { searchTerm: searchTerm }
+      }));
+    })
+    .catch(error => {
+      console.error('Search error:', error);
+      productList.style.opacity = '1';
+      if (searchLoading) {
+        searchLoading.style.display = 'none';
+      }
+    });
+}
+
+function handleFilterToggle() {
+  const section = document.getElementById('shopify-section-{{ section.id }}');
+  if (section) {
+    section.classList.toggle('sidebar-active');
+  }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+  initializeFilterToggle();
+  initializeSearch();
+});
+
+// Re-initialize after AJAX updates
+document.addEventListener('shopify:section:load', function(event) {
+  if (event.detail.sectionId === '{{ section.id }}') {
+    initializeFilterToggle();
+    initializeSearch();
+  }
+});
+
+// Re-initialize after section reorder
+document.addEventListener('shopify:section:reorder', function(event) {
+  if (event.detail.sectionId === '{{ section.id }}') {
+    initializeFilterToggle();
+    initializeSearch();
+  }
+});
+
+// Re-initialize after facet changes (when filters are applied)
+document.addEventListener('facet:changed', function() {
+  initializeFilterToggle();
+  initializeSearch();
+});
+
+// Fallback: re-initialize periodically for aggressive AJAX updates
+setInterval(function() {
+  const section = document.getElementById('shopify-section-{{ section.id }}');
+  const filterButton = section?.querySelector('#desktop-filter-toggle');
+  const searchForm = section?.querySelector('.search-form');
+  
+  if (filterButton && !filterButton.hasAttribute('data-listener-attached')) {
+    filterButton.setAttribute('data-listener-attached', 'true');
+    initializeFilterToggle();
+  }
+  
+  if (searchForm && !searchForm.hasAttribute('data-listener-attached')) {
+    searchForm.setAttribute('data-listener-attached', 'true');
+    initializeSearch();
+  }
+}, 1000);
+</script>
 </div>
 
 {% schema %}

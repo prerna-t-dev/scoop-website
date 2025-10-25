@@ -133,16 +133,6 @@
     "accordion_content_jRzxt6": {
       "type": "accordion-content",
       "blocks": {
-        "item_xEUaT4": {
-          "type": "item",
-          "settings": {
-            "icon": "none",
-            "icon_width": 20,
-            "title": "Fit Recommendations",
-            "content": "<p>{{ product.metafields.custom.fit_recommendation_text.value }}</p><p>{{ product.metafields.custom.fit_recommendations_spacing.value }}</p><p>{{ product.metafields.custom.fit_recommendations_projection.value }}</p><p>{{ product.metafields.custom.fit_recommendations_roots.value }}</p>",
-            "page": ""
-          }
-        },
         "item_xpLiKw": {
           "type": "item",
           "settings": {
@@ -165,7 +155,6 @@
         }
       },
       "block_order": [
-        "item_xEUaT4",
         "item_xpLiKw",
         "item_3Tq3V7"
       ],
@@ -240,128 +229,6 @@
         "border_radius": 24,
         "padding_mobile": 40,
         "padding_desktop": 80
-      }
-    },
-    "comparison_table_iPAUWF": {
-      "type": "comparison-table",
-      "blocks": {
-        "headings_4iWhVV": {
-          "type": "headings",
-          "settings": {
-            "heading_1": "Size Range Focus",
-            "heading_2": "Design Focus",
-            "heading_3": "Fitting Help",
-            "heading_4": "Construction",
-            "heading_5": "",
-            "heading_6": "",
-            "heading_7": "",
-            "heading_8": "",
-            "heading_9": "",
-            "heading_10": "",
-            "heading_11": "",
-            "heading_12": "",
-            "heading_13": "",
-            "heading_14": "",
-            "heading_15": "",
-            "heading_16": "",
-            "heading_17": "",
-            "heading_18": "",
-            "heading_19": "",
-            "heading_20": ""
-          }
-        },
-        "values_a6LbHL": {
-          "type": "values",
-          "settings": {
-            "product": "",
-            "value_1": "<p>Extended (D-K) Cups</p>",
-            "value_2": "<p>Celebrates styles and colours</p>",
-            "value_3": "<p>Expert Consultations</p>",
-            "value_4": "<p>Optimised for support and coverage</p>",
-            "value_5": "",
-            "value_6": "",
-            "value_7": "",
-            "value_8": "",
-            "value_9": "",
-            "value_10": "",
-            "value_11": "",
-            "value_12": "",
-            "value_13": "",
-            "value_14": "",
-            "value_15": "",
-            "value_16": "",
-            "value_17": "",
-            "value_18": "",
-            "value_19": "",
-            "value_20": "",
-            "view_button_background": "",
-            "view_button_text_color": ""
-          }
-        },
-        "values_gGEdN4": {
-          "type": "values",
-          "settings": {
-            "product": "",
-            "value_1": "<p>Stops at D or DD</p>",
-            "value_2": "<p>Limited choice in larger sizes</p>",
-            "value_3": "<p>Size chart only</p>",
-            "value_4": "<p>One pattern fits all</p>",
-            "value_5": "",
-            "value_6": "",
-            "value_7": "",
-            "value_8": "",
-            "value_9": "",
-            "value_10": "",
-            "value_11": "",
-            "value_12": "",
-            "value_13": "",
-            "value_14": "",
-            "value_15": "",
-            "value_16": "",
-            "value_17": "",
-            "value_18": "",
-            "value_19": "",
-            "value_20": "",
-            "view_button_background": "",
-            "view_button_text_color": ""
-          }
-        }
-      },
-      "block_order": [
-        "headings_4iWhVV",
-        "values_a6LbHL",
-        "values_gGEdN4"
-      ],
-      "name": "Comparison table",
-      "settings": {
-        "full_width": true,
-        "subheading": "",
-        "title": "The Scoop Difference",
-        "content": "",
-        "button_text": "",
-        "button_url": "",
-        "scoop_image": "shopify://shop_images/Logo_6e04e44a-b152-43cd-9c24-c1efe26dc568.svg",
-        "scoop_header": "Scoop",
-        "others_header": "Others",
-        "text_position": "start",
-        "max_rows": 5,
-        "view_all_text": "View all",
-        "view_less_text": "View less",
-        "view_product": "View",
-        "show_product_info": false,
-        "show_product_image": false,
-        "show_product_swatch": false,
-        "viewing_product": "",
-        "background": "rgba(0,0,0,0)",
-        "background_gradient": "",
-        "text_color": "",
-        "heading_color": "",
-        "heading_gradient": "",
-        "button_background": "",
-        "button_text_color": "",
-        "chart_background": "",
-        "chart_text_color": "",
-        "chart_true_false_color": ""
       }
     },
     "customer_ugc_YNdAHn": {
@@ -483,7 +350,6 @@
     "accordion_content_jRzxt6",
     "pairs_well_with_enGdXb",
     "info_card_CpBXb8",
-    "comparison_table_iPAUWF",
     "customer_ugc_YNdAHn",
     "faq_two_column_qTXqwf",
     "related-products"

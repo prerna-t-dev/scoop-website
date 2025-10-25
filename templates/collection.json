@@ -124,13 +124,13 @@
       "settings": {
         "products_per_page": 24,
         "products_per_row_mobile": "2",
-        "products_per_row_desktop": 4,
+        "products_per_row_desktop": 3,
         "filter_layout": "sidebar",
         "show_sort_by": true,
         "show_filters": true,
         "show_filter_group_name": true,
         "show_filter_values_count": true,
-        "open_first_filter_group": false
+        "open_first_filter_group": true
       }
     },
     "image_with_text_fbX7dj": {
@@ -218,6 +218,37 @@
         "text_gradient": ""
       }
     },
+    "related_products_J3YLWD": {
+      "type": "related-products",
+      "name": "Related products",
+      "settings": {
+        "recommendations_count": 6,
+        "products": [
+          "smoothie-spacer-tshirt-bra-copy",
+          "frida-brief",
+          "frida-full-cup",
+          "lovelace-brazillian-brief",
+          "lovelace-full-cup",
+          "luxe-strapless",
+          "lovelace-full-cup-bra"
+        ],
+        "full_width": true,
+        "stack_products": false,
+        "show_progress_bar": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "Best Sellers",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
+    },
     "faq_two_column_qaT99e": {
       "type": "faq-two-column",
       "blocks": {
@@ -271,6 +302,7 @@
     "main",
     "image_with_text_fbX7dj",
     "scrolling_text_KeNXnt",
+    "related_products_J3YLWD",
     "faq_two_column_qaT99e"
   ]
 }

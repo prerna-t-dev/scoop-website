@@ -22,6 +22,12 @@ Supported variables
 {%- assign size_label_list = 'general.label.size' | t | replace: ', ', ',' | downcase | split: ',' -%}
 {%- assign variant_image_options = block.settings.variant_image_options | replace: ', ', ',' | downcase | split: ',' -%}
 
+{%- comment -%} Check if this is an underwear product {%- endcomment -%}
+{%- assign is_underwear = false -%}
+{%- if product.template_suffix == 'underwear' or product.type == 'Underwear' -%}
+  {%- assign is_underwear = true -%}
+{%- endif -%}
+
 {%- unless product.has_only_default_variant -%}
   <variant-picker class="variant-picker" section-id="{{ section.id }}" handle="{{ product.handle }}" form-id="{{ form_id }}" {% if update_url %}update-url{% endif %}>
     {%- comment -%}
@@ -83,6 +89,61 @@ Supported variables
           {%- endif -%}
         </div>
 
+        {%- comment -%} Special handling for Size option in underwear products {%- endcomment -%}
+        {%- if is_underwear and option_downcase == 'size' -%}
+          {%- comment -%} Get UK size mappings {%- endcomment -%}
+          {%- assign uk_mappings = shop.metaobjects.uk_size_mapping.values -%}
+          
+          <div class="underwear-size-tabs">
+            <div class="size-tab-headers">
+              <button type="button" class="size-tab-header size-tab-header--active" data-tab="scoop">
+                SCOOP
+              </button>
+              <button type="button" class="size-tab-header" data-tab="uk">
+                UK
+              </button>
+            </div>
+            
+            <div class="size-tab-content">
+              <div class="size-tab-panel size-tab-panel--active" data-tab="scoop">
+                <div class="variant-picker__option-values gap-4">
+                  {%- assign name = form_id | append: '-option' | append: option.position -%}
+                  {%- for option_value in option.values -%}
+                    {%- render 'option-value', type: 'block', form: form_id, option_value: option_value, param_name: name, option_position: option.position, hide_if_disabled: hide_sold_out_variants, reload_page_for_combined_products: update_url, id_prefix: forloop.index -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+              
+              <div class="size-tab-panel" data-tab="uk">
+                <div class="variant-picker__option-values gap-4">
+                  {%- comment -%} Loop through SCOOP sizes in order and find corresponding UK sizes {%- endcomment -%}
+                  {%- for option_value in option.values -%}
+                    {%- assign scoop_size = option_value.name -%}
+                    {%- assign corresponding_uk_size = blank -%}
+                    {%- comment -%} Find the corresponding UK size for this SCOOP size {%- endcomment -%}
+                    {%- for mapping in uk_mappings -%}
+                      {%- if mapping.size == scoop_size -%}
+                        {%- assign corresponding_uk_size = mapping.uk_size -%}
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    
+                    {%- if corresponding_uk_size != blank -%}
+                      <button type="button" class="uk-size-option block-swatch" 
+                              data-scoop-size="{{ scoop_size }}"
+                              data-uk-size="{{ corresponding_uk_size }}"
+                              data-option-value-id="{{ option_value.id }}"
+                              {% if option_value.selected %}data-selected="true"{% endif %}>
+                        <span>{{ corresponding_uk_size }}</span>
+                      </button>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- else -%}
+
         {%- if resolved_option_selector_style == 'dropdown' -%}
           {%- capture popover_id -%}popover-variant-picker-{{ section.id }}-{{ product.id }}-{{ option.position }}{%- endcapture -%}
 
@@ -142,7 +203,153 @@ Supported variables
             </div>
           </div>
         {%- endif -%}
+        {%- endif -%}
       </fieldset>
     {%- endfor -%}
   </variant-picker>
+
+  {%- comment -%} JavaScript for underwear size tabs {%- endcomment -%}
+  {%- if is_underwear -%}
+  <script>
+    // Function to initialize underwear size tabs
+    function initializeUnderwearSizeTabs() {
+      const sizeTabs = document.querySelectorAll('.underwear-size-tabs');
+      
+      sizeTabs.forEach(function(tabContainer) {
+        // Skip if already initialized
+        if (tabContainer.dataset.initialized === 'true') {
+          return;
+        }
+        
+        const headers = tabContainer.querySelectorAll('.size-tab-header');
+        const panels = tabContainer.querySelectorAll('.size-tab-panel');
+        const ukSizeOptions = tabContainer.querySelectorAll('.uk-size-option');
+        
+        // Tab switching functionality
+        headers.forEach(function(header) {
+          header.addEventListener('click', function() {
+            const targetTab = this.getAttribute('data-tab');
+            
+            // Update active header
+            headers.forEach(h => h.classList.remove('size-tab-header--active'));
+            this.classList.add('size-tab-header--active');
+            
+            // Update active panel
+            panels.forEach(p => {
+              p.classList.remove('size-tab-panel--active');
+              p.style.display = 'none';
+            });
+            
+            const targetPanel = tabContainer.querySelector(`.size-tab-panel[data-tab="${targetTab}"]`);
+            if (targetPanel) {
+              targetPanel.classList.add('size-tab-panel--active');
+              targetPanel.style.display = 'block';
+            }
+          });
+        });
+        
+           // UK size option click handling
+           ukSizeOptions.forEach(function(option) {
+             option.addEventListener('click', function(e) {
+               // Prevent tab switching - only handle size selection
+               e.stopPropagation();
+               e.preventDefault();
+               
+               const optionValueId = this.getAttribute('data-option-value-id');
+               const scoopSize = this.getAttribute('data-scoop-size');
+               
+               // Temporarily disable all tab header clicks
+               headers.forEach(function(header) {
+                 header.style.pointerEvents = 'none';
+               });
+               
+               // Find the corresponding SCOOP size option
+               const scoopOption = tabContainer.querySelector(`input[value="${optionValueId}"]`);
+               
+               if (scoopOption) {
+                 // Try a different approach - find the label and click it instead
+                 const scoopLabel = tabContainer.querySelector(`label[for="${scoopOption.id}"]`);
+                 
+                 if (scoopLabel) {
+                   // Click the label instead of the input
+                   scoopLabel.click();
+                 } else {
+                   // Fallback to direct state change
+                   scoopOption.checked = true;
+                   const changeEvent = new Event('change', { bubbles: true });
+                   scoopOption.dispatchEvent(changeEvent);
+                 }
+               }
+               
+               // Re-enable tab header clicks after a delay
+               setTimeout(function() {
+                 headers.forEach(function(header) {
+                   header.style.pointerEvents = 'auto';
+                 });
+               }, 200);
+               
+               // Update visual state
+               ukSizeOptions.forEach(opt => opt.classList.remove('selected'));
+               this.classList.add('selected');
+             });
+           });
+        
+        // Sync UK sizes when SCOOP sizes change
+        const scoopOptions = tabContainer.querySelectorAll('input[type="radio"]');
+        scoopOptions.forEach(function(option) {
+          option.addEventListener('change', function() {
+            if (this.checked) {
+              const optionValueId = this.value;
+              const correspondingUkOption = tabContainer.querySelector(`[data-option-value-id="${optionValueId}"]`);
+              
+              if (correspondingUkOption) {
+                ukSizeOptions.forEach(opt => opt.classList.remove('selected'));
+                correspondingUkOption.classList.add('selected');
+              }
+            }
+          });
+        });
+        
+        // Initialize selected state
+        const selectedScoopOption = tabContainer.querySelector('input[type="radio"]:checked');
+        if (selectedScoopOption) {
+          const optionValueId = selectedScoopOption.value;
+          const correspondingUkOption = tabContainer.querySelector(`[data-option-value-id="${optionValueId}"]`);
+          if (correspondingUkOption) {
+            correspondingUkOption.classList.add('selected');
+          }
+        }
+        
+        // Ensure initial panel visibility
+        const activePanel = tabContainer.querySelector('.size-tab-panel--active');
+        if (activePanel) {
+          activePanel.style.display = 'block';
+        }
+        
+        // Mark as initialized
+        tabContainer.dataset.initialized = 'true';
+      });
+    }
+    
+    // Initialize on DOM ready
+    document.addEventListener('DOMContentLoaded', initializeUnderwearSizeTabs);
+    
+    // Re-initialize on AJAX content updates
+    document.addEventListener('shopify:section:load', initializeUnderwearSizeTabs);
+    document.addEventListener('shopify:section:reorder', initializeUnderwearSizeTabs);
+    
+    // Also listen for custom events that might indicate content updates
+    document.addEventListener('variant:change', function() {
+      setTimeout(initializeUnderwearSizeTabs, 100);
+    });
+    
+    // Fallback: periodically check for new tabs (for aggressive AJAX)
+    setInterval(function() {
+      const uninitializedTabs = document.querySelectorAll('.underwear-size-tabs:not([data-initialized="true"])');
+      if (uninitializedTabs.length > 0) {
+        initializeUnderwearSizeTabs();
+      }
+    }, 1000);
+  </script>
+  {%- endif -%}
 {%- endunless -%}
