@@ -27,13 +27,14 @@ Supported variables
 %}
 
 <line-item class="line-item">
-  {%- if line_item.image != blank -%}
-    <div class="line-item__media-wrapper">
+  <div class="line-item__media-wrapper">
+    {%- if line_item.image != blank -%}
       {{- line_item.image | image_url: width: line_item.image.width | image_tag: loading: 'lazy', sizes: '(max-width: 740px) 80px, 96px', widths: '80,96,160,192', class: 'line-item__media rounded-xs' -}}
-
       <pill-loader class="pill-loader"></pill-loader>
-    </div>
-  {%- endif -%}
+    {%- else -%}
+      <div class="line-item__media line-item__media--placeholder rounded-xs"></div>
+    {%- endif -%}
+  </div>
 
   <div class="line-item__info">
     <div class="v-stack gap-0.5">

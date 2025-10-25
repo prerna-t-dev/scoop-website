@@ -46,7 +46,7 @@
             "text_color": "#654392",
             "pattern_image": "shopify://shop_images/Frame_1000003927_2.png",
             "text": "New\nArrivals",
-            "link_url": ""
+            "link_url": "shopify://collections/bestsellers"
           }
         },
         "category_VLw3qP": {
@@ -56,7 +56,7 @@
             "text_color": "#654392",
             "pattern_image": "shopify://shop_images/Frame_1000003928.png",
             "text": "By\nSize",
-            "link_url": ""
+            "link_url": "shopify://collections/by-size"
           }
         },
         "category_HmteRp": {
@@ -66,7 +66,7 @@
             "text_color": "#654392",
             "pattern_image": "shopify://shop_images/Frame_1000003929.png",
             "text": "By\nStyle",
-            "link_url": ""
+            "link_url": "shopify://collections/by-style"
           }
         },
         "category_bzwgwa": {
@@ -76,7 +76,7 @@
             "text_color": "#654392",
             "pattern_image": "shopify://shop_images/Frame_1000003927_2.png",
             "text": "By\nFeature",
-            "link_url": ""
+            "link_url": "shopify://collections/by-feature"
           }
         },
         "category_mKApXP": {
@@ -86,7 +86,7 @@
             "text_color": "#654392",
             "pattern_image": "shopify://shop_images/Frame_1000003928.png",
             "text": "Sale",
-            "link_url": ""
+            "link_url": "shopify://collections/sale"
           }
         },
         "category_fU6era": {
@@ -96,7 +96,7 @@
             "text_color": "#654392",
             "pattern_image": "shopify://shop_images/Frame_1000003929.png",
             "text": "Gifting",
-            "link_url": ""
+            "link_url": "shopify://collections/gifting"
           }
         }
       },

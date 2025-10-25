@@ -20,53 +20,94 @@ Supported variables
 {%- capture class -%}horizontal-product {% if size == 'sm' %}horizontal-product--sm{% endif %} {% if background != 'rgba(0,0,0,0)' %}rounded-xs{% endif %} snap-start{%- endcapture -%}
 
 <div {% render 'surface', class: class, background: background, text_color: text_color %} data-product-handle="{{ product.handle }}">
+  {%- comment -%} Product Image {%- endcomment -%}
   {%- if product.featured_media != blank -%}
-    <a href="{{ product.url }}">
-      {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', sizes: '(max-width: 740px) 64px, 80px', widths: '64,128,80,160', class: 'horizontal-product__image rounded-xs' -}}
+    <a class="horizontal-product__image-wrapper" href="{{ product.url }}">
+      {{- product.featured_media | image_url: width: 300 | image_tag: class: 'horizontal-product__image', loading: 'lazy' -}}
     </a>
+  {%- else -%}
+    <div class="horizontal-product__image-wrapper horizontal-product__image-placeholder">
+      <div class="horizontal-product__image-empty"></div>
+    </div>
   {%- endif -%}
 
-  <div class="horizontal-product__info">
-    <div class="v-stack gap-0.5">
+  {%- comment -%} Product Content {%- endcomment -%}
+  <div class="horizontal-product__content">
+    <div>
+      {%- comment -%} Product Title {%- endcomment -%}
       {%- if output_link == false -%}
-        <span class="text-sm bold">{{ product.title }}</span>
+        <span class="horizontal-product__title">{{ product.title }}</span>
       {%- else -%}
-        <a href="{{ product.url }}" data-instant class="text-sm bold">
-          <span class="reversed-link hover:show">{{ product.title }}</span>
+        <a href="{{ product.url }}" class="horizontal-product__title">
+          {{ product.title }}
         </a>
       {%- endif -%}
+      
+      {%- comment -%} Price and Color Swatches Container {%- endcomment -%}
+      <div class="horizontal-product__price-swatches-container">
+        <div class="horizontal-product__price">
+          {%- render 'price-list', product: product, variant: product.selected_or_first_available_variant -%}
+        </div>
 
-      {%- render 'price-list', product: product, size: 'sm' -%}
-    </div>
-
-    {%- if show_add_to_cart -%}
-      <div class="horizontal-product__cta">
-        {%- if product.available -%}
-          {%- capture unique_id -%}{{ section.id }}-{{ block.id }}-{{ product.id }}{%- endcapture -%}
-          {%- capture button_content -%}{{ 'product.general.add_to_cart_short' | t }}{%- endcapture -%}
-
-          {%- if product.variants.size == 1 and product.selling_plan_groups.size == 0 -%}
-            {%- capture product_form_id -%}complementary-product-{{ unique_id }}{%- endcapture -%}
-
-            {%- form 'product', product, id: product_form_id, is: 'product-form' -%}
-              <input type="hidden" name="quantity" value="1">
-              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-              {%- render 'button', content: button_content, type: 'submit', size: 'sm', subdued: true -%}
-            {%- endform -%}
-          {%- else -%}
-            {%- capture quick_buy_id -%}quick-buy-horizontal-{{ section.id }}-{{ product.id }}{%- endcapture -%}
-
-            {%- render 'button', content: button_content, size: 'sm', subdued: true, aria_controls: quick_buy_id -%}
-
-            <quick-buy-drawer id="{{ quick_buy_id }}" header-bordered open-from="bottom" handle="{{ product.handle }}?variant={{ product.selected_or_first_available_variant.id }}" role="region" aria-live="polite" class="quick-buy-drawer drawer">
-              {%- comment -%}Quick buy content is filled on demand for performance reasons {%- endcomment -%}
-            </quick-buy-drawer>
+        {%- comment -%} Color swatches - use same logic as pairs-well-with {%- endcomment -%}
+        {%- assign color_label_list = 'general.label.color' | t | replace: ', ', ',' | downcase | split: ',' -%}
+        {%- assign color_option = blank -%}
+        
+        {%- for option in product.options_with_values -%}
+          {%- assign option_downcase = option.name | downcase -%}
+          {%- if color_label_list contains option_downcase -%}
+            {%- assign color_option = option -%}
+            {%- break -%}
           {%- endif -%}
-        {%- else -%}
-          {%- capture button_content -%}{{ 'product.general.sold_out_button' | t }}{%- endcapture -%}
-          {%- render 'button', content: button_content, size: 'sm', disabled: true, subdued: true -%}
+        {%- endfor -%}
+        
+        {%- if color_option != blank and color_option.values.size > 0 -%}
+          <div class="horizontal-product__color-swatches"> 
+            {%- for color_value in color_option.values limit: 3 -%}
+              {%- assign color_variant = blank -%}
+              {%- for variant in product.variants -%}
+                {%- assign option_position = color_option.position | minus: 1 -%}
+                {%- if variant.options[option_position] == color_value.name -%}
+                  {%- assign color_variant = variant -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if color_variant != blank -%}
+                {%- comment -%} Get the actual color value from swatch config {%- endcomment -%}
+                {%- assign color_name_downcase = color_value.name | downcase -%}
+                {%- assign swatch_color = color_name_downcase -%}
+                {%- assign swatch_config = settings.color_swatch_config | newline_to_br | split: '<br />' -%}
+                {%- for swatch_item in swatch_config -%}
+                  {%- assign swatch_parts = swatch_item | split: ':' -%}
+                  {%- assign swatch_name = swatch_parts.first | downcase | strip -%}
+                  {%- if swatch_name == color_name_downcase -%}
+                    {%- assign swatch_value = swatch_parts.last | strip -%}
+                    {%- if swatch_value contains '#' -%}
+                      {%- assign swatch_color = swatch_value -%}
+                    {%- elsif swatch_value contains 'linear-gradient(' -%}
+                      {%- assign swatch_color = swatch_value -%}
+                    {%- endif -%}
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+                
+                <a href="{{ color_variant.url }}" class="horizontal-product__color-swatch--small-svg" title="{{ color_value.name }}">
+                  <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12.75 10.0645C12.75 12.0374 11.1537 13.6365 9.18555 13.6367C8.21946 13.6367 7.34351 13.2516 6.70117 12.626L6.52637 12.4561L6.35156 12.626C5.70923 13.2515 4.83326 13.6367 3.86719 13.6367C1.89905 13.6365 0.302734 12.0374 0.302734 10.0645C0.302852 9.08953 0.693038 8.20617 1.3252 7.56152L1.49609 7.38672L1.3252 7.21191C0.693038 6.56727 0.302851 5.68391 0.302734 4.70898C0.302734 2.73603 1.89905 1.13696 3.86719 1.13672C4.83327 1.13672 5.70923 1.5219 6.35156 2.14746L6.52637 2.31738L6.70117 2.14746C7.3435 1.52189 8.21946 1.13672 9.18555 1.13672C11.1537 1.1369 12.75 2.736 12.75 4.70898C12.7499 5.68386 12.3606 6.56728 11.7285 7.21191L11.5566 7.38672L11.7285 7.56152C12.3606 8.20615 12.7499 9.08958 12.75 10.0645Z" fill="{{ swatch_color }}" stroke="black" stroke-width="0.5"/>
+                  </svg>
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
         {%- endif -%}
       </div>
+    </div>
+
+    {%- comment -%} Add to Cart Button {%- endcomment -%}
+    {%- if show_add_to_cart -%}
+      <button class="horizontal-product__add-to-cart-btn" onclick="window.location.href='{{ product.url }}'">
+        ADD TO CART
+      </button>
     {%- endif -%}
   </div>
 </div>
