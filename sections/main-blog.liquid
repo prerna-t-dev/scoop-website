@@ -32,18 +32,50 @@
       </div>
     </div>
   {%- else -%}
-    <header {% render 'surface', class: 'blog-banner', text_color: section.settings.banner_text_color, background: section.settings.banner_background, background_fallback: 'bg-secondary' %}>
-      <div class="container">
-        <div class="blog-banner-content v-stack gap-10 text-center justify-items-center">
-          <div class="v-stack gap-5 sm:gap-8">
-            <h1 class="h0">{{- blog.title -}}</h1>
+    <header class="blog-banner">
+      {%- comment -%} Split Image Hero Section {%- endcomment -%}
+      <div class="blog-banner__hero">
+        {%- comment -%} Left Purple Graphic Panel {%- endcomment -%}
+        <div class="blog-banner__left-panel">
+          {%- if section.settings.left_panel_image != blank -%}
+            {{ section.settings.left_panel_image | image_url: width: 800 | image_tag: loading: 'eager', class: 'blog-banner__left-image', alt: 'Blog banner left' }}
+          {%- else -%}
+            <div class="blog-banner__real-talk-overlay">
+              <span class="blog-banner__real-text">Real</span>
+              <span class="blog-banner__talk-text">Talk</span>
+            </div>
+          {%- endif -%}
+        </div>
+        
+        {%- comment -%} Right Image Panel {%- endcomment -%}
+        <div class="blog-banner__right-panel">
+          {%- if section.settings.hero_image != blank -%}
+            {{ section.settings.hero_image | image_url: width: 800 | image_tag: loading: 'eager', class: 'blog-banner__hero-image', sizes: '(max-width: 699px) 100vw, 50vw' }}
+          {%- else -%}
+            <div class="blog-banner__hero-placeholder"></div>
+          {%- endif -%}
+          
+          {%- comment -%} Mobile Logo Overlay {%- endcomment -%}
+          {%- if section.settings.real_talk_logo_mobile != blank -%}
+            <div class="blog-banner__real-talk-overlay-mobile">
+              {{ section.settings.real_talk_logo_mobile | image_url: width: 400 | image_tag: loading: 'eager', class: 'blog-banner__real-talk-logo', alt: 'Real Talk' }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
 
-            {%- if section.settings.content != blank -%}
-              <div class="prose">
-                {{- section.settings.content -}}
-              </div>
-            {%- endif -%}
-          </div>
+      {%- comment -%} Newsletter CTA Box {%- endcomment -%}
+      <div class="container">
+        <div class="blog-banner__cta-box">
+          {%- if section.settings.cta_title != blank -%}
+            <h2 class="blog-banner__cta-title">{{ section.settings.cta_title }}</h2>
+          {%- endif -%}
+
+          {%- if section.settings.cta_content != blank -%}
+            <div class="blog-banner__cta-content">
+              {{ section.settings.cta_content }}
+            </div>
+          {%- endif -%}
 
           {%- if section.settings.show_newsletter_form -%}
             {%- form 'customer', id: 'blog-newsletter', class: 'blog-banner__form form' -%}
@@ -59,46 +91,91 @@
 
               <input type="hidden" name="contact[tags]" value="newsletter">
 
-              <div class="fieldset-with-submit">
+              <div class="blog-banner__form-fields">
                 {%- assign label = 'blog.comments.email' | t -%}
                 {%- assign button_content = 'blog.comments.submit' | t -%}
 
-                {%- render 'input', type: 'email', name: 'contact[email]', label: label, value: customer.email, required: true, autocomplete: 'email' -%}
+                {%- render 'input', type: 'email', name: 'contact[email]', label: label, value: customer.email, required: true, autocomplete: 'email', placeholder: 'EMAIL ID' -%}
                 {%- render 'button', content: button_content, icon: 'email', type: 'submit', size: 'xl', background: section.settings.button_background, text_color: section.settings.button_text_color -%}
               </div>
             {%- endform -%}
           {%- endif -%}
         </div>
+      </div>
 
-        {%- if section.settings.show_tags and blog.all_tags.size > 0 -%}
-          <div class="scroll-area bleed sm:unbleed justify-items-center">
-            <div class="nav-categories">
-              <ul class="h-stack bold text-base" role="tablist">
-                <li role="tab" aria-selected="{% if current_tags == blank %}true{% else %}false{% endif %}">
-                  <a href="{{ blog.url }}" class="{% if current_tags == blank %}selected{% endif %}">{{ 'blog.general.all_posts' | t }}</a>
-                </li>
-
-                {%- for tag in blog.all_tags -%}
-                  <li role="tab" aria-selected="{% if current_tags contains tag %}true{% else %}false{% endif %}">
-
-                    {%- if current_tags contains tag -%}
-                      {{- tag | link_to_remove_tag: tag -}}
+      {%- comment -%} Category Tags {%- endcomment -%}
+      {%- if section.settings.show_tags -%}
+        <div class="blog-category-tags">
+          <ul class="blog-category-tags__list" role="tablist">
+            {%- for block in section.blocks -%}
+              {%- case block.type -%}
+                {%- when 'category' -%}
+                  <li role="tab" {% if block.settings.tag_name == 'All' %}aria-selected="{% if current_tags == blank %}true{% else %}false{% endif %}"{% else %}aria-selected="{% if current_tags contains block.settings.tag_name %}true{% else %}false{% endif %}"{% endif %}>
+                    {%- if block.settings.tag_name == 'All' -%}
+                      <a href="{{ blog.url }}" class="blog-category-tags__tag {% if current_tags == blank %}blog-category-tags__tag--active{% endif %}" style="{% if current_tags == blank %}background: {{ block.settings.tag_active_color }}; color: white;{% else %}background: {{ block.settings.tag_color }};{% endif %}">
+                        {{ block.settings.display_name | default: 'All' }}
+                      </a>
                     {%- else -%}
-                      {{- tag | link_to_tag: tag -}}
+                      {%- assign tag_link = blog.url | append: '/tagged/' | append: block.settings.tag_name | replace: ' ', '-' -%}
+                      <a href="{{ tag_link }}" class="blog-category-tags__tag {% if current_tags contains block.settings.tag_name %}blog-category-tags__tag--active{% endif %}" style="{% if current_tags contains block.settings.tag_name %}background: {{ block.settings.tag_active_color }}; color: white;{% else %}background: {{ block.settings.tag_color }};{% endif %}">
+                        {{ block.settings.display_name }}
+                      </a>
                     {%- endif -%}
                   </li>
-                {%- endfor -%}
-              </ul>
-            </div>
-          </div>
-        {%- endif -%}
-      </div>
+              {%- endcase -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
     </header>
 
+    {%- comment -%} Search and Sort Section {%- endcomment -%}
+    <div class="blog-search-sort">
+      <div class="container">
+        <div class="blog-search-sort__wrapper">
+          {%- comment -%} Search Input {%- endcomment -%}
+          <div class="blog-search-sort__search">
+            <form action="{{ blog.url }}" method="get" class="blog-search-form">
+              <input type="search" name="q" value="{{ search.terms }}" placeholder="SEARCH BLOGS" class="blog-search-input" aria-label="Search blogs">
+            </form>
+          </div>
+
+          {%- comment -%} Sort Dropdown {%- endcomment -%}
+          <div class="blog-search-sort__controls">
+            <p class="blog-search-sort__count">{{ paginate.items }} {% if paginate.items == 1 %}Blog{% else %}Blogs{% endif %}</p>
+            
+            <select class="blog-search-sort__select" onchange="window.location.href=this.value">
+              <option value="{{ blog.url }}{% if search.terms %}?q={{ search.terms }}{% endif %}">ALPHABETICALLY</option>
+              <option value="{{ blog.url }}{% if search.terms %}?q={{ search.terms }}&{% else %}?{% endif %}sort_by=created-descending">NEWEST FIRST</option>
+              <option value="{{ blog.url }}{% if search.terms %}?q={{ search.terms }}&{% else %}?{% endif %}sort_by=title-ascending">TITLE A-Z</option>
+              <option value="{{ blog.url }}{% if search.terms %}?q={{ search.terms }}&{% else %}?{% endif %}sort_by=title-descending">TITLE Z-A</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="blog-posts__container container">
-      {%- paginate blog.articles by section.settings.articles_per_page -%}
-        <div class="blog-posts">
-          {%- for article in blog.articles -%}
+      {%- if search.performed -%}
+        {%- comment -%} Show search results {%- endcomment -%}
+        {%- if search.articles.size > 0 -%}
+          <div class="blog-posts">
+            {%- for article in search.articles -%}
+              {%- assign article_index = forloop.index -%}
+              {%- capture sizes -%}(max-width: 699px) 100vw, (max-width: 1149px) calc(100vw / 2 - 40px), (max-width: 1399px) calc(min(100vw, {{ settings.page_width }}px) / 3 - 40px) , calc(min(100vw, {{ settings.page_width }}px) / 3 - 80px) {%- endcapture -%}
+              {%- render 'blog-post-card', article: article, show_excerpt: section.settings.show_excerpt, show_date: section.settings.show_date, show_author: section.settings.show_author, show_comments_count: section.settings.show_comments_count, show_category: section.settings.show_category, sizes: sizes, position: forloop.index, section: section -%}
+            {%- endfor -%}
+          </div>
+        {%- else -%}
+          <div class="blog-search-no-results">
+            <p>No results found for "{{ search.terms }}".</p>
+          </div>
+        {%- endif -%}
+      {%- else -%}
+        {%- comment -%} Show regular blog articles with pagination {%- endcomment -%}
+        {%- paginate blog.articles by section.settings.articles_per_page -%}
+          <div class="blog-posts">
+            {%- for article in blog.articles -%}
             {%- assign article_index = forloop.index -%}
 
             {%- if section.blocks.size > 0 -%}
@@ -154,15 +231,16 @@
               {%- assign background_color = article.metafields.banner.background_color.value | default: section.settings.feature_article_background -%}
               {%- assign text_color = article.metafields.banner.text_color.value | default: section.settings.feature_article_text_color -%}
               {%- capture sizes -%}(max-width: 999px) 100vw, calc(min(100vw, {{ settings.page_width }}px) * 0.65){%- endcapture -%}
-              {%- render 'blog-post-card', article: article, featured: section.settings.feature_first_article, show_excerpt: section.settings.show_excerpt, show_date: section.settings.show_date, show_author: section.settings.show_author, show_comments_count: section.settings.show_comments_count, show_category: section.settings.show_category, background: background_color, text_color: text_color, sizes: sizes, position: forloop.index -%}
+              {%- render 'blog-post-card', article: article, featured: section.settings.feature_first_article, show_excerpt: section.settings.show_excerpt, show_date: section.settings.show_date, show_author: section.settings.show_author, show_comments_count: section.settings.show_comments_count, show_category: section.settings.show_category, background: background_color, text_color: text_color, sizes: sizes, position: forloop.index, section: section -%}
             {%- else -%}
               {%- capture sizes -%}(max-width: 699px) 100vw, (max-width: 1149px) calc(100vw / 2 - 40px), (max-width: 1399px) calc(min(100vw, {{ settings.page_width }}px) / 3 - 40px) , calc(min(100vw, {{ settings.page_width }}px) / 3 - 80px) {%- endcapture -%}
-              {%- render 'blog-post-card', article: article, show_excerpt: section.settings.show_excerpt, show_date: section.settings.show_date, show_author: section.settings.show_author, show_comments_count: section.settings.show_comments_count, show_category: section.settings.show_category, sizes: sizes, position: forloop.index -%}
+              {%- render 'blog-post-card', article: article, show_excerpt: section.settings.show_excerpt, show_date: section.settings.show_date, show_author: section.settings.show_author, show_comments_count: section.settings.show_comments_count, show_category: section.settings.show_category, sizes: sizes, position: forloop.index, section: section -%}
             {%- endif -%}
           {%- endfor -%}
-        </div>
-        {%- render 'pagination', paginate: paginate -%}
-      {%- endpaginate -%}
+          </div>
+          {%- render 'pagination', paginate: paginate -%}
+        {%- endpaginate -%}
+      {%- endif -%}
     </div>
   {%- endif -%}
 </div>
@@ -229,6 +307,36 @@
           "label": "Text"
         }
       ]
+    },
+    {
+      "type": "category",
+      "name": "Category Tag",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tag_name",
+          "label": "Tag Name",
+          "info": "Use 'All' for the all posts button, or enter the exact tag name from your blog posts"
+        },
+        {
+          "type": "text",
+          "id": "display_name",
+          "label": "Display Name",
+          "info": "The text that will appear on the button"
+        },
+        {
+          "type": "color",
+          "id": "tag_color",
+          "label": "Tag Background Color",
+          "default": "#EBDCFF"
+        },
+        {
+          "type": "color",
+          "id": "tag_active_color",
+          "label": "Tag Active Background Color",
+          "default": "#A073B7"
+        }
+      ]
     }
   ],
   "settings": [
@@ -242,6 +350,39 @@
       "label": "Allow transparent header",
       "info": "This setting only applies when this section is the first one.",
       "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "left_panel_image",
+      "label": "Left Panel Image (Desktop)",
+      "info": "Optional image for left panel. If not set, displays 'Real Talk' text."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image (Right Panel)"
+    },
+    {
+      "type": "image_picker",
+      "id": "real_talk_logo_mobile",
+      "label": "Real Talk Logo (Mobile)",
+      "info": "Overlays the hero image on mobile devices"
+    },
+    {
+      "type": "header",
+      "content": "CTA Box"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "CTA Title",
+      "default": "What we're all about"
+    },
+    {
+      "type": "richtext",
+      "id": "cta_content",
+      "label": "CTA Content",
+      "default": "<p>Bras that pinch, shift, slip or simply don't fit right; if you have a fuller bust, then this is probably how it's been for you.</p>"
     },
     {
       "type": "richtext",

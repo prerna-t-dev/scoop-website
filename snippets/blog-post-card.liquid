@@ -35,7 +35,17 @@ Supported parameters
 
       <a href="{{ article.url }}" class="blog-post-card__figure {% unless featured %}rounded{% endunless %}">
         {%- if featured != true and show_category and article.tags.size > 0 -%}
-          <span class="badge badge--primary">{{ article.tags | first }}</span>
+          {%- assign article_tag = article.tags | first -%}
+          {%- assign badge_color = '#EBDCFF' -%}
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'category' and block.settings.tag_name == article_tag -%}
+                {%- assign badge_color = block.settings.tag_color -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+          <span class="badge badge--primary" style="background-color: {{ badge_color }};">{{ article_tag }}</span>
         {%- endif -%}
 
         {{- article.image | image_url: width: article.image.width | image_tag: loading: loading_strategy, sizes: sizes, widths: '300,400,500,600,800,1000,1200,1400,1600,1800,2000', class: 'w-full h-full object-cover zoom-image' -}}
@@ -51,7 +61,17 @@ Supported parameters
     <div class="v-stack {% if featured %}gap-5 sm:gap-6{% else %}gap-4 sm:gap-5{% endif %}">
       <div class="v-stack gap-3 {% if featured %}sm:gap-5{% else %}sm:gap-4{% endif %}">
         {%- if featured and show_category and article.tags.size > 0 -%}
-          <span class="badge badge--current badge--lg">{{ article.tags | first }}</span>
+          {%- assign article_tag = article.tags | first -%}
+          {%- assign badge_color = '#EBDCFF' -%}
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'category' and block.settings.tag_name == article_tag -%}
+                {%- assign badge_color = block.settings.tag_active_color | default: block.settings.tag_color -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+          <span class="badge badge--current badge--lg" style="background-color: {{ badge_color }};">{{ article_tag }}</span>
         {%- endif -%}
 
         <p class="{% if heading_size != blank %}{{ heading_size }}{% elsif featured %}h2{% else %}h3{% endif %}">
@@ -94,6 +114,16 @@ Supported parameters
             </div>
           {%- endif -%}
         </div>
+      {%- endif -%}
+
+      {%- comment -%} Read More Button {%- endcomment -%}
+      {%- if article -%}
+        <a href="{{ article.url }}" class="blog-post-card__read-more">
+          READ MORE
+          <svg width="9" height="10" viewBox="0 0 9 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7.8907 0.438248C7.8566 0.164219 7.60681 -0.0302768 7.33278 0.00382805L2.86723 0.559599C2.5932 0.593704 2.39871 0.843495 2.43281 1.11752C2.46692 1.39155 2.71671 1.58605 2.99074 1.55194L6.96011 1.05792L7.45413 5.0273C7.48823 5.30133 7.73803 5.49582 8.01205 5.46172C8.28608 5.42761 8.48058 5.17782 8.44647 4.9038L7.8907 0.438248ZM7.39453 0.5L7.00002 0.192819L-3.98971e-05 9.18298L0.394472 9.49016L0.788984 9.79734L7.78904 0.807181L7.39453 0.5Z" fill="#A073B7"/>
+          </svg>
+        </a>
       {%- endif -%}
     </div>
   </div>
