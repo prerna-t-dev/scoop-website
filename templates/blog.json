@@ -7,14 +7,186 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-{
+ {
   "sections": {
     "main": {
       "type": "main-blog",
-      "settings": {}
+      "blocks": {
+        "newsletter_CKVrtx": {
+          "type": "newsletter",
+          "settings": {
+            "title": "Newsletter",
+            "content": "<p>Write something about what your customers will receive by subscribing to your newsletter.</p>",
+            "button_text": "Subscribe",
+            "subtext": "",
+            "position": 5,
+            "background": "",
+            "text_color": ""
+          }
+        },
+        "category_TcMhBh": {
+          "type": "category",
+          "settings": {
+            "tag_name": "All",
+            "display_name": "All",
+            "tag_color": "#cca7fc",
+            "tag_active_color": "#a073b7"
+          }
+        },
+        "category_fGhL8r": {
+          "type": "category",
+          "settings": {
+            "tag_name": "Fit Education",
+            "display_name": "Fit Education",
+            "tag_color": "#ebdcff",
+            "tag_active_color": "#cca7fc"
+          }
+        },
+        "category_Ygqkii": {
+          "type": "category",
+          "settings": {
+            "tag_name": "Body Positivity",
+            "display_name": "Body Positivity",
+            "tag_color": "#ffd2cc",
+            "tag_active_color": "#ff978b"
+          }
+        },
+        "category_trMBXt": {
+          "type": "category",
+          "settings": {
+            "tag_name": "Product Spotlights",
+            "display_name": "Product Spotlights",
+            "tag_color": "#ffd299",
+            "tag_active_color": "#ffb455"
+          }
+        }
+      },
+      "block_order": [
+        "newsletter_CKVrtx",
+        "category_TcMhBh",
+        "category_fGhL8r",
+        "category_Ygqkii",
+        "category_trMBXt"
+      ],
+      "settings": {
+        "allow_transparent_header": false,
+        "left_panel_image": "shopify://shop_images/Frame_1000003871_a6d12ba0-11c3-4613-af55-b97c639af7ee.png",
+        "hero_image": "shopify://shop_images/Frame_1000003984.png",
+        "real_talk_logo_mobile": "shopify://shop_images/Group_1000006325.png",
+        "cta_title": "What we're all about",
+        "cta_content": "<p>Bras that pinch, shift, slip or simply don't fit right; if you have a fuller bust, then this is probably how it's been for you.</p>",
+        "content": "<p>Get access to our latest news by signing up for our newsletter.</p>",
+        "show_newsletter_form": true,
+        "show_tags": true,
+        "banner_background": "",
+        "banner_text_color": "",
+        "button_background": "",
+        "button_text_color": "",
+        "articles_per_page": 6,
+        "feature_first_article": true,
+        "feature_article_background": "",
+        "feature_article_text_color": "",
+        "show_excerpt": true,
+        "show_date": true,
+        "show_author": false,
+        "show_comments_count": false,
+        "show_category": true
+      }
+    },
+    "scrolling_text_wjeYek": {
+      "type": "scrolling-text",
+      "blocks": {
+        "motif_nRMMmc": {
+          "type": "motif",
+          "settings": {
+            "motif_svg": "<svg width=\"56\" height=\"56\" viewbox=\"0 0 56 56\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M55.1536 40.41C55.1611 47.7906 49.0262 53.7664 41.462 53.7725C33.8978 53.7725 27.7611 47.7968 27.7537 40.4161L27.7539 41.7965C27.755 49.1711 21.6265 55.1468 14.0623 55.1468C10.2802 55.1468 6.85653 53.6559 4.37669 51.2386C1.89686 48.8214 0.360851 45.4838 0.360286 41.7904C0.35916 34.422 6.48767 28.4401 14.0456 28.434C6.48767 28.434 0.357329 22.4522 0.34991 15.0837C0.348782 7.7092 6.48359 1.72735 14.0478 1.72122C21.6121 1.72122 27.7487 7.70306 27.7498 15.0776L27.7496 13.7095C27.7559 13.642 27.7559 13.5745 27.7559 13.507C27.7559 13.507 27.7559 13.5029 27.7559 13.4947C27.868 6.21834 33.9525 0.346924 41.4475 0.346924C45.2297 0.346924 48.6533 1.83778 51.1331 4.25506C53.613 6.67234 55.149 10.0099 55.1496 13.7033C55.1507 21.0717 49.0222 27.0536 41.4642 27.0597C49.0222 27.0597 55.1525 33.0416 55.1536 40.41Z\" fill=\"#FF978B\"></path>\n</svg>",
+            "motif_color": "#ff978b"
+          }
+        },
+        "text_hRYCqx": {
+          "type": "text",
+          "settings": {
+            "text": "Real sizes for real bodies."
+          }
+        },
+        "motif_8iKBkK": {
+          "type": "motif",
+          "settings": {
+            "motif_svg": "<svg width=\"78\" height=\"78\" viewbox=\"0 0 78 78\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M67.0833 28.3265C72.3071 33.5406 72.1939 42.104 66.8492 47.4567C61.5 52.805 52.9353 52.9181 47.7115 47.704L48.6877 48.6801C53.9027 53.8943 53.794 62.4532 48.4448 67.8016C45.7703 70.4757 42.2951 71.8421 38.8323 71.8861C35.3695 71.9301 31.9235 70.6559 29.3116 68.0445C24.101 62.8346 24.2054 54.2713 29.5457 48.9231C24.201 54.267 15.6364 54.3713 10.4213 49.1659C5.20631 43.9517 5.31513 35.384 10.6599 30.0313C16.0091 24.683 24.5781 24.5742 29.7931 29.7884L28.8256 28.821C28.7823 28.7689 28.7346 28.7211 28.6869 28.6734C28.6869 28.6734 28.684 28.6705 28.6782 28.6648C23.6127 23.4399 23.764 14.9858 29.0642 9.68643C31.7388 7.01227 35.214 5.64585 38.6768 5.60188C42.1395 5.55792 45.5856 6.83207 48.1974 9.44351C53.4081 14.6534 53.3037 23.2167 47.9634 28.5649C53.3081 23.221 61.8727 23.1167 67.0833 28.3265Z\" fill=\"#FFB455\"></path>\n</svg>",
+            "motif_color": "#ffb455"
+          }
+        },
+        "text_xt36KA": {
+          "type": "text",
+          "settings": {
+            "text": "Real sizes for real bodies."
+          }
+        }
+      },
+      "block_order": [
+        "motif_nRMMmc",
+        "text_hRYCqx",
+        "motif_8iKBkK",
+        "text_xt36KA"
+      ],
+      "settings": {
+        "full_width": true,
+        "hide_on_desktop": false,
+        "title": "",
+        "cta_text": "",
+        "cta_url": "",
+        "cta_button_size": "base",
+        "cta_button_style": "fill",
+        "cta_button_secondary": false,
+        "cta_button_background": "",
+        "cta_button_text_color": "",
+        "text_size": "medium",
+        "text_style": "fill",
+        "scrolling_mode": "auto",
+        "scrolling_speed": 120,
+        "image_width_mobile": 250,
+        "image_width_desktop": 250,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "#ecd5d1",
+        "text_gradient": ""
+      }
+    },
+    "related_products_nFzPTA": {
+      "type": "related-products",
+      "name": "Related products",
+      "settings": {
+        "recommendations_count": 6,
+        "products": [
+          "smoothie-spacer-tshirt-bra-copy",
+          "frida-brief",
+          "frida-full-cup",
+          "lovelace-brazillian-brief",
+          "lovelace-full-cup",
+          "luxe-strapless",
+          "lovelace-full-cup-bra"
+        ],
+        "full_width": true,
+        "stack_products": false,
+        "show_progress_bar": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "subheading": "",
+        "title": "Best Sellers",
+        "content": "",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "product_card_background": "",
+        "product_card_text_color": ""
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "scrolling_text_wjeYek",
+    "related_products_nFzPTA"
   ]
 }
