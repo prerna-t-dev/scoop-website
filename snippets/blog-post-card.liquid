@@ -40,7 +40,7 @@ Supported parameters
           {%- if section.blocks.size > 0 -%}
             {%- for block in section.blocks -%}
               {%- if block.type == 'category' and block.settings.tag_name == article_tag -%}
-                {%- assign badge_color = block.settings.tag_color -%}
+                {%- assign badge_color = block.settings.tag_active_color | default: block.settings.tag_color -%}
                 {%- break -%}
               {%- endif -%}
             {%- endfor -%}

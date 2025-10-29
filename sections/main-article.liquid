@@ -93,7 +93,7 @@
 </style>
 
 <div class="article" {% if section.settings.allow_transparent_header %}allow-transparent-header{% endif %}>
-  {%- render 'article-banner', show_date: section.settings.show_date, show_author: section.settings.show_author, show_comments_count: section.settings.show_comments_count, layout: section.settings.layout, article_image: article_image -%}
+  {%- render 'article-banner', show_date: section.settings.show_date, show_author: section.settings.show_author, show_comments_count: section.settings.show_comments_count, layout: section.settings.layout, article_image: article_image, section: section, banner_height_mobile: section.settings.banner_height_mobile, banner_height_desktop: section.settings.banner_height_desktop -%}
 
   <div class="container">
     <div class="article-content v-stack gap-8 sm:gap-10">
@@ -177,6 +177,26 @@
       "id": "image",
       "label": "Image",
       "info": "If none is set, blog post image is used."
+    },
+    {
+      "type": "range",
+      "id": "banner_height_mobile",
+      "label": "Banner Height (Mobile)",
+      "min": 300,
+      "max": 800,
+      "step": 25,
+      "unit": "px",
+      "default": 475
+    },
+    {
+      "type": "range",
+      "id": "banner_height_desktop",
+      "label": "Banner Height (Desktop)",
+      "min": 400,
+      "max": 1000,
+      "step": 25,
+      "unit": "px",
+      "default": 475
     },
     {
       "type": "checkbox",
