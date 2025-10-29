@@ -2,7 +2,7 @@
 ----------------------------------------------------------------------------------------------------------------------
 ARTICLE BANNER COMPONENT
 ----------------------------------------------------------------------------------------------------------------------
-Shows the blog post image with blog post summary on blog post details page. The snippet automatically adjust the image positioning based on its aspect ratio.
+Shows the blog post image with blog post summary on blog post details page.
 
 ********************************************
 Supported parameters
@@ -12,42 +12,101 @@ Supported parameters
 * show_author
 * show_comments_count
 * layout
+* article_image
+* section (for accessing blog section blocks)
 {%- endcomment -%}
 
-<div class="article-banner {% if layout == 'image_text_overlay' %}sm:justify-items-center sm:align-items-center{% endif %}">
-  <div class="article-banner__content text-custom">
-    {%- if article.tags.size > 0 -%}
-      <a href="{{ blog.url }}/tagged/{{ article.tags.first | handle }}" class="badge bold text-sm">{{- article.tags.first -}}</a>
-    {%- endif -%}
+{%- assign read_time = article.content | strip_html | split: ' ' | size | divided_by: 200 | at_least: 1 -%}
+{%- assign banner_height_mobile = banner_height_mobile | default: 475 -%}
+{%- assign banner_height_desktop = banner_height_desktop | default: 475 -%}
 
-    <h1 class="h0">{{- article.title -}}</h1>
-
-    <div class="article__meta text-sm">
-      {%- if show_date -%}
-        <p class="text-with-icon link-faded">
-          {%- render 'icon' with 'blog-date' -%} <time>{{- article.published_at | date: format: 'abbreviated_date' -}}</time>
-        </p>
-      {%- endif -%}
-
-      {%- if show_author -%}
-        <p class="text-with-icon link-faded">
-          {%- render 'icon' with 'blog-author' -%} {{- 'blog.post.written_by' | t: author: article.author -}}
-        </p>
-      {%- endif -%}
-
-      {%- if show_comments_count and article.comments_enabled? -%}
-        <a href="#blog-post-comments" class="text-with-icon link-faded">
-          {%- render 'icon' with 'blog-comment' -%}
-          {{- 'blog.comments.count' | t: count: article.comments_count -}}
-        </a>
-      {%- endif -%}
-    </div>
-  </div>
-
+<div class="article-banner" style="--banner-height-mobile: {{ banner_height_mobile }}px; --banner-height-desktop: {{ banner_height_desktop }}px;">
   {%- if article_image != blank -%}
-    {%- capture sizes -%}(max-width: 1149px) 100vw, {% if layout == 'image_text_overlay' %}min({{ settings.page_width }}px, 100vw){% elsif layout == 'content_first' %}1000px{% else %}(max-width: 1399px) calc(100vw * 0.60 - 40px), calc(min({{ settings.page_width }}px, 100vw) * 0.60 - 64px){% endif %}{%- endcapture -%}
+    {%- capture sizes -%}(max-width: 699px) 100vw, 100vw{%- endcapture -%}
     <div class="article-banner__image">
-      {{- article_image | image_url: width: 1500 | image_tag: sizes: sizes , widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200' -}}
+      {{- article_image | image_url: width: 1500 | image_tag: sizes: sizes, widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', class: 'article-banner__hero-image' -}}
     </div>
   {%- endif -%}
+</div>
+
+{%- comment -%} Banner Content Card (outside banner, similar to blog banner) {%- endcomment -%}
+<div class="container">
+  <div class="article-banner__content-card">
+    {%- comment -%} Category Badge {%- endcomment -%}
+    {%- if article.tags.size > 0 -%}
+      {%- assign article_tag = article.tags.first -%}
+      {%- assign badge_color = '#EBDCFF' -%}
+      {%- comment -%} Get badge color from blog section blocks if available {%- endcomment -%}
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'category' and block.settings.tag_name == article_tag -%}
+            {%- assign badge_color = block.settings.tag_active_color | default: block.settings.tag_color -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+      <a href="{{ blog.url }}/tagged/{{ article.tags.first | handle }}" class="article-banner__badge" style="background-color: {{ badge_color }};">{{- article.tags.first -}}</a>
+    {%- endif -%}
+
+    {%- comment -%} Title {%- endcomment -%}
+    <h1 class="article-banner__title">{{- article.title -}}</h1>
+
+    {%- comment -%} Description/Excerpt {%- endcomment -%}
+    {%- if article.excerpt != blank -%}
+      <p class="article-banner__description">{{ article.excerpt_or_content | strip_html | truncate: 200 }}</p>
+    {%- endif -%}
+
+    {%- comment -%} Social Media Icons (Mobile) {%- endcomment -%}
+    <div class="article-banner__social-mobile">
+      {%- assign share_url = shop.url | append: article.url -%}
+      <a href="{% render 'share-link', host: 'facebook', title: article.title, url: article.url %}" class="article-banner__social-icon" aria-label="Share on Facebook">
+        {%- render 'icon' with 'facebook', width: 24, height: 24 -%}
+      </a>
+      <a href="{% render 'share-link', host: 'twitter', title: article.title, url: article.url %}" class="article-banner__social-icon" aria-label="Share on Twitter">
+        {%- render 'icon' with 'twitter', width: 24, height: 24 -%}
+      </a>
+      <a href="{% render 'share-link', host: 'pinterest', title: article.title, url: article.url %}" class="article-banner__social-icon" aria-label="Share on Pinterest">
+        {%- render 'icon' with 'pinterest', width: 24, height: 24 -%}
+      </a>
+      <button class="article-banner__social-icon" is="share-button" share-url="{{ share_url | escape }}" share-title="{{ article.title | escape }}" aria-label="Share">
+        {%- render 'icon' with 'share', width: 24, height: 24 -%}
+      </button>
+    </div>
+
+    {%- comment -%} Author and Read Time (Mobile) {%- endcomment -%}
+    <div class="article-banner__meta-mobile">
+      {%- if show_author -%}
+        <span>By {{ article.author | default: 'Jane Doe' }}</span>
+      {%- endif -%}
+      {%- if show_author -%}
+        <span>|</span>
+      {%- endif -%}
+      <span>{{ read_time }} min read</span>
+    </div>
+  </div>
+</div>
+
+{%- comment -%} Article Metadata (Desktop - below banner) {%- endcomment -%}
+<div class="article-banner__meta-desktop container">
+  <div class="article-banner__meta-items">
+    {%- if show_author -%}
+      <div class="article-banner__meta-item">
+        <span class="article-banner__meta-label">AUTHOR</span>
+        <span class="article-banner__meta-value">{{ article.author | default: 'Jane Doe' }}</span>
+      </div>
+    {%- endif -%}
+    
+    {%- comment -%} Read time {%- endcomment -%}
+    <div class="article-banner__meta-item">
+      <span class="article-banner__meta-label">READ</span>
+      <span class="article-banner__meta-value">{{ read_time }} mins</span>
+    </div>
+
+    {%- if show_date -%}
+      <div class="article-banner__meta-item">
+        <span class="article-banner__meta-label">DATE</span>
+        <span class="article-banner__meta-value">{{ article.published_at | date: "%d %b %Y" }}</span>
+      </div>
+    {%- endif -%}
+  </div>
 </div>
