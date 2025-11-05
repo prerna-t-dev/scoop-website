@@ -93,10 +93,9 @@
 
               <div class="blog-banner__form-fields">
                 {%- assign label = 'blog.comments.email' | t -%}
-                {%- assign button_content = 'blog.comments.submit' | t -%}
 
                 {%- render 'input', type: 'email', name: 'contact[email]', label: label, value: customer.email, required: true, autocomplete: 'email', placeholder: 'EMAIL ID' -%}
-                {%- render 'button', content: button_content, icon: 'email', type: 'submit', size: 'xl', background: section.settings.button_background, text_color: section.settings.button_text_color -%}
+                {%- render 'button', content: 'SIGN UP', type: 'submit', size: 'xl', background: section.settings.button_background, text_color: section.settings.button_text_color -%}
               </div>
             {%- endform -%}
           {%- endif -%}

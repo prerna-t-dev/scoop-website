@@ -37,10 +37,11 @@ Supported parameters
         {%- if featured != true and show_category and article.tags.size > 0 -%}
           {%- assign article_tag = article.tags | first -%}
           {%- assign badge_color = '#EBDCFF' -%}
-          {%- if section.blocks.size > 0 -%}
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'category' and block.settings.tag_name == article_tag -%}
-                {%- assign badge_color = block.settings.tag_active_color | default: block.settings.tag_color -%}
+          {%- comment -%} Get badge color from metaobject {%- endcomment -%}
+          {%- if shop.metaobjects.blog_category_color_mapping.values.size > 0 -%}
+            {%- for metaobject in shop.metaobjects.blog_category_color_mapping.values -%}
+              {%- if metaobject.category_name.value == article_tag -%}
+                {%- assign badge_color = metaobject.color.value -%}
                 {%- break -%}
               {%- endif -%}
             {%- endfor -%}
@@ -63,10 +64,11 @@ Supported parameters
         {%- if featured and show_category and article.tags.size > 0 -%}
           {%- assign article_tag = article.tags | first -%}
           {%- assign badge_color = '#EBDCFF' -%}
-          {%- if section.blocks.size > 0 -%}
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'category' and block.settings.tag_name == article_tag -%}
-                {%- assign badge_color = block.settings.tag_active_color | default: block.settings.tag_color -%}
+          {%- comment -%} Get badge color from metaobject {%- endcomment -%}
+          {%- if shop.metaobjects.blog_category_color_mapping.values.size > 0 -%}
+            {%- for metaobject in shop.metaobjects.blog_category_color_mapping.values -%}
+              {%- if metaobject.category_name.value == article_tag -%}
+                {%- assign badge_color = metaobject.color.value -%}
                 {%- break -%}
               {%- endif -%}
             {%- endfor -%}
@@ -84,9 +86,9 @@ Supported parameters
 
         {%- if show_excerpt -%}
           {%- if article -%}
-            <p {% if featured %}class="text-lg"{% endif %}>{{ article.excerpt_or_content | strip_html | truncate: 200 }}</p>
+            <p class="blog-post-card__excerpt {% if featured %}text-lg{% endif %}">{{ article.excerpt_or_content | strip_html | truncate: 200 }}</p>
           {%- else -%}
-            <p {% if featured %}class="text-lg"{% endif %}>{{ 'general.on_boarding.blog_post_excerpt' | t }}</p>
+            <p class="blog-post-card__excerpt {% if featured %}text-lg{% endif %}">{{ 'general.on_boarding.blog_post_excerpt' | t }}</p>
           {%- endif -%}
         {%- endif -%}
       </div>
