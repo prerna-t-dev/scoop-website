@@ -11824,3 +11824,476 @@ shopify-accelerated-checkout, shopify-accelerated-checkout-cart {
     font-size: 14px;
   }
 }
+
+/* ============================================
+   BRA QUIZ SECTION
+   ============================================ */
+
+.bra-quiz {
+  padding: 40px 20px;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.bra-quiz__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Progress Bar */
+.bra-quiz__progress {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.bra-quiz__progress-bar {
+  display: flex;
+  gap: 8px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.bra-quiz__progress-step {
+  flex: 1;
+  height: 4px;
+  background-color: #e5e5e5;
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+
+.bra-quiz__progress-step--active {
+  background-color: #A073B7;
+}
+
+/* Steps Container */
+.bra-quiz__steps {
+  position: relative;
+}
+
+.bra-quiz__step {
+  display: none;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.bra-quiz__step--active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Step Card */
+.bra-quiz__step-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  padding: 40px 30px;
+  position: relative;
+  min-height: 500px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 30px;
+}
+
+@media screen and (max-width: 699px) {
+  .bra-quiz__step-card {
+    grid-template-columns: 1fr;
+    padding: 30px 20px;
+    min-height: auto;
+  }
+}
+
+/* Step Header */
+.bra-quiz__step-header {
+  grid-column: 1 / -1;
+}
+
+.bra-quiz__step-number {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.bra-quiz__step-label {
+  font-size: 12px;
+  font-weight: 400;
+  color: #7E7E7E;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bra-quiz__step-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #A073B7;
+}
+
+.bra-quiz__step-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.bra-quiz__step-title {
+  font-family: var(--heading-font-family);
+  font-size: 32px;
+  font-weight: 400;
+  color: #000000;
+  margin: 0;
+  line-height: 1.2;
+}
+
+@media screen and (max-width: 699px) {
+  .bra-quiz__step-title {
+    font-size: 24px;
+  }
+}
+
+/* Step Content */
+.bra-quiz__step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.bra-quiz__instructions {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #000000;
+}
+
+.bra-quiz__instructions p {
+  margin: 0 0 12px 0;
+}
+
+.bra-quiz__instructions p:last-child {
+  margin-bottom: 0;
+}
+
+@media screen and (min-width: 700px) {
+  .bra-quiz__instructions {
+    font-size: 16px;
+  }
+}
+
+/* Input Wrapper */
+.bra-quiz__input-wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.bra-quiz__input {
+  flex: 1;
+  padding: 16px 20px;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #000000;
+  background-color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: border-color 0.3s ease;
+}
+
+.bra-quiz__input::placeholder {
+  color: #999999;
+}
+
+.bra-quiz__input:focus {
+  outline: none;
+  border-color: #A073B7;
+}
+
+.bra-quiz__next-btn {
+  width: 48px;
+  height: 48px;
+  background-color: #A073B7;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.bra-quiz__next-btn:hover {
+  background-color: #8a5d9f;
+}
+
+.bra-quiz__next-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Question Step */
+.bra-quiz__question {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+.bra-quiz__question p {
+  margin: 0;
+}
+
+.bra-quiz__options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bra-quiz__option {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.bra-quiz__option:hover {
+  background-color: #f8f8f8;
+}
+
+.bra-quiz__radio {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #A073B7;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.bra-quiz__option-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #000000;
+  flex: 1;
+}
+
+/* Continue Button Wrapper */
+.bra-quiz__continue-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 24px;
+}
+
+.bra-quiz__continue-btn {
+  width: 48px;
+  height: 48px;
+  background-color: #A073B7;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.bra-quiz__continue-btn:hover {
+  background-color: #8a5d9f;
+}
+
+.bra-quiz__continue-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Illustration */
+.bra-quiz__illustration {
+  margin-top: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.bra-quiz__illustration svg,
+.bra-quiz__illustration img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Large Step Number */
+.bra-quiz__step-number-large {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 120px;
+  font-weight: 300;
+  color: #f0f0f0;
+  line-height: 1;
+  font-family: var(--heading-font-family);
+  pointer-events: none;
+}
+
+@media screen and (max-width: 699px) {
+  .bra-quiz__step-number-large {
+    font-size: 80px;
+    bottom: 15px;
+    left: 15px;
+  }
+}
+
+/* Email Step */
+.bra-quiz__step--email .bra-quiz__step-card {
+  grid-template-columns: 1fr;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.bra-quiz__email-description {
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 24px;
+}
+
+@media screen and (min-width: 700px) {
+  .bra-quiz__email-description {
+    font-size: 16px;
+  }
+}
+
+.bra-quiz__email-wrapper {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.bra-quiz__email-input {
+  flex: 1;
+  padding: 16px 20px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #000000;
+  background-color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bra-quiz__email-input::placeholder {
+  color: #999999;
+}
+
+.bra-quiz__email-input:focus {
+  outline: none;
+  border-color: #A073B7;
+}
+
+.bra-quiz__submit-btn {
+  padding: 16px 32px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.bra-quiz__submit-btn:hover {
+  background-color: #333333;
+}
+
+.bra-quiz__privacy-consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #7E7E7E;
+  cursor: pointer;
+}
+
+.bra-quiz__privacy-consent input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  cursor: pointer;
+  accent-color: #A073B7;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.bra-quiz__privacy-consent a {
+  color: #A073B7;
+  text-decoration: underline;
+}
+
+.bra-quiz__success {
+  padding: 20px;
+  background-color: #f0f5f0;
+  border-radius: 8px;
+  color: #546056;
+  text-align: center;
+}
+
+.bra-quiz__success-size {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.bra-quiz__size-display {
+  text-align: center;
+  margin: 30px 0;
+  padding: 30px;
+  background-color: #F8F8F8;
+  border-radius: 12px;
+}
+
+.bra-quiz__size-label {
+  font-size: 14px;
+  font-weight: 400;
+  color: #7E7E7E;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.bra-quiz__size-value {
+  font-size: 48px;
+  font-weight: 400;
+  color: #A073B7;
+  font-family: var(--heading-font-family);
+  line-height: 1.2;
+}
+
+@media screen and (max-width: 699px) {
+  .bra-quiz__size-value {
+    font-size: 36px;
+  }
+}
+
+.bra-quiz__errors {
+  padding: 20px;
+  background-color: #fff5f5;
+  border-radius: 8px;
+  color: #d32f2f;
+  margin-bottom: 20px;
+}

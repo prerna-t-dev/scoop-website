@@ -1,0 +1,116 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+ {
+    "sections": {
+      "main": {
+        "type": "main-page",
+        "settings": {
+          "full_width": false,
+          "content_width": "80ch",
+          "background": "",
+          "background_gradient": ""
+        }
+      },
+      "bra_quiz_LUnqcg": {
+        "type": "bra-quiz",
+        "blocks": {
+          "measurement_step_MDd8Fg": {
+            "type": "measurement_step",
+            "settings": {
+              "step_title": "Snug Underband",
+              "measurement_key": "snug_underband",
+              "instructions": "<p>Measure around your body, right where your breasts meet your chest wall, where your bra band should sit.</p><p>Remember to exhale and relax your shoulders. This measurement should be comfortably supportive.</p>",
+              "illustration": "",
+              "step_icon": "",
+              "next_icon": ""
+            }
+          },
+          "measurement_step_8mDaKy": {
+            "type": "measurement_step",
+            "settings": {
+              "step_title": "Tight Underband",
+              "measurement_key": "tight_underband",
+              "instructions": "<p>Measure around the same part but this time pull the tape as tight as possible, as if it could almost break. <br/><br/>Exhale and relax your shoulders. </p>",
+              "illustration": "",
+              "step_icon": "",
+              "next_icon": ""
+            }
+          },
+          "measurement_step_LQ44J7": {
+            "type": "measurement_step",
+            "settings": {
+              "step_title": "Standing Overbust",
+              "measurement_key": "standing_overbust",
+              "instructions": "<p>Measure loosely around the fullest part of your breasts while standing. <br/><br/>This might be around your nipples.</p>",
+              "illustration": "",
+              "step_icon": "",
+              "next_icon": ""
+            }
+          },
+          "measurement_step_iTPDAr": {
+            "type": "measurement_step",
+            "settings": {
+              "step_title": "Leaning Overbust",
+              "measurement_key": "leaning_overbust",
+              "instructions": "<p>Lean over at 90 degrees and measure loosely around the fullest part of your breasts. <br/><br/>This is often more than your standing measurement. </p>",
+              "illustration": "",
+              "step_icon": "",
+              "next_icon": ""
+            }
+          },
+          "question_step_C8x3dJ": {
+            "type": "question_step",
+            "settings": {
+              "step_title": "And lastly...",
+              "question_key": "breast_space",
+              "question": "<p>When you lean over at 90 degrees and let your breasts hang freely, how much space is naturally between them?</p>",
+              "option_1_text": "There is no space/ my breasts touch",
+              "option_1_value": "no_space",
+              "option_2_text": "There is about 1-2 fingers worth of space between my breasts",
+              "option_2_value": "1-2_fingers",
+              "option_3_text": "There is more than 2 fingers worth of space between my breasts",
+              "option_3_value": "more_than_2_fingers",
+              "illustration": "",
+              "step_icon": "",
+              "continue_icon": ""
+            }
+          },
+          "email_step_gJiJFk": {
+            "type": "email_step",
+            "settings": {
+              "step_title": "Enter your email",
+              "description": "To receive your bra size and personalised recommendations",
+              "button_text": "FIND YOUR SIZE",
+              "show_privacy_consent": true,
+              "privacy_text": "<p>I consent to the storage of my information in order to calculate my size and improve the accuracy of the calculator. For details on how your data is stored and used, read our <a href='/policies/privacy-policy'>Privacy Policy</a>.</p>",
+              "success_message": "Thank you! Your bra size has been calculated and saved."
+            }
+          }
+        },
+        "block_order": [
+          "measurement_step_MDd8Fg",
+          "measurement_step_8mDaKy",
+          "measurement_step_LQ44J7",
+          "measurement_step_iTPDAr",
+          "question_step_C8x3dJ",
+          "email_step_gJiJFk"
+        ],
+        "name": "Bra Quiz",
+        "settings": {
+          "title": "Find Your Perfect Bra Size"
+        }
+      }
+    },
+    "order": [
+      "main",
+      "bra_quiz_LUnqcg"
+    ]
+  }
+  
