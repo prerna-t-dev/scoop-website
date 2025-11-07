@@ -1,0 +1,375 @@
+Instructions for Calculator
+Record the following measurements and details bra-less in inches:
+1. Snug Underband (SU): A comfortably supportive measurement around your
+body, right where your boobs meet your chest/ where your bra band should
+sit. Exhale, relax your shoulders.
+2. Tight Underband (TU): A measurement around the same part but pulling the
+tape as tight as possible, like it could almost break. Exhale, relax your
+shoulders.
+3. Standing Overbust (SO): A measurement taken loosely around the fullest part
+of your bust while standing.
+4. Leaning Overbust (LO): A measurement taken loosely around the fullest part
+of your bust while leaning over at 90 degrees. This is often bigger than your
+standing bust.
+5. When you lean over at 90 degrees and let your breasts hang freely, how much
+space is naturally between your breasts?
+a. There is no space/ my boobs touch ➡ Close-Set Breasts (CS)
+b. There is about 1-2 fingers worth of space between my boobs ➡ Average
+Space between Breasts (AS)
+c. There is more than 2 fingers worth of space between my boobs ➡
+Side-Set Breasts (SS)
+Logic for Fit Calculator
+I. To estimate band size
+A. Estimating band size using SU:
+● Use SU if it is an even number (e.g. 32 ➡ Band Size 32)
+● Round up the SU to the next even round number if it is a whole odd number
+or an odd number with a decimal (e.g. 31 - 31.99 ➡ Band Size 32)
+● Round down to the nearest even whole number if SU is an even number with
+a decimal up to the 0.5 point (e.g. 32.01 - 32.50 ➡ Band Size 32).
+● Round up to the next even round number if SU is between an even number
+with a decimal above 0.5 to the next odd number (e.g. 32.51 - 32.99 ➡ Band
+Size 34)
+B. Estimating band size using TU + 2 inches:
+● Use TU + 2 if it results in an even whole number (e.g. 30 + 2 ➡ Band Size 32)
+● Round up TU + 2 to the next even whole number if it is a whole odd number or
+a whole odd number with a decimal (e.g. 29 - 29.99 + 2 = 31 - 31.99 ➡ Band Size
+32)
+● Round down to the nearest even number if TU + 2 is an even number with a
+decimal up to the 0.5 (e.g. 30.01 - 30.50 + 2 = 32.01 - 32.50 ➡ Band Size 32), but
+add a suggestion to use an extender, or size up in the band for a more relaxed
+fit.
+● Round up to the next even whole number if TU + 2 is between an even
+number with a decimal above 0.5 to the next odd number (e.g. 30.51 - 30.99 +
+2 = 32.51 - 32.99 ➡ Band Size 34)
+If A and B steps above yield different results, choose the smaller estimated band
+size of the two for calculating the primary size.
+II. To estimate cup size
+1. Estimating base cup size using SO, LO and SU:
+● Subtract SU from the average of SO and LO
+○ i.e. (SO+LO)/2 - SU
+● Round down to the nearest whole number if the resulting number has a
+decimal point between 0.01-0.24 (e.g. 9.1 ➡ 9)
+● Adjacent cup rule: If the resulting number has a decimal point between
+0.25-0.59, use both the rounded down and the rounded up numbers (e.g. 8.5
+➡ 8 and 9)
+● Round up to the nearest whole number if the resulting number has a decimal
+point between 0.60-0.99 (e.g. 7.7 ➡ 8)
+● Map the resulting number(s) to the corresponding cup size as per the chart
+below:
+(SO+LO)/2 - SU UK Cup Size
+4” D
+5” DD
+6” E
+7” F
+8” FF
+9” G
+10” GG
+11” H
+12” HH
+13” J
+14” JJ
+15” K
+16” KK
+17” L
+E.g. if SU = 31.5, SO = 38.5, and LO = 41.5:
+(SO+LO)/ 2 = 40
+40 - 31.5 = 8.5 ➡ Base Cup Size FF/G
+2. Adjusting cup size based on breast spacing:
+If the user selects
+● CS: add one Cup Size (e.g. G ➡ GG or FF/G ➡ )
+● AS: retain the same Cup Size (e.g. G ➡ G)
+● SS: subtract one Cup Size (e.g. G ➡ FF)
+III. Other Instructions:
+1. Size not available:
+Provide the message “Sorry, we don’t carry your size yet - but we’re working on
+it!” when:
+○ SU < 25 (size prediction would be below 26 band), or
+○ TU < 23 (size prediction would be below 26 band), or
+○ SU > 40.5 (size prediction would be beyond 40 band), or
+○ TU > 38.5 (size prediction would be beyond 40 band), or
+○ (SO+LO)/2 - SU > 15” (size prediction would be beyond K cup), or
+○ (SO+LO)/2 - SU < 5” (size prediction would be below DD cup)
+2. Size not available but sister size available:
+Provide message “Although we don’t carry your exact recommended size yet,
+a sister size of [insert relevant sister size] might work for you!” when:
+○ Calculated size is 26F-L, or
+○ Calculated size is 28E-KK
+○ Calculated size is 42D-JJ
+○ Calculate relevant sister sizes for the specific band estimates as follows:
+■ For 26 bands: up two sizes in the band, down two in the cup (26G
+➡ 30F)
+■ For 28 bands: up one size in the band, down one in the cup (28H
+➡ 30GG)
+■ For 42 bands: down one size in the band, up one size in the cup
+(42F ➡ 40FF)
+3. Customer has less “squish”/ Relaxed-fit trigger
+Provide the additional message: “Based on your measurements, we
+recommend that you either use a non-stretch extender for your first few wears
+as you break in your new bra. Or, you could also choose [relaxed-fit sister size]
+for a more relaxed fit.” when:
+○ The estimated band size using method A and B gives different results,
+provide the relaxed-fit sister size using the bigger band size estimate,
+or
+○ SU = even whole number with a decimal up to the 0.5 point (e.g. 32.01 -
+32.50), or
+○ TU+2 = even whole number with a decimal up to the 0.5 point (e.g. 32.01
+- 32.50).
+○ Calculate relaxed fit sister size by increasing the estimated band size by
+one size and reducing the cup size by one size (e.g. relaxed fit for 32F ➡
+34E). If the adjacent cup rule was triggered, provide the relaxed-fit in
+relevant adjacent cups as well (e.g. Relaxed-fit for 32G/GG ➡ 34FF/G)
+○ When SU and TU are both odd numbers or odd numbers with a
+decimal point (e.g, SU = 31, TU = 29.7), do not provide a relaxed fit option.
+4. Customer probably has extra “squish”/ Firm-fit trigger
+Provide the additional message “Based on your measurements, you could
+choose [firm-fit sister size] for a more supportive fit.” when:
+○ SU-TU > 3" , or
+○ Estimated band size =/>38
+○ Calculate firm fit sister size by reducing the estimated band size by one
+size and increasing the cup size by one size (e.g. firm fit for 38F = 36FF).
+If the adjacent cup rule was triggered, provide the firm-fit in relevant
+adjacent cups as well (e.g. Firm fit for 40G/GG ➡ 38GG/H)
+IV. To provide bra style suggestions
+Projection
+● If LO-SO =/> 3; suggest “Projected Bras” (CK Victory)
+● If LO-SO =0-1; suggest “Shallow bras” (CK Smoothie Spacer)
+● If LO-SO = 1-3; suggest all bras in stock in their size
+Fullness
+● If user selects CS; suggest “Plunge Bras” (CK Flare, Smoothie Spacer)
+● If user selects SS; suggests “Side Support Bras” (CK Flare, Victory, Lovelace)
+● If user selects AS; suggest all bras in stock in their size
+Plus sizes calculation techniques
+V shaped ribcage overestimating cup size (plus size bodies + AMAB)
+Source:
+https://www.reddit.com/r/ABraThatFits/comments/n5hsff/troubleshooting_the_calcul
+ator_for_plus_sizes/ or u/ihatespunk
+Loose: 40
+Snug: 39
+Tight: 38
+Standing: 51
+Leaning: 53
+Lying: 52
+Putting this into the calculator gives me a 38JJ UK. After numerous amazon prime
+wardrobe orders, posting fit checks to this sub, and finally braving a good bra
+boutique during the pandemic, I've found a great fit in 38G - 38GG, a full 4-5 cup
+sizes smaller!
+The process of working my way down through the sizes to figure this out was really
+difficult and disheartening and made me feel terrible about my boobs until I found
+The Size. Lately with the influx of new users I keep seeing similar comments from
+other plus size people, and whats really frustrating is I'm seeing these people get
+downvoted and talked down to in the comments and told to just TRUST the
+calculator. I say - give the calculator a chance, but also trust your own experience; if
+you try on your calculator size, do all the jiggling and swooping and scooping, and
+you're still swimming, know that IT'S NOT YOUR FAULT AND YOU DIDN'T DO
+ANYTHING WRONG AND YOUR BODY IS NORMAL!
+Here's something I just tried to figure out how to compensate for the extra inches on
+my back that aren't ever going into my cups:
+1. I took a pen and made a mark in the middle of each armpit behind my boobs.
+2. Then I measured across my back, where my band sits, from mark to mark. Got
+20 inches.
+3. Then I measured across my back, mark to mark, level with the largest part of
+my bust while standing: 24 inches.
+4. Tried it leaning forward: 26 inches.
+That makes my back fat differential 4-6 inches... right about the same as the
+overestimation from the calculator. If I subtract 5 inches from my bust
+measurements then put it in the calculator, its bang on at 38G.
+Non-breast projection overestimating cup size
+Source: https://blogs.understance.com/size-calculator-upgrade/
+● For 40-42 estimated bands, size down 1 cup
+● For 44 estimated band, size down 2 cups
+● For 46 estimated bands, size down 3 cups
+“Given that 70-80% of our fitting models in this size range are side-full, we
+corrected the size calculator to work for this shape. If you are dramatically
+centre-full (breasts touching when supported), size up 1 cup if you wear 40/42
+band, 2 cups if you wear 44 band, and 3 cups if you wear 46/48 bands (based
+on what the current understance size calculator gives you).”
+Extra Reading
+Are your breasts fuller on top, fuller on bottom,
+or average-ish?
+Fullness refers to whether your breast tissue is
+mostly above or below the nipple. It doesn't have to
+do with "saggy" or "perky." This helps determine
+how your breasts behave in a bra.
+Lean forward, as close to 90 degrees as you can. If
+your nipples are closer to your chin, your breasts are
+bottom-full. If your nipples are closer to your belly
+button, your breasts are top-full.
+Are your roots wider, narrower, or average-ish?
+Roots are where your breasts are attached to the
+rest of your body. Lift your breasts up and look in
+the mirror - roots are the curved line at the base.
+Wide roots: Your breast tissue ends directly under
+your armpit, or is connected to your back.
+Narrow roots: Your breast tissue ends at least 2''
+before your armpit.
+Average roots: Somewhere in between.
+Side-full vs. centre-full
+These two sets of breasts clearly have different volumes, and need to wear different
+cup sizes.
+The calculator would give the correct band result for side- and centre-full, but
+overestimate the cup size for side-full.
+Given that 70-80% of our fitting models in this size range are side-full, we corrected
+the size calculator to work for this shape. If you are dramatically centre-full (breasts
+touching when supported), size up 1 cup if you wear 40/42 band, 2 cups if you wear
+44 band, and 3 cups if you wear 46/48 bands.
+Branatomy
+Let’s be real, bras are hard and miserably difficult for some of us. Bodies come in
+different shapes and sizes and your bra has to reflect this in order for it to be
+comfortable. In addition to our commitment to providing the very best bras for every
+shape and size, we want to provide you with all the resources you need so that you
+can make the best decision for your shape!
+Breast Shape Guide
+Roots
+Let’s Talk About Roots
+Breast roots are the outline of where your breasts are
+attached to the rest of your body.
+Support your breasts with your hands, and look in the mirror
+– your roots are the curved line at the base of your breasts.
+Roots Can Be Wide
+or Narrow
+The widest roots can extend from chest
+centre to the back, encompassing the
+underarm area.
+Fun Fact: The narrowest roots we have fitted
+are just about 2 inches across.
+Roots Can Be Tall or Short
+The tallest roots start under the chin. While,
+shorter roots can look like a “shelf” when
+supported.
+Roots and Under–F**kin’–Wire
+If you are wearing an underwire bra, ideally the
+underwire contours your breast roots exactly. In
+this section, we are discussing the importance
+of knowing your roots and how it affects the type of underwire that might work for
+you.
+Wide Roots
+If your roots are wide, an underwire that’s too narrow will sit on your breast tissue,
+irritating and damaging it. Bras for wide roots need wide underwires.
+Narrow Roots
+If your roots are narrow, an underwire that’s too wide will irritate the area under your
+arms or even your back.
+SHOP FOR NARROW ROOTS
+Short Roots
+If your roots are short, an underwire that’s too tall will likely give you centre gore
+discomfort.
+SHOP FOR SHORT ROOTS
+Tall Roots
+If your roots are tall, the underwire doesn’t have to “cover” all of your roots, as long as
+the rest of the bra gives you proper coverage and support.
+It’s ok if the centre gore doesn’t rise all the way to where your roots start at chest
+centre, and the underwire doesn’t rise all the way to where your breasts start on the
+sides.
+SHOP FOR TALL ROOTS
+Projection
+What About Projection?
+Projection is how “deep” your breasts are. You can be anywhere from not projected at
+all (flat) to very projected.
+Fullness
+Let’s Talk About Fullness
+For people with any amount of projection, the fullness can lie near the centre, near
+the sides, or both. Without a bra on, naturally lift your breasts with your hands. If
+most of your breasts are at the centre (touching when supported, or connected in
+the middle), you are centre-full. If most of your breasts sit on the sides near your
+arms, with a large space between them in the centre, you are side-full. If they are
+equal, you have even horizontal fullness.
+Average Horizontal-Fullness
+Centre & Side-Full
+Centre-Full
+Side-Full
+The Question is: How Full is the Cup?
+The fullness can also lie on top, on bottom, or both. When you cup your breasts in
+your hands, if most of your breasts are above the nipple, you are full-on-top. If most
+of your breasts are below the nipple, you are full-on-bottom. If you have equally as
+much breast tissue above and below your nipple, you have even vertical fullness
+Top-full
+Bottom-full
+Even Vertical-fullness
+Shop Shallow | Shop Medium
+Shop Projected | Shop Very Projected
+Breast Shapes
+Different root shapes, combined with different places your fullness lies, creates many
+wonderful different boob shapes. Some examples:
+1: Bell
+Tall and narrow roots, projected/bottom-full, relaxed.
+2: Butterfly
+Projected/side-full, typically with tall roots, nipples pointing outward.
+3: Omega
+Narrow and short roots, projected/full all-around.
+4: Plate
+Wide roots, not very projected.
+5: Balloon
+Wide and tall roots, projected/full all-around. Balloon shapes tend to struggle to
+make the centre gore tack. If it’s painful to separate your breasts, it’s not necessary for
+the centre gore to touch your sternum. If you want your breasts to be separated, look
+for bras with narrow gores
+Some Other Factors That Determine Breast Shape:
+Self-Supporting or Relaxed
+Breasts tend to become more relaxed with age, though they can be weighed down
+by gravity at any age. Breastfeeding itself doesn’t necessarily make breasts more
+relaxed, but weight loss can trigger it. There are no muscles in your breasts, so
+exercise cannot prevent breasts from becoming more relaxed.
+Asymmetry
+Breasts can be mismatched in size and/or in shape.
+IMF* Height
+(*Inframammary Fold)
+This is the level of the bottom of your roots. Most people’s Inframammary Fold (or
+IMF) starts somewhere between the armpit and the elbow, but they can start much
+lower/at stomach-level, or much higher/below your chin.
+Low IMF Height
+Average IMF Height
+High IMF Height
+Parts of a Bra
+1: Cup
+Seamed cup bras have sections (upper cup, lower cup, side panel). Generally
+speaking, the more sections, the rounder the shape (bras with 4 sections usually give
+a more rounded shape, while bras with 2 sections will give a more cone-like shape).
+Molded cup bras don’t have sections.
+2: Wing
+Wings are a main support mechanism of bras. If you prefer more support and lift,
+look for bras with strong, wide wings. If you have the habit of reading fabric content
+labels, you can judge the “strength” (i.e. stretch recovery) of wings by reading the
+spandex percentage. We recommend at least 20% spandex for wings if you want the
+“held in” feeling.
+3: Underwire
+Underwire is another main support mechanism of bras. They can be wide or narrow.
+They can come up short or tall in the centre gore. They can come up short or tall on
+the sides (under your arms). They can be made from plastic or metal (Understance
+underwires are all made from stainless steel coated in nylon). The ideal underwire
+contours your breast root exactly, and shouldn’t sit on top of your breasts.
+4: Centre Gore
+The centre gore is where the underwires meet in the middle. Generally speaking, for
+underwire bras, the bra gore should lie flat against your sternum. However, if you
+have very centre-full breasts that touch when supported, or you have an inverted
+sternum, the centre gore doesn’t have to touch your sternum. Wireless bras typically
+don’t tack either.
+5: Apex
+The apex is where the straps are attached to the rest of the bra. If you struggle with
+slipping straps or straps rubbing your armpit, look for bras with closer-set apex.
+6: Hook and Closure
+If you prefer more support, look for bras with 3-4 rows of hooks. If you prefer less
+support, go for bras with 1-2 rows of hooks. Make sure the hook-and-eye pad has a
+little thickness, so you don’t feel the metal hooks through the fabric.
+7: Side Boning
+Side boning is the plastic strip sewn into the side of the bra. It brings your breasts
+toward the centre and points them forward.
+Bra Care Guide
+Bra Care
+How to wash, dry, and store your bras so they last longer.
+Washing & Drying
+Washing by hand and air drying will make your bra last the longest. But if you don’t
+have time and need to machine wash, make sure to:
+● Hook the bra to avoid snagging, especially if it’s a lace bra
+● Use a lingerie bag to protect the underwire
+● Machine wash on delicate
+● Tumble dry on low heat
+It’s important to avoid using excessive heat because heat kills elastane (also known
+as spandex or Lycra), the component that gives fabrics stretch.
+Storing
+Store your bras with care. Molded cup bras (made from one piece of molded foam
+with no seams on the cups) can crease and lose their shape if they are crushed. Prop
+up the cups when storing (you can put socks or scarves under the cups). For
+underwire bras, make sure the underwire is not twisted or bent when storing.
+On a similar note, don’t wear the same bra every day — give it at least a day to rest in
+between wears. This allows the elastane to recover from the stretch of wearing and
+your body heat, making it last longer. We recommend having at least 3 bras in your
+regular rotation.
