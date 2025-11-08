@@ -1,0 +1,288 @@
+{%- render 'section-spacing-collapsing' -%}
+
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+VIDEO BANNER SECTION
+----------------------------------------------------------------------------------------------------------------------
+A banner section with text overlay and an embedded video player that overlaps the banner.
+{%- endcomment -%}
+
+<style>
+  #video-banner-{{ section.id }} .video-banner__banner {
+    background-color: {{ section.settings.banner_background | default: '#F27D70' }};
+    {%- if section.settings.banner_min_height_mobile != blank -%}
+      min-height: {{ section.settings.banner_min_height_mobile }}px;
+    {%- endif -%}
+  }
+  
+  {%- if section.settings.banner_min_height_desktop != blank -%}
+    @media screen and (min-width: 700px) {
+      #video-banner-{{ section.id }} .video-banner__banner {
+        min-height: {{ section.settings.banner_min_height_desktop }}px;
+      }
+    }
+  {%- endif -%}
+  
+  #video-banner-{{ section.id }} .video-banner__upper-text,
+  #video-banner-{{ section.id }} .video-banner__main-text {
+    color: {{ section.settings.text_color | default: '#FFFFFF' }};
+  }
+  
+  {%- assign video_aspect_ratio_raw = section.settings.video_aspect_ratio | default: 24 -%}
+  {%- assign video_aspect_ratio = video_aspect_ratio_raw | divided_by: 10.0 -%}
+  {%- assign aspect_ratio_percentage = 100 | divided_by: video_aspect_ratio -%}
+  
+  {%- assign video_aspect_ratio_mobile_raw = section.settings.video_aspect_ratio_mobile | default: 20 -%}
+  {%- assign video_aspect_ratio_mobile = video_aspect_ratio_mobile_raw | divided_by: 10.0 -%}
+  {%- assign aspect_ratio_percentage_mobile = 100 | divided_by: video_aspect_ratio_mobile -%}
+  
+  @media screen and (max-width: 699px) {
+    #video-banner-{{ section.id }} .video-banner__video-thumbnail,
+    #video-banner-{{ section.id }} .video-banner__video-player {
+      padding-bottom: {{ aspect_ratio_percentage_mobile }}%;
+    }
+  }
+  
+  @media screen and (min-width: 700px) {
+    #video-banner-{{ section.id }} .video-banner__video-thumbnail,
+    #video-banner-{{ section.id }} .video-banner__video-player {
+      padding-bottom: {{ aspect_ratio_percentage }}%;
+    }
+  }
+</style>
+
+<div {% render 'section-properties' %}>
+  <div class="video-banner" id="video-banner-{{ section.id }}">
+    <div class="video-banner__container">
+    <div class="video-banner__wrapper">
+      {%- comment -%} Main Banner {%- endcomment -%}
+      <div class="video-banner__banner">
+        {%- if section.settings.banner_image_mobile != blank -%}
+          <div class="video-banner__banner-image-mobile">
+            {{- section.settings.banner_image_mobile | image_url: width: section.settings.banner_image_mobile.width | image_tag: loading: 'lazy', class: 'video-banner__banner-image-mobile-img' -}}
+          </div>
+        {%- endif -%}
+        
+        {%- if section.settings.banner_pattern != blank -%}
+          <div class="video-banner__pattern">
+            {{- section.settings.banner_pattern | image_url: width: section.settings.banner_pattern.width | image_tag: loading: 'lazy', class: 'video-banner__pattern-image' -}}
+          </div>
+        {%- endif -%}
+        
+        <div class="video-banner__content">
+          {%- if section.settings.upper_text != blank -%}
+            <div class="video-banner__upper-text">{{ section.settings.upper_text }}</div>
+          {%- endif -%}
+          
+          {%- if section.settings.main_text != blank -%}
+            <h2 class="video-banner__main-text">{{ section.settings.main_text }}</h2>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- comment -%} Video Player {%- endcomment -%}
+      {%- if section.settings.video_url != blank or section.settings.video_thumbnail != blank -%}
+        <div class="video-banner__video-wrapper">
+          {%- if section.settings.video_thumbnail != blank -%}
+            <div class="video-banner__video-thumbnail">
+              {{- section.settings.video_thumbnail | image_url: width: section.settings.video_thumbnail.width | image_tag: loading: 'lazy', class: 'video-banner__thumbnail-image' -}}
+              <button class="video-banner__play-button" aria-label="Play video" data-video-trigger>
+                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="30" cy="30" r="30" fill="white" fill-opacity="0.7"/>
+                  <path d="M25 20L25 40L40 30L25 20Z" fill="white"/>
+                </svg>
+              </button>
+            </div>
+          {%- endif -%}
+          
+          {%- if section.settings.video_url != blank -%}
+            <div class="video-banner__video-player" data-video-player style="display: none;">
+              {%- if section.settings.video_url.type == 'youtube' -%}
+                <iframe 
+                  src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?rel=0" 
+                  frameborder="0" 
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowfullscreen
+                  class="video-banner__iframe"
+                ></iframe>
+              {%- elsif section.settings.video_url.type == 'vimeo' -%}
+                <iframe 
+                  src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}" 
+                  frameborder="0" 
+                  allow="autoplay; fullscreen; picture-in-picture" 
+                  allowfullscreen
+                  class="video-banner__iframe"
+                ></iframe>
+              {%- else -%}
+                <video 
+                  src="{{ section.settings.video_url }}" 
+                  controls 
+                  class="video-banner__video"
+                ></video>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    const videoBanner = document.getElementById('video-banner-{{ section.id }}');
+    if (!videoBanner) return;
+    
+    const playButton = videoBanner.querySelector('[data-video-trigger]');
+    const videoPlayer = videoBanner.querySelector('[data-video-player]');
+    const thumbnail = videoBanner.querySelector('.video-banner__video-thumbnail');
+    
+    if (playButton && videoPlayer) {
+      playButton.addEventListener('click', function() {
+        thumbnail.style.display = 'none';
+        videoPlayer.style.display = 'block';
+      });
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Video Banner",
+  "class": "shopify-section--video-banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Banner Content"
+    },
+    {
+      "type": "text",
+      "id": "upper_text",
+      "label": "Upper Text",
+      "default": "LET'S TAKE YOUR"
+    },
+    {
+      "type": "text",
+      "id": "main_text",
+      "label": "Main Text",
+      "default": "Bra Size Quiz"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_pattern",
+      "label": "Banner Pattern Image",
+      "info": "Optional decorative pattern overlay"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image_mobile",
+      "label": "Banner Image (Mobile)",
+      "info": "Background image for mobile devices"
+    },
+    {
+      "type": "range",
+      "id": "banner_min_height_mobile",
+      "label": "Banner Min Height (Mobile)",
+      "min": 200,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "banner_min_height_desktop",
+      "label": "Banner Min Height (Desktop)",
+      "min": 300,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Video URL",
+      "accept": ["youtube", "vimeo"],
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc"
+    },
+    {
+      "type": "image_picker",
+      "id": "video_thumbnail",
+      "label": "Video Thumbnail",
+      "info": "Thumbnail image shown before video plays"
+    },
+    {
+      "type": "range",
+      "id": "video_aspect_ratio",
+      "label": "Video Aspect Ratio (Desktop)",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "default": 24,
+      "info": "Width divided by height × 10 (e.g., 24 for 2.4:1 ratio)"
+    },
+    {
+      "type": "range",
+      "id": "video_aspect_ratio_mobile",
+      "label": "Video Aspect Ratio (Mobile)",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "default": 20,
+      "info": "Width divided by height × 10 (e.g., 20 for 2.0:1 ratio)"
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "banner_background",
+      "label": "Banner Background",
+      "default": "#F27D70"
+    },
+    {
+      "type": "color",
+      "id": "pattern_color",
+      "label": "Pattern Color",
+      "default": "#F7A89F",
+      "info": "Color for pattern overlay (if pattern image is not used)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video Banner"
+    }
+  ]
+}
+{% endschema %}
+

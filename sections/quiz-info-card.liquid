@@ -1,0 +1,171 @@
+{%- render 'section-spacing-collapsing' -%}
+
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+QUIZ INFO CARD SECTION
+----------------------------------------------------------------------------------------------------------------------
+A card section with text on one side and image on the other, with curved divider.
+{%- endcomment -%}
+
+<style>
+  #quiz-info-card-{{ section.id }} .quiz-info-card__wrapper {
+    background-color: {{ section.settings.background_color | default: '#FF615C' }};
+    {%- if section.settings.desktop_image != blank -%}
+      background-image: url('{{ section.settings.desktop_image | image_url: width: section.settings.desktop_image.width }}');
+    {%- elsif section.settings.mobile_image != blank -%}
+      background-image: url('{{ section.settings.mobile_image | image_url: width: section.settings.mobile_image.width }}');
+    {%- endif -%}
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  @media screen and (max-width: 699px) {
+    #quiz-info-card-{{ section.id }} .quiz-info-card__wrapper {
+      {%- if section.settings.mobile_image != blank -%}
+        background-image: url('{{ section.settings.mobile_image | image_url: width: section.settings.mobile_image.width }}');
+        {%- assign image = section.settings.mobile_image -%}
+        {%- if image.width != blank and image.height != blank -%}
+          aspect-ratio: {{ image.width }} / {{ image.height }};
+        {%- endif -%}
+      {%- elsif section.settings.desktop_image != blank -%}
+        background-image: url('{{ section.settings.desktop_image | image_url: width: section.settings.desktop_image.width }}');
+        {%- assign image = section.settings.desktop_image -%}
+        {%- if image.width != blank and image.height != blank -%}
+          aspect-ratio: {{ image.width }} / {{ image.height }};
+        {%- endif -%}
+      {%- endif -%}
+    }
+  }
+  
+  #quiz-info-card-{{ section.id }} .quiz-info-card__text {
+    color: {{ section.settings.text_color | default: '#FFFFFF' }};
+  }
+  
+  #quiz-info-card-{{ section.id }} .quiz-info-card__heading {
+    color: {{ section.settings.heading_color | default: '#FFFFFF' }};
+  }
+</style>
+
+<div {% render 'section-properties' %}>
+  <div class="quiz-info-card" id="quiz-info-card-{{ section.id }}">
+    <div class="quiz-info-card__container container">
+      <div class="quiz-info-card__wrapper">
+        {%- comment -%} Text Section {%- endcomment -%}
+        <div class="quiz-info-card__text-section">
+          {%- if section.settings.heading != blank -%}
+            <h2 class="quiz-info-card__heading">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+          
+          {%- if section.settings.text != blank -%}
+            <div class="quiz-info-card__text">
+              {{ section.settings.text }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Quiz Info Card",
+  "tag": "section",
+  "class": "shopify-section--quiz-info-card",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Just a friendly reminder"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Scoop is a judgment-free zone where your bra size isn't 'too much', it's just right. We fit you, not some outdated, misinformed ideal.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop Image",
+      "info": "Image displayed on desktop"
+    },
+    {
+      "type": "select",
+      "id": "desktop_image_position",
+      "label": "Desktop Image Position",
+      "options": [
+        {
+          "label": "Left",
+          "value": "left"
+        },
+        {
+          "label": "Right",
+          "value": "right"
+        }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image",
+      "info": "Image displayed on mobile"
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_position",
+      "label": "Mobile Image Position",
+      "options": [
+        {
+          "label": "Top",
+          "value": "top"
+        },
+        {
+          "label": "Bottom",
+          "value": "bottom"
+        }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FF615C"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quiz Info Card"
+    }
+  ]
+}
+{% endschema %}
+

@@ -1,0 +1,168 @@
+{%- render 'section-spacing-collapsing' -%}
+
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+QUIZ BANNER SECTION
+----------------------------------------------------------------------------------------------------------------------
+A banner section with heading, instructions, and a purple wavy design element with icon and text.
+{%- endcomment -%}
+
+<style>
+  #quiz-banner-{{ section.id }} .quiz-banner__container {
+    max-width: 1000px;
+  }
+  
+  #quiz-banner-{{ section.id }} .quiz-banner__heading {
+    color: {{ section.settings.heading_color | default: '#000000' }};
+  }
+  
+  #quiz-banner-{{ section.id }} .quiz-banner__instructions {
+    color: {{ section.settings.text_color | default: '#7E7E7E' }};
+  }
+  
+  #quiz-banner-{{ section.id }} .quiz-banner__purple-banner {
+    background-color: {{ section.settings.purple_banner_color | default: '#E0CCF7' }};
+    {%- if section.settings.purple_design_image != blank -%}
+      --purple-design-mask: url('{{ section.settings.purple_design_image | image_url: width: section.settings.purple_design_image.width }}');
+      {%- assign image_width = section.settings.purple_design_image.width | default: 1 -%}
+      {%- assign image_height = section.settings.purple_design_image.height | default: 1 -%}
+      {%- assign aspect_ratio = image_width | divided_by: image_height | times: 100.0 -%}
+      aspect-ratio: {{ image_width }} / {{ image_height }};
+    {%- endif -%}
+  }
+  
+  #quiz-banner-{{ section.id }} .quiz-banner__purple-banner-text {
+    color: {{ section.settings.purple_banner_text_color | default: '#000000' }};
+  }
+</style>
+
+<div {% render 'section-properties' %}>
+  <div class="quiz-banner" id="quiz-banner-{{ section.id }}">
+    <div class="quiz-banner__container">
+      <div class="quiz-banner__wrapper">
+        {%- comment -%} Left Section - Text {%- endcomment -%}
+        <div class="quiz-banner__text-section">
+          {%- if section.settings.heading != blank -%}
+            <h2 class="quiz-banner__heading">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+          
+          {%- if section.settings.instructions != blank -%}
+            <p class="quiz-banner__instructions">{{ section.settings.instructions }}</p>
+          {%- endif -%}
+        </div>
+
+        {%- comment -%} Right Section - Purple Banner {%- endcomment -%}
+        <div class="quiz-banner__purple-banner">
+          {%- if section.settings.purple_design_image != blank -%}
+            {%- comment -%} Purple Design Image (wavy border) {%- endcomment -%}
+            <div class="quiz-banner__purple-design">
+              {{- section.settings.purple_design_image | image_url: width: section.settings.purple_design_image.width | image_tag: loading: 'lazy', class: 'quiz-banner__purple-design-image' -}}
+            </div>
+          {%- endif -%}
+          
+          {%- if section.settings.icon_image != blank -%}
+            <div class="quiz-banner__icon">
+              {{- section.settings.icon_image | image_url: width: section.settings.icon_image.width | image_tag: loading: 'lazy', class: 'quiz-banner__icon-image' -}}
+            </div>
+          {%- endif -%}
+          
+          {%- if section.settings.instructions != blank -%}
+            <p class="quiz-banner__purple-banner-text">{{ section.settings.instructions }}</p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Quiz Banner",
+  "class": "shopify-section--quiz-banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Let's calculate your size"
+    },
+    {
+      "type": "textarea",
+      "id": "instructions",
+      "label": "Instructions",
+      "default": "Grab a measuring tape (or a non-elastic string and a ruler) and log your information below!"
+    },
+    {
+      "type": "header",
+      "content": "Purple Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "purple_design_image",
+      "label": "Purple Design Image",
+      "info": "Wavy border design image for the purple banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_image",
+      "label": "Icon Image",
+      "info": "Measuring tape icon image"
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "purple_banner_color",
+      "label": "Purple Banner Background",
+      "default": "#E0CCF7"
+    },
+    {
+      "type": "color",
+      "id": "purple_banner_text_color",
+      "label": "Purple Banner Text Color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quiz Banner"
+    }
+  ]
+}
+{% endschema %}
+
