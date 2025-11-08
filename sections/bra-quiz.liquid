@@ -18,10 +18,22 @@ The customer form automatically stores the bra size in customer tags:
 No webhooks or apps needed! The tags are set directly via the form (same approach as newsletter form).
 {%- endcomment -%}
 
+{%- comment -%} Check if we should show success card {%- endcomment -%}
+{%- assign show_success_card = false -%}
+{%- assign current_url = request.url -%}
+{%- if current_url contains 'customer_posted=true' -%}
+  {%- assign show_success_card = true -%}
+{%- endif -%}
+
 <div class="bra-quiz" id="bra-quiz-{{ section.id }}">
   <div class="bra-quiz__container container">
+    {%- comment -%} Quiz Header {%- endcomment -%}
+    <div class="bra-quiz__header" {% if show_success_card %}style="display: none;"{% endif %}>
+      <h2 class="bra-quiz__header-title">BEGIN QUIZ</h2>
+    </div>
+
     {%- comment -%} Progress Indicator {%- endcomment -%}
-    <div class="bra-quiz__progress">
+    <div class="bra-quiz__progress" {% if show_success_card %}style="display: none;"{% endif %}>
       <div class="bra-quiz__progress-bar">
         {%- for i in (1..6) -%}
           <div class="bra-quiz__progress-step {% if forloop.index == 1 %}bra-quiz__progress-step--active{% endif %}" data-step="{{ forloop.index }}"></div>
@@ -30,31 +42,24 @@ No webhooks or apps needed! The tags are set directly via the form (same approac
     </div>
 
     {%- comment -%} Quiz Steps {%- endcomment -%}
-    <div class="bra-quiz__steps">
+    <div class="bra-quiz__steps" {% if show_success_card %}style="display: none;"{% endif %}>
       {%- for block in section.blocks -%}
         {%- case block.type -%}
           {%- when 'measurement_step' -%}
             <div class="bra-quiz__step {% if forloop.first %}bra-quiz__step--active{% endif %}" data-step="{{ forloop.index }}" {{ block.shopify_attributes }}>
               <div class="bra-quiz__step-card">
-                {%- comment -%} Step Header {%- endcomment -%}
-                <div class="bra-quiz__step-header">
-                  <div class="bra-quiz__step-number">
-                    <span class="bra-quiz__step-label">STEP {{ forloop.index }}</span>
-                    {%- if block.settings.step_icon != blank -%}
-                      <span class="bra-quiz__step-icon">{{ block.settings.step_icon }}</span>
-                    {%- endif -%}
-                  </div>
-                  <h2 class="bra-quiz__step-title">{{ block.settings.step_title }}</h2>
-                </div>
-
-                {%- comment -%} Step Content {%- endcomment -%}
-                <div class="bra-quiz__step-content">
-                  {%- comment -%} Instructions {%- endcomment -%}
-                  {%- if block.settings.instructions != blank -%}
-                    <div class="bra-quiz__instructions">
-                      {{ block.settings.instructions }}
+                {%- comment -%} Left Column - Content {%- endcomment -%}
+                <div class="bra-quiz__step-left">
+                  {%- comment -%} Step Header {%- endcomment -%}
+                  <div class="bra-quiz__step-header">
+                    <div class="bra-quiz__step-number">
+                      <span class="bra-quiz__step-label">STEP {{ forloop.index }}</span>
+                      {%- if block.settings.step_icon != blank -%}
+                        <span class="bra-quiz__step-icon">{{ block.settings.step_icon }}</span>
+                      {%- endif -%}
                     </div>
-                  {%- endif -%}
+                    <h2 class="bra-quiz__step-title">{{ block.settings.step_title }}</h2>
+                  </div>
 
                   {%- comment -%} Input Field {%- endcomment -%}
                   <div class="bra-quiz__input-wrapper">
@@ -68,23 +73,36 @@ No webhooks or apps needed! The tags are set directly via the form (same approac
                       data-measurement="{{ block.settings.measurement_key }}"
                     >
                     <button type="button" class="bra-quiz__next-btn" data-next-step>
-                      {%- if block.settings.next_icon != blank -%}
-                        {{ block.settings.next_icon }}
-                      {%- else -%}
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M9 18L15 12L9 6" stroke="#A073B7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                      {%- endif -%}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.1838 0C20.5066 0 23.2003 2.69372 23.2003 6.01659C23.2003 8.52444 21.6659 10.6738 19.4848 11.5774C21.6659 12.4809 23.2003 14.6303 23.2003 17.1382C23.2003 20.461 20.5066 23.1548 17.1838 23.1548C14.6545 23.1548 12.49 21.5941 11.6002 19.3833C10.7104 21.5941 8.54581 23.1548 6.01659 23.1548C2.69372 23.1548 0 20.461 0 17.1382C0 14.6303 1.53436 12.481 3.7155 11.5774C1.53436 10.6738 0 8.52442 0 6.01659C0 2.69372 2.69372 0 6.01659 0C8.54578 0 10.7104 1.56063 11.6002 3.77141C12.49 1.56063 14.6546 0 17.1838 0Z" fill="#CCA7FC"/>
+                        <path d="M10.0355 8.48083L13.1602 11.6055L10.064 14.7016" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
                     </button>
                   </div>
+                </div>
 
-                  {%- comment -%} Illustration {%- endcomment -%}
-                  {%- if block.settings.illustration != blank -%}
-                    <div class="bra-quiz__illustration">
-                      {{ block.settings.illustration }}
+                {%- comment -%} Right Column - Instructions {%- endcomment -%}
+                <div class="bra-quiz__step-right">
+                  {%- comment -%} Instructions {%- endcomment -%}
+                  {%- if block.settings.instructions != blank -%}
+                    <div class="bra-quiz__instructions">
+                      {{ block.settings.instructions }}
                     </div>
                   {%- endif -%}
                 </div>
+
+                {%- comment -%} Illustration (Absolute Position) {%- endcomment -%}
+                {%- if block.settings.illustration != blank -%}
+                  <div class="bra-quiz__illustration" 
+                    style="
+                      {%- if block.settings.illustration_right_mobile != blank -%}--illustration-right-mobile: {{ block.settings.illustration_right_mobile }}px;{%- endif -%}
+                      {%- if block.settings.illustration_bottom_mobile != blank -%}--illustration-bottom-mobile: {{ block.settings.illustration_bottom_mobile }}px;{%- endif -%}
+                      {%- if block.settings.illustration_right_desktop != blank -%}--illustration-right-desktop: {{ block.settings.illustration_right_desktop }}px;{%- endif -%}
+                      {%- if block.settings.illustration_bottom_desktop != blank -%}--illustration-bottom-desktop: {{ block.settings.illustration_bottom_desktop }}px;{%- endif -%}
+                    ">
+                    {{ block.settings.illustration }}
+                  </div>
+                {%- endif -%}
 
                 {%- comment -%} Large Step Number {%- endcomment -%}
                 <div class="bra-quiz__step-number-large">
@@ -94,19 +112,21 @@ No webhooks or apps needed! The tags are set directly via the form (same approac
             </div>
 
           {%- when 'question_step' -%}
-            <div class="bra-quiz__step {% if forloop.index == 5 %}bra-quiz__step--active{% endif %}" data-step="{{ forloop.index }}" {{ block.shopify_attributes }}>
+            <div class="bra-quiz__step bra-quiz__step--question {% if forloop.index == 5 %}bra-quiz__step--active{% endif %}" data-step="{{ forloop.index }}" {{ block.shopify_attributes }}>
               <div class="bra-quiz__step-card">
-                <div class="bra-quiz__step-header">
-                  <div class="bra-quiz__step-number">
-                    <span class="bra-quiz__step-label">STEP {{ forloop.index }}</span>
-                    {%- if block.settings.step_icon != blank -%}
-                      <span class="bra-quiz__step-icon">{{ block.settings.step_icon }}</span>
-                    {%- endif -%}
+                {%- comment -%} Left Column - Header {%- endcomment -%}
+                <div class="bra-quiz__step-left">
+                  {%- comment -%} Step Header {%- endcomment -%}
+                  <div class="bra-quiz__step-header">
+                    <div class="bra-quiz__step-number">
+                      <span class="bra-quiz__step-label">STEP {{ forloop.index }}</span>
+                    </div>
+                    <h2 class="bra-quiz__step-title">{{ block.settings.step_title }}</h2>
                   </div>
-                  <h2 class="bra-quiz__step-title">{{ block.settings.step_title }}</h2>
                 </div>
 
-                <div class="bra-quiz__step-content">
+                {%- comment -%} Right Column - Question, Options, and Illustration {%- endcomment -%}
+                <div class="bra-quiz__step-right">
                   {%- if block.settings.question != blank -%}
                     <div class="bra-quiz__question">
                       {{ block.settings.question }}
@@ -118,15 +138,16 @@ No webhooks or apps needed! The tags are set directly via the form (same approac
                     {%- for i in (1..3) -%}
                       {%- assign option_key = 'option_' | append: i | append: '_text' -%}
                       {%- assign option_value = 'option_' | append: i | append: '_value' -%}
+                      {%- assign option_image_key = 'option_' | append: i | append: '_image' -%}
                       {%- if block.settings[option_key] != blank -%}
-                        <label class="bra-quiz__option">
+                        <label class="bra-quiz__option" data-option-index="{{ i }}">
                           <input 
                             type="radio" 
                             name="question-{{ forloop.parentloop.index }}" 
                             value="{{ block.settings[option_value] }}"
                             data-question="{{ block.settings.question_key }}"
                             class="bra-quiz__radio"
-                          >
+                          />
                           <span class="bra-quiz__option-text">{{ block.settings[option_key] }}</span>
                         </label>
                       {%- endif -%}
@@ -135,133 +156,166 @@ No webhooks or apps needed! The tags are set directly via the form (same approac
 
                   {%- comment -%} Continue Button {%- endcomment -%}
                   <div class="bra-quiz__continue-wrapper">
-                    <button type="button" class="bra-quiz__continue-btn" data-next-step>
-                      {%- if block.settings.continue_icon != blank -%}
-                        {{ block.settings.continue_icon }}
-                      {%- else -%}
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M9 18L15 12L9 6" stroke="#A073B7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                      {%- endif -%}
+                    <button type="button" class="bra-quiz__continue-btn bra-quiz__continue-btn--text" data-next-step>
+                      CONTINUE
                     </button>
                   </div>
 
-                  {%- if block.settings.illustration != blank -%}
-                    <div class="bra-quiz__illustration">
-                      {{ block.settings.illustration }}
-                    </div>
-                  {%- endif -%}
+                  {%- comment -%} Dynamic Illustration based on selected option {%- endcomment -%}
+                  <div class="bra-quiz__question-illustration" data-question-illustration>
+                    {%- if block.settings.option_1_image != blank -%}
+                      <div class="bra-quiz__option-image bra-quiz__option-image--1" data-option-image="1" style="display: none;">
+                        {{ block.settings.option_1_image }}
+                      </div>
+                    {%- endif -%}
+                    {%- if block.settings.option_2_image != blank -%}
+                      <div class="bra-quiz__option-image bra-quiz__option-image--2" data-option-image="2" style="display: none;">
+                        {{ block.settings.option_2_image }}
+                      </div>
+                    {%- endif -%}
+                    {%- if block.settings.option_3_image != blank -%}
+                      <div class="bra-quiz__option-image bra-quiz__option-image--3" data-option-image="3" style="display: none;">
+                        {{ block.settings.option_3_image }}
+                      </div>
+                    {%- endif -%}
+                  </div>
                 </div>
 
+                {%- comment -%} Large Step Number {%- endcomment -%}
                 <div class="bra-quiz__step-number-large">
                   {{ forloop.index | prepend: '0' | slice: -2, 2 }}
                 </div>
               </div>
             </div>
 
-          {%- when 'results_step' -%}
-            <div class="bra-quiz__step bra-quiz__step--results" data-step="{{ forloop.index }}" {{ block.shopify_attributes }}>
-              <div class="bra-quiz__step-card">
-                <div class="bra-quiz__step-header">
-                  <div class="bra-quiz__step-number">
-                    <span class="bra-quiz__step-label">YOUR SIZE</span>
-                  </div>
-                  <h2 class="bra-quiz__step-title">{{ block.settings.step_title | default: "Your Recommended Bra Size" }}</h2>
-                </div>
-
-                <div class="bra-quiz__step-content">
-                  <div class="bra-quiz__results">
-                    <div class="bra-quiz__size-display" id="bra-quiz-size-display">
-                      <span class="bra-quiz__size-value">--</span>
-                    </div>
-                    {%- if block.settings.description != blank -%}
-                      <p class="bra-quiz__results-description">{{ block.settings.description }}</p>
-                    {%- endif -%}
-                  </div>
-
-                  {%- comment -%} Continue to Email Button {%- endcomment -%}
-                  <div class="bra-quiz__continue-wrapper">
-                    <button type="button" class="bra-quiz__continue-btn bra-quiz__continue-btn--large" data-next-step>
-                      {{ block.settings.button_text | default: "Continue" }}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           {%- when 'email_step' -%}
             <div class="bra-quiz__step bra-quiz__step--email" data-step="{{ forloop.index }}" {{ block.shopify_attributes }}>
-              <div class="bra-quiz__step-card{% if form.posted_successfully? %} bra-quiz__step-card--success{% endif %}">
-                {%- unless form.posted_successfully? -%}
-                  <div class="bra-quiz__step-header" data-step-header>
-                    <div class="bra-quiz__step-number">
-                      <span class="bra-quiz__step-label">FINAL STEP</span>
+              <div class="bra-quiz__step-card">
+                {%- form 'customer', id: 'bra-quiz-form', class: 'bra-quiz__form' -%}
+                  {%- if form.posted_successfully? -%}
+                    {%- comment -%} Success state - form will be hidden, success card will be shown via JS {%- endcomment -%}
+                    <div style="display: none;">
+                      <div id="bra-quiz-result" class="bra-quiz__success-size">
+                        <div class="bra-quiz__size-label">YOUR SIZE IS</div>
+                        <div class="bra-quiz__size-value">--</div>
+                      </div>
                     </div>
-                    <h2 class="bra-quiz__step-title">{{ block.settings.step_title | default: "Enter your email" }}</h2>
-                  </div>
-                {%- endunless -%}
-
-                <div class="bra-quiz__step-content" data-step-content>
-                  {%- if block.settings.description != blank and form.posted_successfully? == false -%}
-                    <p class="bra-quiz__email-description">{{ block.settings.description }}</p>
-                  {%- endif -%}
-
-                  {%- form 'customer', id: 'bra-quiz-form', class: 'bra-quiz__form' -%}
-                    {%- if form.posted_successfully? -%}
-                      <div class="bra-quiz__success">
-                        <p>{{ block.settings.success_message | default: "Thank you! Your bra size has been calculated and saved." }}</p>
-                        <div id="bra-quiz-result" class="bra-quiz__success-size">
-                          <div class="bra-quiz__size-label">Your Recommended Bra Size</div>
-                          <div class="bra-quiz__size-value">--</div>
-                        </div>
+                  {%- else -%}
+                    {%- if form.errors -%}
+                      <div class="bra-quiz__errors">
+                        {{ form.errors | default_errors }}
                       </div>
-                    {%- else -%}
-                      {%- if form.errors -%}
-                        <div class="bra-quiz__errors">
-                          {{ form.errors | default_errors }}
-                        </div>
-                      {%- endif -%}
+                    {%- endif -%}
 
-                      <div class="bra-quiz__email-wrapper">
-                        <input 
-                          type="email" 
-                          name="contact[email]" 
-                          id="bra-quiz-email" 
-                          class="bra-quiz__email-input" 
-                          placeholder="EMAIL ID"
-                          value="{{ customer.email }}"
-                          required
-                          autocomplete="email"
-                        >
-                        <button type="submit" class="bra-quiz__submit-btn">
-                          {{ block.settings.button_text | default: "FIND YOUR SIZE" }}
-                        </button>
-                      </div>
-
-                      {%- comment -%} Privacy Consent {%- endcomment -%}
+                    {%- comment -%} Left Column - Privacy Consent {%- endcomment -%}
+                    <div class="bra-quiz__email-left">
                       {%- if block.settings.show_privacy_consent -%}
                         <label class="bra-quiz__privacy-consent">
                           <input type="checkbox" name="contact[accepts_marketing]" value="true" id="bra-quiz-consent" required>
                           <span>{{ block.settings.privacy_text | default: "I consent to the storage of my information in order to calculate my size and improve the accuracy of the calculator. For details on how your data is stored and used, read our Privacy Policy." }}</span>
                         </label>
                       {%- endif -%}
+                    </div>
 
-                      {%- comment -%} 
-                        Hidden fields for storing measurements and bra size
-                        Note: Matches Shopify newsletter handling using contact fields
-                        Tags will be set via JavaScript before form submission
-                      {%- endcomment -%}
-                      <input type="hidden" name="contact[tags]" id="bra-quiz-contact-tags" value="bra-quiz">
-                      <input type="hidden" name="contact[body]" id="bra-quiz-contact-body" value="">
-                      <input type="hidden" id="bra-quiz-measurements" value="">
-                      <input type="hidden" id="bra-quiz-size" value="">
-                    {%- endif -%}
-                  {%- endform -%}
-                </div>
+                    {%- comment -%} Right Column - Email Form Panel {%- endcomment -%}
+                    <div class="bra-quiz__email-right">
+                      <div class="bra-quiz__email-panel">
+                        {%- unless form.posted_successfully? -%}
+                          <div class="bra-quiz__step-header" data-step-header>
+                            <h2 class="bra-quiz__step-title">{{ block.settings.step_title | default: "Enter your email" }}</h2>
+                          </div>
+                        {%- endunless -%}
+
+                        {%- if block.settings.description != blank and form.posted_successfully? == false -%}
+                          <p class="bra-quiz__email-description">{{ block.settings.description }}</p>
+                        {%- endif -%}
+
+                        <div class="bra-quiz__email-wrapper">
+                          <input 
+                            type="email" 
+                            name="contact[email]" 
+                            id="bra-quiz-email" 
+                            class="bra-quiz__email-input" 
+                            placeholder="EMAIL ID"
+                            value="{{ customer.email }}"
+                            required
+                            autocomplete="email"
+                          >
+                          <button type="submit" class="bra-quiz__submit-btn">
+                            {{ block.settings.button_text | default: "FIND YOUR SIZE" }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {%- comment -%} 
+                      Hidden fields for storing measurements and bra size
+                      Note: Matches Shopify newsletter handling using contact fields
+                      Tags will be set via JavaScript before form submission
+                    {%- endcomment -%}
+                    <input type="hidden" name="contact[tags]" id="bra-quiz-contact-tags" value="bra-quiz">
+                    <input type="hidden" name="contact[body]" id="bra-quiz-contact-body" value="">
+                    <input type="hidden" name="customer[note]" id="bra-quiz-customer-note" value="">
+                    <input type="hidden" id="bra-quiz-measurements" value="">
+                    <input type="hidden" id="bra-quiz-size" value="">
+                  {%- endif -%}
+                {%- endform -%}
               </div>
             </div>
         {%- endcase -%}
       {%- endfor -%}
+    </div>
+
+    {%- comment -%} Success Results Card (separate from email step) {%- endcomment -%}
+    <div class="bra-quiz__success-card" id="bra-quiz-success-card" style="display: {% if show_success_card %}block{% else %}none{% endif %};">
+      <style>
+        #bra-quiz-{{ section.id }} .bra-quiz__success-card-wrapper {
+          background-color: {{ section.settings.success_background_color | default: '#FF615C' }};
+          {%- if section.settings.success_pattern_image_mobile != blank -%}
+            background-image: url('{{ section.settings.success_pattern_image_mobile | image_url: width: section.settings.success_pattern_image_mobile.width }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+          {%- elsif section.settings.success_pattern_image != blank -%}
+            background-image: url('{{ section.settings.success_pattern_image | image_url: width: section.settings.success_pattern_image.width }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+          {%- endif -%}
+        }
+        
+        @media screen and (min-width: 700px) {
+          #bra-quiz-{{ section.id }} .bra-quiz__success-card-wrapper {
+            {%- if section.settings.success_pattern_image != blank -%}
+              background-image: url('{{ section.settings.success_pattern_image | image_url: width: section.settings.success_pattern_image.width }}');
+            {%- elsif section.settings.success_pattern_image_mobile != blank -%}
+              background-image: url('{{ section.settings.success_pattern_image_mobile | image_url: width: section.settings.success_pattern_image_mobile.width }}');
+            {%- endif -%}
+          }
+        }
+        
+        #bra-quiz-{{ section.id }} .bra-quiz__success-message,
+        #bra-quiz-{{ section.id }} .bra-quiz__size-value {
+          color: {{ section.settings.success_text_color | default: '#FFFFFF' }};
+        }
+        
+        #bra-quiz-{{ section.id }} .bra-quiz__size-label {
+          color: {{ section.settings.success_label_color | default: '#000000' }};
+        }
+        
+        #bra-quiz-{{ section.id }} .bra-quiz__success-card-wrapper {
+          border-color: {{ section.settings.success_border_color | default: '#FFFFFF' }};
+        }
+      </style>
+      <div class="bra-quiz__success-card-wrapper">
+        <div class="bra-quiz__success-content">
+          <p class="bra-quiz__success-message">Thanks for taking our quiz!</p>
+          <div id="bra-quiz-result" class="bra-quiz__success-size">
+            <div class="bra-quiz__size-label">YOUR SIZE IS</div>
+            <div class="bra-quiz__size-value">--</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -304,16 +358,54 @@ No webhooks or apps needed! The tags are set directly via the form (same approac
           "info": "Add SVG or HTML illustration for this step"
         },
         {
-          "type": "text",
-          "id": "step_icon",
-          "label": "Step Icon",
-          "info": "Optional icon or emoji for the step"
+          "type": "header",
+          "content": "Illustration Position"
+        },
+        {
+          "type": "range",
+          "id": "illustration_right_mobile",
+          "label": "Right Position (Mobile)",
+          "min": -200,
+          "max": 200,
+          "step": 5,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "illustration_bottom_mobile",
+          "label": "Bottom Position (Mobile)",
+          "min": -200,
+          "max": 200,
+          "step": 5,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "illustration_right_desktop",
+          "label": "Right Position (Desktop)",
+          "min": -200,
+          "max": 200,
+          "step": 5,
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "illustration_bottom_desktop",
+          "label": "Bottom Position (Desktop)",
+          "min": -200,
+          "max": 200,
+          "step": 5,
+          "unit": "px",
+          "default": 0
         },
         {
           "type": "html",
-          "id": "next_icon",
-          "label": "Next Button Icon (SVG)",
-          "info": "Optional custom SVG icon for next button"
+          "id": "step_icon",
+          "label": "Step Icon (HTML/SVG)",
+          "info": "Optional SVG icon for the step"
         }
       ]
     },
@@ -377,45 +469,26 @@ No webhooks or apps needed! The tags are set directly via the form (same approac
           "default": "more_than_2_fingers"
         },
         {
-          "type": "html",
-          "id": "illustration",
-          "label": "Illustration (HTML/SVG)"
-        },
-        {
-          "type": "text",
-          "id": "step_icon",
-          "label": "Step Icon"
+          "type": "header",
+          "content": "Option Images"
         },
         {
           "type": "html",
-          "id": "continue_icon",
-          "label": "Continue Button Icon (SVG)",
-          "info": "Optional custom SVG icon for continue button"
-        }
-      ]
-    },
-    {
-      "type": "results_step",
-      "name": "Results Display Step",
-      "limit": 1,
-      "settings": [
-        {
-          "type": "text",
-          "id": "step_title",
-          "label": "Step Title",
-          "default": "Your Recommended Bra Size"
+          "id": "option_1_image",
+          "label": "Option 1 Image (HTML/SVG)",
+          "info": "Image shown when option 1 is selected"
         },
         {
-          "type": "richtext",
-          "id": "description",
-          "label": "Description",
-          "default": "<p>Based on your measurements, here's your recommended bra size.</p>"
+          "type": "html",
+          "id": "option_2_image",
+          "label": "Option 2 Image (HTML/SVG)",
+          "info": "Image shown when option 2 is selected"
         },
         {
-          "type": "text",
-          "id": "button_text",
-          "label": "Continue Button Text",
-          "default": "Continue"
+          "type": "html",
+          "id": "option_3_image",
+          "label": "Option 3 Image (HTML/SVG)",
+          "info": "Image shown when option 3 is selected"
         }
       ]
     },
@@ -473,6 +546,50 @@ No webhooks or apps needed! The tags are set directly via the form (same approac
       "id": "title",
       "label": "Title",
       "default": "Find Your Perfect Bra Size"
+    },
+    {
+      "type": "header",
+      "content": "Success Card Design"
+    },
+    {
+      "type": "color",
+      "id": "success_background_color",
+      "label": "Background Color",
+      "default": "#FF615C",
+      "info": "Main background color for the success card (used as fallback if no pattern image)"
+    },
+    {
+      "type": "image_picker",
+      "id": "success_pattern_image",
+      "label": "Pattern Image (Desktop)",
+      "info": "Background image for the success card on desktop"
+    },
+    {
+      "type": "image_picker",
+      "id": "success_pattern_image_mobile",
+      "label": "Pattern Image (Mobile)",
+      "info": "Background image for the success card on mobile"
+    },
+    {
+      "type": "color",
+      "id": "success_text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF",
+      "info": "Color for the main message and size value"
+    },
+    {
+      "type": "color",
+      "id": "success_label_color",
+      "label": "Label Color",
+      "default": "#000000",
+      "info": "Color for the 'YOUR SIZE IS' label"
+    },
+    {
+      "type": "color",
+      "id": "success_border_color",
+      "label": "Border Color",
+      "default": "#FFFFFF",
+      "info": "Color for the card border"
     }
   ],
   "presets": [

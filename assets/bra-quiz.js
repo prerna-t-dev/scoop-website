@@ -12,46 +12,78 @@
     if (!quizContainer) return;
 
     // Check if form was successfully posted - if so, just display result and return
-    const resultDiv = quizContainer.querySelector('#bra-quiz-result');
-    const successMessage = quizContainer.querySelector('.bra-quiz__success');
-    const hasStoredSize = sessionStorage.getItem('bra-quiz-size');
+    const successCard = quizContainer.querySelector('#bra-quiz-success-card');
+    const emailStep = quizContainer.querySelector('.bra-quiz__step--email');
+    const formInSuccessState = emailStep && emailStep.querySelector('form') && emailStep.querySelector('form').dataset.postedSuccessfully === 'true';
     
-    // Check if form was successfully submitted (either via form state or sessionStorage)
-    if ((resultDiv && successMessage) || hasStoredSize) {
-      // Form was successfully submitted - show success message and result
+    // Check URL parameter for success state
+    const urlParams = new URLSearchParams(window.location.search);
+    const customerPosted = urlParams.get('customer_posted') === 'true';
+    
+    // Check if form was successfully submitted (only via form state or URL parameter, not sessionStorage)
+    if (formInSuccessState || customerPosted) {
+      // Hide video banner and quiz banner sections when results are shown
+      const videoBannerSection = document.querySelector('[id*="video_banner"]');
+      const quizBannerSection = document.querySelector('[id*="quiz_banner"]');
+      
+      if (videoBannerSection) {
+        videoBannerSection.style.display = 'none';
+      }
+      if (quizBannerSection) {
+        quizBannerSection.style.display = 'none';
+      }
+      
+      // Show success-only sections (related products, collection list, quiz info card)
+      const relatedProductsSection = document.querySelector('[id*="related_products"]');
+      const collectionListSection = document.querySelector('[id*="collection_list"]');
+      const quizInfoCardSection = document.querySelector('[id*="quiz_info_card"]');
+      
+      if (relatedProductsSection) {
+        relatedProductsSection.style.display = '';
+      }
+      if (collectionListSection) {
+        collectionListSection.style.display = '';
+      }
+      if (quizInfoCardSection) {
+        quizInfoCardSection.style.display = '';
+      }
+      
+      // Form was successfully submitted - show separate success card and hide email step
       const emailStep = quizContainer.querySelector('.bra-quiz__step--email');
+      const successCard = quizContainer.querySelector('#bra-quiz-success-card');
       const allSteps = quizContainer.querySelectorAll('.bra-quiz__step');
       const progressSteps = quizContainer.querySelectorAll('.bra-quiz__progress-step');
+      const quizHeader = quizContainer.querySelector('.bra-quiz__header');
+      const progressBar = quizContainer.querySelector('.bra-quiz__progress');
       
+      // Hide all quiz steps
+      allSteps.forEach(step => {
+        step.classList.remove('bra-quiz__step--active');
+        step.style.display = 'none';
+      });
+      
+      // Hide the email step card
       if (emailStep) {
-        // Show the email step (which contains the success message)
-        emailStep.classList.add('bra-quiz__step--active');
-        
-        const stepHeader = emailStep.querySelector('[data-step-header]');
-        if (stepHeader) {
-          stepHeader.style.display = 'none';
-        }
-        const emailDescription = emailStep.querySelector('.bra-quiz__email-description');
-        if (emailDescription) {
-          emailDescription.style.display = 'none';
-        }
-        const stepCard = emailStep.querySelector('.bra-quiz__step-card');
-        if (stepCard) {
-          stepCard.classList.add('bra-quiz__step-card--success');
-        }
-        
-        // Hide other steps
-        allSteps.forEach(step => {
-          if (step !== emailStep) {
-            step.classList.remove('bra-quiz__step--active');
-          }
-        });
-        
-        // Update progress bar to show all steps as complete
-        progressSteps.forEach(progressStep => {
-          progressStep.classList.add('bra-quiz__progress-step--active');
-        });
+        emailStep.style.display = 'none';
       }
+      
+      // Hide quiz header and progress bar
+      if (quizHeader) {
+        quizHeader.style.display = 'none';
+      }
+      if (progressBar) {
+        progressBar.style.display = 'none';
+      }
+      
+      // Show the separate success card
+      if (successCard) {
+        successCard.style.display = 'block';
+      }
+      
+      // Update progress bar to show all steps as complete
+      progressSteps.forEach(progressStep => {
+        progressStep.classList.add('bra-quiz__progress-step--active');
+      });
       
       // Get or calculate the size
       let calculatedSize = sessionStorage.getItem('bra-quiz-size');
@@ -88,36 +120,17 @@
         }
       }
       
-      // If form wasn't in success state, create the success message
-      if (!resultDiv || !successMessage) {
-        const emailStepContent = emailStep ? emailStep.querySelector('[data-step-content]') : null;
-        if (emailStepContent) {
-          emailStepContent.innerHTML = `
-            <div class="bra-quiz__success">
-              <p>Thank you! Your bra size has been calculated and saved.</p>
-              <div id="bra-quiz-result" class="bra-quiz__success-size">
-                <div class="bra-quiz__size-label">Your Recommended Bra Size</div>
-                <div class="bra-quiz__size-value">${calculatedSize || '--'}</div>
-              </div>
-            </div>
-          `;
-        }
-      }
-
-      // Ensure the size is displayed in whichever result container exists
-      let sizeValueEl = quizContainer.querySelector('#bra-quiz-result .bra-quiz__size-value');
-      if (!sizeValueEl && emailStep) {
-        sizeValueEl = emailStep.querySelector('.bra-quiz__size-value');
+      // Ensure the size is displayed in the success card
+      let sizeValueEl = quizContainer.querySelector('#bra-quiz-success-card .bra-quiz__size-value');
+      if (!sizeValueEl) {
+        sizeValueEl = quizContainer.querySelector('#bra-quiz-result .bra-quiz__size-value');
       }
       if (sizeValueEl && calculatedSize && calculatedSize !== 'Please complete all measurements') {
         sizeValueEl.textContent = calculatedSize;
       }
       
-      // Clean up storage after a delay (so it persists if page is refreshed)
-      setTimeout(() => {
-        sessionStorage.removeItem('bra-quiz-size');
-        sessionStorage.removeItem('bra-quiz-measurements');
-      }, 5000);
+      // Don't clean up storage immediately - keep it for page refresh
+      // Only clean up after a longer delay or when user navigates away
       
       // Don't initialize quiz - just return
       return;
@@ -227,22 +240,94 @@
       });
 
       currentStep = stepNumber;
+      
+      // Update clickability after step change
+      updateProgressStepClickability();
       // Only save if not skipping (skip on initial load)
       if (!skipSave) {
         saveData();
       }
       
-      // If showing results step, calculate and display size
+      // Size display is now handled by the separate success card
+      
+      // Note: Size is NOT displayed in email step - only after form submission
+    }
+
+    // Handle question step image switching based on selected option
+    function updateQuestionIllustration(stepElement) {
+      const questionIllustration = stepElement.querySelector('[data-question-illustration]');
+      if (!questionIllustration) return;
+
+      const selectedRadio = stepElement.querySelector('.bra-quiz__radio:checked');
+      if (!selectedRadio) {
+        // Hide all images if no option is selected
+        questionIllustration.querySelectorAll('.bra-quiz__option-image').forEach(img => {
+          img.style.display = 'none';
+        });
+        return;
+      }
+
+      // Get the option index from the radio button's parent label
+      const optionLabel = selectedRadio.closest('.bra-quiz__option');
+      const optionIndex = optionLabel ? optionLabel.getAttribute('data-option-index') : null;
+
+      if (optionIndex) {
+        // Hide all images
+        questionIllustration.querySelectorAll('.bra-quiz__option-image').forEach(img => {
+          img.style.display = 'none';
+        });
+
+        // Show the image for the selected option
+        const selectedImage = questionIllustration.querySelector(`[data-option-image="${optionIndex}"]`);
+        if (selectedImage) {
+          selectedImage.style.display = 'flex';
+        }
+      }
+    }
+
+    // Update showStep to also update question illustration
+    const originalShowStep = showStep;
+    showStep = function(stepNumber, skipSave) {
+      originalShowStep(stepNumber, skipSave);
       const currentStepElement = steps[stepNumber - 1];
-      if (currentStepElement && currentStepElement.classList.contains('bra-quiz__step--results')) {
-        const calculatedSize = calculateBraSize();
-        const sizeDisplay = quizContainer.querySelector('#bra-quiz-size-display .bra-quiz__size-value');
-        if (sizeDisplay) {
-          sizeDisplay.textContent = calculatedSize;
+      if (currentStepElement) {
+        updateQuestionIllustration(currentStepElement);
+      }
+    };
+
+    // Check if a step is completed (has data)
+    function isStepCompleted(stepNumber) {
+      if (stepNumber === 1) return true; // First step is always accessible
+      
+      const stepElement = steps[stepNumber - 1];
+      if (!stepElement) return false;
+      
+      // Check if it's a measurement step
+      const input = stepElement.querySelector('.bra-quiz__input');
+      if (input && input.dataset.measurement) {
+        const measurementKey = input.dataset.measurement;
+        return measurements[measurementKey] !== undefined && measurements[measurementKey] !== null;
+      }
+      
+      // Check if it's a question step
+      const radios = stepElement.querySelectorAll('.bra-quiz__radio');
+      if (radios.length > 0) {
+        for (let radio of radios) {
+          const questionKey = radio.dataset.question;
+          if (questionKey && measurements[questionKey] !== undefined && measurements[questionKey] !== null) {
+            return true;
+          }
         }
       }
       
-      // Note: Size is NOT displayed in email step - only after form submission
+      // Results step has been removed - results are now shown in a separate success card
+      
+      // Email step is always accessible if we've reached it
+      if (stepElement.classList.contains('bra-quiz__step--email')) {
+        return currentStep >= stepNumber;
+      }
+      
+      return false;
     }
 
     function collectMeasurement(stepElement) {
@@ -414,6 +499,53 @@
       return `${bandSize}${cupSizeStr}`;
     }
 
+    // Check if all required measurements are completed
+    function areAllMeasurementsCompleted() {
+      const requiredKeys = ['snug_underband', 'tight_underband', 'standing_overbust', 'leaning_overbust'];
+      const allMeasurementsComplete = requiredKeys.every(key => 
+        measurements[key] !== undefined && measurements[key] !== null
+      );
+      
+      // Also check if question step is completed (if it exists)
+      const questionKeys = Object.keys(measurements).filter(key => 
+        !requiredKeys.includes(key) && measurements[key] !== undefined && measurements[key] !== null
+      );
+      
+      return allMeasurementsComplete;
+    }
+
+    // Update progress step clickability - allow forward and backward navigation
+    function updateProgressStepClickability() {
+      progressSteps.forEach((progressStep, index) => {
+        const stepNumber = index + 1;
+        // Allow navigation to any step (forward or backward)
+        progressStep.classList.add('bra-quiz__progress-step--completed');
+        progressStep.classList.remove('bra-quiz__progress-step--disabled');
+      });
+    }
+
+    // Progress step click handlers - allow forward and backward navigation
+    progressSteps.forEach((progressStep, index) => {
+      progressStep.addEventListener('click', function() {
+        const targetStep = index + 1;
+        // Allow navigation to any step
+        showStep(targetStep);
+      });
+    });
+
+    // Update clickability on load and after each step
+    updateProgressStepClickability();
+
+    // Add change event listeners to radio buttons for question steps
+    steps.forEach(function(step) {
+      const radios = step.querySelectorAll('.bra-quiz__radio');
+      radios.forEach(function(radio) {
+        radio.addEventListener('change', function() {
+          updateQuestionIllustration(step);
+        });
+      });
+    });
+
     // Next button handlers
     quizContainer.addEventListener('click', function(e) {
       if (e.target.closest('[data-next-step]')) {
@@ -441,6 +573,27 @@
         if (!email) {
           console.error('Email is required');
           e.preventDefault();
+          return false;
+        }
+        
+        // Check if all required measurements are completed
+        if (!areAllMeasurementsCompleted()) {
+          e.preventDefault();
+          alert('Please complete all measurement steps before submitting.');
+          // Navigate to first incomplete step
+          const requiredKeys = ['snug_underband', 'tight_underband', 'standing_overbust', 'leaning_overbust'];
+          for (let i = 0; i < steps.length; i++) {
+            const step = steps[i];
+            const input = step.querySelector('.bra-quiz__input');
+            if (input && input.dataset.measurement) {
+              const measurementKey = input.dataset.measurement;
+              if (requiredKeys.includes(measurementKey) && 
+                  (measurements[measurementKey] === undefined || measurements[measurementKey] === null)) {
+                showStep(i + 1);
+                break;
+              }
+            }
+          }
           return false;
         }
         
@@ -474,6 +627,7 @@
         
         // Store structured data in contact body for reference/webhook processing
         const contactBodyInput = form.querySelector('#bra-quiz-contact-body');
+        const customerNoteInput = form.querySelector('#bra-quiz-customer-note');
         if (contactBodyInput) {
           const noteData = {
             source: 'bra-quiz',
@@ -483,6 +637,10 @@
             tags: contactTagsInput ? contactTagsInput.value : undefined
           };
           contactBodyInput.value = JSON.stringify(noteData);
+
+          if (customerNoteInput) {
+            customerNoteInput.value = JSON.stringify(noteData);
+          }
         }
         
         // Let Shopify handle the form submission and captcha
@@ -499,14 +657,154 @@
     populateSavedValues();
     // Show step without saving (skipSave = true on initial load)
     showStep(currentStep, true);
+    // Update clickability after data is loaded
+    updateProgressStepClickability();
     
     // Debug: Log current state
     console.log('Quiz initialized - Current step:', currentStep, 'Measurements:', measurements);
   }
 
+  // Hide banners immediately if results are already shown (check sessionStorage or URL)
+  function hideBannersIfResultsShown() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const customerPosted = urlParams.get('customer_posted') === 'true';
+    
+    // Only hide quiz if URL parameter is present (not just sessionStorage)
+    if (customerPosted) {
+      const videoBannerSection = document.querySelector('[id*="video_banner"]');
+      const quizBannerSection = document.querySelector('[id*="quiz_banner"]');
+      const quizHeader = document.querySelector('.bra-quiz__header');
+      const progressBar = document.querySelector('.bra-quiz__progress');
+      const quizSteps = document.querySelector('.bra-quiz__steps');
+      const successCard = document.querySelector('#bra-quiz-success-card');
+      
+      if (videoBannerSection) {
+        videoBannerSection.style.display = 'none';
+      }
+      if (quizBannerSection) {
+        quizBannerSection.style.display = 'none';
+      }
+      
+      // Show success-only sections (related products, collection list, quiz info card)
+      const relatedProductsSection = document.querySelector('[id*="related_products"]');
+      const collectionListSection = document.querySelector('[id*="collection_list"]');
+      const quizInfoCardSection = document.querySelector('[id*="quiz_info_card"]');
+      
+      if (relatedProductsSection) {
+        relatedProductsSection.style.display = '';
+      }
+      if (collectionListSection) {
+        collectionListSection.style.display = '';
+      }
+      if (quizInfoCardSection) {
+        quizInfoCardSection.style.display = '';
+      }
+      if (quizHeader) {
+        quizHeader.style.display = 'none';
+      }
+      if (progressBar) {
+        progressBar.style.display = 'none';
+      }
+      if (quizSteps) {
+        quizSteps.style.display = 'none';
+      }
+      if (successCard) {
+        successCard.style.display = 'block';
+        
+        // Try to display the size if available from sessionStorage
+        const sizeValueEl = successCard.querySelector('.bra-quiz__size-value');
+        if (sizeValueEl) {
+          const hasStoredSize = sessionStorage.getItem('bra-quiz-size');
+          if (hasStoredSize) {
+            sizeValueEl.textContent = hasStoredSize;
+          } else if (customerPosted) {
+            // If URL parameter is present but no sessionStorage, try to get from stored measurements
+            const storedMeasurements = sessionStorage.getItem('bra-quiz-measurements');
+            if (storedMeasurements) {
+              try {
+                const measurements = JSON.parse(storedMeasurements);
+                // Recalculate size from measurements
+                const su = parseFloat(measurements.snug_underband) || 0;
+                const tu = parseFloat(measurements.tight_underband) || 0;
+                const so = parseFloat(measurements.standing_overbust) || 0;
+                const lo = parseFloat(measurements.leaning_overbust) || 0;
+                
+                if (su && tu && so && lo) {
+                  // Use simplified calculation for display on refresh
+                  // Full calculation is done in the main function
+                  const bandSize = Math.min(Math.round(su), Math.round(tu + 2));
+                  const avgBust = (so + lo) / 2;
+                  const cupDifference = avgBust - su;
+                  
+                  if (cupDifference >= 5 && cupDifference <= 15) {
+                    const cupOrder = ['D', 'DD', 'E', 'F', 'FF', 'G', 'GG', 'H', 'HH', 'J', 'JJ', 'K', 'KK', 'L'];
+                    const cupIndex = Math.floor(cupDifference) - 5;
+                    if (cupIndex >= 0 && cupIndex < cupOrder.length) {
+                      const calculatedSize = 'UK ' + bandSize + ' ' + cupOrder[cupIndex];
+                      sizeValueEl.textContent = calculatedSize;
+                    }
+                  }
+                }
+              } catch (e) {
+                console.error('Error parsing stored measurements:', e);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Check immediately if DOM is already loaded
+  if (document.readyState !== 'loading') {
+    hideBannersIfResultsShown();
+    // Hide success-only sections on normal state
+    const urlParams = new URLSearchParams(window.location.search);
+    const customerPosted = urlParams.get('customer_posted') === 'true';
+    if (!customerPosted) {
+      const relatedProductsSection = document.querySelector('[id*="related_products"]');
+      const collectionListSection = document.querySelector('[id*="collection_list"]');
+      const quizInfoCardSection = document.querySelector('[id*="quiz_info_card"]');
+      
+      if (relatedProductsSection) {
+        relatedProductsSection.style.display = 'none';
+      }
+      if (collectionListSection) {
+        collectionListSection.style.display = 'none';
+      }
+      if (quizInfoCardSection) {
+        quizInfoCardSection.style.display = 'none';
+      }
+    }
+  }
+
+  // Function to hide success-only sections on normal state
+  function hideSuccessOnlySections() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const customerPosted = urlParams.get('customer_posted') === 'true';
+    
+    if (!customerPosted) {
+      const relatedProductsSection = document.querySelector('[id*="related_products"]');
+      const collectionListSection = document.querySelector('[id*="collection_list"]');
+      const quizInfoCardSection = document.querySelector('[id*="quiz_info_card"]');
+      
+      if (relatedProductsSection) {
+        relatedProductsSection.style.display = 'none';
+      }
+      if (collectionListSection) {
+        collectionListSection.style.display = 'none';
+      }
+      if (quizInfoCardSection) {
+        quizInfoCardSection.style.display = 'none';
+      }
+    }
+  }
+
   // Initialize on DOMContentLoaded
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
+      hideBannersIfResultsShown();
+      hideSuccessOnlySections();
       // Find all bra quiz containers (only elements with class 'bra-quiz')
       const quizContainers = document.querySelectorAll('.bra-quiz[id^="bra-quiz-"]');
       quizContainers.forEach(function(container) {
@@ -515,6 +813,8 @@
     });
   } else {
     // DOM already loaded
+    hideBannersIfResultsShown();
+    hideSuccessOnlySections();
     const quizContainers = document.querySelectorAll('.bra-quiz[id^="bra-quiz-"]');
     quizContainers.forEach(function(container) {
       initBraQuiz(container.id);
