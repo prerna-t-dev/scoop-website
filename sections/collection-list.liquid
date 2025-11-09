@@ -8,51 +8,91 @@ CSS
 
 <style>
   #shopify-section-{{ section.id }} {
-    padding-top: 64px !important;
+    padding-top: 32px !important;
   }
 
-  #shopify-section-{{ section.id }} .section-header h2 {
-    font-size: 35px;
-    color: #000000;
-  }
-
-  #shopify-section-{{ section.id }} .section-header .prose {
-    font-size: var(--text-base);
-    color: #828282;
-  }
-
-  #shopify-section-{{ section.id }} .section-header {
+  #shopify-section-{{ section.id }} .collection-list-header {
     display: flex;
     flex-direction: column;
     gap: 16px;
+  }
+
+  #shopify-section-{{ section.id }} .collection-list-header__left {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #shopify-section-{{ section.id }} .collection-list-header__heading {
+    font-family: var(--heading-font-family);
+    font-size: 35px;
+    font-weight: 400;
+    line-height: 1.2;
+    {%- if section.settings.heading_gradient != blank -%}
+      background: {{ section.settings.heading_gradient }};
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    {%- elsif section.settings.heading_color != blank and section.settings.heading_color != 'rgba(0,0,0,0)' -%}
+      color: {{ section.settings.heading_color.rgb }};
+    {%- else -%}
+      color: #000000;
+    {%- endif -%}
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .collection-list-header__heading p {
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .collection-list-header__heading em {
+    font-style: italic;
+  }
+
+  #shopify-section-{{ section.id }} .collection-list-header__subheading {
+    font-family: var(--text-font-family);
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #000000;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .collection-list-header__content {
+    font-family: var(--text-font-family);
+    font-size: var(--text-base);
+    color: #828282;
+    margin: 0;
   }
 
   #shopify-section-{{ section.id }} .collection-list {
     background-color: transparent !important;
   }
 
-
-
   @media screen and (min-width: 700px) {
-    #shopify-section-{{ section.id }} .section-header h2 {
+    #shopify-section-{{ section.id }} .collection-list-header {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    #shopify-section-{{ section.id }} .collection-list-header__left {
+      flex: 1;
+    }
+
+    #shopify-section-{{ section.id }} .collection-list-header__heading {
       font-size: 42px;
     }
 
-    #shopify-section-{{ section.id }} .section-header {
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: space-between;
+    #shopify-section-{{ section.id }} .collection-list-header__subheading {
+      font-size: 16px;
     }
 
-    #shopify-section-{{ section.id }} .section-header .prose {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    #shopify-section-{{ section.id }} .section-header .prose p{
-      margin-block-start: 0;
+    #shopify-section-{{ section.id }} .collection-list-header__content {
+      flex: 1;
+      max-width: 500px;
     }
 
     #shopify-section-{{ section.id }} .collection-list {
@@ -81,8 +121,27 @@ LIQUID
 
 <div {% render 'section-properties' %}>
   <div class="section-stack">
-    {%- assign link_url = section.settings.link_url | default: section.settings.collection.url -%}
-    {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: link_url -%}
+    {%- if section.settings.title != blank or section.settings.subheading != blank or section.settings.content != blank -%}
+      <div class="collection-list-header">
+        <div class="collection-list-header__left">
+          {%- if section.settings.title != blank -%}
+            <h2 class="collection-list-header__heading">
+              {{ section.settings.title }}
+            </h2>
+          {%- endif -%}
+          
+          {%- if section.settings.subheading != blank -%}
+            <p class="collection-list-header__subheading">{{ section.settings.subheading | escape }}</p>
+          {%- endif -%}
+        </div>
+        
+        {%- if section.settings.content != blank -%}
+          <div class="collection-list-header__content">
+            {{ section.settings.content }}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
 
     <div class="{% if section.settings.show_progress_bar %}scrollable-with-controls{% else %}floating-controls-container{% endif %}">
       {%- assign scroll_area_id = 'scroll-area-' | append: section.id -%}
@@ -233,7 +292,7 @@ LIQUID
       "label": "Heading",
       "default": "<p>Collection list</p>"
     },
-    {
+    { 
       "type": "richtext",
       "id": "content",
       "label": "Content"

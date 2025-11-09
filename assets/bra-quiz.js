@@ -496,7 +496,7 @@
       }
 
       const cupSizeStr = cupSizes.length === 1 ? cupSizes[0] : cupSizes.join('/');
-      return `${bandSize}${cupSizeStr}`;
+      return `${bandSize} ${cupSizeStr}`;
     }
 
     // Check if all required measurements are completed
@@ -609,7 +609,10 @@
         // Set contact tags - include bra size as a tag (Shopify handles customer creation similar to newsletter)
         const contactTagsInput = form.querySelector('#bra-quiz-contact-tags');
         if (contactTagsInput && calculatedSize && calculatedSize !== 'Please complete all measurements') {
-          const sizeTag = 'bra-size-' + calculatedSize;
+          // Check if size is not available (error message)
+          const isSizeNotAvailable = calculatedSize.includes("don't carry your size") || calculatedSize.includes("don't carry");
+          const sizeTag = isSizeNotAvailable ? 'bra-size-not-available' : 'bra-size-' + calculatedSize.replace(/\s+/g, '-');
+          
           const existingTags = (contactTagsInput.value || '')
             .split(',')
             .map(tag => tag.trim())

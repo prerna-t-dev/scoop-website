@@ -67,11 +67,14 @@ No webhooks or apps needed! The tags are set directly via the form (same approac
                       type="number" 
                       id="measurement-{{ forloop.index }}" 
                       class="bra-quiz__input" 
-                      placeholder="ENTER MEASUREMENTS IN INCHES"
+                      placeholder=" "
                       step="0.1"
                       min="0"
                       data-measurement="{{ block.settings.measurement_key }}"
                     >
+                    <label for="measurement-{{ forloop.index }}" class="bra-quiz__input-label">
+                      <span class="bra-quiz__placeholder-underlined">ENTER MEASUREMENTS</span> IN INCHES
+                    </label>
                     <button type="button" class="bra-quiz__next-btn" data-next-step>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.1838 0C20.5066 0 23.2003 2.69372 23.2003 6.01659C23.2003 8.52444 21.6659 10.6738 19.4848 11.5774C21.6659 12.4809 23.2003 14.6303 23.2003 17.1382C23.2003 20.461 20.5066 23.1548 17.1838 23.1548C14.6545 23.1548 12.49 21.5941 11.6002 19.3833C10.7104 21.5941 8.54581 23.1548 6.01659 23.1548C2.69372 23.1548 0 20.461 0 17.1382C0 14.6303 1.53436 12.481 3.7155 11.5774C1.53436 10.6738 0 8.52442 0 6.01659C0 2.69372 2.69372 0 6.01659 0C8.54578 0 10.7104 1.56063 11.6002 3.77141C12.49 1.56063 14.6546 0 17.1838 0Z" fill="#CCA7FC"/>
@@ -86,6 +89,12 @@ No webhooks or apps needed! The tags are set directly via the form (same approac
                   {%- comment -%} Instructions {%- endcomment -%}
                   {%- if block.settings.instructions != blank -%}
                     <div class="bra-quiz__instructions">
+                        <div class="bra-quiz__step-number bra-quiz__step-number--height-only" style="opacity: 0 !important">
+                        <span class="bra-quiz__step-label">STEP {{ forloop.index }}</span>
+                        {%- if block.settings.step_icon != blank -%}
+                            <span class="bra-quiz__step-icon">{{ block.settings.step_icon }}</span>
+                        {%- endif -%}
+                        </div>
                       {{ block.settings.instructions }}
                     </div>
                   {%- endif -%}
@@ -309,7 +318,9 @@ No webhooks or apps needed! The tags are set directly via the form (same approac
       </style>
       <div class="bra-quiz__success-card-wrapper">
         <div class="bra-quiz__success-content">
-          <p class="bra-quiz__success-message">Thanks for taking our quiz!</p>
+          <p class="bra-quiz__success-message">Thanks for
+            <br />
+             taking our quiz!</p>
           <div id="bra-quiz-result" class="bra-quiz__success-size">
             <div class="bra-quiz__size-label">YOUR SIZE IS</div>
             <div class="bra-quiz__size-value">--</div>
