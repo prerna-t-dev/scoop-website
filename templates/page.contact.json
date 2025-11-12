@@ -68,6 +68,7 @@
         "name_label": "YOUR NAME",
         "email_label": "",
         "message_label": "",
+        "background_svg": "",
         "background": "",
         "background_gradient": "",
         "text_color": "",
@@ -84,17 +85,33 @@
       "custom_css": [
         ".bg-custom {box-shadow: none;}",
         "@media (max-width: 700px) {.contact-info__grid {gap: 0; }}",
-        "@media (min-width: 700px) {.contact-info__column:last-child{padding-left: 80px; }}"
+        "@media (min-width: 700px) {.contact-info__column:last-child {padding-left: 80px; }}"
       ],
       "name": "Contact Info",
       "settings": {
         "full_width": false,
         "title": "",
-        "email": "email@scoopstudio.com",
-        "phone": "+91 1234567890",
-        "address": "Address Line 1\nAddress Line 2\nCity - Pincode\nIndia",
+        "email": "hello@shopscoopstudio.com",
+        "phone": "+91 9667089725",
+        "address": "9, Southern Avenue,\nMaharani Bagh\nNew Delhi - 110065\nIndia",
         "background": "#f8eeec",
         "background_gradient": ""
+      }
+    },
+    "custom_html_kBkqEn": {
+      "type": "custom-html",
+      "custom_css": [
+        "iframe {width: 100%; margin: auto;}"
+      ],
+      "name": "Custom HTML",
+      "settings": {
+        "full_width": false,
+        "remove_vertical_spacing": false,
+        "remove_horizontal_spacing": false,
+        "html": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.0111369696815!2d77.26155107553058!3d28.569428286943424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce397e5e63977%3A0x42304fa951bbde40!2s9%2C%20Southern%20Ave%2C%20Block%20J%2C%20Maharani%20Bagh%2C%20New%20Friends%20Colony%2C%20New%20Delhi%2C%20Delhi%20110065!5e0!3m2!1sen!2sin!4v1760279785790!5m2!1sen!2sin\" width=\"1200\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
       }
     },
     "contact_ep6LtL": {
@@ -128,6 +145,7 @@
         "name_label": "YOUR NAME",
         "email_label": "",
         "message_label": "HERE’S WHY I WANT TO BE A PART OF SCOOP",
+        "background_svg": "",
         "background": "",
         "background_gradient": "",
         "text_color": "",
@@ -137,22 +155,6 @@
         "contact_text_color": "",
         "button_background": "",
         "button_text_color": ""
-      }
-    },
-    "custom_html_kBkqEn": {
-      "type": "custom-html",
-      "custom_css": [
-        "iframe {width: 100%; margin: auto;}"
-      ],
-      "name": "Custom HTML",
-      "settings": {
-        "full_width": false,
-        "remove_vertical_spacing": false,
-        "remove_horizontal_spacing": false,
-        "html": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3504.0111369696815!2d77.26155107553058!3d28.569428286943424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce397e5e63977%3A0x42304fa951bbde40!2s9%2C%20Southern%20Ave%2C%20Block%20J%2C%20Maharani%20Bagh%2C%20New%20Friends%20Colony%2C%20New%20Delhi%2C%20Delhi%20110065!5e0!3m2!1sen!2sin!4v1760279785790!5m2!1sen!2sin\" width=\"1200\" height=\"350\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
-        "background": "",
-        "background_gradient": "",
-        "text_color": ""
       }
     },
     "ig_carousel_UUgbMM": {
@@ -222,8 +224,8 @@
     "image_with_text_overlay_tkxfdn",
     "contact",
     "contact_info_Etgczz",
-    "contact_ep6LtL",
     "custom_html_kBkqEn",
+    "contact_ep6LtL",
     "ig_carousel_UUgbMM"
   ]
 }
