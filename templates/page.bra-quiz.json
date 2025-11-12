@@ -29,6 +29,7 @@
         "banner_pattern": "shopify://shop_images/Frame_1000006044.png",
         "banner_min_height_mobile": 200,
         "banner_min_height_desktop": 480,
+        "show_video": false,
         "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "video_thumbnail": "shopify://shop_images/image_139.png",
         "video_aspect_ratio": 24,
@@ -186,7 +187,8 @@
       "type": "related-products",
       "custom_css": [
         ".section-header {justify-content: start;}",
-        ".section-full {padding-bottom: 0;}"
+        ".section-full {padding-bottom: 0;}",
+        ".section-header .h2{text-align: left;}"
       ],
       "name": "Related products",
       "settings": {

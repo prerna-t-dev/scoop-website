@@ -13,6 +13,11 @@ A banner section with text overlay and an embedded video player that overlaps th
     {%- if section.settings.banner_min_height_mobile != blank -%}
       min-height: {{ section.settings.banner_min_height_mobile }}px;
     {%- endif -%}
+    {%- unless section.settings.show_video -%}
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    {%- endunless -%}
   }
   
   {%- if section.settings.banner_min_height_desktop != blank -%}
@@ -22,6 +27,12 @@ A banner section with text overlay and an embedded video player that overlaps th
       }
     }
   {%- endif -%}
+  
+  {%- unless section.settings.show_video -%}
+    #video-banner-{{ section.id }} .video-banner__content {
+      text-align: center;
+    }
+  {%- endunless -%}
   
   #video-banner-{{ section.id }} .video-banner__upper-text,
   #video-banner-{{ section.id }} .video-banner__main-text {
@@ -81,54 +92,57 @@ A banner section with text overlay and an embedded video player that overlaps th
       </div>
 
       {%- comment -%} Video Player {%- endcomment -%}
-      {%- if section.settings.video_url != blank or section.settings.video_thumbnail != blank -%}
-        <div class="video-banner__video-wrapper">
-          {%- if section.settings.video_thumbnail != blank -%}
-            <div class="video-banner__video-thumbnail">
-              {{- section.settings.video_thumbnail | image_url: width: section.settings.video_thumbnail.width | image_tag: loading: 'lazy', class: 'video-banner__thumbnail-image' -}}
-              <button class="video-banner__play-button" aria-label="Play video" data-video-trigger>
-                <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="30" cy="30" r="30" fill="white" fill-opacity="0.7"/>
-                  <path d="M25 20L25 40L40 30L25 20Z" fill="white"/>
-                </svg>
-              </button>
-            </div>
-          {%- endif -%}
-          
-          {%- if section.settings.video_url != blank -%}
-            <div class="video-banner__video-player" data-video-player style="display: none;">
-              {%- if section.settings.video_url.type == 'youtube' -%}
-                <iframe 
-                  src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?rel=0" 
-                  frameborder="0" 
-                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                  allowfullscreen
-                  class="video-banner__iframe"
-                ></iframe>
-              {%- elsif section.settings.video_url.type == 'vimeo' -%}
-                <iframe 
-                  src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}" 
-                  frameborder="0" 
-                  allow="autoplay; fullscreen; picture-in-picture" 
-                  allowfullscreen
-                  class="video-banner__iframe"
-                ></iframe>
-              {%- else -%}
-                <video 
-                  src="{{ section.settings.video_url }}" 
-                  controls 
-                  class="video-banner__video"
-                ></video>
-              {%- endif -%}
-            </div>
-          {%- endif -%}
-        </div>
+      {%- if section.settings.show_video -%}
+        {%- if section.settings.video_url != blank or section.settings.video_thumbnail != blank -%}
+          <div class="video-banner__video-wrapper">
+            {%- if section.settings.video_thumbnail != blank -%}
+              <div class="video-banner__video-thumbnail">
+                {{- section.settings.video_thumbnail | image_url: width: section.settings.video_thumbnail.width | image_tag: loading: 'lazy', class: 'video-banner__thumbnail-image' -}}
+                <button class="video-banner__play-button" aria-label="Play video" data-video-trigger>
+                  <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="30" cy="30" r="30" fill="white" fill-opacity="0.7"/>
+                    <path d="M25 20L25 40L40 30L25 20Z" fill="white"/>
+                  </svg>
+                </button>
+              </div>
+            {%- endif -%}
+            
+            {%- if section.settings.video_url != blank -%}
+              <div class="video-banner__video-player" data-video-player style="display: none;">
+                {%- if section.settings.video_url.type == 'youtube' -%}
+                  <iframe 
+                    src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?rel=0" 
+                    frameborder="0" 
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    class="video-banner__iframe"
+                  ></iframe>
+                {%- elsif section.settings.video_url.type == 'vimeo' -%}
+                  <iframe 
+                    src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}" 
+                    frameborder="0" 
+                    allow="autoplay; fullscreen; picture-in-picture" 
+                    allowfullscreen
+                    class="video-banner__iframe"
+                  ></iframe>
+                {%- else -%}
+                  <video 
+                    src="{{ section.settings.video_url }}" 
+                    controls 
+                    class="video-banner__video"
+                  ></video>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
       {%- endif -%}
     </div>
   </div>
   </div>
 </div>
 
+{%- if section.settings.show_video -%}
 <script>
   (function() {
     const videoBanner = document.getElementById('video-banner-{{ section.id }}');
@@ -146,6 +160,7 @@ A banner section with text overlay and an embedded video player that overlaps th
     }
   })();
 </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -210,6 +225,12 @@ A banner section with text overlay and an embedded video player that overlaps th
     {
       "type": "header",
       "content": "Video"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_video",
+      "label": "Show video",
+      "default": true
     },
     {
       "type": "video_url",

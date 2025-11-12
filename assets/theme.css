@@ -11853,6 +11853,7 @@ shopify-accelerated-checkout, shopify-accelerated-checkout-cart {
   color: #000000;
   text-decoration: underline;
   margin: 0;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 700px) {
@@ -12736,6 +12737,57 @@ shopify-accelerated-checkout, shopify-accelerated-checkout-cart {
   }
 }
 
+.bra-quiz__retake-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+  color: #000000;
+  font-family: var(--text-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.bra-quiz__retake-button:hover {
+  opacity: 0.7;
+}
+
+.bra-quiz__retake-arrow {
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.bra-quiz__retake-button:hover .bra-quiz__retake-arrow {
+  transform: rotate(-20deg);
+}
+
+.bra-quiz__error-message {
+  margin-top: 24px;
+  font-family: var(--text-font-family);
+  font-size: 18px;
+  font-weight: 500;
+  color: #000000;
+  text-align: center;
+  line-height: 1.5;
+}
+
+@media screen and (min-width: 700px) {
+  .bra-quiz__retake-button {
+    margin-top: 40px;
+    font-size: 16px;
+  }
+  
+  .bra-quiz__error-message {
+    margin-top: 32px;
+    font-size: 22px;
+  }
+}
+
 
 
 @media screen and (max-width: 699px) {
@@ -12751,6 +12803,21 @@ shopify-accelerated-checkout, shopify-accelerated-checkout-cart {
   text-decoration-thickness: 2px;
   text-underline-offset: 8px;
   margin-top: 0px;
+}
+
+.bra-quiz__size-link {
+  color: inherit;
+  text-decoration: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  cursor: pointer !important;
+  transition: opacity 0.2s ease;
+  display: inline-block;
+}
+
+.bra-quiz__size-link:hover {
+  opacity: 0.8;
 }
 
 @media screen and (min-width: 700px) {

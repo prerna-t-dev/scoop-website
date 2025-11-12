@@ -6,6 +6,53 @@
 (function() {
   'use strict';
 
+  // Function to parse size string and create a link to the filtered collection
+  function setSizeValueWithLink(element, sizeString) {
+    if (!element || !sizeString) return;
+    
+    // Check if it's an error message - don't make it a link
+    if (sizeString.includes("don't carry") || sizeString.includes("Please complete")) {
+      element.textContent = sizeString;
+      return;
+    }
+    
+    // Parse the size string (e.g., "30 E", "30 FF", "UK 30 E", "30 DD/E")
+    // Remove "UK " prefix if present
+    let sizeText = sizeString.replace(/^UK\s+/i, '').trim();
+    
+    // Extract band size and cup size
+    // Pattern: number followed by space, then cup size(s)
+    const sizeMatch = sizeText.match(/^(\d+)\s+(.+)$/);
+    
+    if (sizeMatch) {
+      const bandSize = sizeMatch[1];
+      let cupSize = sizeMatch[2];
+      
+      // If multiple cup sizes (e.g., "DD/E"), use the first one
+      if (cupSize.includes('/')) {
+        cupSize = cupSize.split('/')[0];
+      }
+      
+      // Create the collection URL
+      const collectionUrl = `/collections/by-size?filter.v.option.band+size=${bandSize}&filter.v.option.cup+size=${encodeURIComponent(cupSize)}`;
+      
+      // Create the link element
+      const link = document.createElement('a');
+      link.href = collectionUrl;
+      link.textContent = sizeString;
+      link.className = 'bra-quiz__size-link';
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      
+      // Clear the element and add the link
+      element.textContent = '';
+      element.appendChild(link);
+    } else {
+      // If we can't parse it, just display as text
+      element.textContent = sizeString;
+    }
+  }
+
   // Initialize all bra quiz instances on the page
   function initBraQuiz(containerId) {
     const quizContainer = document.getElementById(containerId);
@@ -125,8 +172,31 @@
       if (!sizeValueEl) {
         sizeValueEl = quizContainer.querySelector('#bra-quiz-result .bra-quiz__size-value');
       }
-      if (sizeValueEl && calculatedSize && calculatedSize !== 'Please complete all measurements') {
-        sizeValueEl.textContent = calculatedSize;
+      const resultElement = quizContainer.querySelector('#bra-quiz-result');
+      const errorMessageEl = quizContainer.querySelector('#bra-quiz-error-message');
+      
+      if (calculatedSize && calculatedSize !== 'Please complete all measurements') {
+        // Check if it's an error message
+        if (calculatedSize.includes("don't carry")) {
+          // Hide result, show error message
+          if (resultElement) {
+            resultElement.style.display = 'none';
+          }
+          if (errorMessageEl) {
+            errorMessageEl.style.display = 'block';
+          }
+        } else {
+          // Show result, hide error message
+          if (resultElement) {
+            resultElement.style.display = 'block';
+          }
+          if (errorMessageEl) {
+            errorMessageEl.style.display = 'none';
+          }
+          if (sizeValueEl) {
+            setSizeValueWithLink(sizeValueEl, calculatedSize);
+          }
+        }
       }
       
       // Don't clean up storage immediately - keep it for page refresh
@@ -138,6 +208,16 @@
 
     const steps = quizContainer.querySelectorAll('.bra-quiz__step');
     const progressSteps = quizContainer.querySelectorAll('.bra-quiz__progress-step');
+    const headerTitle = quizContainer.querySelector('.bra-quiz__header-title');
+    
+    // Add click handler to scroll to top when header title is clicked
+    if (headerTitle) {
+      headerTitle.style.cursor = 'pointer';
+      headerTitle.addEventListener('click', function() {
+        quizContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+    
     const storageKey = 'bra-quiz-' + containerId;
     let currentStep = 1;
     const measurements = {};
@@ -285,12 +365,33 @@
       }
     }
 
-    // Update showStep to also update question illustration
+    // Update showStep to also update question illustration and set default selection
     const originalShowStep = showStep;
     showStep = function(stepNumber, skipSave) {
       originalShowStep(stepNumber, skipSave);
       const currentStepElement = steps[stepNumber - 1];
       if (currentStepElement) {
+        // Check if it's a question step and no option is selected
+        if (currentStepElement.classList.contains('bra-quiz__step--question')) {
+          const radios = currentStepElement.querySelectorAll('.bra-quiz__radio');
+          const checkedRadio = currentStepElement.querySelector('.bra-quiz__radio:checked');
+          
+          // If no radio is checked and there are at least 2 options, select the second one
+          if (!checkedRadio && radios.length >= 2) {
+            const secondRadio = radios[1];
+            secondRadio.checked = true;
+            
+            // Save the value to measurements
+            const questionKey = secondRadio.dataset.question;
+            if (questionKey) {
+              measurements[questionKey] = secondRadio.value;
+            }
+            
+            // Trigger change event to update illustration
+            secondRadio.dispatchEvent(new Event('change'));
+          }
+        }
+        
         updateQuestionIllustration(currentStepElement);
       }
     };
@@ -716,10 +817,31 @@
         
         // Try to display the size if available from sessionStorage
         const sizeValueEl = successCard.querySelector('.bra-quiz__size-value');
+        const resultElement = successCard.querySelector('#bra-quiz-result');
+        const errorMessageEl = successCard.querySelector('#bra-quiz-error-message');
+        
         if (sizeValueEl) {
           const hasStoredSize = sessionStorage.getItem('bra-quiz-size');
           if (hasStoredSize) {
-            sizeValueEl.textContent = hasStoredSize;
+            // Check if it's an error message
+            if (hasStoredSize.includes("don't carry")) {
+              // Hide result, show error message
+              if (resultElement) {
+                resultElement.style.display = 'none';
+              }
+              if (errorMessageEl) {
+                errorMessageEl.style.display = 'block';
+              }
+            } else {
+              // Show result, hide error message
+              if (resultElement) {
+                resultElement.style.display = 'block';
+              }
+              if (errorMessageEl) {
+                errorMessageEl.style.display = 'none';
+              }
+              setSizeValueWithLink(sizeValueEl, hasStoredSize);
+            }
           } else if (customerPosted) {
             // If URL parameter is present but no sessionStorage, try to get from stored measurements
             const storedMeasurements = sessionStorage.getItem('bra-quiz-measurements');
@@ -744,7 +866,30 @@
                     const cupIndex = Math.floor(cupDifference) - 5;
                     if (cupIndex >= 0 && cupIndex < cupOrder.length) {
                       const calculatedSize = 'UK ' + bandSize + ' ' + cupOrder[cupIndex];
-                      sizeValueEl.textContent = calculatedSize;
+                      // Show result, hide error message
+                      if (resultElement) {
+                        resultElement.style.display = 'block';
+                      }
+                      if (errorMessageEl) {
+                        errorMessageEl.style.display = 'none';
+                      }
+                      setSizeValueWithLink(sizeValueEl, calculatedSize);
+                    } else {
+                      // Size out of range - show error message
+                      if (resultElement) {
+                        resultElement.style.display = 'none';
+                      }
+                      if (errorMessageEl) {
+                        errorMessageEl.style.display = 'block';
+                      }
+                    }
+                  } else {
+                    // Size out of range - show error message
+                    if (resultElement) {
+                      resultElement.style.display = 'none';
+                    }
+                    if (errorMessageEl) {
+                      errorMessageEl.style.display = 'block';
                     }
                   }
                 }
@@ -803,6 +948,19 @@
     }
   }
 
+  // Handle smooth scrolling to quiz section when hash is present
+  function scrollToQuizSection() {
+    const hash = window.location.hash;
+    if (hash && hash.startsWith('#bra-quiz-')) {
+      const quizElement = document.querySelector(hash);
+      if (quizElement) {
+        setTimeout(function() {
+          quizElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }
+
   // Initialize on DOMContentLoaded
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
@@ -813,6 +971,7 @@
       quizContainers.forEach(function(container) {
         initBraQuiz(container.id);
       });
+      scrollToQuizSection();
     });
   } else {
     // DOM already loaded
@@ -822,6 +981,7 @@
     quizContainers.forEach(function(container) {
       initBraQuiz(container.id);
     });
+    scrollToQuizSection();
   }
 })();
 
