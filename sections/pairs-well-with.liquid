@@ -260,6 +260,14 @@ LIQUID
 
         <scroll-carousel id="{{ scroll_area_id }}" class="pairs-well-with-list scroll-area bleed">
 
+        {%- comment -%} Collect product IDs from metafield and current product to filter out duplicates {%- endcomment -%}
+        {%- assign metafield_product_ids = '|' | append: product.id | append: '|' -%}
+        {%- if product.metafields.custom.pairs_well_with != blank -%}
+          {%- for item in product.metafields.custom.pairs_well_with.value -%}
+            {%- assign metafield_product_ids = metafield_product_ids | append: '|' | append: item.id | append: '|' -%}
+          {%- endfor -%}
+        {%- endif -%}
+
         {%- if product.metafields.custom.pairs_well_with != blank -%}
           {%- for item in product.metafields.custom.pairs_well_with.value -%}
             <div class="scroll-area__item pairs-well-with-list__item group" data-product-id="{{ item.id }}">
@@ -350,6 +358,8 @@ LIQUID
           
           {%- assign products_to_show = section.settings.collection.products | limit: 6 -%}
           {%- for product in products_to_show -%}
+            {%- assign product_id_check = '|' | append: product.id | append: '|' -%}
+            {%- unless metafield_product_ids contains product_id_check -%}
             <div class="scroll-area__item pairs-well-with-list__item group" data-product-id="{{ product.id }}">
               {%- assign featured_image = product.featured_media | default: product.media.first -%}
               {%- if featured_image != blank -%}
@@ -430,6 +440,7 @@ LIQUID
                 </button>
               </div>
             </div>
+            {%- endunless -%}
           {%- endfor -%}
         </scroll-carousel>
 

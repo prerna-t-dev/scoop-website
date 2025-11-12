@@ -149,7 +149,7 @@
             "icon": "none",
             "icon_width": 20,
             "title": "Care Instructions",
-            "content": "<p>Write content to help your customers to better understand your products or policies.</p>",
+            "content": "<p>Hand wash and air dry. Do not bleach, iron or dry clean. Machine washing shortens the life of the product. If you must machine wash, use a washing net.</p>",
             "page": ""
           }
         },
@@ -158,8 +158,8 @@
           "settings": {
             "icon": "none",
             "icon_width": 20,
-            "title": "Delivery & Returns",
-            "content": "<p>Write content to help your customers to better understand your products or policies.</p>",
+            "title": "Return Policy",
+            "content": "<p>Find more information on our <a href=\"/pages/return-policy\" target=\"_blank\" title=\"Return Policy\">Return Policy</a> page</p>",
             "page": ""
           }
         }
@@ -466,7 +466,7 @@
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 4,
         "subheading": "",
-        "title": "Bestsellers",
+        "title": "<p>Bestsellers</p>",
         "content": "",
         "background": "",
         "background_gradient": "",

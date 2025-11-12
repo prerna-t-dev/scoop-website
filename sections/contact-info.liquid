@@ -32,7 +32,7 @@
 
   #shopify-section-{{ section.id }} .contact-info__label {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 400;
     margin-bottom: 8px;
     color: #000000;
   }
@@ -41,6 +41,11 @@
     font-size: 14px;
     line-height: 140%;
     color: #7E7E7E;
+    text-decoration: none;
+  }
+
+  #shopify-section-{{ section.id }} .contact-info__value:hover {
+    text-decoration: underline;
   }
 
   @media screen and (min-width: 700px) {
@@ -75,7 +80,7 @@
             {%- if section.settings.email != blank -%}
               <div class="contact-info__item">
                 <div class="contact-info__label">Email</div>
-                <div class="contact-info__value">{{ section.settings.email }}</div>
+                <a href="mailto:{{ section.settings.email }}" class="contact-info__value">{{ section.settings.email }}</a>
               </div>
             {%- endif -%}
             
@@ -90,7 +95,7 @@
           <div class="contact-info__column">
             {%- if section.settings.address != blank -%}
               <div class="contact-info__item">
-                <div class="contact-info__label">Address</div>
+                <div class="contact-info__label">Studio Address <br />(Appointment-Only)</div>
                 <div class="contact-info__value">{{ section.settings.address | newline_to_br }}</div>
               </div>
             {%- endif -%}

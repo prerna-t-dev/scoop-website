@@ -473,7 +473,19 @@
         {%- for filter in collection.filters -%}
           {%- assign filter_label_downcase = filter.label | downcase -%}
           {%- if filter_label_downcase contains 'style' -%}
+            {%- assign has_active_style = false -%}
+            {%- for filter_value in filter.values -%}
+              {%- if filter_value.active -%}
+                {%- assign has_active_style = true -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
             <div class="collection-top-filters__buttons">
+              <button type="button" class="collection-top-filters__button {% unless has_active_style %}active{% endunless %}" 
+                      data-filter-clear="true"
+                      data-filter-type="style">
+                All
+              </button>
               {%- for filter_value in filter.values -%}
                 <button type="button" class="collection-top-filters__button {% if filter_value.active %}active{% endif %}" 
                         data-filter-label-value="{{ filter_value.value }}">
@@ -529,7 +541,19 @@
         {%- for filter in collection.filters -%}
           {%- assign filter_label_downcase = filter.label | downcase -%}
           {%- if filter_label_downcase contains 'feature' -%}
+            {%- assign has_active_feature = false -%}
+            {%- for filter_value in filter.values -%}
+              {%- if filter_value.active -%}
+                {%- assign has_active_feature = true -%}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
             <div class="collection-top-filters__buttons">
+              <button type="button" class="collection-top-filters__button {% unless has_active_feature %}active{% endunless %}" 
+                      data-filter-clear="true"
+                      data-filter-type="feature">
+                All
+              </button>
               {%- for filter_value in filter.values -%}
                 <button type="button" class="collection-top-filters__button {% if filter_value.active %}active{% endif %}" 
                         data-filter-label-value="{{ filter_value.value }}">
@@ -1438,6 +1462,14 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.target.classList.contains('collection-top-filters__button')) {
       e.preventDefault();
       e.stopPropagation();
+      
+      // Check if this is the "All" button
+      if (e.target.getAttribute('data-filter-clear') === 'true') {
+        // Clear all filters by navigating to base collection URL
+        const collectionUrl = '{{ collection.url }}';
+        window.location.href = collectionUrl;
+        return;
+      }
       
       const filterValue = e.target.getAttribute('data-filter-label-value');
       console.log('Top filter clicked:', filterValue);
