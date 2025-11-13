@@ -1,0 +1,646 @@
+{%- render 'section-spacing-collapsing' -%}
+
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+CSS
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+<style>
+  #shopify-section-{{ section.id }} {
+    --quiz-card-background: {{ section.settings.background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card {
+    background: var(--quiz-card-background);
+    border-radius: {{ section.settings.border_radius }}px;
+    padding: {{ section.settings.padding_mobile }}px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1;
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .quiz-card {
+        min-width: 850px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  {%- if section.settings.background_image_mobile != blank -%}
+    #shopify-section-{{ section.id }} .quiz-card::before {
+      background-image: url('{{ section.settings.background_image_mobile | image_url: width: 1600 }}');
+      background-size: contain;
+      opacity: {{ section.settings.background_opacity_mobile | divided_by: 100.0 }};
+    }
+  {%- endif -%}
+
+  #shopify-section-{{ section.id }} .quiz-card__eyebrow {
+    font-size: {{ section.settings.eyebrow_font_size }}px;
+    font-weight: {{ section.settings.eyebrow_font_weight }} !important;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 12px;
+    margin-bottom: 16px;
+    color: {{ section.settings.eyebrow_color }};
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card__heading {
+    font-family: var(--heading-font-family);
+    font-size: {{ section.settings.heading_font_size_mobile }}px;
+    font-weight: {{ section.settings.heading_font_weight }};
+    line-height: 1;
+    margin-bottom: 16px;
+    color: {{ section.settings.heading_color }};
+    font-style: {{ section.settings.heading_font_style }} !important;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card__icon {
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    margin: 0 auto 14px;
+    color: {{ section.settings.icon_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card__content {
+    font-size: {{ section.settings.content_font_size_mobile }}px;
+    line-height: 1.6;
+    /* margin-bottom: 32px; */
+    color: {{ section.settings.content_color }};
+    max-width: {{ section.settings.content_max_width }}px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card--align-mobile-left {
+    text-align: left;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card--align-mobile-center {
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card--align-mobile-right {
+    text-align: right;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card--align-mobile-left .quiz-card__icon {
+    justify-content: flex-start;
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card--align-mobile-center .quiz-card__icon {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card--align-mobile-right .quiz-card__icon {
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card--align-mobile-left .quiz-card__content {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card--align-mobile-center .quiz-card__content {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card--align-mobile-right .quiz-card__content {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  @media screen and (max-width: 419px) {
+    #shopify-section-{{ section.id }} .quiz-card__icon {
+      transform: scale(0.8);
+      transform-origin: center;
+    }
+  }
+
+
+  @media screen and (min-width: 420px) {
+    {%- if section.settings.background_image_desktop != blank -%}
+    #shopify-section-{{ section.id }} .quiz-card::before {
+      background-image: url('{{ section.settings.background_image_desktop | image_url: width: 1600 }}');
+      background-size: cover;
+      opacity: {{ section.settings.background_opacity_desktop | divided_by: 100.0 }};
+    }
+    {%- endif -%}
+  }
+
+  @media screen and (min-width: 850px) {
+    #shopify-section-{{ section.id }} .quiz-card {
+      padding: {{ section.settings.padding_desktop }}px;
+      min-width: 750px;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card__heading {
+      font-size: {{ section.settings.heading_font_size_desktop }}px;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card__content {
+      font-size: {{ section.settings.content_font_size_desktop }}px;
+    }
+
+    {%- if section.settings.background_image_desktop != blank -%}
+    #shopify-section-{{ section.id }} .quiz-card::before {
+      background-size: contain;
+      opacity: {{ section.settings.background_opacity_desktop | divided_by: 100.0 }};
+    }
+    {%- endif -%}
+  }
+
+  @media screen and (min-width: 420px) {
+    #shopify-section-{{ section.id }} .quiz-card--align-desktop-left {
+      text-align: left;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card--align-desktop-center {
+      text-align: center;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card--align-desktop-right {
+      text-align: right;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card--align-desktop-left .quiz-card__icon {
+      justify-content: flex-start;
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card--align-desktop-center .quiz-card__icon {
+      justify-content: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card--align-desktop-right .quiz-card__icon {
+      justify-content: flex-end;
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card--align-desktop-left .quiz-card__content {
+      margin-left: 0;
+      margin-right: auto;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card--align-desktop-center .quiz-card__content {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card--align-desktop-right .quiz-card__content {
+      margin-left: auto;
+      margin-right: 0;
+    }
+  }
+
+
+  @media screen and (min-width: 1600px) {
+    #shopify-section-{{ section.id }} .quiz-card {
+      min-width: 1000px;
+    }
+  }
+</style>
+
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+LIQUID
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+<div {% render 'section-properties' %}>
+  <div class="section-stack">
+    <div class="quiz-card quiz-card--align-mobile-{{ section.settings.text_alignment_mobile }} quiz-card--align-desktop-{{ section.settings.text_alignment_desktop }}">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="quiz-card__heading">{{ section.settings.heading | newline_to_br }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.eyebrow_text != blank -%}
+        <p class="quiz-card__eyebrow">{{ section.settings.eyebrow_text }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.icon_svg != blank -%}
+        <div class="quiz-card__icon">
+          {{ section.settings.icon_svg }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.content != blank -%}
+        <div class="quiz-card__content">
+          {{ section.settings.content }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button_text != blank -%}
+        {%- render 'button', 
+          content: section.settings.button_text, 
+          href: section.settings.button_link,
+          size: section.settings.button_size,
+          style: section.settings.button_style,
+          secondary: section.settings.button_secondary,
+          background: section.settings.button_background,
+          text_color: section.settings.button_text_color
+        -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Fitting card",
+  "class": "shopify-section--quiz-card",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Eyebrow text"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow text",
+      "default": "BETWEEN 11AM-5PM"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "label": "Eyebrow font size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_weight",
+      "label": "Eyebrow font weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Virtual Fittings are available<br>Tuesdays & Thursdays"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading font size (mobile)",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_desktop",
+      "label": "Heading font size (desktop)",
+      "min": 32,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 400
+    },
+    {
+      "type": "select",
+      "id": "heading_font_style",
+      "label": "Heading font style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "italic",
+          "label": "Italic"
+        }
+      ],
+      "default": "italic"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "html",
+      "id": "icon_svg",
+      "label": "Icon SVG",
+      "info": "Paste your SVG code here. Use fill=\"currentColor\" or stroke=\"currentColor\" for color control.",
+      "default": "<svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M6 4h20M6 28h20\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M11 6h10v2.5a3 3 0 0 1-1 2.24l-3 2.8a1 1 0 0 0 0 1.46l3 2.76a3 3 0 0 1 1 2.22V26H11v-6.02a3 3 0 0 1 1-2.22l3-2.76a1 1 0 0 0 0-1.46l-3-2.8a3 3 0 0 1-1-2.24V6Z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\"/></svg>"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#6B4C9A"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content",
+      "default": "<p>Once you place your fittings order with us, we will get in touch to confirm and schedule a time of your preference.</p><p>You may reschedule or cancel the fitting up to 24 hours in advance by getting in touch with us directly. Changes or cancellations with less than 24 hour notice will not be refunded.</p>"
+    },
+    {
+      "type": "color",
+      "id": "content_color",
+      "label": "Content color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "content_font_size_mobile",
+      "label": "Content font size (mobile)",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "content_font_size_desktop",
+      "label": "Content font size (desktop)",
+      "min": 16,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 400,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "Alignment"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment_mobile",
+      "label": "Content alignment (mobile)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment_desktop",
+      "label": "Content alignment (desktop)",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "BOOK YOUR FITTING"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "label": "Button size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "base",
+          "label": "Base"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "xl",
+          "label": "Extra Large"
+        }
+      ],
+      "default": "base"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "fill",
+          "label": "Fill"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_secondary",
+      "label": "Use secondary button style",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background (optional)",
+      "info": "Leave empty to use theme default"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color (optional)",
+      "info": "Leave empty to use theme default"
+    },
+    {
+      "type": "header",
+      "content": "Card styling"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#C8B3E6"
+    },
+    {
+      "type": "header",
+      "content": "Background image overlay"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image (mobile)",
+      "info": "Image will be displayed as background overlay on mobile devices"
+    },
+    {
+      "type": "range",
+      "id": "background_opacity_mobile",
+      "label": "Background opacity (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_desktop",
+      "label": "Background image (desktop)",
+      "info": "Image will be displayed as background overlay on desktop devices"
+    },
+    {
+      "type": "range",
+      "id": "background_opacity_desktop",
+      "label": "Background opacity (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Card padding (mobile)",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "label": "Card padding (desktop)",
+      "min": 40,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fitting card",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}
+
+
+

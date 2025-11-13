@@ -15,6 +15,51 @@ CSS
 
     --before-after-initial-drag-position: {{ section.settings.drag_initial_position }}%;
   }
+
+  #shopify-section-{{ section.id }} .before-after__title {
+    font-family: var(--heading-font-family);
+    font-size: 35px;
+    line-height: 1;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .before-after__title {
+      font-size: 42px;
+      line-height: 1;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .prose {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  #shopify-section-{{ section.id }} .prose > p {
+    margin-bottom: 20px;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .prose {
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    #shopify-section-{{ section.id }} .prose > p {
+      margin-bottom: 40px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .before-after__label {
+    font-family: var(--text-font-family);
+    font-size: 10px;
+    text-transform: uppercase;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .before-after__label {
+      font-size: 13px;
+    }
+  }
 </style>
 
 {%- comment -%}
@@ -30,11 +75,13 @@ LIQUID
         <p class="subheading">{{ section.settings.subheading | escape }}</p>
       {%- endif -%}
 
-      {%- if section.settings.title != blank -%}
-        <h2 class="h2">{{ section.settings.title | escape }}</h2>
-      {%- endif -%}
-
       {{- section.settings.content -}}
+
+      {%- if section.settings.title != blank -%}
+        <div class="before-after__title">
+          {{ section.settings.title }}
+        </div>
+      {%- endif -%}
     {%- endcapture -%}
 
     {%- if content != blank -%}
@@ -68,7 +115,7 @@ LIQUID
           {%- endif -%}
 
           {%- if section.settings.before_text != blank -%}
-            <p class="before-after__label before-after__label--left before-after__label--{{ section.settings.before_after_text_position }} h5">
+            <p class="before-after__label before-after__label--left before-after__label--{{ section.settings.before_after_text_position }}">
               {{- section.settings.before_text | escape -}}
             </p>
           {%- endif -%}
@@ -93,7 +140,7 @@ LIQUID
           {%- endif -%}
 
           {%- if section.settings.after_text != blank -%}
-            <p class="before-after__label before-after__label--right before-after__label--{{ section.settings.before_after_text_position }} h5">
+            <p class="before-after__label before-after__label--right before-after__label--{{ section.settings.before_after_text_position }}">
               {{- section.settings.after_text | escape -}}
             </p>
           {%- endif -%}
@@ -135,10 +182,10 @@ LIQUID
       "label": "Subheading"
     },
     {
-      "type": "text",
+      "type": "richtext",
       "id": "title",
       "label": "Heading",
-      "default": "Before/after"
+      "default": "<p>Before/after</p>"
     },
     {
       "type": "richtext",
