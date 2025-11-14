@@ -8776,7 +8776,7 @@ product-rerender {
 .revealed-image__wrapper > .revealed-image__image-clipper, .revealed-image__wrapper > .revealed-image__content--inside {
   clip-path: inset(37% 37% 41%);
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
 }
 
 .revealed-image__content {

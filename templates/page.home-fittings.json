@@ -1,0 +1,528 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+ {
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "content_width": "80ch",
+        "background": "",
+        "background_gradient": ""
+      }
+    },
+    "image_with_text_overlay_xtPFh9": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_6QYNxF": {
+          "type": "heading",
+          "settings": {
+            "text": "Home\nFittings",
+            "heading_tag": "h0"
+          }
+        }
+      },
+      "block_order": [
+        "heading_6QYNxF"
+      ],
+      "name": "Image with text overlay",
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "enable_parallax": false,
+        "image_size": "auto",
+        "image": "shopify://shop_images/Group_1000006485.png",
+        "mobile_image": "shopify://shop_images/Frame_1000006083.png",
+        "mobile_text_position": "place-self-start-center text-center",
+        "desktop_text_position": "sm:place-self-center-start sm:text-start",
+        "text_color": "#ffffff",
+        "overlay_color": "#000000",
+        "overlay_opacity": 0
+      }
+    },
+    "fitting_details_3D6e9h": {
+      "type": "fitting-details",
+      "name": "Fitting details",
+      "settings": {
+        "heading": "We bring the fitting room to you.",
+        "subheading": "A private in-person consultation with our trained fitter at a location of your preference ",
+        "product": "home-fitting",
+        "location": "NCR",
+        "duration": "45 mins",
+        "note": "Once you place your fitting order with us, we will get in touch to confirm the payment and schedule a time of your preference.",
+        "covered_heading": "What's covered?",
+        "covered_content": "<p>We'll begin with a conversation to understand your current bra troubles and pain points, and our fitter will then guide you through taking a series of measurements to calculate your size.</p><p>You will then be provided with personalised recommendations of styles and features to consider while shopping for your next bra.</p>",
+        "right_background_color": "#f8eeec"
+      }
+    },
+    "card_details_list_9gqNqd": {
+      "type": "card-details-list",
+      "blocks": {
+        "card_7K9rBQ": {
+          "type": "card",
+          "settings": {
+            "title": "<p>What should you bring?</p>",
+            "content": "<p>Prior to the fitting, you will be required to fill a pre-consultation form. For this you will need a measuring tape (easily available on blinkit), and potentially a friend/ family member to help. </p>",
+            "background_color": "#cca7fc",
+            "pattern_image": "shopify://shop_images/Logo_1_46c7d2c8-5445-4555-8599-43a913b75af0.png"
+          }
+        },
+        "card_3jUYpP": {
+          "type": "card",
+          "settings": {
+            "title": "<p>What will you get?</p>",
+            "content": "<p>During the fitting, your most comfortable bra, and a private room with a mirror</p>",
+            "background_color": "#ff615c",
+            "pattern_image": "shopify://shop_images/Logo_2.png"
+          }
+        },
+        "card_zqDqVe": {
+          "type": "card",
+          "settings": {
+            "title": "<p><em>Additional</em> Information</p>",
+            "content": "<p>While video is certainly helpful, it is not required during the virtual fitting. Our fitters (women only) are trained to guide you through the measurements to ensure accurate results - with or without video.</p>",
+            "background_color": "#ffb455",
+            "pattern_image": "shopify://shop_images/Logo_3.png"
+          }
+        }
+      },
+      "block_order": [
+        "card_7K9rBQ",
+        "card_3jUYpP",
+        "card_zqDqVe"
+      ],
+      "name": "Card details list",
+      "settings": {
+        "full_width": true,
+        "stack_cards": true,
+        "show_progress_bar": false,
+        "cards_per_row_mobile": "1",
+        "cards_per_row_desktop": 3,
+        "min_height_mobile": 345,
+        "min_height_desktop": 480,
+        "subheading": "",
+        "title": "",
+        "content": "",
+        "link_url": "",
+        "link_text": "View all",
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": ""
+      }
+    },
+    "rich_heading_BzVtxb": {
+      "type": "rich-heading",
+      "custom_css": [
+        ".section-full {padding-bottom: 16px; padding-top: 16px;}"
+      ],
+      "name": "Rich heading",
+      "settings": {
+        "heading": "<p>A Home Consult to get <em>you </em>right.</p>",
+        "content_width": "small",
+        "text_alignment": "center",
+        "padding_left_mobile": 40,
+        "padding_right_mobile": 40,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "scrolling_text_nkhiwe": {
+      "type": "scrolling-text",
+      "blocks": {
+        "image_tpDdPC": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_185_1.png"
+          }
+        },
+        "image_jgHQUV": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_181.png"
+          }
+        },
+        "image_3Ein44": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_175.png"
+          }
+        },
+        "image_7LgXQi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_185_2.png"
+          }
+        }
+      },
+      "block_order": [
+        "image_tpDdPC",
+        "image_jgHQUV",
+        "image_3Ein44",
+        "image_7LgXQi"
+      ],
+      "custom_css": [
+        ".scrolling-text__image {margin-left: 12px !important; margin-right: 12px !important;}"
+      ],
+      "name": "Scrolling text",
+      "settings": {
+        "full_width": true,
+        "hide_on_desktop": false,
+        "padding_top_mobile": 36,
+        "padding_top_desktop": 36,
+        "title": "",
+        "cta_text": "",
+        "cta_url": "",
+        "cta_button_size": "base",
+        "cta_button_style": "fill",
+        "cta_button_secondary": false,
+        "cta_button_background": "",
+        "cta_button_text_color": "",
+        "text_size": "large",
+        "text_style": "fill",
+        "scrolling_mode": "scroll",
+        "scrolling_speed": 40,
+        "image_width_mobile": 250,
+        "image_width_desktop": 390,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "text_gradient": ""
+      }
+    },
+    "scrolling_text_FCzhG4": {
+      "type": "scrolling-text",
+      "blocks": {
+        "image_FkdBUy": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_185_2.png"
+          }
+        },
+        "image_njCULN": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_179.png"
+          }
+        },
+        "image_fBNnEM": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_177.png"
+          }
+        },
+        "image_7tUGEF": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_181.png"
+          }
+        }
+      },
+      "block_order": [
+        "image_FkdBUy",
+        "image_njCULN",
+        "image_fBNnEM",
+        "image_7tUGEF"
+      ],
+      "custom_css": [
+        ".scrolling-text__image {margin-left: 12px !important; margin-right: 12px !important;}",
+        ".section-full {padding-top: 0 !important;}"
+      ],
+      "name": "Scrolling text",
+      "settings": {
+        "full_width": true,
+        "hide_on_desktop": false,
+        "padding_top_mobile": 0,
+        "padding_top_desktop": 0,
+        "title": "",
+        "cta_text": "",
+        "cta_url": "",
+        "cta_button_size": "base",
+        "cta_button_style": "fill",
+        "cta_button_secondary": false,
+        "cta_button_background": "",
+        "cta_button_text_color": "",
+        "text_size": "large",
+        "text_style": "fill",
+        "scrolling_mode": "scroll",
+        "scrolling_speed": 45,
+        "image_width_mobile": 250,
+        "image_width_desktop": 390,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "text_gradient": ""
+      }
+    },
+    "scrolling_text_xab3LD": {
+      "type": "scrolling-text",
+      "blocks": {
+        "motif_LMQfp8": {
+          "type": "motif",
+          "settings": {
+            "motif_svg": "<svg width=\"117\" height=\"116\" viewbox=\"0 0 117 116\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M82.6036 0C101.6 0 117 15.3023 117 34.1786C117 43.4419 113.291 51.8442 107.268 58C113.291 64.1558 117 72.5581 117 81.8214C117 100.698 101.6 116 82.6036 116C73.2155 116 64.7066 112.262 58.5 106.203C52.2934 112.262 43.7845 116 34.3964 116C15.3998 116 0 100.698 0 81.8214C0 72.5582 3.70872 64.1558 9.731 58C3.70872 51.8442 0 43.4418 0 34.1786C0 15.3023 15.3998 0 34.3964 0C43.7843 0 52.2935 3.73751 58.5 9.7963C64.7065 3.73751 73.2157 0 82.6036 0Z\" fill=\"#FFE3DD\"></path>\n</svg>",
+            "motif_color": "#ff978b"
+          }
+        },
+        "motif_aGVMxD": {
+          "type": "motif",
+          "settings": {
+            "motif_svg": "<svg width=\"130\" height=\"116\" viewbox=\"0 0 130 116\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M130 116H0C0 90.5536 14.7962 68.5364 36.3074 58C14.7962 47.4636 0 25.4464 0 0H130C130 25.4464 115.204 47.4636 93.6926 58C115.204 68.5199 130 90.537 130 116Z\" fill=\"#FFE3DD\"></path>\n</svg>",
+            "motif_color": "#ffb455"
+          }
+        },
+        "motif_wYNLxc": {
+          "type": "motif",
+          "settings": {
+            "motif_svg": "<svg width=\"114\" height=\"114\" viewbox=\"0 0 114 114\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M0.432044 28.5057C0.432044 12.7739 13.1009 0.0130836 28.7193 0.0130843C44.3377 0.013085 57.0065 12.7739 57.0065 28.5057C56.9935 12.7608 69.6623 -1.93806e-06 85.2807 -1.25536e-06C100.899 -5.72657e-07 113.568 12.7477 113.581 28.4926C113.581 44.2245 100.925 56.9853 85.2937 56.9984C85.2937 56.9984 85.2807 56.9984 85.2677 56.9984C100.899 56.7497 113.763 69.3142 113.997 85.0591C114.231 100.804 101.757 113.748 86.1253 113.997C85.8395 113.997 85.5536 113.997 85.2677 113.997L28.7323 113.997C13.1009 114.232 0.250125 101.668 0.00324637 85.9229C-0.23064 70.178 12.2433 57.234 27.8747 56.9853C28.1606 56.9853 28.4464 56.9853 28.7323 56.9853C13.1009 56.9853 0.432035 44.2375 0.419043 28.4926L0.432044 28.5057Z\" fill=\"#FFE3DD\"></path>\n</svg>",
+            "motif_color": "#f9cec6"
+          }
+        },
+        "motif_4iAN8i": {
+          "type": "motif",
+          "settings": {
+            "motif_svg": "<svg width=\"117\" height=\"116\" viewbox=\"0 0 117 116\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M86.6582 0C103.415 0 117 13.4949 117 30.1417C117 42.7055 109.262 53.4734 98.2622 58C109.262 62.5266 117 73.2945 117 85.8583C117 102.505 103.415 116 86.6582 116C73.9032 116 62.9872 108.181 58.5 97.1057C54.0128 108.181 43.0968 116 30.3418 116C13.5845 116 0 102.505 0 85.8583C0 73.2947 7.73783 62.5267 18.7374 58C7.73783 53.4733 0 42.7053 0 30.1417C0 13.4949 13.5845 0 30.3418 0C43.0966 0 54.0127 7.81841 58.5 18.8939C62.9873 7.81841 73.9034 0 86.6582 0Z\" fill=\"#FFE3DD\"></path>\n</svg>",
+            "motif_color": "#f9cec6"
+          }
+        },
+        "motif_eYx3w6": {
+          "type": "motif",
+          "settings": {
+            "motif_svg": "<svg width=\"117\" height=\"120\" viewbox=\"0 0 117 120\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M59.085 0C68.6235 0 76.4418 7.40483 77.1652 16.8095C80.244 14.3858 84.1217 12.9412 88.335 12.9412C98.3507 12.9412 106.47 21.1054 106.47 31.1765C106.47 35.092 105.242 38.7187 103.153 41.69C111.099 43.6272 117 50.8262 117 59.4118C117 68.5845 110.264 76.1728 101.495 77.454C104.578 80.7229 106.47 85.1392 106.47 90C106.47 100.071 98.3507 108.235 88.335 108.235C84.0677 108.235 80.145 106.753 77.0475 104.273C75.8319 113.157 68.2544 120 59.085 120C49.9156 120 42.3368 113.157 41.1214 104.273C38.024 106.753 34.102 108.235 29.835 108.235C19.8193 108.235 11.7 100.071 11.7 90C11.7 85.2 13.5444 80.8332 16.5594 77.577C7.28155 76.774 0 68.949 0 59.4118C0 50.4629 6.41063 43.0194 14.8661 41.4717C12.8692 38.5418 11.7 34.9967 11.7 31.1765C11.7 21.1054 19.8193 12.9412 29.835 12.9412C34.0479 12.9412 37.925 14.3862 41.0037 16.8095C41.727 7.40478 49.5465 0 59.085 0Z\" fill=\"#FFE3DD\"></path>\n</svg>",
+            "motif_color": "#f9cec6"
+          }
+        },
+        "motif_6G8J8q": {
+          "type": "motif",
+          "settings": {
+            "motif_svg": "<svg width=\"153\" height=\"92\" viewbox=\"0 0 153 92\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M107.233 0C132.509 0 153 20.5949 153 46C153 71.4051 132.509 92 107.233 92C95.4036 92 84.6231 87.4891 76.5 80.0859C68.3769 87.4891 57.5964 92 45.7673 92C20.4907 92 0 71.4051 0 46C0 20.5949 20.4907 0 45.7673 0C57.5963 0 68.3769 4.51062 76.5 11.9136C84.6231 4.51061 95.4037 0 107.233 0Z\" fill=\"#FFE3DD\"></path>\n</svg>",
+            "motif_color": "#f9cec6"
+          }
+        },
+        "motif_UaDAcy": {
+          "type": "motif",
+          "settings": {
+            "motif_svg": "<svg width=\"60\" height=\"114\" viewbox=\"0 0 60 114\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M60 114H0V0H60C60 26.535 42.8317 49.0451 19.0054 56.9944C42.8317 64.9549 60 87.465 60 113.989V114Z\" fill=\"#FFE3DD\"></path>\n</svg>",
+            "motif_color": "#f9cec6"
+          }
+        },
+        "motif_eVVLYx": {
+          "type": "motif",
+          "settings": {
+            "motif_svg": "<svg width=\"108\" height=\"116\" viewbox=\"0 0 108 116\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M108 116C92.5044 116 77.6436 109.889 66.6865 99.0121C61.1945 93.5601 56.9089 87.1345 54 80.1439C51.0911 87.1345 46.8055 93.5601 41.3135 99.0121C30.3564 109.889 15.4956 116 0 116V0C15.4956 2.01718e-06 30.3565 6.11079 41.3135 16.9879C46.8054 22.4398 51.0911 28.8652 54 35.8557C56.9089 28.8652 61.1946 22.4398 66.6865 16.9879C77.6436 6.11079 92.5044 -1.83435e-07 108 0V116Z\" fill=\"#FFE3DD\"></path>\n</svg>",
+            "motif_color": "#f9cec6"
+          }
+        }
+      },
+      "block_order": [
+        "motif_LMQfp8",
+        "motif_aGVMxD",
+        "motif_wYNLxc",
+        "motif_4iAN8i",
+        "motif_eYx3w6",
+        "motif_6G8J8q",
+        "motif_UaDAcy",
+        "motif_eVVLYx"
+      ],
+      "custom_css": [
+        ".scrolling-text__motif svg {width: 80px; height: 80px;}",
+        "@media (min-width: 700px) {.scrolling-text__motif svg {width: auto; height: auto; }}"
+      ],
+      "settings": {
+        "full_width": true,
+        "hide_on_desktop": false,
+        "padding_top_mobile": 36,
+        "padding_top_desktop": 36,
+        "title": "",
+        "cta_text": "",
+        "cta_url": "",
+        "cta_button_size": "base",
+        "cta_button_style": "fill",
+        "cta_button_secondary": false,
+        "cta_button_background": "",
+        "cta_button_text_color": "",
+        "text_size": "medium",
+        "text_style": "fill",
+        "scrolling_mode": "auto",
+        "scrolling_speed": 120,
+        "image_width_mobile": 250,
+        "image_width_desktop": 250,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "#ecd5d1",
+        "text_gradient": ""
+      }
+    },
+    "before_after_image_Mk8EmD": {
+      "type": "before-after-image",
+      "name": "Before/after image",
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "<p>Before vs After <br/>getting a fitting with Scoop</p>",
+        "content": "<p>THE SCOOP DIFFERENCE</p>",
+        "before_image": "shopify://shop_images/Before_Left_Side_Image_1.png",
+        "after_image": "shopify://shop_images/After_Right_Side_Image_1.png",
+        "expand_image": false,
+        "text_position": "center",
+        "before_after_text_position": "bottom",
+        "before_text": "Before",
+        "after_text": "After",
+        "drag_initial_position": 50,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "before_text_color": "#000000",
+        "after_text_color": "#000000",
+        "drag_cursor_background": "#ffffff",
+        "drag_cursor_color": "#000000"
+      }
+    },
+    "fitting_card_DAAhKD": {
+      "type": "fitting-card",
+      "name": "Fitting card",
+      "settings": {
+        "eyebrow_text": "BETWEEN 11AM-5PM",
+        "eyebrow_color": "#000000",
+        "eyebrow_font_size": 14,
+        "eyebrow_font_weight": 600,
+        "heading": "Home Fittings are available \nWednesdays",
+        "heading_color": "#000000",
+        "heading_font_size_mobile": 30,
+        "heading_font_size_desktop": 42,
+        "heading_font_weight": 400,
+        "heading_font_style": "normal",
+        "icon_svg": "<svg width=\"28\" height=\"29\" viewbox=\"0 0 28 29\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M27.8145 28.4414L0.185547 28.4414C0.185547 22.2023 3.33018 16.804 7.90195 14.2206C3.33018 11.6373 0.185547 6.23898 0.185547 -0.00012207L27.8145 -0.00012207C27.8145 6.23898 24.6698 11.6373 20.0981 14.2206C24.6698 16.8 27.8145 22.1982 27.8145 28.4414Z\" fill=\"#A073B7\"></path>\n</svg>",
+        "icon_color": "#6b4c9a",
+        "icon_size": 48,
+        "content": "<p>Once you place your fittings order with us, we will get in touch to confirm and schedule a time of your preference.<br/><br/>You may reschedule or cancel the fitting up to 24 hours in advance by getting in touch with us directly. Changes or cancellations with less than 24 hour notice will not be refunded. Fees are fully adjustable against any online or studio purchase made within 14 days of your fitting/ trial.</p>",
+        "content_color": "#000000",
+        "content_font_size_mobile": 14,
+        "content_font_size_desktop": 16,
+        "content_max_width": 500,
+        "text_alignment_mobile": "left",
+        "text_alignment_desktop": "center",
+        "button_text": "",
+        "button_link": "",
+        "button_size": "base",
+        "button_style": "fill",
+        "button_secondary": false,
+        "button_background": "",
+        "button_text_color": "",
+        "background_color": "rgba(0,0,0,0)",
+        "background_image_mobile": "shopify://shop_images/Group_1000006431.png",
+        "background_opacity_mobile": 100,
+        "background_image_desktop": "shopify://shop_images/Group_1000005895.png",
+        "background_opacity_desktop": 100,
+        "border_radius": 0,
+        "padding_mobile": 40,
+        "padding_desktop": 64
+      }
+    },
+    "collection_list_cBY6XG": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_8KAAcX": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Frame_1000003704.png",
+            "image_mobile": "shopify://shop_images/Frame_1000003719.png",
+            "subheading": "",
+            "title": "",
+            "url": "shopify://pages/virtual-fittings",
+            "heading_tag": "h3",
+            "text_position": "place-self-start text-start",
+            "text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "collection_XcMEgH": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Frame_1000003706.png",
+            "image_mobile": "shopify://shop_images/Frame_1000003701_1.png",
+            "subheading": "",
+            "title": "",
+            "url": "shopify://pages/home-fittings",
+            "heading_tag": "h3",
+            "text_position": "place-self-start text-start",
+            "text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "collection_GajXAt": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Frame_1000003705.png",
+            "image_mobile": "shopify://shop_images/Frame_1000003703_1.png",
+            "subheading": "",
+            "title": "",
+            "url": "shopify://pages/studio-fittings",
+            "heading_tag": "h3",
+            "text_position": "place-self-start text-start",
+            "text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "collection_8KAAcX",
+        "collection_XcMEgH",
+        "collection_GajXAt"
+      ],
+      "custom_css": [
+        ".section-full {max-width: 1000px; margin: auto; padding-top: 0;}",
+        ".collection-list-header {text-align: center;}"
+      ],
+      "settings": {
+        "full_width": true,
+        "stack_collections": true,
+        "collections_per_row_mobile": "1",
+        "collections_per_row": 2,
+        "show_progress_bar": false,
+        "subheading": "",
+        "title": "<p>Want to try <em>your</em> fit another way?</p>",
+        "content": "",
+        "link_url": "",
+        "link_text": "",
+        "background": "#ffffff",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image_with_text_overlay_xtPFh9",
+    "fitting_details_3D6e9h",
+    "card_details_list_9gqNqd",
+    "rich_heading_BzVtxb",
+    "scrolling_text_nkhiwe",
+    "scrolling_text_FCzhG4",
+    "scrolling_text_xab3LD",
+    "before_after_image_Mk8EmD",
+    "fitting_card_DAAhKD",
+    "collection_list_cBY6XG"
+  ]
+}

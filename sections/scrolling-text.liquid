@@ -14,13 +14,14 @@
     #shopify-section-{{ section.id }} {
       --section-spacing-inline: 0;
       --scrolling-text-font-size: 50px;
-      padding-top: 36px !important;
+      padding-top: {{ section.settings.padding_top_mobile | default: 36 }}px !important;
       padding-bottom: 36px !important;
     }
 
     @media screen and (min-width: 700px) {
       #shopify-section-{{ section.id }} {
         --scrolling-text-font-size: 62px;
+        padding-top: {{ section.settings.padding_top_desktop | default: 36 }}px !important;
       }
     }
     
@@ -217,6 +218,26 @@
       "id": "hide_on_desktop",
       "label": "Hide on desktop",
       "default": false
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top (mobile)",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top (desktop)",
+      "default": 36
     },
     {
       "type": "text",

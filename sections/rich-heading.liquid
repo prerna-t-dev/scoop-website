@@ -1,0 +1,164 @@
+{%- if section.settings.heading != blank -%}
+  {%- assign text_alignment = section.settings.text_alignment | replace: 'left', 'start' | replace: 'right', 'end' -%}
+  {%- render 'section-spacing-collapsing' -%}
+
+  <style>
+    #shopify-section-{{ section.id }} {
+      --rich-text-max-width: {% if section.settings.content_width == 'small' %}650px{% elsif section.settings.content_width == 'medium' %}780px{% else %}100%{% endif %}
+    }
+    
+    #shopify-section-{{ section.id }} .rich-text__wrapper {
+      max-width: var(--rich-text-max-width);
+      padding-left: {{ section.settings.padding_left_mobile | default: 0 }}px;
+      padding-right: {{ section.settings.padding_right_mobile | default: 0 }}px;
+    }
+    
+    @media screen and (min-width: 700px) {
+      #shopify-section-{{ section.id }} .rich-text__wrapper {
+        padding-left: {{ section.settings.padding_left_desktop | default: 0 }}px;
+        padding-right: {{ section.settings.padding_right_desktop | default: 0 }}px;
+      }
+    }
+    
+    #shopify-section-{{ section.id }} .rich-text__heading {
+      font-family: var(--heading-font-family);
+      font-weight: var(--heading-font-weight);
+      font-style: var(--heading-font-style);
+      letter-spacing: var(--heading-letter-spacing);
+      text-transform: var(--heading-text-transform);
+      font-size: 35px;
+      line-height: 1;
+    }
+    
+    @media screen and (min-width: 700px) {
+      #shopify-section-{{ section.id }} .rich-text__heading {
+        font-size: 42px;
+      }
+    }
+  </style>
+
+  <div {% render 'section-properties' %}>
+    <div class="rich-text justify-{{ text_alignment }}">
+      <div class="rich-text__wrapper">
+        <div class="rich-text__heading prose justify-items-{{ text_alignment }} text-{{ text_alignment }}">
+          {{- section.settings.heading -}}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Rich heading",
+  "class": "shopify-section--rich-heading",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "content_width",
+      "label": "Content width",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "small"
+    },
+    {
+      "type": "text_alignment",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "label": "Padding left (mobile)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "label": "Padding right (mobile)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_left_desktop",
+      "label": "Padding left (desktop)",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_right_desktop",
+      "label": "Padding right (desktop)",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich heading",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}
+
