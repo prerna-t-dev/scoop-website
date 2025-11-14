@@ -1,0 +1,434 @@
+{%- if section.blocks.size > 0 -%}
+  {%- render 'section-spacing-collapsing' -%}
+
+  <style>
+    #shopify-section-{{ section.id }} .cascading-images {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: {{ section.settings.padding_top_mobile | default: 40 }}px 0;
+      overflow: hidden;
+    }
+
+    #shopify-section-{{ section.id }} .cascading-images__item {
+      position: absolute;
+      width: 100%;
+      max-width: {{ section.settings.image_max_width_mobile | default: 400 }}px;
+      transform: translateY(100%) scale(1);
+      transition: transform {{ section.settings.animation_duration | default: 800 | divided_by: 1000.0 }}s ease-out;
+      will-change: transform;
+    }
+
+    #shopify-section-{{ section.id }} .cascading-images__item.revealed {
+      transform: translateY(0) scale(1);
+    }
+
+
+      {%- for block in section.blocks -%}
+      #shopify-section-{{ section.id }} .cascading-images__item:nth-child({{ forloop.index }}) {
+        z-index: {{ forloop.index }};
+        transition-delay: {{ forloop.index0 | times: section.settings.animation_delay | default: 200 | divided_by: 1000.0 }}s;
+      }
+    {%- endfor -%}
+
+    #shopify-section-{{ section.id }} .cascading-images__image {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: {{ section.settings.border_radius | default: 0 }}px;
+      box-shadow: {{ section.settings.shadow_x | default: 0 }}px {{ section.settings.shadow_y | default: 10 }}px {{ section.settings.shadow_blur | default: 30 }}px rgba(0, 0, 0, {{ section.settings.shadow_opacity | default: 0.15 }});
+    }
+
+    @media screen and (min-width: 700px) {
+      #shopify-section-{{ section.id }} .cascading-images {
+        padding: {{ section.settings.padding_top_desktop | default: 60 }}px 0;
+      }
+
+      #shopify-section-{{ section.id }} .cascading-images__item {
+        max-width: {{ section.settings.image_max_width_desktop | default: 600 }}px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #shopify-section-{{ section.id }} .cascading-images__item {
+        transform: translateY(0) !important;
+      }
+    }
+  </style>
+
+  <div {% render 'section-properties' %}>
+    <div class="cascading-images">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image != blank -%}
+          <div class="cascading-images__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.link_url != blank -%}
+              <a href="{{ block.settings.link_url }}" class="cascading-images__link">
+            {%- endif -%}
+            
+            {%- capture sizes -%}(max-width: 699px) min({{ section.settings.image_max_width_mobile | default: 400 }}px, 100vw), min({{ section.settings.image_max_width_desktop | default: 600 }}px, 100vw){%- endcapture -%}
+            {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '400,600,800,1000,1200,1400,1600', class: 'cascading-images__image' -}}
+            
+            {%- if block.settings.link_url != blank -%}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const section = document.getElementById('shopify-section-{{ section.id }}');
+      if (!section) return;
+
+      const items = section.querySelectorAll('.cascading-images__item');
+      if (items.length === 0) return;
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      if (prefersReducedMotion) {
+        // Show all images immediately if reduced motion is preferred
+        items.forEach(item => {
+          item.classList.add('revealed');
+        });
+        return;
+      }
+
+      function revealImages() {
+        const rect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const scrollY = window.scrollY || window.pageYOffset;
+        const sectionTop = section.offsetTop;
+        
+        // Only process if section is visible
+        if (rect.bottom < 0 || rect.top > windowHeight) {
+          return;
+        }
+        
+        items.forEach((item, index) => {
+          // Calculate when each image should be revealed
+          // Each image reveals when scroll position reaches its trigger point
+          const revealSpacing = {{ section.settings.reveal_spacing | default: 200 }};
+          const triggerPoint = sectionTop + (index * revealSpacing);
+          const currentScroll = scrollY + windowHeight;
+          
+          // Reveal image when scroll position passes its trigger point
+          if (currentScroll >= triggerPoint && !item.classList.contains('revealed')) {
+            item.classList.add('revealed');
+            
+            // Apply scale to all previously revealed images
+            updateImageScales();
+          }
+        });
+      }
+      
+      function updateImageScales() {
+        const scaleReduction = {{ section.settings.scale_reduction | default: 5 | divided_by: 100.0 }};
+        const revealedItems = Array.from(items).filter(item => item.classList.contains('revealed'));
+        
+        revealedItems.forEach((item, index) => {
+          // Each revealed image scales down based on its position in the stack
+          // First image (index 0) stays at scale 1, each subsequent image scales down
+          const scale = Math.max(0.5, 1 - (index * scaleReduction));
+          item.style.transform = `translateY(0) scale(${scale})`;
+        });
+      }
+      
+      // Initial check - only reveal if already scrolled past trigger points
+      revealImages();
+      
+      // Update on scroll
+      let ticking = false;
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            revealImages();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }
+      
+      window.addEventListener('scroll', onScroll, { passive: true });
+      
+      // Also check when section enters viewport
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            revealImages();
+          }
+        });
+      }, {
+        threshold: 0,
+        rootMargin: '100px'
+      });
+      
+      observer.observe(section);
+      
+      // Cleanup
+      window.addEventListener('beforeunload', () => {
+        window.removeEventListener('scroll', onScroll);
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Cascading images",
+  "class": "shopify-section--cascading-images",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "image_max_width_mobile",
+      "label": "Image max width (mobile)",
+      "min": 200,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "image_max_width_desktop",
+      "label": "Image max width (desktop)",
+      "min": 400,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "image_gap_mobile",
+      "label": "Image gap (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "image_gap_desktop",
+      "label": "Image gap (desktop)",
+      "min": 0,
+      "max": 152,
+      "step": 4,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "image_overlap_mobile",
+      "label": "Image overlap (mobile)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 40,
+      "info": "Negative margin to create cascading effect"
+    },
+    {
+      "type": "range",
+      "id": "image_overlap_desktop",
+      "label": "Image overlap (desktop)",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "default": 60,
+      "info": "Negative margin to create cascading effect"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation duration",
+      "min": 300,
+      "max": 1500,
+      "step": 100,
+      "unit": "ms",
+      "default": 800,
+      "info": "How long each image takes to slide up"
+    },
+    {
+      "type": "range",
+      "id": "animation_delay",
+      "label": "Animation delay between images",
+      "min": 100,
+      "max": 500,
+      "step": 50,
+      "unit": "ms",
+      "default": 200,
+      "info": "Delay between each image animation"
+    },
+    {
+      "type": "range",
+      "id": "reveal_spacing",
+      "label": "Reveal spacing",
+      "min": 50,
+      "max": 500,
+      "step": 25,
+      "unit": "px",
+      "default": 200,
+      "info": "Scroll distance between each image reveal"
+    },
+    {
+      "type": "range",
+      "id": "scale_reduction",
+      "label": "Scale reduction per image",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "default": 5,
+      "info": "How much each stacked image scales down (as percentage)"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "shadow_x",
+      "label": "Shadow X offset",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "shadow_y",
+      "label": "Shadow Y offset",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "label": "Shadow blur",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "label": "Shadow opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL",
+          "info": "Optional: Make the image clickable"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cascading images",
+      "category": "Media",
+      "blocks": [
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        },
+        {
+          "type": "image"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
