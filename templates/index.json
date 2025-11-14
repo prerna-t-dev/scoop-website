@@ -386,7 +386,7 @@
         "collections_per_row": 3,
         "show_progress_bar": false,
         "subheading": "",
-        "title": "Here’s how we help!",
+        "title": "<p>Here’s how we help!</p>",
         "content": "<p>Three ways to get the fit you've always wanted. Expert guidance, wherever you're most comfortable.</p>",
         "link_url": "",
         "link_text": "",

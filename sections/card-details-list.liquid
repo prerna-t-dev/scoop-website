@@ -1,0 +1,363 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} .card-details-list {
+    --card-item-width: 74vw;
+    --card-grid: auto / auto-flow var(--card-item-width);
+    display: grid;
+    grid: var(--card-grid);
+    gap: var(--spacing-4);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  #shopify-section-{{ section.id }} .card-details-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .card-details-list.bleed {
+    padding-inline-end: 0 !important;
+    margin-inline-end: 0 !important;
+  }
+
+  #shopify-section-{{ section.id }} .card-details-item {
+    scroll-snap-align: start;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    padding: 24px 16px;
+    min-height: {{ section.settings.min_height_mobile }}px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  #shopify-section-{{ section.id }} .card-details-item__pattern {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  #shopify-section-{{ section.id }} .card-details-item__pattern img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    object-position: center bottom;
+  }
+
+  #shopify-section-{{ section.id }} .card-details-item__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  #shopify-section-{{ section.id }} .card-details-item__title {
+    font-family: var(--heading-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 100%;
+    color: #000000;
+    margin: 0 0 12px 0;
+  }
+
+  #shopify-section-{{ section.id }} .card-details-item__title em {
+    font-style: italic;
+  }
+
+  #shopify-section-{{ section.id }} .card-details-item__text {
+    font-family: var(--text-font-family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 140%;
+    color: #FFFFFF;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .card-details-list {
+      --card-item-width: 36vw;
+      --card-grid: {% if section.settings.stack_cards %}auto / repeat(2, minmax(0, 1fr)){% else %}auto / auto-flow var(--card-item-width){% endif %};
+      gap: 24px;
+    }
+
+    #shopify-section-{{ section.id }} .card-details-item {
+      padding: 36px 24px;
+      min-height: {{ section.settings.min_height_desktop }}px;
+      border-radius: 14px;
+    }
+
+    #shopify-section-{{ section.id }} .card-details-item__title {
+      font-size: 34px;
+      margin-bottom: 18px;
+    }
+
+    #shopify-section-{{ section.id }} .card-details-item__text {
+      font-size: 20px;
+    }
+  }
+
+  @media screen and (min-width: 1000px) {
+    #shopify-section-{{ section.id }} .card-details-list {
+      --card-item-width: calc(var(--container-inner-width) / {{ section.settings.cards_per_row_desktop }} - (var(--product-list-column-gap) / {{ section.settings.cards_per_row_desktop }} * {{ section.settings.cards_per_row_desktop | minus: 1 }}));
+      --card-grid: {% if section.settings.stack_cards %}auto / repeat({{ section.settings.cards_per_row_desktop }}, minmax(0, 1fr)){% else %}auto / auto-flow var(--card-item-width){% endif %};
+      gap: 32px;
+    }
+
+    #shopify-section-{{ section.id }} .card-details-item {
+      padding: 36px 24px;
+      min-height: {{ section.settings.min_height_desktop }}px;
+    }
+
+    #shopify-section-{{ section.id }} .card-details-item__title {
+      font-size: 34px;
+      margin-bottom: 18px;
+    }
+
+    #shopify-section-{{ section.id }} .card-details-item__text {
+      font-size: 20px;
+    }
+  }
+</style>
+
+<div {% render 'section-properties' %}>
+  <div class="section-stack">
+    {%- if section.settings.title != blank or section.settings.subheading != blank or section.settings.content != blank -%}
+      {%- render 'section-header', subheading: section.settings.subheading, heading: section.settings.title, heading_color: section.settings.heading_color, heading_gradient: section.settings.heading_gradient, content: section.settings.content, link_text: section.settings.link_text, link_url: section.settings.link_url -%}
+    {%- endif -%}
+
+    <div class="{% if section.settings.show_progress_bar %}scrollable-with-controls{% else %}floating-controls-container{% endif %}">
+      {%- assign scroll_area_id = 'scroll-area-' | append: section.id -%}
+
+      <scroll-carousel selector=".card-details-item" id="{{ scroll_area_id }}" class="scroll-area bleed {% if section.blocks.size > section.settings.cards_per_row_desktop %}is-scrollable{% endif %}">
+        <div class="card-details-list">
+          {%- for block in section.blocks -%}
+            <div class="card-details-item" style="background-color: {{ block.settings.background_color | default: '#C8B3E6' }};" {{ block.shopify_attributes }}>
+              {%- if block.settings.pattern_image != blank -%}
+                <div class="card-details-item__pattern">
+                  {{ block.settings.pattern_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: '' }}
+                </div>
+              {%- endif -%}
+              
+              <div class="card-details-item__content">
+                {%- if block.settings.title != blank -%}
+                  <div class="card-details-item__title">{{ block.settings.title }}</div>
+                {%- endif -%}
+                
+                {%- if block.settings.content != blank -%}
+                  <div class="card-details-item__text">
+                    {{ block.settings.content }}
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </scroll-carousel>
+
+      {%- if section.settings.stack_cards == false -%}
+        {%- if section.settings.show_progress_bar -%}
+          {%- assign default_progress = section.settings.cards_per_row_desktop | times: 1.0 | divided_by: section.blocks.size -%}
+          {%- render 'scrollbar', observes: scroll_area_id, default_progress: default_progress, show_buttons: true -%}
+        {%- else -%}
+          <button is="prev-button" class="circle-button circle-button--lg circle-button--fill border group" aria-controls="{{ scroll_area_id }}" disabled>
+            <span class="sr-only">{{ 'general.accessibility.previous' | t }}</span>
+            <span class="animated-arrow animated-arrow--reverse"></span>
+          </button>
+
+          <button is="next-button" class="circle-button circle-button--lg circle-button--fill border group" aria-controls="{{ scroll_area_id }}">
+            <span class="sr-only">{{ 'general.accessibility.next' | t }}</span>
+            <span class="animated-arrow"></span>
+          </button>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Card details list",
+  "class": "shopify-section--card-details-list",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "stack_cards",
+      "label": "Stack cards",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_progress_bar",
+      "label": "Show carousel progress bar",
+      "default": false,
+      "visible_if": "{{ section.settings.stack_cards == false }}"
+    },
+    {
+      "type": "select",
+      "id": "cards_per_row_mobile",
+      "label": "Cards per row (mobile)",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "cards_per_row_desktop",
+      "min": 2,
+      "max": 5,
+      "label": "Cards per row (desktop)",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "min_height_mobile",
+      "min": 200,
+      "max": 600,
+      "step": 5,
+      "unit": "px",
+      "label": "Minimum height (mobile)",
+      "default": 275
+    },
+    {
+      "type": "range",
+      "id": "min_height_desktop",
+      "min": 300,
+      "max": 800,
+      "step": 5,
+      "unit": "px",
+      "label": "Minimum height (desktop)",
+      "default": 400
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link URL"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "View all"
+    },
+    {
+      "type": "header",
+      "content": "Colors",
+      "info": "Gradient replaces solid colors when set."
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color"
+    },
+    {
+      "type": "color_background",
+      "id": "heading_gradient",
+      "label": "Heading gradient"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "title",
+          "label": "Title",
+          "default": "<p>Card title</p>"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content",
+          "default": "<p>Card content goes here.</p>"
+        },
+        {
+          "type": "color",
+          "id": "background_color",
+          "label": "Background color",
+          "default": "#C8B3E6"
+        },
+        {
+          "type": "image_picker",
+          "id": "pattern_image",
+          "label": "Pattern image",
+          "info": "Optional decorative pattern image for the bottom of the card"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Card details list",
+      "category": "Content",
+      "blocks": [
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
