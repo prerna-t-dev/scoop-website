@@ -1,0 +1,226 @@
+{%- if section.blocks.size > 0 -%}
+  {%- render 'section-spacing-collapsing' -%}
+
+  <style>
+    #shopify-section-{{ section.id }} {
+      --section-spacing-inline: 0px;
+    }
+
+    #shopify-section-{{ section.id }} .custom-image-gallery {
+      position: relative;
+      min-height: {{ section.settings.min_height_mobile | default: 100 }}vw;
+      width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .custom-image-gallery__item {
+      position: absolute;
+    }
+
+    {%- for block in section.blocks -%}
+      #shopify-section-{{ section.id }} .custom-image-gallery__item[data-block-id="{{ block.id }}"] {
+        width: {{ block.settings.width_mobile | default: 30 }}vw;
+        left: {{ block.settings.left_mobile | default: 0 }}%;
+        top: {{ block.settings.top_mobile | default: 0 }}%;
+        {%- unless block.settings.visible_on_mobile -%}
+          display: none;
+        {%- endunless -%}
+      }
+    {%- endfor -%}
+
+    #shopify-section-{{ section.id }} .custom-image-gallery__image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    {%- for block in section.blocks -%}
+      {%- if block.settings.enable_drop_shadow -%}
+        #shopify-section-{{ section.id }} .custom-image-gallery__item[data-block-id="{{ block.id }}"] .custom-image-gallery__image {
+          filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.1))
+                  drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1))
+                  drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.1))
+                  drop-shadow(0px 8px 16px rgba(0, 0, 0, 0.1))
+                  drop-shadow(0px 16px 32px rgba(0, 0, 0, 0.1));
+        }
+      {%- endif -%}
+    {%- endfor -%}
+
+    @media screen and (min-width: 700px) {
+      #shopify-section-{{ section.id }} .custom-image-gallery {
+        min-height: {{ section.settings.min_height_desktop | default: 100 }}vw;
+      }
+
+      {%- for block in section.blocks -%}
+        #shopify-section-{{ section.id }} .custom-image-gallery__item[data-block-id="{{ block.id }}"] {
+          width: {{ block.settings.width_desktop | default: 30 }}vw;
+          left: {{ block.settings.left_desktop | default: 0 }}%;
+          top: {{ block.settings.top_desktop | default: 0 }}%;
+          display: block;
+        }
+      {%- endfor -%}
+    }
+  </style>
+
+  <div {% render 'section-properties' %}>
+    <div class="custom-image-gallery">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image != blank -%}
+          <div class="custom-image-gallery__item" data-block-id="{{ block.id }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.link_url != blank -%}
+              <a href="{{ block.settings.link_url }}" class="custom-image-gallery__link">
+            {%- endif -%}
+            
+            {%- capture sizes -%}(max-width: 699px) {{ block.settings.width_mobile | default: 30 }}vw, {{ block.settings.width_desktop | default: 30 }}vw{%- endcapture -%}
+            {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '400,600,800,1000,1200,1400,1600', class: 'custom-image-gallery__image' -}}
+            
+            {%- if block.settings.link_url != blank -%}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Custom Image Gallery",
+  "class": "shopify-section--custom-image-gallery",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "min_height_mobile",
+      "label": "Minimum height (mobile)",
+      "min": 20,
+      "max": 200,
+      "step": 5,
+      "unit": "vw",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "min_height_desktop",
+      "label": "Minimum height (desktop)",
+      "min": 50,
+      "max": 200,
+      "step": 5,
+      "unit": "vw",
+      "default": 100
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "Link URL",
+          "info": "Optional link for the image"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_drop_shadow",
+          "label": "Enable drop shadow",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Mobile Settings"
+        },
+        {
+          "type": "checkbox",
+          "id": "visible_on_mobile",
+          "label": "Visible on mobile",
+          "default": true
+        },
+        {
+          "type": "range",
+          "id": "width_mobile",
+          "label": "Width (mobile)",
+          "min": 5,
+          "max": 100,
+          "step": 1,
+          "unit": "vw",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "left_mobile",
+          "label": "Left position (mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "top_mobile",
+          "label": "Top position (mobile)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "type": "header",
+          "content": "Desktop Settings"
+        },
+        {
+          "type": "range",
+          "id": "width_desktop",
+          "label": "Width (desktop)",
+          "min": 5,
+          "max": 100,
+          "step": 1,
+          "unit": "vw",
+          "default": 30
+        },
+        {
+          "type": "range",
+          "id": "left_desktop",
+          "label": "Left position (desktop)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "top_desktop",
+          "label": "Top position (desktop)",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "default": 0
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Image Gallery"
+    }
+  ]
+}
+{% endschema %}
+
