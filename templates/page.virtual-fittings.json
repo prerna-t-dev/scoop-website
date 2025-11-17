@@ -60,7 +60,7 @@
         "note": "Once you place your fitting order with us, we will get in touch to confirm the payment and schedule a time of your preference.",
         "covered_heading": "What's covered?",
         "covered_content": "<p>We'll begin with a conversation to understand your current bra troubles and pain points, and our fitter will then guide you through taking a series of measurements to calculate your size.</p><p>You will then be provided with personalised recommendations of styles and features to consider while shopping for your next bra.</p>",
-        "right_background_color": "#F8EEEC"
+        "right_background_color": "#f8eeec"
       }
     },
     "card_details_list_9gqNqd": {
@@ -118,6 +118,197 @@
         "text_color": "",
         "heading_color": "",
         "heading_gradient": ""
+      }
+    },
+    "rich_heading_yVLXM9": {
+      "type": "rich-heading",
+      "custom_css": [
+        ".section-full {padding-bottom: 0; padding-top: 16px;}"
+      ],
+      "name": "Rich heading",
+      "settings": {
+        "heading": "<p>A Virtual Consult to get <em>you </em>right.</p>",
+        "content_width": "small",
+        "text_alignment": "center",
+        "padding_left_mobile": 40,
+        "padding_right_mobile": 40,
+        "padding_left_desktop": 0,
+        "padding_right_desktop": 0,
+        "background": "",
+        "background_gradient": "",
+        "text_color": ""
+      }
+    },
+    "custom_image_gallery_ticzTi": {
+      "type": "custom-image-gallery",
+      "blocks": {
+        "image_zw9bJi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Group_1000006235.png",
+            "link_url": "",
+            "enable_drop_shadow": true,
+            "visible_on_mobile": true,
+            "width_mobile": 55,
+            "left_mobile": 41,
+            "top_mobile": 20,
+            "width_desktop": 30,
+            "left_desktop": 47,
+            "top_desktop": 24
+          }
+        },
+        "image_qKpaBj": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Group_1000006237.png",
+            "link_url": "",
+            "enable_drop_shadow": true,
+            "visible_on_mobile": true,
+            "width_mobile": 26,
+            "left_mobile": 6,
+            "top_mobile": 8,
+            "width_desktop": 13,
+            "left_desktop": 23,
+            "top_desktop": 19
+          }
+        },
+        "image_46PGCJ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Group_1000006241.png",
+            "link_url": "",
+            "enable_drop_shadow": true,
+            "visible_on_mobile": false,
+            "width_mobile": 30,
+            "left_mobile": 0,
+            "top_mobile": 0,
+            "width_desktop": 12,
+            "left_desktop": 8,
+            "top_desktop": 17
+          }
+        },
+        "image_gCPHLF": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Group_1000006239.png",
+            "link_url": "",
+            "enable_drop_shadow": true,
+            "visible_on_mobile": false,
+            "width_mobile": 30,
+            "left_mobile": 0,
+            "top_mobile": 0,
+            "width_desktop": 27,
+            "left_desktop": 0,
+            "top_desktop": 60
+          }
+        },
+        "image_bRmWxU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Group_1000006230_1.png",
+            "link_url": "",
+            "enable_drop_shadow": true,
+            "visible_on_mobile": true,
+            "width_mobile": 75,
+            "left_mobile": 13,
+            "top_mobile": 47,
+            "width_desktop": 42,
+            "left_desktop": 29,
+            "top_desktop": 46
+          }
+        },
+        "image_3ttGkb": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Group_1000006231.png",
+            "link_url": "",
+            "enable_drop_shadow": false,
+            "visible_on_mobile": true,
+            "width_mobile": 30,
+            "left_mobile": 5,
+            "top_mobile": 78,
+            "width_desktop": 15,
+            "left_desktop": 23,
+            "top_desktop": 78
+          }
+        },
+        "image_8t3BEk": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Group_1000006231.png",
+            "link_url": "",
+            "enable_drop_shadow": false,
+            "visible_on_mobile": false,
+            "width_mobile": 30,
+            "left_mobile": 0,
+            "top_mobile": 0,
+            "width_desktop": 15,
+            "left_desktop": 79,
+            "top_desktop": 5
+          }
+        },
+        "image_GHBx3U": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Group_1000006243.png",
+            "link_url": "",
+            "enable_drop_shadow": true,
+            "visible_on_mobile": false,
+            "width_mobile": 30,
+            "left_mobile": 0,
+            "top_mobile": 0,
+            "width_desktop": 13,
+            "left_desktop": 87,
+            "top_desktop": 41
+          }
+        },
+        "image_wzfTgU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Group_1000006241.png",
+            "link_url": "",
+            "enable_drop_shadow": true,
+            "visible_on_mobile": false,
+            "width_mobile": 30,
+            "left_mobile": 0,
+            "top_mobile": 0,
+            "width_desktop": 12,
+            "left_desktop": 73,
+            "top_desktop": 60
+          }
+        },
+        "image_zrixzh": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/image_153.png",
+            "link_url": "",
+            "enable_drop_shadow": false,
+            "visible_on_mobile": true,
+            "width_mobile": 35,
+            "left_mobile": 32,
+            "top_mobile": 98,
+            "width_desktop": 30,
+            "left_desktop": 35,
+            "top_desktop": 98
+          }
+        }
+      },
+      "block_order": [
+        "image_zw9bJi",
+        "image_qKpaBj",
+        "image_46PGCJ",
+        "image_gCPHLF",
+        "image_bRmWxU",
+        "image_3ttGkb",
+        "image_8t3BEk",
+        "image_GHBx3U",
+        "image_wzfTgU",
+        "image_zrixzh"
+      ],
+      "name": "Custom Image Gallery",
+      "settings": {
+        "min_height_mobile": 105,
+        "min_height_desktop": 65
       }
     },
     "scrolling_text_xab3LD": {
@@ -197,6 +388,8 @@
       "settings": {
         "full_width": true,
         "hide_on_desktop": false,
+        "padding_top_mobile": 36,
+        "padding_top_desktop": 36,
         "title": "",
         "cta_text": "",
         "cta_url": "",
@@ -369,6 +562,8 @@
     "image_with_text_overlay_xtPFh9",
     "fitting_details_3D6e9h",
     "card_details_list_9gqNqd",
+    "rich_heading_yVLXM9",
+    "custom_image_gallery_ticzTi",
     "scrolling_text_xab3LD",
     "before_after_image_Mk8EmD",
     "fitting_card_DAAhKD",
