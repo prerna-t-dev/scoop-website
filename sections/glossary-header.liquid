@@ -1,0 +1,405 @@
+{%- unless section.settings.full_width -%}
+  {%- render 'section-spacing-collapsing' -%}
+{%- endunless -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {%- if section.settings.full_width -%}
+      --section-outer-spacing-block: 0;
+      --section-spacing-inline: 0px;
+    {%- endif -%}
+
+    {%- if section.settings.allow_transparent_header -%}
+      margin-block-start: calc(-1 * var(--header-height) * var(--section-is-first));
+    {%- endif -%}
+  }
+
+  #shopify-section-{{ section.id }} .glossary-header__hero {
+    position: relative;
+    height: {{ section.settings.height_mobile | default: 220 }}px;
+    overflow: hidden;
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .glossary-header__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .glossary-header__overlay-container {
+    margin-bottom: -60px;
+  }
+
+  #shopify-section-{{ section.id }} .glossary-header__overlay {
+    position: relative;
+    top: -60px;
+    background: {{ section.settings.overlay_color | default: '#FF615C' }};
+    border-radius: {{ section.settings.overlay_border_radius | default: 16 }}px;
+    padding: {{ section.settings.overlay_padding_mobile | default: 40 }}px {{ section.settings.overlay_padding_mobile | default: 24 }}px;
+    z-index: 2;
+    width: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .glossary-header__overlay > * {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .glossary-header__title {
+    font-family: var(--heading-font-family);
+    font-size: {{ section.settings.title_font_size_mobile | default: 42 }}px;
+    font-weight: {{ section.settings.title_font_weight | default: 400 }};
+    color: {{ section.settings.title_color | default: '#FFFFFF' }};
+    line-height: 1.2;
+    margin: 0 0 {{ section.settings.title_spacing_mobile | default: 12 }}px 0;
+  }
+
+  #shopify-section-{{ section.id }} .glossary-header__description {
+    font-family: var(--text-font-family);
+    font-size: {{ section.settings.description_font_size_mobile | default: 16 }}px;
+    font-weight: {{ section.settings.description_font_weight | default: 400 }};
+    color: {{ section.settings.description_color | default: '#FFFFFF' }};
+    line-height: {{ section.settings.description_line_height | default: 1.5 }};
+    margin: 0;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .glossary-header__hero {
+      height: {{ section.settings.height_desktop | default: 570 }}px;
+      border-radius: 24px;
+    }
+
+    #shopify-section-{{ section.id }} .glossary-header__image {
+      border-radius: 24px;
+    }
+
+    #shopify-section-{{ section.id }} .glossary-header__overlay-container {
+      margin-bottom: -80px;
+    }
+
+    #shopify-section-{{ section.id }} .glossary-header__overlay {
+      border-radius: {{ section.settings.overlay_border_radius | default: 16 }}px;
+      padding: {{ section.settings.overlay_padding_desktop | default: 60 }}px {{ section.settings.overlay_padding_desktop | default: 50 }}px;
+      top: -80px;
+      width: 80vw;
+      max-width: {{ section.settings.overlay_max_width | default: 600 }}px;
+      
+
+     
+    }
+
+    #shopify-section-{{ section.id }} .glossary-header__overlay > * {
+      max-width: 100%;
+    }
+
+    #shopify-section-{{ section.id }} .glossary-header__title {
+      font-size: {{ section.settings.title_font_size_desktop | default: 56 }}px;
+      margin-bottom: {{ section.settings.title_spacing_desktop | default: 16 }}px;
+    }
+
+    #shopify-section-{{ section.id }} .glossary-header__description {
+      font-size: {{ section.settings.description_font_size_desktop | default: 18 }}px;
+    }
+  }
+
+</style>
+
+<div {% render 'section-properties' %} {% if section.settings.allow_transparent_header %}allow-transparent-header{% endif %}>
+  {%- capture class -%}glossary-header__hero {% if section.settings.full_width %}full-bleed{% endif %}{%- endcapture -%}
+  <div class="{{ class }}">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 2000 | image_tag: loading: 'eager', class: 'glossary-header__image', alt: section.settings.image.alt | default: 'Glossary header' }}
+    {%- else -%}
+      <div style="width: 100%; height: 100%; background: #f5f5f5; position: absolute; top: 0; left: 0;"></div>
+    {%- endif -%}
+
+  </div>
+
+  {%- comment -%} Overlay Container {%- endcomment -%}
+  <div class="container glossary-header__overlay-container">
+    <div class="glossary-header__overlay">
+      {%- if section.settings.title != blank -%}
+        <h1 class="glossary-header__title">{{ section.settings.title }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <p class="glossary-header__description">{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Glossary Header",
+  "class": "shopify-section--glossary-header",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_transparent_header",
+      "label": "Allow transparent header",
+      "info": "This setting only applies when this section is the first one.",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "label": "Height (mobile)",
+      "min": 100,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "default": 220
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "label": "Height (desktop)",
+      "min": 200,
+      "max": 1200,
+      "step": 10,
+      "unit": "px",
+      "default": 570
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Glossary"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "One stop shop for all your questions about fitting jargon!"
+    },
+    {
+      "type": "header",
+      "content": "Overlay Styling"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay background color",
+      "default": "#FF615C"
+    },
+    {
+      "type": "range",
+      "id": "overlay_border_radius",
+      "label": "Overlay border radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "overlay_padding_mobile",
+      "label": "Overlay padding (mobile)",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "overlay_padding_desktop",
+      "label": "Overlay padding (desktop)",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "overlay_max_width",
+      "label": "Overlay max width (desktop)",
+      "min": 400,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_mobile",
+      "label": "Title font size (mobile)",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "title_font_size_desktop",
+      "label": "Title font size (desktop)",
+      "min": 32,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "select",
+      "id": "title_font_weight",
+      "label": "Title font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        },
+        {
+          "value": "700",
+          "label": "Bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "title_spacing_mobile",
+      "label": "Title bottom spacing (mobile)",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "title_spacing_desktop",
+      "label": "Title bottom spacing (desktop)",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_font_size_mobile",
+      "label": "Description font size (mobile)",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_font_size_desktop",
+      "label": "Description font size (desktop)",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "select",
+      "id": "description_font_weight",
+      "label": "Description font weight",
+      "options": [
+        {
+          "value": "300",
+          "label": "Light"
+        },
+        {
+          "value": "400",
+          "label": "Regular"
+        },
+        {
+          "value": "500",
+          "label": "Medium"
+        },
+        {
+          "value": "600",
+          "label": "Semi-bold"
+        }
+      ],
+      "default": "400"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "description_line_height",
+      "label": "Description line height",
+      "min": 1.2,
+      "max": 2.0,
+      "step": 0.1,
+      "default": 1.5
+    }
+  ],
+  "presets": [
+    {
+      "name": "Glossary Header"
+    }
+  ]
+}
+{% endschema %}
+

@@ -132,37 +132,39 @@
         progressStep.classList.add('bra-quiz__progress-step--active');
       });
       
-      // Get or calculate the size
-      let calculatedSize = sessionStorage.getItem('bra-quiz-size');
+      // Get or calculate the size result
+      let sizeResult = null;
+      const storedSizeResult = sessionStorage.getItem('bra-quiz-size-result');
       
-      if (!calculatedSize || calculatedSize === 'Please complete all measurements') {
+      if (storedSizeResult) {
+        try {
+          sizeResult = JSON.parse(storedSizeResult);
+        } catch (e) {
+          console.error('Error parsing stored size result:', e);
+        }
+      }
+      
+      // Fallback: try to get old format string
+      if (!sizeResult) {
+        const oldSizeString = sessionStorage.getItem('bra-quiz-size');
+        if (oldSizeString && oldSizeString !== 'Please complete all measurements' && !oldSizeString.includes("don't carry")) {
+          sizeResult = { mainSize: oldSizeString };
+        }
+      }
+      
+      // If still no result, try to recalculate from stored measurements
+      if (!sizeResult) {
         const storedMeasurements = sessionStorage.getItem('bra-quiz-measurements');
         if (storedMeasurements) {
           try {
             const tempMeasurements = JSON.parse(storedMeasurements);
-            // Recalculate from stored measurements using the full calculation function
-            // We'll need to call calculateBraSize with the stored measurements
-            // For now, let's use a simplified calculation
-            const su = parseFloat(tempMeasurements.snug_underband) || 0;
-            const tu = parseFloat(tempMeasurements.tight_underband) || 0;
-            const so = parseFloat(tempMeasurements.standing_overbust) || 0;
-            const lo = parseFloat(tempMeasurements.leaning_overbust) || 0;
-            
-            if (su && tu && so && lo) {
-              const bandSize = Math.min(Math.round(su), Math.round(tu + 2));
-              const avgBust = (so + lo) / 2;
-              const cupDifference = avgBust - su;
-              
-              if (cupDifference >= 5 && cupDifference <= 15) {
-                const cupOrder = ['D', 'DD', 'E', 'F', 'FF', 'G', 'GG', 'H', 'HH', 'J', 'JJ', 'K', 'KK', 'L'];
-                const cupIndex = Math.floor(cupDifference) - 5;
-                if (cupIndex >= 0 && cupIndex < cupOrder.length) {
-                  calculatedSize = bandSize + cupOrder[cupIndex];
-                }
-              }
-            }
+            // Temporarily set measurements to recalculate
+            const originalMeasurements = { ...measurements };
+            Object.assign(measurements, tempMeasurements);
+            sizeResult = calculateBraSize();
+            Object.assign(measurements, originalMeasurements);
           } catch (e) {
-            console.error('Error parsing stored measurements:', e);
+            console.error('Error recalculating size:', e);
           }
         }
       }
@@ -174,17 +176,25 @@
       }
       const resultElement = quizContainer.querySelector('#bra-quiz-result');
       const errorMessageEl = quizContainer.querySelector('#bra-quiz-error-message');
+      const sisterSizeEl = quizContainer.querySelector('.bra-quiz__sister-size');
+      const relaxedFitEl = quizContainer.querySelector('.bra-quiz__relaxed-fit');
+      const firmFitEl = quizContainer.querySelector('.bra-quiz__firm-fit');
       
-      if (calculatedSize && calculatedSize !== 'Please complete all measurements') {
-        // Check if it's an error message
-        if (calculatedSize.includes("don't carry")) {
+      if (sizeResult) {
+        // Check if it's an error
+        if (sizeResult.error) {
           // Hide result, show error message
           if (resultElement) {
             resultElement.style.display = 'none';
           }
           if (errorMessageEl) {
             errorMessageEl.style.display = 'block';
+            errorMessageEl.textContent = sizeResult.error;
           }
+          // Hide all additional size options
+          if (sisterSizeEl) sisterSizeEl.style.display = 'none';
+          if (relaxedFitEl) relaxedFitEl.style.display = 'none';
+          if (firmFitEl) firmFitEl.style.display = 'none';
         } else {
           // Show result, hide error message
           if (resultElement) {
@@ -193,8 +203,59 @@
           if (errorMessageEl) {
             errorMessageEl.style.display = 'none';
           }
-          if (sizeValueEl) {
-            setSizeValueWithLink(sizeValueEl, calculatedSize);
+          if (sizeValueEl && sizeResult.mainSize) {
+            setSizeValueWithLink(sizeValueEl, sizeResult.mainSize);
+          }
+          
+          // Show sister size if available
+          if (sisterSizeEl) {
+            if (sizeResult.sisterSize) {
+              sisterSizeEl.style.display = 'block';
+              const sisterSizeTextEl = sisterSizeEl.querySelector('.bra-quiz__sister-size-text');
+              const sisterSizeValueEl = sisterSizeEl.querySelector('.bra-quiz__sister-size-value');
+              if (sisterSizeTextEl && sizeResult.sisterSizeMessage) {
+                sisterSizeTextEl.textContent = sizeResult.sisterSizeMessage;
+              }
+              if (sisterSizeValueEl && sizeResult.sisterSize) {
+                setSizeValueWithLink(sisterSizeValueEl, sizeResult.sisterSize);
+              }
+            } else {
+              sisterSizeEl.style.display = 'none';
+            }
+          }
+          
+          // Show relaxed fit if available
+          if (relaxedFitEl) {
+            if (sizeResult.relaxedFit) {
+              relaxedFitEl.style.display = 'block';
+              const relaxedFitTextEl = relaxedFitEl.querySelector('.bra-quiz__relaxed-fit-text');
+              const relaxedFitValueEl = relaxedFitEl.querySelector('.bra-quiz__relaxed-fit-value');
+              if (relaxedFitTextEl && sizeResult.relaxedFitMessage) {
+                relaxedFitTextEl.textContent = sizeResult.relaxedFitMessage;
+              }
+              if (relaxedFitValueEl && sizeResult.relaxedFit) {
+                setSizeValueWithLink(relaxedFitValueEl, sizeResult.relaxedFit);
+              }
+            } else {
+              relaxedFitEl.style.display = 'none';
+            }
+          }
+          
+          // Show firm fit if available
+          if (firmFitEl) {
+            if (sizeResult.firmFit) {
+              firmFitEl.style.display = 'block';
+              const firmFitTextEl = firmFitEl.querySelector('.bra-quiz__firm-fit-text');
+              const firmFitValueEl = firmFitEl.querySelector('.bra-quiz__firm-fit-value');
+              if (firmFitTextEl && sizeResult.firmFitMessage) {
+                firmFitTextEl.textContent = sizeResult.firmFitMessage;
+              }
+              if (firmFitValueEl && sizeResult.firmFit) {
+                setSizeValueWithLink(firmFitValueEl, sizeResult.firmFit);
+              }
+            } else {
+              firmFitEl.style.display = 'none';
+            }
           }
         }
       }
@@ -526,12 +587,12 @@
 
       // Validate that we have the required measurements
       if (!su || !tu || !so || !lo) {
-        return 'Please complete all measurements';
+        return { error: 'Please complete all measurements' };
       }
 
       // Check for size not available conditions
       if (su < 25 || tu < 23 || su > 40.5 || tu > 38.5) {
-        return 'Sorry, we don\'t carry your size yet - but we\'re working on it!';
+        return { error: 'Sorry, we don\'t carry your size yet - but we\'re working on it!' };
       }
 
       // I. Calculate Band Size
@@ -544,6 +605,7 @@
       
       // Choose the smaller of the two
       let bandSize = Math.min(bandSizeA, bandSizeB);
+      const biggerBandSize = Math.max(bandSizeA, bandSizeB);
 
       // II. Calculate Cup Size
       // Base cup calculation: (SO + LO) / 2 - SU
@@ -552,7 +614,7 @@
       
       // Check if cup size is out of range
       if (cupDifference > 15 || cupDifference < 5) {
-        return 'Sorry, we don\'t carry your size yet - but we\'re working on it!';
+        return { error: 'Sorry, we don\'t carry your size yet - but we\'re working on it!' };
       }
 
       // Rounding rules for cup difference
@@ -593,11 +655,106 @@
       
       // Format result
       if (cupSizes.length === 0) {
-        return 'Sorry, we don\'t carry your size yet - but we\'re working on it!';
+        return { error: 'Sorry, we don\'t carry your size yet - but we\'re working on it!' };
       }
 
       const cupSizeStr = cupSizes.length === 1 ? cupSizes[0] : cupSizes.join('/');
-      return `${bandSize} ${cupSizeStr}`;
+      const mainSize = `${bandSize} ${cupSizeStr}`;
+      
+      // Initialize result object
+      const result = {
+        mainSize: mainSize,
+        sisterSize: null,
+        relaxedFit: null,
+        firmFit: null,
+        sisterSizeMessage: null,
+        relaxedFitMessage: null,
+        firmFitMessage: null
+      };
+
+      // Check for sister size availability (size not available but sister size available)
+      // Check if any cup size in the array matches the required sizes
+      const sisterSizeCups26 = ['F', 'FF', 'G', 'GG', 'H', 'HH', 'J', 'JJ', 'K', 'KK', 'L'];
+      const sisterSizeCups28 = ['E', 'F', 'FF', 'G', 'GG', 'H', 'HH', 'J', 'JJ', 'K', 'KK'];
+      const sisterSizeCups42 = ['D', 'DD', 'E', 'F', 'FF', 'G', 'GG', 'H', 'HH', 'J', 'JJ'];
+      
+      const isSisterSizeCase = 
+        (bandSize === 26 && cupSizes.some(cup => sisterSizeCups26.includes(cup))) ||
+        (bandSize === 28 && cupSizes.some(cup => sisterSizeCups28.includes(cup))) ||
+        (bandSize === 42 && cupSizes.some(cup => sisterSizeCups42.includes(cup)));
+
+      if (isSisterSizeCase) {
+        let sisterBandSize, sisterCupSizes;
+        if (bandSize === 26) {
+          // Up two sizes in band, down two in cup
+          sisterBandSize = 30;
+          sisterCupSizes = cupSizes.map(cup => adjustCupSize(cup, -2)).filter(cup => cup !== '');
+        } else if (bandSize === 28) {
+          // Up one size in band, down one in cup
+          sisterBandSize = 30;
+          sisterCupSizes = cupSizes.map(cup => adjustCupSize(cup, -1)).filter(cup => cup !== '');
+        } else if (bandSize === 42) {
+          // Down one size in band, up one in cup
+          sisterBandSize = 40;
+          sisterCupSizes = cupSizes.map(cup => adjustCupSize(cup, 1)).filter(cup => cup !== '');
+        }
+        
+        if (sisterCupSizes && sisterCupSizes.length > 0) {
+          const sisterCupStr = sisterCupSizes.length === 1 ? sisterCupSizes[0] : sisterCupSizes.join('/');
+          result.sisterSize = `${sisterBandSize} ${sisterCupStr}`;
+          result.sisterSizeMessage = `Although we don't carry your exact recommended size yet, a sister size of ${result.sisterSize} might work for you!`;
+        }
+      }
+
+      // Check for relaxed-fit trigger
+      const suDecimalPart = su - Math.floor(su);
+      const tuPlus2DecimalPart = tuPlus2 - Math.floor(tuPlus2);
+      const suIsEven = Math.floor(su) % 2 === 0;
+      const tuIsEven = Math.floor(tu) % 2 === 0;
+      
+      const shouldShowRelaxedFit = 
+        (bandSizeA !== bandSizeB) || // Different results from method A and B
+        (suIsEven && suDecimalPart >= 0.01 && suDecimalPart <= 0.50) || // SU = even whole number with decimal up to 0.5
+        (Math.floor(tuPlus2) % 2 === 0 && tuPlus2DecimalPart >= 0.01 && tuPlus2DecimalPart <= 0.50); // TU+2 = even whole number with decimal up to 0.5
+
+      // Don't show relaxed fit if both SU and TU are odd numbers
+      const bothOdd = (Math.floor(su) % 2 !== 0) && (Math.floor(tu) % 2 !== 0);
+      
+      if (shouldShowRelaxedFit && !bothOdd) {
+        // If methods A and B gave different results, use the bigger band size for relaxed fit
+        // Otherwise, increase band by one size, decrease cup by one size
+        let relaxedBandSize;
+        if (bandSizeA !== bandSizeB) {
+          relaxedBandSize = biggerBandSize;
+        } else {
+          relaxedBandSize = bandSize + 2;
+        }
+        const relaxedCupSizes = cupSizes.map(cup => adjustCupSize(cup, -1)).filter(cup => cup !== '');
+        
+        if (relaxedCupSizes.length > 0 && relaxedBandSize <= 44) {
+          const relaxedCupStr = relaxedCupSizes.length === 1 ? relaxedCupSizes[0] : relaxedCupSizes.join('/');
+          result.relaxedFit = `${relaxedBandSize} ${relaxedCupStr}`;
+          result.relaxedFitMessage = `Based on your measurements, we recommend that you either use a non-stretch extender for your first few wears as you break in your new bra. Or, you could also choose ${result.relaxedFit} for a more relaxed fit.`;
+        }
+      }
+
+      // Check for firm-fit trigger
+      const suMinusTu = su - tu;
+      const shouldShowFirmFit = (suMinusTu > 3) || (bandSize >= 38);
+      
+      if (shouldShowFirmFit && bandSize >= 26) {
+        // Decrease band by one size, increase cup by one size
+        const firmBandSize = bandSize - 2;
+        const firmCupSizes = cupSizes.map(cup => adjustCupSize(cup, 1)).filter(cup => cup !== '');
+        
+        if (firmCupSizes.length > 0 && firmBandSize >= 26) {
+          const firmCupStr = firmCupSizes.length === 1 ? firmCupSizes[0] : firmCupSizes.join('/');
+          result.firmFit = `${firmBandSize} ${firmCupStr}`;
+          result.firmFitMessage = `Based on your measurements, you could choose ${result.firmFit} for a more supportive fit.`;
+        }
+      }
+
+      return result;
     }
 
     // Check if all required measurements are completed
@@ -699,20 +856,23 @@
         }
         
         // Calculate bra size before submission
-        const calculatedSize = calculateBraSize();
+        const sizeResult = calculateBraSize();
         
-        // Store size and measurements in sessionStorage for display after redirect
-        if (calculatedSize && calculatedSize !== 'Please complete all measurements') {
-          sessionStorage.setItem('bra-quiz-size', calculatedSize);
+        // Store size result and measurements in sessionStorage for display after redirect
+        if (sizeResult && !sizeResult.error) {
+          sessionStorage.setItem('bra-quiz-size-result', JSON.stringify(sizeResult));
+          sessionStorage.setItem('bra-quiz-size', sizeResult.mainSize); // Keep for backward compatibility
+          sessionStorage.setItem('bra-quiz-measurements', JSON.stringify(measurements));
+        } else if (sizeResult && sizeResult.error) {
+          sessionStorage.setItem('bra-quiz-size', sizeResult.error); // Store error for backward compatibility
           sessionStorage.setItem('bra-quiz-measurements', JSON.stringify(measurements));
         }
         
         // Set contact tags - include bra size as a tag (Shopify handles customer creation similar to newsletter)
         const contactTagsInput = form.querySelector('#bra-quiz-contact-tags');
-        if (contactTagsInput && calculatedSize && calculatedSize !== 'Please complete all measurements') {
-          // Check if size is not available (error message)
-          const isSizeNotAvailable = calculatedSize.includes("don't carry your size") || calculatedSize.includes("don't carry");
-          const sizeTag = isSizeNotAvailable ? 'bra-size-not-available' : 'bra-size-' + calculatedSize.replace(/\s+/g, '-');
+        if (contactTagsInput && sizeResult && !sizeResult.error) {
+          const mainSize = sizeResult.mainSize || '';
+          const sizeTag = 'bra-size-' + mainSize.replace(/\s+/g, '-');
           
           const existingTags = (contactTagsInput.value || '')
             .split(',')
@@ -735,7 +895,8 @@
         if (contactBodyInput) {
           const noteData = {
             source: 'bra-quiz',
-            bra_size: calculatedSize,
+            bra_size: sizeResult && !sizeResult.error ? sizeResult.mainSize : (sizeResult && sizeResult.error ? sizeResult.error : 'Unknown'),
+            size_result: sizeResult,
             measurements: measurements,
             calculated_at: new Date().toISOString(),
             tags: contactTagsInput ? contactTagsInput.value : undefined

@@ -325,6 +325,25 @@ No webhooks or apps needed! The tags are set directly via the form (same approac
             <div class="bra-quiz__size-label">YOUR SIZE IS</div>
             <div class="bra-quiz__size-value">--</div>
           </div>
+          
+          {%- comment -%} Sister Size {%- endcomment -%}
+          <div class="bra-quiz__sister-size" style="display: none;">
+            <p class="bra-quiz__sister-size-text"></p>
+            <div class="bra-quiz__sister-size-value"></div>
+          </div>
+          
+          {%- comment -%} Relaxed Fit {%- endcomment -%}
+          <div class="bra-quiz__relaxed-fit" style="display: none;">
+            <p class="bra-quiz__relaxed-fit-text"></p>
+            <div class="bra-quiz__relaxed-fit-value"></div>
+          </div>
+          
+          {%- comment -%} Firm Fit {%- endcomment -%}
+          <div class="bra-quiz__firm-fit" style="display: none;">
+            <p class="bra-quiz__firm-fit-text"></p>
+            <div class="bra-quiz__firm-fit-value"></div>
+          </div>
+          
           <a href="/pages/bra-quiz#bra-quiz-{{ section.id }}" class="bra-quiz__retake-button">
             <span>RETAKE QUIZ</span>
             <svg width="16" height="16" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="bra-quiz__retake-arrow">

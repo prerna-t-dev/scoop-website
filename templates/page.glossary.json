@@ -1,0 +1,543 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+ {
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "full_width": false,
+        "content_width": "80ch",
+        "background": "",
+        "background_gradient": ""
+      }
+    },
+    "glossary_header_nYnMim": {
+      "type": "glossary-header",
+      "name": "Glossary Header",
+      "settings": {
+        "full_width": false,
+        "allow_transparent_header": false,
+        "image": "shopify://shop_images/Frame_1000003871_2_1.png",
+        "height_mobile": 220,
+        "height_desktop": 570,
+        "title": "Glossary",
+        "description": "One stop shop for all your questions about fitting jargon!",
+        "overlay_color": "#ff615c",
+        "overlay_border_radius": 16,
+        "overlay_padding_mobile": 40,
+        "overlay_padding_desktop": 60,
+        "overlay_max_width": 600,
+        "title_font_size_mobile": 24,
+        "title_font_size_desktop": 74,
+        "title_font_weight": "400",
+        "title_color": "#ffffff",
+        "title_spacing_mobile": 12,
+        "title_spacing_desktop": 16,
+        "description_font_size_mobile": 14,
+        "description_font_size_desktop": 22,
+        "description_font_weight": "400",
+        "description_color": "#ffffff",
+        "description_line_height": 1.5
+      }
+    },
+    "breast_shape_tT4wWr": {
+      "type": "breast-shape",
+      "blocks": {
+        "shape_card_grnP6H": {
+          "type": "shape_card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000006289.png",
+            "title": "FULL ON BOTTOM BREASTS",
+            "description": "Most of your breast tissue or volume is located in the lower half of the breasts, beneath the nipple.",
+            "styles_label": "Styles that work well:",
+            "styles_links": "<p><a href=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Plunge\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Plunge\">Plunge</a> and <a href=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Balcony\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Balcony\">Balcony</a></p>"
+          }
+        },
+        "shape_card_W8p6M9": {
+          "type": "shape_card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000006289_1.png",
+            "title": "FULL ON TOP BREASTS",
+            "description": "Most of your breast tissue or volume is located within the upper half of the breast, above the nipple",
+            "styles_label": "Styles that work well:",
+            "styles_links": "<p><a href=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Balcony\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Balcony\">Balcony</a> and <a href=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\">Full Cup</a></p>"
+          }
+        },
+        "shape_card_yRTU8G": {
+          "type": "shape_card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000006290.png",
+            "title": "FULL ALL AROUND",
+            "description": "Your breast tissue or volume is located evenly around the top and bottom halves of the breasts and your nipple sits in the middle of your breast.",
+            "styles_label": "Styles that work well:",
+            "styles_links": "<p><a href=\"https://www.shopscoopstudio.com/collections/by-style\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-style\">All Styles</a></p>"
+          }
+        },
+        "shape_card_MURzfw": {
+          "type": "shape_card",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000006291.png",
+            "title": "PENDULOUS BREASTS",
+            "description": "Breasts that are soft, where most of the volume hangs below the breast root. Common for people who have given birth, had weight loss, or have aged.",
+            "styles_label": "Styles that work well:",
+            "styles_links": "<p><a href=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\">Full Cup</a> and <a href=\"https://www.shopscoopstudio.com/collections/by-feature?filter.p.m.custom.collection_by_feature=Unlined\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-feature?filter.p.m.custom.collection_by_feature=Unlined\">Unlined</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "shape_card_grnP6H",
+        "shape_card_W8p6M9",
+        "shape_card_yRTU8G",
+        "shape_card_MURzfw"
+      ],
+      "name": "Breast Shape",
+      "settings": {
+        "title": "<p>Breast <em>Shape</em></p>",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor pretium justo at dignissim."
+      }
+    },
+    "breast_shape_info_rrEBng": {
+      "type": "breast-shape-info",
+      "blocks": {
+        "info_card_DrnxPB": {
+          "type": "info_card",
+          "settings": {
+            "icon": "shopify://shop_images/Vector_8.svg",
+            "title": "BREAST PROJECTION",
+            "description": "This refers to how far your breasts project outward from your chest wall. Projection is a spectrum. So if your breasts sit close to your chest and don't stick out much, you likely have shallower breasts. If they project outward noticeably, you likely have full or projected breasts. The standing and leaning overbust measurements used in our bra size calculator also help us in estimating your breast projection.",
+            "styles_item_1": "<p><strong>Bras for Projected Breasts:</strong> <a href=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\">Full Cup</a> and <a href=\"https://www.shopscoopstudio.com/collections/by-feature?filter.p.m.custom.collection_by_feature=Unlined\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-feature?filter.p.m.custom.collection_by_feature=Unlined\">Unlined</a></p>",
+            "styles_item_2": "<p><strong>Bras for Shallow Breasts:</strong> <a href=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\">Full Cup</a> and <a href=\"https://www.shopscoopstudio.com/collections/by-feature?filter.p.m.custom.collection_by_feature=Unlined\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-feature?filter.p.m.custom.collection_by_feature=Unlined\">Unlined</a></p>"
+          }
+        },
+        "info_card_ej9yNT": {
+          "type": "info_card",
+          "settings": {
+            "icon": "shopify://shop_images/Union_1.svg",
+            "title": "BREAST SPACING",
+            "description": "This is about how close or far apart your breasts are from each other. If your breasts sit close together with little space in between, they're close-set. If there's more space between them, they're side-set.",
+            "styles_item_1": "<p><strong>Bras for Close-Set Breasts:</strong> <a href=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\">Full Cup</a> and <a href=\"https://www.shopscoopstudio.com/collections/by-feature?filter.p.m.custom.collection_by_feature=Unlined\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-feature?filter.p.m.custom.collection_by_feature=Unlined\">Unlined</a></p>",
+            "styles_item_2": "<p><strong>Bras for Side-Set Breasts:</strong> <a href=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\">Full Cup</a> and <a href=\"https://www.shopscoopstudio.com/collections/by-feature?filter.p.m.custom.collection_by_feature=Unlined\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-feature?filter.p.m.custom.collection_by_feature=Unlined\">Unlined</a></p>"
+          }
+        },
+        "info_card_nLmV9a": {
+          "type": "info_card",
+          "settings": {
+            "icon": "shopify://shop_images/Union_2.svg",
+            "title": "ROOT WIDTH",
+            "description": "Your breast root is where your breast tissue starts on your chest. It's useful to think of it as the area or width on your chest that your breasts are attached to. Wide roots spread across more of the chest wall. Narrow roots have a smaller base.",
+            "styles_item_1": "<p><strong>Bras for Narrow Roots:</strong> <a href=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\">Full Cup</a> and <a href=\"https://www.shopscoopstudio.com/collections/by-feature?filter.p.m.custom.collection_by_feature=Unlined\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-feature?filter.p.m.custom.collection_by_feature=Unlined\">Unlined</a></p>",
+            "styles_item_2": "<p><strong>Bras for Wide Roots:</strong> <a href=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-style?filter.p.m.custom.collection_by_style=Full+Cup\">Full Cup</a> and <a href=\"https://www.shopscoopstudio.com/collections/by-feature?filter.p.m.custom.collection_by_feature=Unlined\" target=\"_blank\" title=\"https://www.shopscoopstudio.com/collections/by-feature?filter.p.m.custom.collection_by_feature=Unlined\">Unlined</a></p>"
+          }
+        }
+      },
+      "block_order": [
+        "info_card_DrnxPB",
+        "info_card_ej9yNT",
+        "info_card_nLmV9a"
+      ],
+      "name": "Breast Shape Info",
+      "settings": {
+        "title": "<p>Along with shape, a few other factors can influence how your bras fit. We map our products on the basis of</p>"
+      }
+    },
+    "quiz_card_two_cta_8pz6dw": {
+      "type": "quiz-card-two-cta",
+      "name": "Quiz card two CTA",
+      "settings": {
+        "eyebrow_text": "ONE SIZE DOESN'T FIT ALL",
+        "eyebrow_color": "#000000",
+        "eyebrow_font_size": 14,
+        "eyebrow_font_weight": 600,
+        "heading": "Your best fit <br>\nstarts here.",
+        "heading_color": "#000000",
+        "heading_font_size_mobile": 36,
+        "heading_font_size_desktop": 42,
+        "heading_font_weight": 400,
+        "heading_font_style": "normal",
+        "icon_svg": "<svg width=\"28\" height=\"29\" viewbox=\"0 0 28 29\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M27.6289 28.4415L-3.80336e-10 28.4415C-2.96904e-10 22.2024 3.14463 16.8041 7.7164 14.2208C3.14463 11.6374 0 6.2391 0 0L27.6289 0C27.6289 6.2391 24.4843 11.6374 19.9125 14.2208C24.4843 16.8001 27.6289 22.1984 27.6289 28.4415Z\" fill=\"#A073B7\"></path>\n</svg>",
+        "icon_color": "#6b4c9a",
+        "icon_size": 48,
+        "content": "<p>Do your bras pinch, shift or slip off your shoulder? Let's nip those problems in the cup and find you your best fit yet.</p>",
+        "content_color": "#000000",
+        "content_font_size": 16,
+        "content_max_width": 760,
+        "button_text": "BRA SIZE QUIZ",
+        "button_link": "",
+        "button_size": "base",
+        "button_style": "fill",
+        "button_secondary": false,
+        "button_background": "",
+        "button_text_color": "",
+        "button_2_text": "BOOK A FITTING",
+        "button_2_link": "",
+        "button_2_size": "base",
+        "button_2_style": "outline",
+        "button_2_secondary": false,
+        "button_2_background": "",
+        "button_2_text_color": "",
+        "background_color": "#e0cef8",
+        "background_opacity_mobile": 30,
+        "background_opacity_desktop": 30,
+        "border_radius": 16,
+        "padding_mobile": 40,
+        "padding_desktop": 64
+      }
+    },
+    "bra_parts_and_common_issues_PjBNgJ": {
+      "type": "bra-parts-and-common-issues",
+      "blocks": {
+        "bra_part_4HQGEh": {
+          "type": "bra_part",
+          "settings": {
+            "part_name": "Cups",
+            "description": "The cups are where your breast tissue sits. They can be lined or unlined, seamed or seamless, and play a key role in shaping and supporting your breasts.",
+            "common_issues": "Breast spillage/ bulging, Gaping cups, Chaffing or cutting in under the armpit"
+          }
+        },
+        "bra_part_GwQjkq": {
+          "type": "bra_part",
+          "settings": {
+            "part_name": "Band",
+            "description": "The band is the part of the bra that wraps around your torso — and it's responsible for providing about 80% of the support. A well-fitting band is the foundation of a supportive bra.",
+            "common_issues": "Band rides up, Band digs in, Band easily pulled away from the body, Back pain"
+          }
+        },
+        "bra_part_mjBwJT": {
+          "type": "bra_part",
+          "settings": {
+            "part_name": "Underwire",
+            "description": "Usually made of metal or plastic, underwires run along the bottom and sides of the cups. They help define the bra's shape and create an uplifted silhouette.",
+            "common_issues": "Poking or Digging in of wires"
+          }
+        },
+        "bra_part_xwEgXV": {
+          "type": "bra_part",
+          "settings": {
+            "part_name": "Gore",
+            "description": "The gore is the small panel at the centre front of the bra that connects the two cups. In an ideal fit, the gore should sit flat against your sternum.",
+            "common_issues": "Floating gore, Gore digging into the sternum"
+          }
+        },
+        "bra_part_EpWaXh": {
+          "type": "bra_part",
+          "settings": {
+            "part_name": "Wings",
+            "description": "These are the side and back portions of the bra that stretch from the outer edge of the cups to the hooks or closures. They help anchor the bra and contribute to a smooth fit under clothing.",
+            "common_issues": "Being able to wear a new bra on the tightest hook"
+          }
+        },
+        "bra_part_gCbcr8": {
+          "type": "bra_part",
+          "settings": {
+            "part_name": "Straps",
+            "description": "Straps help keep your bra secure and stable, but they're only meant to carry around 20% of the weight of your breasts. They're almost always adjustable and should be set to a two finger tension for optimal support.",
+            "common_issues": "Loose straps, Straps sliding off, Shoulder pain/ tension"
+          }
+        }
+      },
+      "block_order": [
+        "bra_part_4HQGEh",
+        "bra_part_GwQjkq",
+        "bra_part_mjBwJT",
+        "bra_part_xwEgXV",
+        "bra_part_EpWaXh",
+        "bra_part_gCbcr8"
+      ],
+      "name": "Bra Parts & Issues",
+      "settings": {
+        "title": "<p>Bra Parts & Common Issues</p>",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor pretium justo at dignissim.",
+        "anatomy_image_mobile": "shopify://shop_images/Frame_1000006239_2.png",
+        "anatomy_image_desktop": "shopify://shop_images/Frame_1000006239_1.png"
+      }
+    },
+    "quiz_card_two_cta_wWnxe9": {
+      "type": "quiz-card-two-cta",
+      "name": "Quiz card two CTA",
+      "settings": {
+        "eyebrow_text": "ONE SIZE DOESN'T FIT ALL",
+        "eyebrow_color": "#000000",
+        "eyebrow_font_size": 14,
+        "eyebrow_font_weight": 600,
+        "heading": "Experiencing <i>any</i> of <br>\nthe issues above?",
+        "heading_color": "#000000",
+        "heading_font_size_mobile": 36,
+        "heading_font_size_desktop": 42,
+        "heading_font_weight": 400,
+        "heading_font_style": "normal",
+        "icon_svg": "<svg width=\"29\" height=\"28\" viewbox=\"0 0 29 28\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path d=\"M-0.000115649 27.6289L-0.000114441 -1.2436e-06C6.23899 -9.70796e-07 11.6373 3.14463 14.2206 7.7164C16.804 3.14463 22.2023 -2.72803e-07 28.4414 0L28.4414 27.6289C22.2023 27.6289 16.804 24.4843 14.2206 19.9125C11.6413 24.4843 6.24305 27.6289 -0.000115649 27.6289Z\" fill=\"#FF615C\"></path>\n</svg>",
+        "icon_color": "#f9cec6",
+        "icon_size": 48,
+        "content": "<p>Let's nip those problems in the cup and find you your best fit yet. Calculate your bra size, or book a fitting. </p>",
+        "content_color": "#000000",
+        "content_font_size": 16,
+        "content_max_width": 760,
+        "button_text": "BRA SIZE QUIZ",
+        "button_link": "",
+        "button_size": "base",
+        "button_style": "fill",
+        "button_secondary": false,
+        "button_background": "",
+        "button_text_color": "",
+        "button_2_text": "BOOK A FITTING",
+        "button_2_link": "",
+        "button_2_size": "base",
+        "button_2_style": "outline",
+        "button_2_secondary": false,
+        "button_2_background": "",
+        "button_2_text_color": "",
+        "background_color": "#f9cec6",
+        "background_opacity_mobile": 30,
+        "background_opacity_desktop": 30,
+        "border_radius": 16,
+        "padding_mobile": 40,
+        "padding_desktop": 64
+      }
+    },
+    "types_of_bra_mNFftD": {
+      "type": "types-of-bra",
+      "blocks": {
+        "bra_type_6JzQKT": {
+          "type": "bra_type",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000006191.png",
+            "title": "FULL CUP BRA",
+            "description": "A full cup bra covers most of the breast tissue, offering maximum coverage and support. It's a great option for everyday wear, especially for fuller busts, and helps prevent spillage at the top or sides."
+          }
+        },
+        "bra_type_qQFgxj": {
+          "type": "bra_type",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000006273.png",
+            "title": "BALCONY BRA",
+            "description": "Also known as a balconette, this bra has wide-set straps and a horizontal neckline, offering a lifted, open shape. It provides moderate coverage and is great for wide necklines or square-cut tops. Best suited for those with broader shoulders and bottom fullness."
+          }
+        },
+        "bra_type_wQq8Qw": {
+          "type": "bra_type",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000006274.png",
+            "title": "PLUNGE BRA",
+            "description": "A plunge bra features a deep V-neckline, making it perfect for low-cut tops and dresses. It brings the breasts inward and enhances cleavage, often with angled cups and a low centre gore which is ideal for close-set breasts."
+          }
+        },
+        "bra_type_VwLbpt": {
+          "type": "bra_type",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000006275.png",
+            "title": "STRAPLESS BRA",
+            "description": "Designed to stay up without shoulder straps, a good strapless bra relies on firm bands, grippy edges, and strong underwires for support. Not all strapless bras are built for fuller-busts — at Scoop, we only stock ones that actually hold up."
+          }
+        },
+        "bra_type_aHJcgU": {
+          "type": "bra_type",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1000006276.png",
+            "title": "SPORTS BRA",
+            "description": "A sports bra is made to minimize bounce and movement during physical activity. Depending on the style, it may compress or encapsulate each breast separately. A supportive sports bra is a must-have for comfort, control, and long-term breast health, especially for fuller busts."
+          }
+        }
+      },
+      "block_order": [
+        "bra_type_6JzQKT",
+        "bra_type_qQFgxj",
+        "bra_type_wQq8Qw",
+        "bra_type_VwLbpt",
+        "bra_type_aHJcgU"
+      ],
+      "name": "Types of Bra",
+      "settings": {
+        "title": "<p>Types of Bras</p>",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor pretium justo at dignissim."
+      }
+    },
+    "booking_card_7jTmQb": {
+      "type": "booking-card",
+      "name": "Booking card",
+      "settings": {
+        "card_image_mobile": "shopify://shop_images/Group_1000006153_2466b389-9687-4c40-8034-3c6d40ba7420.svg",
+        "card_image_desktop": "shopify://shop_images/Group_1000006420.svg",
+        "icon_svg": "<svg width=\"115\" height=\"81\" viewbox=\"0 0 115 81\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<ellipse cx=\"57.0846\" cy=\"69.1307\" rx=\"57.0846\" ry=\"11.0486\" fill=\"#A073B7\"></ellipse>\n<path d=\"M19.7031 15.1718L11.0547 6.52344\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\"></path>\n<path d=\"M23.594 13.4508L20.2578 1\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\"></path>\n<path d=\"M16.1364 19.0667L3.68555 15.7305\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\"></path>\n<rect x=\"1.11346\" y=\"1.0041\" width=\"50.6613\" height=\"54.9969\" rx=\"3.16196\" transform=\"matrix(1.00141 0.0118914 0.112042 0.992207 19.5402 16.5805)\" fill=\"#FFB455\" stroke=\"black\" stroke-width=\"2\"></rect>\n<rect x=\"1.11346\" y=\"1.0041\" width=\"50.6613\" height=\"54.9969\" rx=\"3.16196\" transform=\"matrix(1.00141 0.0118914 0.112042 0.992207 25.4426 16.5883)\" fill=\"#FFB455\" stroke=\"black\" stroke-width=\"2\"></rect>\n<path d=\"M34.9141 30.707L43.1631 30.805\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\"></path>\n<path d=\"M35.4766 35.7617L43.7256 35.8597\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\"></path>\n<path d=\"M36.5488 44.3086L70.2857 44.7092\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\"></path>\n<path d=\"M37.3516 52.2227L71.0884 52.6233\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\"></path>\n<path d=\"M38.1426 59.2461L71.8795 59.6467\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\"></path>\n<path d=\"M89.1489 17.6588L81.7266 12.1758L69.684 29.3408L72.3454 34.2535L77.1063 34.8238L77.7115 33.9612L89.1489 17.6588Z\" fill=\"#FFB455\"></path>\n<path d=\"M81.8105 12.0508L69.6714 29.3535L70.365 34.6777\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n<path d=\"M89.1602 17.4883L77.021 34.791L70.4948 34.7435\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n<path d=\"M81.8105 12.0508L89.1732 17.4897\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path>\n<path d=\"M35.9868 20.7702C37.8915 20.7702 39.2441 19.2381 39.0079 17.348C38.7716 15.458 37.036 13.9258 35.1312 13.9258\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\"></path>\n<path d=\"M46.0629 20.7624C47.9677 20.7624 49.3203 19.2302 49.084 17.3402C48.8478 15.4502 47.1121 13.918 45.2074 13.918\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\"></path>\n<path d=\"M56.1508 20.7702C58.0556 20.7702 59.4082 19.2381 59.1719 17.348C58.9357 15.458 57.2 13.9258 55.2953 13.9258\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\"></path>\n<path d=\"M66.2387 20.7702C68.1435 20.7702 69.4961 19.2381 69.2598 17.348C69.0236 15.458 67.2879 13.9258 65.3832 13.9258\" stroke=\"black\" stroke-width=\"2\" stroke-linecap=\"round\"></path>\n<path d=\"M32.1153 17.348C31.879 15.458 33.2316 13.9258 35.1364 13.9258\" stroke=\"black\" stroke-width=\"2\"></path>\n<path d=\"M42.1817 17.3402C41.9454 15.4502 43.298 13.918 45.2028 13.918\" stroke=\"black\" stroke-width=\"2\"></path>\n<path d=\"M52.2696 17.3402C52.0333 15.4502 53.3859 13.918 55.2907 13.918\" stroke=\"black\" stroke-width=\"2\"></path>\n<path d=\"M62.3457 17.348C62.1095 15.458 63.4621 13.9258 65.3668 13.9258\" stroke=\"black\" stroke-width=\"2\"></path>\n</svg>",
+        "icon_color": "#6b4c9a",
+        "icon_size": 112,
+        "heading": "",
+        "heading_color": "#000000",
+        "heading_font_size_mobile": 24,
+        "heading_font_size_desktop": 32,
+        "heading_font_weight": 400,
+        "heading_font_style": "normal",
+        "content": "<p>Not sure what style is ideal for you?</p>",
+        "content_color": "#000000",
+        "content_font_size": 12,
+        "content_font_size_desktop": 16,
+        "button_text": "BOOK A FITTING",
+        "button_link": "shopify://pages/virtual-fittings",
+        "button_size": "base",
+        "button_style": "fill",
+        "button_secondary": false,
+        "button_background": "",
+        "button_text_color": "",
+        "padding_mobile": 40,
+        "padding_desktop": 80
+      }
+    },
+    "faq_two_column_E6cae9": {
+      "type": "faq-two-column",
+      "blocks": {
+        "item_ckTCkP": {
+          "type": "item",
+          "settings": {
+            "title": "Moulded or Padded Cups",
+            "content": "<p>These bras (commonly called T-shirt bras) have cups made from foam or spacer fabric, usually seamless, to create a smooth silhouette under clothes. They gently shape the breasts into a predefined contour. While they offer coverage and invisibility, they’re often less supportive than unlined bras, especially for fuller busts.</p>",
+            "open_by_default": true
+          }
+        },
+        "item_7Y48YM": {
+          "type": "item",
+          "settings": {
+            "title": "Unlined Cups ",
+            "content": "<p>Unlined cups have no foam or padding and are made by stitching together panels of fabric like lace, cotton, mesh or microfibre. These seams provide structure and lift, making unlined bras the most supportive options for fuller busts. Most unlined bras are constructed from 3 or 4 panels with seams that may be vertical, horizontal, or angled, each contributing to a specific shape.</p>",
+            "open_by_default": false
+          }
+        },
+        "item_AdVGNN": {
+          "type": "item",
+          "settings": {
+            "title": "Side support ",
+            "content": "<p>This refers to a specific panel, seam, or at times, an inner sling, along the outer edge of the cup that helps pull breast tissue inward from the sides toward the centre. Side support creates a more lifted and forward-facing shape and is especially helpful for wide-set fuller busts.</p>",
+            "open_by_default": false
+          }
+        },
+        "item_P3DHJV": {
+          "type": "item",
+          "settings": {
+            "title": "Stretch lace ",
+            "content": "<p>A soft, flexible fabric with built-in stretch that moulds to the natural shape of your breast. It’s particularly useful for anyone with breast asymmetry or fluctuating breast size (like during menstrual cycles) and offers gentle support without restriction.</p>",
+            "open_by_default": false
+          }
+        }
+      },
+      "block_order": [
+        "item_ckTCkP",
+        "item_7Y48YM",
+        "item_AdVGNN",
+        "item_P3DHJV"
+      ],
+      "name": "FAQ Two Column",
+      "settings": {
+        "full_width": true,
+        "subheading": "",
+        "title": "<p>Bra Features</p>",
+        "content": "<p>Each bra has a unique construction with features that aid specific concerns.</p>",
+        "max_width": 1000,
+        "intro_padding_right": 100,
+        "background": "",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": "",
+        "faq_background": "#f8eeec"
+      }
+    },
+    "collection_list_XwVYRY": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_JGraTi": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Frame_1000003704.png",
+            "image_mobile": "shopify://shop_images/Frame_1000003719.png",
+            "subheading": "",
+            "title": "",
+            "url": "",
+            "heading_tag": "h3",
+            "text_position": "place-self-start text-start",
+            "text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "collection_WAHaCV": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Frame_1000003705.png",
+            "image_mobile": "shopify://shop_images/Frame_1000003703_1.png",
+            "subheading": "",
+            "title": "",
+            "url": "",
+            "heading_tag": "h3",
+            "text_position": "place-self-start text-start",
+            "text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        },
+        "collection_6gaU9j": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/Frame_1000003706.png",
+            "image_mobile": "shopify://shop_images/Frame_1000003701_1.png",
+            "subheading": "",
+            "title": "",
+            "url": "",
+            "heading_tag": "h3",
+            "text_position": "place-self-start text-start",
+            "text_color": "#000000",
+            "overlay_color": "#000000",
+            "overlay_opacity": 0
+          }
+        }
+      },
+      "block_order": [
+        "collection_JGraTi",
+        "collection_WAHaCV",
+        "collection_6gaU9j"
+      ],
+      "custom_css": [
+        ".collection-list,.floating-controls-container,scroll-carousel {background-color: #fbf7f5 !important;}",
+        ".section-full{border-radius: 24px 24px 0 0;}"
+      ],
+      "settings": {
+        "full_width": true,
+        "stack_collections": true,
+        "collections_per_row_mobile": "1",
+        "collections_per_row": 3,
+        "show_progress_bar": false,
+        "subheading": "",
+        "title": "<p>Confused about what <br/>features will work for <em>you</em>?</p>",
+        "content": "<p>Three ways to get the fit you've always wanted. Expert guidance, wherever you're most comfortable. <span style=\"text-decoration:underline\">Book a fitting!</span></p>",
+        "link_url": "",
+        "link_text": "",
+        "background": "#fbf7f5",
+        "background_gradient": "",
+        "text_color": "",
+        "heading_color": "",
+        "heading_gradient": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "glossary_header_nYnMim",
+    "breast_shape_tT4wWr",
+    "breast_shape_info_rrEBng",
+    "quiz_card_two_cta_8pz6dw",
+    "bra_parts_and_common_issues_PjBNgJ",
+    "quiz_card_two_cta_wWnxe9",
+    "types_of_bra_mNFftD",
+    "booking_card_7jTmQb",
+    "faq_two_column_E6cae9",
+    "collection_list_XwVYRY"
+  ]
+}
