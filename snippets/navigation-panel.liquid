@@ -60,9 +60,9 @@ Supported variables
 
             <li class="h3 sm:h4">
               {%- if link.links.size > 0 or mega_menu_block != '' and is_mega_menu == false -%}
-                <button class="text-with-icon w-full group justify-between" aria-expanded="false" data-panel="1-{% increment level_1 %}">
+                <button class="text-with-icon w-full group justify-between navigation-menu-item-with-submenu" aria-expanded="false" data-panel="1-{% increment level_1 %}">
                   <span>{{ link.title }}</span>
-                  <span class="circle-chevron group-hover:colors group-expanded:colors">{%- render 'icon' with 'chevron-right-small', direction_aware: true -%}</span>
+                  <span class="navigation-scalloped-arrow">{%- render 'icon-arrow-right-scallop-mobile' -%}</span>
                 </button>
               {%- else -%}
                 <a href="{{ link.url }}" class="group block w-full">
@@ -89,7 +89,7 @@ Supported variables
                           {%- if sub_link.links.size > 0 -%}
                             <button class="text-with-icon w-full justify-between" aria-expanded="false" data-panel="2-{% increment level_2 %}">
                               <span>{{ sub_link.title }}</span>
-                              <span class="circle-chevron group-hover:colors group-expanded:colors">{%- render 'icon' with 'chevron-right-small', direction_aware: true -%}</span>
+                              <span class="navigation-scalloped-arrow">{%- render 'icon-arrow-right-scallop-mobile' -%}</span>
                             </button>
                           {%- else -%}
                             <a class="group {% if is_image_shown and is_mega_menu %}h-stack gap-4{% else %}block w-full{% endif %}" href="{{ sub_link.url }}">

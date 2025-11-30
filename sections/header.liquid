@@ -75,12 +75,17 @@ the underlying logic of the menu.
   {%- endif -%}
 
   /* Main navigation styling */
+  #shopify-section-{{ section.id }} .header__main-nav .header__link-list details{
+    height: 100%;
+  }
+  
   #shopify-section-{{ section.id }} .header__main-nav .header__link-list a,
   #shopify-section-{{ section.id }} .header__main-nav .header__link-list button,
   #shopify-section-{{ section.id }} .header__main-nav .header__link-list summary {
     color: white;
     font-size: 18px;
     font-family: var(--heading-font-family);
+    height: 100%;
   }
 </style>
 
@@ -138,7 +143,7 @@ the underlying logic of the menu.
                         {%- unless mega_menu_block.settings.layout == 'drawer' -%}
                           <details is="mega-menu-disclosure" trigger="{{ section.settings.menu_open_trigger | escape }}" {{ mega_menu_block.shopify_attributes }}>
                             <summary class="text-with-icon gap-2.5 link-faded-reverse" {% if link.url != '#' %}data-url="{{ link.url | escape }}"{% endif %}>
-                              {{- link.title -}} {%- render 'icon' with 'chevron-bottom' -%}
+                              {{- link.title -}} {%- render 'icon-menu-chevron' -%}
                             </summary>
 
                            {%- render 'mega-menu-horizontal', link: link, mega_menu_block: mega_menu_block -%}
@@ -155,7 +160,7 @@ the underlying logic of the menu.
                       {%- else -%}
                         <details class="relative" is="dropdown-disclosure" trigger="{{ section.settings.menu_open_trigger | escape }}">
                           <summary class="text-with-icon gap-2.5 link-faded-reverse" {% if link.url != '#' %}data-url="{{ link.url | escape }}"{% endif %}>
-                            {{- link.title -}} {%- render 'icon' with 'chevron-bottom' -%}
+                            {{- link.title -}} {%- render 'icon-menu-chevron' -%}
                           </summary>
 
                           <div class="dropdown-menu {% if link.levels <= 1 %}dropdown-menu--restrictable{% endif %}">
@@ -587,11 +592,22 @@ the underlying logic of the menu.
               "label": "Horizontal (centered)"
             },
             {
+              "value": "fittings",
+              "label": "Fittings"
+            },
+            {
               "value": "drawer",
               "label": "Drawer"
             }
           ],
           "default": "horizontal"
+        },
+        {
+          "type": "text",
+          "id": "services_heading",
+          "label": "Services heading",
+          "default": "OUR SERVICES",
+          "info": "Only used for Fittings layout"
         },
         {
           "type": "select",
