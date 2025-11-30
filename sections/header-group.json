@@ -39,6 +39,66 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "mega_menu_prMy4t": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Our Collection",
+            "layout": "fittings",
+            "services_heading": "OUR COLLECTIONS",
+            "submenu_style": "bold_heading",
+            "image_1": "shopify://shop_images/Screenshot_2025-09-12_at_1.33.24_PM_1.png",
+            "image_heading_1": "By Size",
+            "image_link_1": "shopify://collections/by-size",
+            "image_text_color_1": "#000000",
+            "image_2": "shopify://shop_images/lovelace_black-1_copy_2.png",
+            "image_heading_2": "By Style",
+            "image_link_2": "shopify://collections/by-style",
+            "image_text_color_2": "#000000",
+            "image_3": "shopify://shop_images/flare_amethystpurple-3_2_2.png",
+            "image_heading_3": "By Feature",
+            "image_link_3": "shopify://collections/by-feature",
+            "image_text_color_3": "#000000",
+            "product": "",
+            "product_card_background": "",
+            "product_card_text_color": "",
+            "promo_content_layout": "grid",
+            "stretch_promo": false,
+            "drawer_link_image": "hide"
+          }
+        },
+        "mega_menu_Nycrji": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Fittings",
+            "layout": "fittings",
+            "services_heading": "OUR SERVICES",
+            "submenu_style": "bold_heading",
+            "image_1": "shopify://shop_images/Frame_1000006094.svg",
+            "image_heading_1": "Virtual Fittings",
+            "image_link_1": "shopify://pages/virtual-fittings",
+            "image_text_color_1": "#000000",
+            "image_2": "shopify://shop_images/Frame_1000006096.svg",
+            "image_heading_2": "Studio Fittings",
+            "image_link_2": "shopify://pages/studio-fittings",
+            "image_text_color_2": "#000000",
+            "image_3": "shopify://shop_images/Frame_1000006095.svg",
+            "image_heading_3": "Home Fittings",
+            "image_link_3": "shopify://pages/home-fittings",
+            "image_text_color_3": "#000000",
+            "product": "",
+            "product_card_background": "",
+            "product_card_text_color": "",
+            "promo_content_layout": "grid",
+            "stretch_promo": false,
+            "drawer_link_image": "hide"
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_prMy4t",
+        "mega_menu_Nycrji"
+      ],
       "settings": {
         "enable_sticky": true,
         "hide_on_scroll": true,
@@ -48,11 +108,11 @@
         "menu": "main-menu",
         "sidebar_menu": "",
         "secondary_menu": "",
-        "menu_open_trigger": "click",
+        "menu_open_trigger": "hover",
         "opening_from": "left",
         "layout": "logo_left_navigation_center",
         "show_social_media": true,
-        "show_locale_selector": true,
+        "show_locale_selector": false,
         "show_country_selector": true,
         "show_country_flag": true,
         "show_country_name": false,
