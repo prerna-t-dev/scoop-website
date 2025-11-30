@@ -172,7 +172,7 @@
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 4,
         "subheading": "",
-        "title": "Best Sellers",
+        "title": "<p>Best Sellers</p>",
         "content": "",
         "background": "",
         "background_gradient": "",

@@ -1,0 +1,246 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} .types-of-bra {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .types-of-bra__header {
+    margin-bottom: var(--spacing-8);
+    text-align: left;
+  }
+
+  #shopify-section-{{ section.id }} .types-of-bra__title {
+    font-family: var(--heading-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.3 !important;
+    color: #000000;
+    margin: 0 0 10px 0;
+  }
+
+  #shopify-section-{{ section.id }} .types-of-bra__description {
+    font-family: var(--text-font-family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #000000;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .types-of-bra__list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  #shopify-section-{{ section.id }} .types-of-bra__item {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 18px;
+    align-items: start;
+  }
+
+  #shopify-section-{{ section.id }} .types-of-bra__item-image {
+    width: 80%;
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .types-of-bra__item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #shopify-section-{{ section.id }} .types-of-bra__item-title {
+    font-family: var(--text-font-family);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.5 !important;
+    color: #000000;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  #shopify-section-{{ section.id }} .types-of-bra__item-description {
+    font-family: var(--text-font-family);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #000000;
+    margin: 0;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .types-of-bra__header {
+      margin-bottom: 64px;
+    }
+
+    #shopify-section-{{ section.id }} .types-of-bra__title {
+      font-size: 56px;
+      margin-bottom: var(--spacing-6);
+    }
+
+    #shopify-section-{{ section.id }} .types-of-bra__description {
+      font-size: 22px;
+    }
+
+    #shopify-section-{{ section.id }} .types-of-bra__list {
+      gap: 48px;
+    }
+
+    #shopify-section-{{ section.id }} .types-of-bra__item {
+      grid-template-columns: auto 1fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    #shopify-section-{{ section.id }} .types-of-bra__item-image {
+      max-width: 250px;
+      margin: 0;
+    }
+
+    #shopify-section-{{ section.id }} .types-of-bra__item-title {
+      font-size: 18px;
+      letter-spacing: 0.05em;
+    }
+
+    #shopify-section-{{ section.id }} .types-of-bra__item-description {
+      font-size: 18px;
+    }
+  }
+</style>
+
+<div {% render 'section-properties' %}>
+  <div class="types-of-bra">
+    {%- if section.settings.title != blank or section.settings.description != blank -%}
+      <div class="types-of-bra__header">
+        {%- if section.settings.title != blank -%}
+          <h2 class="types-of-bra__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="types-of-bra__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="types-of-bra__list">
+        {%- for block in section.blocks -%}
+          <div class="types-of-bra__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="types-of-bra__item-image-wrapper">
+                {{ block.settings.image | image_url: width: 500 | image_tag: loading: 'lazy', class: 'types-of-bra__item-image', alt: block.settings.title | default: 'Bra type' }}
+              </div>
+            {%- endif -%}
+
+            <div class="types-of-bra__item-content">
+              {%- if block.settings.title != blank -%}
+                <h3 class="types-of-bra__item-title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+
+              {%- if block.settings.description != blank -%}
+                <p class="types-of-bra__item-description">{{ block.settings.description }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Types of Bra",
+  "class": "shopify-section--types-of-bra",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "<p>Types of Bras</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor pretium justo at dignissim."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bra_type",
+      "name": "Bra Type",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "FULL CUP BRA"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "A full cup bra covers most of the breast tissue, offering maximum coverage and support. It's a great option for everyday wear, especially for fuller busts, and helps prevent spillage at the top or sides."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Types of Bra",
+      "blocks": [
+        {
+          "type": "bra_type",
+          "settings": {
+            "title": "FULL CUP BRA",
+            "description": "A full cup bra covers most of the breast tissue, offering maximum coverage and support. It's a great option for everyday wear, especially for fuller busts, and helps prevent spillage at the top or sides."
+          }
+        },
+        {
+          "type": "bra_type",
+          "settings": {
+            "title": "BALCONY BRA",
+            "description": "Also known as a balconette, this bra has wide-set straps and a horizontal neckline, offering a lifted, open shape. It provides moderate coverage and is great for wide necklines or square-cut tops. Best suited for those with broader shoulders and bottom fullness."
+          }
+        },
+        {
+          "type": "bra_type",
+          "settings": {
+            "title": "PLUNGE BRA",
+            "description": "A plunge bra features a deep V-neckline, making it perfect for low-cut tops and dresses. It brings the breasts inward and enhances cleavage, often with angled cups and a low centre gore which is ideal for close-set breasts."
+          }
+        },
+        {
+          "type": "bra_type",
+          "settings": {
+            "title": "STRAPLESS BRA",
+            "description": "Designed to stay up without shoulder straps, a good strapless bra relies on firm bands, grippy edges, and strong underwires for support. Not all strapless bras are built for fuller-busts — at Scoop, we only stock ones that actually hold up."
+          }
+        },
+        {
+          "type": "bra_type",
+          "settings": {
+            "title": "SPORTS BRA",
+            "description": "A sports bra is made to minimize bounce and movement during physical activity. Depending on the style, it may compress or encapsulate each breast separately. A supportive sports bra is a must-have for comfort, control, and long-term breast health, especially for fuller busts."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

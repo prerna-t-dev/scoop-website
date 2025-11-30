@@ -70,6 +70,33 @@ CSS
     background-color: transparent !important;
   }
 
+  /* Remove grey background from floating-controls-container and all its children */
+  #shopify-section-{{ section.id }} .floating-controls-container,
+  #shopify-section-{{ section.id }} .floating-controls-container *,
+  #shopify-section-{{ section.id }} .floating-controls-container .scroll-area,
+  #shopify-section-{{ section.id }} .floating-controls-container scroll-carousel,
+  #shopify-section-{{ section.id }} .floating-controls-container collection-list,
+  #shopify-section-{{ section.id }} .floating-controls-container .bleed {
+    background-color: transparent !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    filter: none !important;
+  }
+
+  /* Override bg-custom if section has background set */
+  #shopify-section-{{ section.id }}.bg-custom .floating-controls-container,
+  #shopify-section-{{ section.id }}.bg-custom .floating-controls-container * {
+    background-color: transparent !important;
+    background: transparent !important;
+  }
+
+  /* Remove backdrop effects */
+  #shopify-section-{{ section.id }} .floating-controls-container,
+  #shopify-section-{{ section.id }} .floating-controls-container * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
   @media screen and (min-width: 700px) {
     #shopify-section-{{ section.id }} .collection-list-header {
       flex-direction: row;

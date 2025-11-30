@@ -1,0 +1,612 @@
+{%- render 'section-spacing-collapsing' -%}
+
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+CSS
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+<style>
+  #shopify-section-{{ section.id }} {
+    --quiz-card-background: {{ section.settings.background_color }};
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card {
+    background: var(--quiz-card-background);
+    border-radius: {{ section.settings.border_radius }}px;
+    padding: {{ section.settings.padding_mobile }}px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    max-width: 780px;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 1;
+  }
+
+  {%- if section.settings.background_image_mobile != blank -%}
+    #shopify-section-{{ section.id }} .quiz-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('{{ section.settings.background_image_mobile | image_url: width: 800 }}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: -1;
+      opacity: {{ section.settings.background_opacity_mobile | divided_by: 100.0 }};
+    }
+  {%- endif -%}
+
+  #shopify-section-{{ section.id }} .quiz-card__eyebrow {
+    font-size: {{ section.settings.eyebrow_font_size }}px;
+    font-weight: {{ section.settings.eyebrow_font_weight }} !important;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    color: {{ section.settings.eyebrow_color }};
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card__heading {
+    font-family: var(--heading-font-family);
+    font-size: {{ section.settings.heading_font_size_mobile }}px;
+    font-weight: {{ section.settings.heading_font_weight }};
+    line-height: 1;
+    margin-bottom: 16px;
+    color: {{ section.settings.heading_color }};
+    font-style: {{ section.settings.heading_font_style }} !important;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card__icon {
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    margin: 0 0 14px 0;
+    color: {{ section.settings.icon_color }};
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card__icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card__content {
+    font-size: {{ section.settings.content_font_size }}px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    color: {{ section.settings.content_color }};
+    max-width: {{ section.settings.content_max_width }}px;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card__buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card__buttons > * {
+    width: auto;
+    max-width: none;
+    flex: 0 1 auto;
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card__buttons > *:first-child {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.17);
+  }
+
+  #shopify-section-{{ section.id }} .quiz-card__buttons > *:first-child:hover {
+    background-color: #FFFFFF !important;
+    color: #000000 !important;
+  }
+
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .quiz-card {
+      padding: {{ section.settings.padding_desktop }}px;
+      text-align: center;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card__heading {
+      font-size: {{ section.settings.heading_font_size_desktop }}px;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card__content {
+      font-size: 18px;
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card__icon {
+      margin: 0 auto 14px;
+      justify-content: center;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card__buttons {
+      flex-direction: row;
+      gap: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .quiz-card__buttons > * {
+      width: auto;
+      max-width: none;
+      flex: 0 1 auto;
+    }
+
+    {%- if section.settings.background_image_desktop != blank -%}
+      #shopify-section-{{ section.id }} .quiz-card::before {
+        background-image: url('{{ section.settings.background_image_desktop | image_url: width: 1200 }}');
+        opacity: {{ section.settings.background_opacity_desktop | divided_by: 100.0 }};
+      }
+    {%- endif -%}
+  }
+</style>
+
+{%- comment -%}
+------------------------------------------------------------------------------------------------------------------------
+LIQUID
+------------------------------------------------------------------------------------------------------------------------
+{%- endcomment -%}
+
+<div {% render 'section-properties' %}>
+  <div class="section-stack">
+    <div class="quiz-card">
+      {%- if section.settings.eyebrow_text != blank -%}
+        <p class="quiz-card__eyebrow">{{ section.settings.eyebrow_text }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="quiz-card__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.icon_svg != blank -%}
+        <div class="quiz-card__icon">
+          {{ section.settings.icon_svg }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.content != blank -%}
+        <div class="quiz-card__content">
+          {{ section.settings.content }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button_text != blank or section.settings.button_2_text != blank -%}
+        <div class="quiz-card__buttons">
+          {%- if section.settings.button_text != blank -%}
+            {%- render 'button', 
+              content: section.settings.button_text, 
+              href: section.settings.button_link,
+              size: section.settings.button_size,
+              style: section.settings.button_style,
+              secondary: section.settings.button_secondary,
+              background: section.settings.button_background,
+              text_color: section.settings.button_text_color
+            -%}
+          {%- endif -%}
+          {%- if section.settings.button_2_text != blank -%}
+            {%- render 'button', 
+              content: section.settings.button_2_text, 
+              href: section.settings.button_2_link,
+              size: section.settings.button_2_size,
+              style: section.settings.button_2_style,
+              secondary: section.settings.button_2_secondary,
+              background: section.settings.button_2_background,
+              text_color: section.settings.button_2_text_color
+            -%}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Quiz card two CTA",
+  "class": "shopify-section--quiz-card-two-cta",
+  "tag": "section",
+  "disabled_on": {
+    "templates": ["password"],
+    "groups": ["header", "custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Eyebrow text"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow_text",
+      "label": "Eyebrow text",
+      "default": "ONE SIZE DOESN'T FIT ALL"
+    },
+    {
+      "type": "color",
+      "id": "eyebrow_color",
+      "label": "Eyebrow color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_size",
+      "label": "Eyebrow font size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "eyebrow_font_weight",
+      "label": "Eyebrow font weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your best fit starts here."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "label": "Heading font size (mobile)",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_desktop",
+      "label": "Heading font size (desktop)",
+      "min": 32,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "min": 400,
+      "max": 700,
+      "step": 100,
+      "default": 400
+    },
+    {
+      "type": "select",
+      "id": "heading_font_style",
+      "label": "Heading font style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "italic",
+          "label": "Italic"
+        }
+      ],
+      "default": "italic"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "html",
+      "id": "icon_svg",
+      "label": "Icon SVG",
+      "info": "Paste your SVG code here. Use fill=\"currentColor\" or stroke=\"currentColor\" for color control."
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon color",
+      "default": "#6B4C9A"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 24,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content",
+      "default": "<p>Do your bras pinch, shift or slip off your shoulder? Let's nip those problems in the cup and find you your best fit yet.</p>"
+    },
+    {
+      "type": "color",
+      "id": "content_color",
+      "label": "Content color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "content_font_size",
+      "label": "Content font size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 400,
+      "max": 1000,
+      "step": 20,
+      "unit": "px",
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "Button 1"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "BRA SIZE QUIZ"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "label": "Button size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "base",
+          "label": "Base"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "xl",
+          "label": "Extra Large"
+        }
+      ],
+      "default": "base"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "fill",
+          "label": "Fill"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_secondary",
+      "label": "Use secondary button style",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background (optional)",
+      "info": "Leave empty to use theme default"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color (optional)",
+      "info": "Leave empty to use theme default"
+    },
+    {
+      "type": "header",
+      "content": "Button 2"
+    },
+    {
+      "type": "text",
+      "id": "button_2_text",
+      "label": "Button text",
+      "default": "BOOK A FITTING"
+    },
+    {
+      "type": "url",
+      "id": "button_2_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_2_size",
+      "label": "Button size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "Small"
+        },
+        {
+          "value": "base",
+          "label": "Base"
+        },
+        {
+          "value": "lg",
+          "label": "Large"
+        },
+        {
+          "value": "xl",
+          "label": "Extra Large"
+        }
+      ],
+      "default": "base"
+    },
+    {
+      "type": "select",
+      "id": "button_2_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "fill",
+          "label": "Fill"
+        },
+        {
+          "value": "outline",
+          "label": "Outline"
+        }
+      ],
+      "default": "outline"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_2_secondary",
+      "label": "Use secondary button style",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "button_2_background",
+      "label": "Button background (optional)",
+      "info": "Leave empty to use theme default"
+    },
+    {
+      "type": "color",
+      "id": "button_2_text_color",
+      "label": "Button text color (optional)",
+      "info": "Leave empty to use theme default"
+    },
+    {
+      "type": "header",
+      "content": "Card styling"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#C8B3E6"
+    },
+    {
+      "type": "header",
+      "content": "Background image overlay"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image (mobile)",
+      "info": "Image will be displayed as background overlay on mobile devices"
+    },
+    {
+      "type": "range",
+      "id": "background_opacity_mobile",
+      "label": "Background opacity (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image_desktop",
+      "label": "Background image (desktop)",
+      "info": "Image will be displayed as background overlay on desktop devices"
+    },
+    {
+      "type": "range",
+      "id": "background_opacity_desktop",
+      "label": "Background opacity (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_mobile",
+      "label": "Card padding (mobile)",
+      "min": 20,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_desktop",
+      "label": "Card padding (desktop)",
+      "min": 40,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quiz card two CTA",
+      "category": "Content"
+    }
+  ]
+}
+{% endschema %}
+

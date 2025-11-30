@@ -1,0 +1,324 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} .breast-shape {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .breast-shape__header {
+    margin-bottom: var(--spacing-8);
+    text-align: left;
+  }
+
+  #shopify-section-{{ section.id }} .breast-shape__title {
+    font-family: var(--heading-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #000000;
+    margin: 0 0 10px 0;
+  }
+
+  #shopify-section-{{ section.id }} .breast-shape__description {
+    font-family: var(--text-font-family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #000000;
+    margin: 0;
+    max-width: 800px;
+  }
+
+  #shopify-section-{{ section.id }} .breast-shape__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  #shopify-section-{{ section.id }} .breast-shape__card {
+    /* background-color: #F8EEEC; */
+    border: 1px solid #7E7E7E;
+    border-radius: 10px;
+    padding: 24px 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    align-items: start;
+  }
+
+  #shopify-section-{{ section.id }} .breast-shape__card-image {
+    width: 100%;
+    /* max-width: 200px; */
+    height: 100%;
+    width: auto;
+    margin: 0 auto;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .breast-shape__card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 20px;
+  }
+
+  #shopify-section-{{ section.id }} .breast-shape__card-title {
+    font-family: var(--text-font-family);
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 1.5 !important;
+    color: #000000;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  #shopify-section-{{ section.id }} .breast-shape__card-description {
+    font-family: var(--text-font-family);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #000000;
+    margin: 0 0 40px 0;
+  }
+
+  #shopify-section-{{ section.id }} .breast-shape__card-styles {
+    margin-top: var(--spacing-2);
+  }
+
+  #shopify-section-{{ section.id }} .breast-shape__card-styles-label {
+    font-family: var(--text-font-family);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #FF615C;
+    /* margin: 0 0 var(--spacing-1) 0; */
+  }
+
+  #shopify-section-{{ section.id }} .breast-shape__card-styles-links {
+    font-family: var(--text-font-family);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #000000;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .breast-shape__card-styles-links a {
+    color: #000000;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .breast-shape__header {
+      margin-bottom: 64px;
+    }
+
+    #shopify-section-{{ section.id }} .breast-shape__title {
+      font-size: 56px;
+      margin-bottom: var(--spacing-6);
+    }
+
+    #shopify-section-{{ section.id }} .breast-shape__description {
+      font-size: 22px;
+    }
+
+    #shopify-section-{{ section.id }} .breast-shape__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 64px;
+      padding: 0 64px;
+    }
+
+    #shopify-section-{{ section.id }} .breast-shape__card {
+      padding: 32px;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+      border-radius: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .breast-shape__card-content {
+        padding-left: 0;
+    }
+
+    #shopify-section-{{ section.id }} .breast-shape__card-image {
+      /* max-width: 250px; */
+      margin: 0;
+    }
+
+    #shopify-section-{{ section.id }} .breast-shape__card-title {
+      font-size: 18px;
+      letter-spacing: 0.05em;
+    }
+
+    #shopify-section-{{ section.id }} .breast-shape__card-description {
+      font-size: 15px;
+    }
+
+    #shopify-section-{{ section.id }} .breast-shape__card-styles-label {
+      font-size: 13px;
+    }
+
+    #shopify-section-{{ section.id }} .breast-shape__card-styles-links {
+      font-size: 13px;
+    }
+  }
+</style>
+
+<div {% render 'section-properties' %}>
+  <div class="breast-shape">
+    {%- if section.settings.title != blank or section.settings.description != blank -%}
+      <div class="breast-shape__header">
+        {%- if section.settings.title != blank -%}
+          <h2 class="breast-shape__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="breast-shape__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="breast-shape__grid">
+        {%- for block in section.blocks -%}
+          <div class="breast-shape__card" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="breast-shape__card-image-wrapper">
+                {{ block.settings.image | image_url: width: 500 | image_tag: loading: 'lazy', class: 'breast-shape__card-image', alt: block.settings.image.alt | default: block.settings.title }}
+              </div>
+            {%- endif -%}
+
+            <div class="breast-shape__card-content">
+              {%- if block.settings.title != blank -%}
+                <h3 class="breast-shape__card-title">{{ block.settings.title }}</h3>
+              {%- endif -%}
+
+              {%- if block.settings.description != blank -%}
+                <p class="breast-shape__card-description">{{ block.settings.description }}</p>
+              {%- endif -%}
+
+              {%- if block.settings.styles_label != blank or block.settings.styles_links != blank -%}
+                <div class="breast-shape__card-styles">
+                  {%- if block.settings.styles_label != blank -%}
+                    <p class="breast-shape__card-styles-label">{{ block.settings.styles_label }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.styles_links != blank -%}
+                    <div class="breast-shape__card-styles-links">
+                      {{ block.settings.styles_links }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Breast Shape",
+  "class": "shopify-section--breast-shape",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "<p>Breast Shape</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor pretium justo at dignissim."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "shape_card",
+      "name": "Breast Shape Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Illustration"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "FULL ON BOTTOM BREASTS"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Most of your breast tissue or volume is located in the lower half of the breasts, beneath the nipple."
+        },
+        {
+          "type": "text",
+          "id": "styles_label",
+          "label": "Styles label",
+          "default": "Styles that work well:"
+        },
+        {
+          "type": "richtext",
+          "id": "styles_links",
+          "label": "Style links",
+          "default": "<p>Plunge and Balcony</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Breast Shape",
+      "blocks": [
+        {
+          "type": "shape_card",
+          "settings": {
+            "title": "FULL ON BOTTOM BREASTS",
+            "description": "Most of your breast tissue or volume is located in the lower half of the breasts, beneath the nipple.",
+            "styles_label": "Styles that work well:",
+            "styles_links": "<p>Plunge and Balcony</p>"
+          }
+        },
+        {
+          "type": "shape_card",
+          "settings": {
+            "title": "FULL ON TOP BREASTS",
+            "description": "Most of your breast tissue or volume is located within the upper half of the breast, above the nipple",
+            "styles_label": "Styles that work well:",
+            "styles_links": "<p>Balcony and Full Cup</p>"
+          }
+        },
+        {
+          "type": "shape_card",
+          "settings": {
+            "title": "FULL ALL AROUND",
+            "description": "Your breast tissue or volume is located evenly around the top and bottom halves of the breasts and your nipple sits in the middle of your breast.",
+            "styles_label": "Styles that work well:",
+            "styles_links": "<p>All Styles</p>"
+          }
+        },
+        {
+          "type": "shape_card",
+          "settings": {
+            "title": "PENDULOUS BREASTS",
+            "description": "Breasts that are soft, where most of the volume hangs below the breast root. Common for people who have given birth, had weight loss, or have aged.",
+            "styles_label": "Styles that work well:",
+            "styles_links": "<p>Full Cup and Unlined</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

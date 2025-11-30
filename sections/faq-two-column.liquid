@@ -139,7 +139,7 @@
   }
 
   #shopify-section-{{ section.id }} .accordion-content[aria-hidden="false"] {
-    max-height: 200px;
+    max-height: none;
   }
 
   #shopify-section-{{ section.id }} .accordion-content .prose {
@@ -187,14 +187,15 @@
       <div class="faq-accordion-container">
         {%- for block in section.blocks -%}
           {%- if block.settings.title != blank and block.settings.content != blank -%}
+            {%- assign is_open = block.settings.open_by_default | default: false -%}
             <div class="accordion-item" {{ block.shopify_attributes }}>
-              <button class="accordion-trigger" aria-expanded="false" aria-controls="accordion-content-{{ block.id }}">
+              <button class="accordion-trigger" aria-expanded="{{ is_open }}" aria-controls="accordion-content-{{ block.id }}">
                 <span>{{ block.settings.title }}</span>
                 <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </button>
-              <div class="accordion-content" id="accordion-content-{{ block.id }}" aria-hidden="true">
+              <div class="accordion-content" id="accordion-content-{{ block.id }}" aria-hidden="{% if is_open %}false{% else %}true{% endif %}">
                 <div class="prose">{{ block.settings.content }}</div>
               </div>
             </div>
@@ -209,6 +210,17 @@
   document.addEventListener('DOMContentLoaded', function() {
     const accordionTriggers = document.querySelectorAll('#shopify-section-{{ section.id }} .accordion-trigger');
     
+    // Set initial state for items open by default
+    accordionTriggers.forEach(trigger => {
+      const content = document.getElementById(trigger.getAttribute('aria-controls'));
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      
+      if (isExpanded) {
+        // Set max-height to actual content height for items open by default
+        content.style.maxHeight = content.scrollHeight + 'px';
+      }
+    });
+    
     accordionTriggers.forEach(trigger => {
       trigger.addEventListener('click', function() {
         const isExpanded = this.getAttribute('aria-expanded') === 'true';
@@ -220,12 +232,28 @@
             otherTrigger.setAttribute('aria-expanded', 'false');
             const otherContent = document.getElementById(otherTrigger.getAttribute('aria-controls'));
             otherContent.setAttribute('aria-hidden', 'true');
+            otherContent.style.maxHeight = '0px';
           }
         });
         
         // Toggle current accordion
+        if (isExpanded) {
+          // Closing
+          content.style.maxHeight = content.scrollHeight + 'px';
+          // Force reflow
+          content.offsetHeight;
+          content.style.maxHeight = '0px';
+          content.setAttribute('aria-hidden', 'true');
+        } else {
+          // Opening
+          content.style.maxHeight = '0px';
+          content.setAttribute('aria-hidden', 'false');
+          // Force reflow
+          content.offsetHeight;
+          content.style.maxHeight = content.scrollHeight + 'px';
+        }
+        
         this.setAttribute('aria-expanded', !isExpanded);
-        content.setAttribute('aria-hidden', isExpanded);
       });
     });
   });
@@ -276,6 +304,12 @@
           "id": "content",
           "label": "Answer",
           "default": "<p>Write content to answer to common questions your customers may have about your products, shipping policies..</p>"
+        },
+        {
+          "type": "checkbox",
+          "id": "open_by_default",
+          "label": "Open by default",
+          "default": false
         }
       ]
     }

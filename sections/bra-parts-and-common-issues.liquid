@@ -1,0 +1,341 @@
+{%- render 'section-spacing-collapsing' -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    padding-inline-end: 0 !important;
+  }
+
+  #shopify-section-{{ section.id }} .section {
+    padding-inline-end: 0 !important;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts {
+    max-width: 1027px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__header {
+    margin-bottom: var(--spacing-8);
+    text-align: left;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__title {
+    font-family: var(--heading-font-family);
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.3 !important;
+    color: #000000;
+    margin: 0 0 10px 0;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__description {
+    font-family: var(--text-font-family);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #000000;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__anatomy {
+    margin-bottom: var(--spacing-8);
+    text-align: center;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__anatomy-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__anatomy-image--desktop {
+    display: none;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__table-wrapper::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__table-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__table-wrapper::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+    margin: 0;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__table-header {
+    background-color: transparent;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__table-header th {
+    font-family: var(--text-font-family);
+    font-size: 12px;
+    font-weight: 600;
+    /* text-transform: uppercase; */
+    /* letter-spacing: 0.05em; */
+    color: #FF615C;
+    padding: 12px 16px;
+    text-align: left;
+    border: none;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__table-row {
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__table-row:nth-child(odd) {
+    background-color: #FBF7F5;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__table-cell {
+    font-family: var(--text-font-family);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: #000000;
+    padding: 16px;
+    vertical-align: top;
+    border: none;
+  }
+
+  #shopify-section-{{ section.id }} .bra-parts__table-cell:first-child {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} {
+      padding-inline-end: revert !important;
+    }
+
+    #shopify-section-{{ section.id }} .section {
+      padding-inline-end: revert !important;
+    }
+
+    #shopify-section-{{ section.id }} .bra-parts__header {
+      margin-bottom: 64px;
+    }
+
+    #shopify-section-{{ section.id }} .bra-parts__title {
+      font-size: 56px;
+      margin-bottom: var(--spacing-6);
+    }
+
+    #shopify-section-{{ section.id }} .bra-parts__description {
+      font-size: 22px;
+    }
+
+    #shopify-section-{{ section.id }} .bra-parts__anatomy {
+      margin-bottom: 64px;
+    }
+
+    #shopify-section-{{ section.id }} .bra-parts__anatomy-image--mobile {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .bra-parts__anatomy-image--desktop {
+      display: block;
+    }
+
+    #shopify-section-{{ section.id }} .bra-parts__table-wrapper {
+      overflow-x: visible;
+    }
+
+    #shopify-section-{{ section.id }} .bra-parts__table {
+      min-width: auto;
+    }
+
+    #shopify-section-{{ section.id }} .bra-parts__table-header th {
+      font-size: 18px;
+      padding: 16px 24px;
+    }
+
+    #shopify-section-{{ section.id }} .bra-parts__table-cell {
+      font-size: 15px;
+      padding: 24px;
+    }
+  }
+</style>
+
+<div {% render 'section-properties' %}>
+  <div class="bra-parts">
+    {%- if section.settings.title != blank or section.settings.description != blank -%}
+      <div class="bra-parts__header">
+        {%- if section.settings.title != blank -%}
+          <h2 class="bra-parts__title">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="bra-parts__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.anatomy_image_mobile != blank or section.settings.anatomy_image_desktop != blank -%}
+      <div class="bra-parts__anatomy">
+        {%- if section.settings.anatomy_image_mobile != blank -%}
+          {{ section.settings.anatomy_image_mobile | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'bra-parts__anatomy-image bra-parts__anatomy-image--mobile', alt: 'Anatomy of your bra' }}
+        {%- endif -%}
+        {%- if section.settings.anatomy_image_desktop != blank -%}
+          {{ section.settings.anatomy_image_desktop | image_url: width: 2000 | image_tag: loading: 'lazy', class: 'bra-parts__anatomy-image bra-parts__anatomy-image--desktop', alt: 'Anatomy of your bra' }}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="bra-parts__table-wrapper">
+        <table class="bra-parts__table">
+          <thead class="bra-parts__table-header">
+            <tr>
+              <th>BRA PART</th>
+              <th>What is it?</th>
+              <th>Common Issues</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%- for block in section.blocks -%}
+              <tr class="bra-parts__table-row" {{ block.shopify_attributes }}>
+                <td class="bra-parts__table-cell">{{ block.settings.part_name }}</td>
+                <td class="bra-parts__table-cell">{{ block.settings.description }}</td>
+                <td class="bra-parts__table-cell">{{ block.settings.common_issues }}</td>
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bra Parts & Issues",
+  "class": "shopify-section--bra-parts-and-common-issues",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "<p>Bra Parts & Common Issues</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor pretium justo at dignissim."
+    },
+    {
+      "type": "header",
+      "content": "Anatomy Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "anatomy_image_mobile",
+      "label": "Anatomy image (mobile)"
+    },
+    {
+      "type": "image_picker",
+      "id": "anatomy_image_desktop",
+      "label": "Anatomy image (desktop)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bra_part",
+      "name": "Bra Part",
+      "settings": [
+        {
+          "type": "text",
+          "id": "part_name",
+          "label": "Bra part name",
+          "default": "Cups"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "What is it?",
+          "default": "The cups are where your breast tissue sits. They can be lined or unlined, seamed or seamless, and play a key role in shaping and supporting your breasts."
+        },
+        {
+          "type": "textarea",
+          "id": "common_issues",
+          "label": "Common Issues",
+          "default": "Breast spillage/ bulging, Gaping cups, Chaffing or cutting in under the armpit"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bra Parts & Issues",
+      "blocks": [
+        {
+          "type": "bra_part",
+          "settings": {
+            "part_name": "Cups",
+            "description": "The cups are where your breast tissue sits. They can be lined or unlined, seamed or seamless, and play a key role in shaping and supporting your breasts.",
+            "common_issues": "Breast spillage/ bulging, Gaping cups, Chaffing or cutting in under the armpit"
+          }
+        },
+        {
+          "type": "bra_part",
+          "settings": {
+            "part_name": "Band",
+            "description": "The band is the part of the bra that wraps around your torso — and it's responsible for providing about 80% of the support. A well-fitting band is the foundation of a supportive bra.",
+            "common_issues": "Band rides up, Band digs in, Band easily pulled away from the body, Back pain"
+          }
+        },
+        {
+          "type": "bra_part",
+          "settings": {
+            "part_name": "Underwire",
+            "description": "Usually made of metal or plastic, underwires run along the bottom and sides of the cups. They help define the bra's shape and create an uplifted silhouette.",
+            "common_issues": "Poking or Digging in of wires"
+          }
+        },
+        {
+          "type": "bra_part",
+          "settings": {
+            "part_name": "Gore",
+            "description": "The gore is the small panel at the centre front of the bra that connects the two cups. In an ideal fit, the gore should sit flat against your sternum.",
+            "common_issues": "Floating gore, Gore digging into the sternum"
+          }
+        },
+        {
+          "type": "bra_part",
+          "settings": {
+            "part_name": "Wings",
+            "description": "These are the side and back portions of the bra that stretch from the outer edge of the cups to the hooks or closures. They help anchor the bra and contribute to a smooth fit under clothing.",
+            "common_issues": "Being able to wear a new bra on the tightest hook"
+          }
+        },
+        {
+          "type": "bra_part",
+          "settings": {
+            "part_name": "Straps",
+            "description": "Straps help keep your bra secure and stable, but they're only meant to carry around 20% of the weight of your breasts. They're almost always adjustable and should be set to a two finger tension for optimal support.",
+            "common_issues": "Loose straps, Straps sliding off, Shoulder pain/ tension"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

@@ -746,7 +746,8 @@ height-observer, visibility-progress, scroll-area, video-media, model-media, med
   padding-inline-end: var(--spacing-5);
   font-weight: bold;
   line-height: 1.6;
-  transition: background-color .15s ease-in-out, color .15s ease-in-out, box-shadow .15s ease-in-out;
+  transition: background-color .15s ease-in-out, color .15s ease-in-out, box-shadow .15s ease-in-out, border .15s ease-in-out;
+  border: none;
   display: inline-block;
   position: relative;
 }
@@ -789,7 +790,7 @@ height-observer, visibility-progress, scroll-area, video-media, model-media, med
 .button--outline {
   color: rgb(var(--button-outline-color) / var(--button-background-opacity, 1));
   background: none;
-  box-shadow: inset 0 0 0 2px;
+  border: 1px solid rgb(var(--button-outline-color));
 }
 
 .button__loader, .button__feedback {
@@ -12830,6 +12831,61 @@ shopify-accelerated-checkout, shopify-accelerated-checkout-cart {
 
 .bra-quiz__success-card .bra-quiz__size-label {
   color: #000000;
+}
+
+/* Sister Size, Relaxed Fit, Firm Fit Styles */
+.bra-quiz__sister-size,
+.bra-quiz__relaxed-fit,
+.bra-quiz__firm-fit {
+  margin-top: 24px;
+  text-align: left;
+}
+
+.bra-quiz__sister-size-text,
+.bra-quiz__relaxed-fit-text,
+.bra-quiz__firm-fit-text {
+  font-family: var(--text-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 1.5;
+  margin: 0 0 8px 0;
+}
+
+.bra-quiz__sister-size-value,
+.bra-quiz__relaxed-fit-value,
+.bra-quiz__firm-fit-value {
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 600;
+  color: #FFFFFF;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 6px;
+  line-height: 1.2;
+}
+
+@media screen and (min-width: 700px) {
+  .bra-quiz__sister-size,
+  .bra-quiz__relaxed-fit,
+  .bra-quiz__firm-fit {
+    margin-top: 32px;
+    text-align: center;
+  }
+  
+  .bra-quiz__sister-size-text,
+  .bra-quiz__relaxed-fit-text,
+  .bra-quiz__firm-fit-text {
+    font-size: 16px;
+  }
+  
+  .bra-quiz__sister-size-value,
+  .bra-quiz__relaxed-fit-value,
+  .bra-quiz__firm-fit-value {
+    font-size: 28px;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 8px;
+  }
 }
 
 .bra-quiz__errors {
