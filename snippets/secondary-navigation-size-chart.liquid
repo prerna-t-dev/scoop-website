@@ -1,0 +1,60 @@
+{%- comment -%}
+  Size Chart for Secondary Navigation
+  This is a simplified version that works independently from the main mega menu system
+{%- endcomment -%}
+
+{%- liquid
+  assign band_sizes = mega_menu_block.settings.size_chart_band_sizes | split: ','
+  assign cup_sizes = mega_menu_block.settings.size_chart_cup_sizes | split: ','
+  assign unavailable_sizes_raw = mega_menu_block.settings.size_chart_unavailable_sizes | strip
+  assign unavailable_sizes = unavailable_sizes_raw | newline_to_br | split: '<br />'
+  assign collection_url_raw = mega_menu_block.settings.size_chart_collection_url | default: '/collections/by-size'
+  if collection_url_raw contains 'shopify://'
+    assign collection_url = collection_url_raw | replace: 'shopify://collections/', '/collections/'
+  else
+    assign collection_url = collection_url_raw
+  endif
+-%}
+
+<div class="secondary-navigation-size-chart" style="--cup-count: {{ cup_sizes.size }};">
+  <div class="secondary-navigation-size-chart__grid">
+    {%- comment -%} Data rows with size values only {%- endcomment -%}
+    {%- for band_size in band_sizes -%}
+      {%- assign band_size_trimmed = band_size | strip -%}
+      {%- assign is_last_row = forloop.last -%}
+      {%- for cup_size in cup_sizes -%}
+        {%- assign cup_size_trimmed = cup_size | strip -%}
+        {%- assign is_last_column = forloop.last -%}
+        {%- assign size_combination = band_size_trimmed | append: cup_size_trimmed -%}
+        {%- assign is_unavailable = false -%}
+        {%- for unavailable_size in unavailable_sizes -%}
+          {%- assign unavailable_size_trimmed = unavailable_size | strip | replace: ' ', '' -%}
+          {%- if unavailable_size_trimmed != blank and unavailable_size_trimmed == size_combination -%}
+            {%- assign is_unavailable = true -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+        {%- assign cell_classes = 'secondary-navigation-size-chart__cell' -%}
+        {%- if is_last_column -%}
+          {%- assign cell_classes = cell_classes | append: ' secondary-navigation-size-chart__cell--last-column' -%}
+        {%- endif -%}
+        {%- if is_last_row -%}
+          {%- assign cell_classes = cell_classes | append: ' secondary-navigation-size-chart__cell--last-row' -%}
+        {%- endif -%}
+        {%- unless is_unavailable -%}
+          {%- assign size_url = collection_url | append: '?filter.v.option.band size=' | append: band_size_trimmed | append: '&filter.v.option.cup size=' | append: cup_size_trimmed -%}
+          <div class="{{ cell_classes }} secondary-navigation-size-chart__cell--available">
+            <a href="{{ size_url }}" class="secondary-navigation-size-chart__link">
+              {{- band_size_trimmed -}} {{- cup_size_trimmed -}}
+            </a>
+          </div>
+        {%- else -%}
+          <div class="{{ cell_classes }} secondary-navigation-size-chart__cell--disabled">
+            {{- band_size_trimmed -}} {{- cup_size_trimmed -}}
+          </div>
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</div>
+

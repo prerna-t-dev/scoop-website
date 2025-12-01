@@ -87,6 +87,159 @@ the underlying logic of the menu.
     font-family: var(--heading-font-family);
     height: 100%;
   }
+
+  /* Secondary navigation bar styling */
+  #shopify-section-{{ section.id }} .header__secondary-navigation {
+    background-color: #ffffff;
+    border-top: 1px solid #E5E5E5;
+    padding-block: var(--spacing-2);
+    will-change: transform;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  #shopify-section-{{ section.id }} .header__secondary-navigation-wrapper {
+    max-width: var(--container-outer-width);
+    margin-inline: auto;
+    padding-inline: var(--section-spacing-inline);
+    contain: layout style paint;
+  }
+
+  #shopify-section-{{ section.id }} .header__secondary-navigation-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-6);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  #shopify-section-{{ section.id }} .header__secondary-navigation-link {
+    color: #654392;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: var(--text-font-family);
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .header__secondary-navigation-link {
+      font-size: 14px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .header__secondary-navigation-link:hover {
+    opacity: 0.7;
+  }
+
+  #shopify-section-{{ section.id }} .header__secondary-navigation-separator {
+    color: #CCCCCC;
+    font-size: 12px;
+    user-select: none;
+  }
+
+  #shopify-section-{{ section.id }} .header__secondary-navigation-details {
+    position: relative;
+    display: inline-block;
+  }
+
+  #shopify-section-{{ section.id }} .header__secondary-navigation-details summary {
+    list-style: none;
+    cursor: pointer;
+  }
+
+  #shopify-section-{{ section.id }} .header__secondary-navigation-details summary::-webkit-details-marker {
+    display: none;
+  }
+
+  @media screen and (min-width: 1150px) {
+    #shopify-section-{{ section.id }},
+    #shopify-section-{{ section.id }} height-observer,
+    #shopify-section-{{ section.id }} store-header,
+    #shopify-section-{{ section.id }} .header,
+    #shopify-section-{{ section.id }} .header__wrapper,
+    #shopify-section-{{ section.id }} .header__secondary-navigation,
+    #shopify-section-{{ section.id }} .header__secondary-navigation-wrapper,
+    #shopify-section-{{ section.id }} .header__secondary-navigation-list,
+    #shopify-section-{{ section.id }} .header__secondary-navigation-list li,
+    #shopify-section-{{ section.id }} .header__secondary-navigation-details {
+      overflow: visible !important;
+      overflow-x: visible !important;
+      overflow-y: visible !important;
+    }
+
+    #shopify-section-{{ section.id }} .header__secondary-navigation-details {
+      position: relative;
+      z-index: 1000;
+    }
+
+    #shopify-section-{{ section.id }} .header__secondary-navigation-details .mega-menu,
+    #shopify-section-{{ section.id }} .header__secondary-navigation-details .secondary-navigation-size-chart {
+      position: fixed !important;
+      z-index: 99999 !important;
+      width: auto !important;
+      min-width: 600px !important;
+      max-width: 90vw !important;
+      background-color: #ffffff !important;
+      overflow: visible !important;
+    }
+
+    .secondary-navigation-style-feature,
+    .secondary-navigation-size-chart {
+      position: fixed !important;
+      z-index: 99999 !important;
+      width: 100vw !important;
+      max-width: 100vw !important;
+      padding: 2.5rem 100px !important;
+      background-color: #ffffff !important;
+      overflow: visible !important;
+      margin-top: 0 !important;
+    }
+
+    #shopify-section-{{ section.id }} .secondary-navigation-style-feature {
+      width: 100vw !important;
+      max-width: 100vw !important;
+      left: 0 !important;
+      right: 0 !important;
+      transform: none !important;
+    }
+  }
+
+  @media screen and (min-width: 700px) {
+    #shopify-section-{{ section.id }} .header__secondary-navigation-separator {
+      font-size: 14px;
+    }
+  }
+
+  @media screen and (max-width: 699px) {
+    /* Secondary navigation bar styling */
+    #shopify-section-{{ section.id }} .header__secondary-navigation {
+      padding-inline-start: 24px;
+    }
+  
+    #shopify-section-{{ section.id }} .header__secondary-navigation-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    #shopify-section-{{ section.id }} .header__secondary-navigation-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    #shopify-section-{{ section.id }} .header__secondary-navigation-list {
+      justify-content: flex-start;
+      padding-inline: var(--section-spacing-inline);
+    }
+  }
 </style>
 
 <height-observer variable="header">
@@ -300,6 +453,68 @@ the underlying logic of the menu.
         </ul>
       </div>
     </div>
+
+    {%- comment -%}
+      --------------------------------------------------------------------------------------------------------------------
+      SECONDARY NAVIGATION BAR
+      --------------------------------------------------------------------------------------------------------------------
+    {%- endcomment -%}
+
+    {%- if section.settings.secondary_navigation_menu.links.size > 0 -%}
+      <nav class="header__secondary-navigation" role="navigation">
+        <div class="header__secondary-navigation-wrapper">
+          <ul class="header__secondary-navigation-list" role="list">
+            {%- for link in section.settings.secondary_navigation_menu.links -%}
+              {% liquid
+                assign link_title_downcase = link.title | strip | downcase
+                assign mega_menu_block = ''
+
+                for block in section.blocks
+                  assign menu_item_downcase = block.settings.menu_item | strip | downcase
+
+                  if menu_item_downcase == link_title_downcase
+                    assign mega_menu_block = block
+                    break
+                  endif
+
+                endfor
+              %}
+              <li>
+                {%- if mega_menu_block != '' and mega_menu_block.settings.layout == 'size_chart' -%}
+                  <details class="header__secondary-navigation-details" data-size-chart-dropdown data-trigger="{{ section.settings.menu_open_trigger | escape }}">
+                    <summary class="header__secondary-navigation-link" {% if link.url != '#' %}data-url="{{ link.url | escape }}"{% endif %}>
+                      {{- link.title -}}
+                    </summary>
+                    {%- render 'secondary-navigation-size-chart', mega_menu_block: mega_menu_block -%}
+                  </details>
+                {%- elsif mega_menu_block != '' and mega_menu_block.settings.layout == 'style_feature' -%}
+                  <details class="header__secondary-navigation-details" data-style-feature-dropdown data-trigger="{{ section.settings.menu_open_trigger | escape }}">
+                    <summary class="header__secondary-navigation-link" {% if link.url != '#' %}data-url="{{ link.url | escape }}"{% endif %}>
+                      {{- link.title -}}
+                    </summary>
+                    {%- render 'secondary-navigation-style-feature', mega_menu_block: mega_menu_block -%}
+                  </details>
+                {%- elsif mega_menu_block != '' and mega_menu_block.settings.layout != 'drawer' -%}
+                  <details is="mega-menu-disclosure" trigger="{{ section.settings.menu_open_trigger | escape }}" {{ mega_menu_block.shopify_attributes }} class="header__secondary-navigation-details">
+                    <summary class="header__secondary-navigation-link" {% if link.url != '#' %}data-url="{{ link.url | escape }}"{% endif %}>
+                      {{- link.title -}}
+                    </summary>
+                    {%- render 'mega-menu-horizontal', link: link, mega_menu_block: mega_menu_block -%}
+                  </details>
+                {%- else -%}
+                  <a href="{{ link.url }}" class="header__secondary-navigation-link" {% if link.current %}aria-current="page"{% endif %}>
+                    {{- link.title -}}
+                  </a>
+                {%- endif -%}
+              </li>
+              {%- unless forloop.last -%}
+                <li class="header__secondary-navigation-separator" aria-hidden="true">|</li>
+              {%- endunless -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      </nav>
+    {%- endif -%}
   </store-header>
 </height-observer>
 
@@ -334,7 +549,252 @@ the underlying logic of the menu.
 
 <script>
   document.documentElement.style.setProperty('--header-height', Math.round(document.getElementById('shopify-section-{{ section.id }}').clientHeight) + 'px');
-</script>
+
+  // Handle hover/click for secondary navigation size chart
+  (function() {
+    const sizeChartDropdowns = document.querySelectorAll('#shopify-section-{{ section.id }} [data-size-chart-dropdown]');
+    const trigger = '{{ section.settings.menu_open_trigger | escape }}';
+    
+    sizeChartDropdowns.forEach(function(details) {
+      const summary = details.querySelector('summary');
+      const sizeChart = details.querySelector('.secondary-navigation-size-chart');
+      let hoverTimeout;
+      
+      function updatePosition() {
+        // Don't show dropdown on mobile
+        if (window.innerWidth < 1150) {
+          if (sizeChart) {
+            sizeChart.style.display = 'none';
+            sizeChart.style.visibility = 'hidden';
+            sizeChart.style.opacity = '0';
+          }
+          return;
+        }
+        
+        if (sizeChart && details.open) {
+          const rect = summary.getBoundingClientRect();
+          // Move to body if not already there to escape all containers
+          if (sizeChart.parentElement !== document.body) {
+            document.body.appendChild(sizeChart);
+          }
+          sizeChart.style.position = 'fixed';
+          sizeChart.style.top = (rect.bottom + 8) + 'px';
+          sizeChart.style.left = '50%';
+          sizeChart.style.transform = 'translateX(-50%)';
+          sizeChart.style.zIndex = '99999';
+          sizeChart.style.overflow = 'visible';
+          sizeChart.style.clipPath = 'none';
+          sizeChart.style.clip = 'unset';
+          sizeChart.style.display = 'block';
+          sizeChart.style.visibility = 'visible';
+          sizeChart.style.opacity = '1';
+        } else if (sizeChart && !details.open) {
+          // Hide and move back to details when closed
+          sizeChart.style.display = 'none';
+          if (sizeChart.parentElement === document.body) {
+            const originalParent = details;
+            if (originalParent && originalParent.querySelector('summary')) {
+              originalParent.appendChild(sizeChart);
+            }
+          }
+        }
+      }
+      
+      if (trigger === 'hover') {
+        summary.addEventListener('click', function(e) {
+          // On mobile (<1150px), allow navigation to the link URL
+          if (window.innerWidth < 1150 && summary.dataset.url) {
+            window.location.href = summary.dataset.url;
+            return;
+          }
+          if (summary.dataset.url) {
+            e.preventDefault();
+          }
+        });
+        
+        summary.addEventListener('mouseenter', function() {
+          // Don't open dropdown on mobile
+          if (window.innerWidth < 1150) {
+            return;
+          }
+          clearTimeout(hoverTimeout);
+          details.open = true;
+          setTimeout(updatePosition, 0);
+        });
+        
+        details.addEventListener('mouseleave', function() {
+          hoverTimeout = setTimeout(function() {
+            details.open = false;
+            updatePosition();
+          }, 200);
+        });
+        
+        // Also handle mouseleave on the size chart itself
+        if (sizeChart) {
+          sizeChart.addEventListener('mouseenter', function() {
+            clearTimeout(hoverTimeout);
+          });
+          
+          sizeChart.addEventListener('mouseleave', function() {
+            hoverTimeout = setTimeout(function() {
+              details.open = false;
+              updatePosition();
+            }, 200);
+          });
+        }
+      } else {
+        summary.addEventListener('click', function(e) {
+          // On mobile (<1150px), allow navigation to the link URL
+          if (window.innerWidth < 1150 && summary.dataset.url) {
+            window.location.href = summary.dataset.url;
+            return;
+          }
+          if (summary.dataset.url) {
+            e.preventDefault();
+          }
+          setTimeout(updatePosition, 0);
+        });
+      }
+      
+      // Watch for details open attribute changes
+      const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'open') {
+            updatePosition();
+          }
+        });
+      });
+      observer.observe(details, { attributes: true });
+      
+      window.addEventListener('resize', updatePosition);
+      window.addEventListener('scroll', updatePosition);
+    });
+      })();
+
+      // Handle hover/click for secondary navigation style/feature
+      (function() {
+        const styleFeatureDropdowns = document.querySelectorAll('#shopify-section-{{ section.id }} [data-style-feature-dropdown]');
+        const trigger = '{{ section.settings.menu_open_trigger | escape }}';
+        
+        styleFeatureDropdowns.forEach(function(details) {
+          const summary = details.querySelector('summary');
+          const styleFeature = details.querySelector('.secondary-navigation-style-feature');
+          let hoverTimeout;
+          
+          function updatePosition() {
+            // Don't show dropdown on mobile
+            if (window.innerWidth < 1150) {
+              if (styleFeature) {
+                styleFeature.style.display = 'none';
+                styleFeature.style.visibility = 'hidden';
+                styleFeature.style.opacity = '0';
+              }
+              return;
+            }
+            
+            if (styleFeature && details.open) {
+              const rect = summary.getBoundingClientRect();
+              // Move to body if not already there to escape all containers
+              if (styleFeature.parentElement !== document.body) {
+                document.body.appendChild(styleFeature);
+              }
+              styleFeature.style.position = 'fixed';
+              styleFeature.style.top = (rect.bottom + 8) + 'px';
+              styleFeature.style.left = '0';
+              styleFeature.style.right = '0';
+              styleFeature.style.width = '100vw';
+              styleFeature.style.maxWidth = '100vw';
+              styleFeature.style.transform = 'none';
+              styleFeature.style.zIndex = '99999';
+              styleFeature.style.overflow = 'visible';
+              styleFeature.style.clipPath = 'none';
+              styleFeature.style.clip = 'unset';
+              styleFeature.style.display = 'block';
+              styleFeature.style.visibility = 'visible';
+              styleFeature.style.opacity = '1';
+            } else if (styleFeature && !details.open) {
+              // Hide and move back to details when closed
+              styleFeature.style.display = 'none';
+              if (styleFeature.parentElement === document.body) {
+                const originalParent = details;
+                if (originalParent && originalParent.querySelector('summary')) {
+                  originalParent.appendChild(styleFeature);
+                }
+              }
+            }
+          }
+          
+          if (trigger === 'hover') {
+            summary.addEventListener('click', function(e) {
+              // On mobile (<1150px), allow navigation to the link URL
+              if (window.innerWidth < 1150 && summary.dataset.url) {
+                window.location.href = summary.dataset.url;
+                return;
+              }
+              if (summary.dataset.url) {
+                e.preventDefault();
+              }
+            });
+            
+            summary.addEventListener('mouseenter', function() {
+              // Don't open dropdown on mobile
+              if (window.innerWidth < 1150) {
+                return;
+              }
+              clearTimeout(hoverTimeout);
+              details.open = true;
+              setTimeout(updatePosition, 0);
+            });
+            
+            details.addEventListener('mouseleave', function() {
+              hoverTimeout = setTimeout(function() {
+                details.open = false;
+                updatePosition();
+              }, 200);
+            });
+            
+            // Also handle mouseleave on the style feature itself
+            if (styleFeature) {
+              styleFeature.addEventListener('mouseenter', function() {
+                clearTimeout(hoverTimeout);
+              });
+              
+              styleFeature.addEventListener('mouseleave', function() {
+                hoverTimeout = setTimeout(function() {
+                  details.open = false;
+                  updatePosition();
+                }, 200);
+              });
+            }
+          } else {
+            summary.addEventListener('click', function(e) {
+              // On mobile (<1150px), allow navigation to the link URL
+              if (window.innerWidth < 1150 && summary.dataset.url) {
+                window.location.href = summary.dataset.url;
+                return;
+              }
+              if (summary.dataset.url) {
+                e.preventDefault();
+              }
+              setTimeout(updatePosition, 0);
+            });
+          }
+          
+          // Watch for details open attribute changes
+          const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+              if (mutation.type === 'attributes' && mutation.attributeName === 'open') {
+                updatePosition();
+              }
+            });
+          });
+          observer.observe(details, { attributes: true });
+          
+          window.addEventListener('resize', updatePosition);
+          window.addEventListener('scroll', updatePosition);
+        });
+      })();
+    </script>
 
 {% schema %}
 {
@@ -404,6 +864,12 @@ the underlying logic of the menu.
       "id": "secondary_menu",
       "label": "Secondary menu",
       "info": "This menu won't show dropdown items. For best results, limit the number of links to 1 or 2."
+    },
+    {
+      "type": "link_list",
+      "id": "secondary_navigation_menu",
+      "label": "Secondary navigation bar",
+      "info": "Horizontal navigation bar below the main header with vertical separators"
     },
     {
       "type": "select",
@@ -596,6 +1062,14 @@ the underlying logic of the menu.
               "label": "Fittings"
             },
             {
+              "value": "size_chart",
+              "label": "Size Chart"
+            },
+            {
+              "value": "style_feature",
+              "label": "Style/Feature"
+            },
+            {
               "value": "drawer",
               "label": "Drawer"
             }
@@ -608,6 +1082,83 @@ the underlying logic of the menu.
           "label": "Services heading",
           "default": "OUR SERVICES",
           "info": "Only used for Fittings layout"
+        },
+        {
+          "type": "header",
+          "content": "Size Chart",
+          "info": "Only used for Size Chart layout"
+        },
+        {
+          "type": "url",
+          "id": "size_chart_collection_url",
+          "label": "Collection URL",
+          "info": "Base collection URL (e.g., /collections/by-size)"
+        },
+        {
+          "type": "text",
+          "id": "size_chart_band_sizes",
+          "label": "Band sizes",
+          "default": "28,30,32,34,36,38",
+          "info": "Comma-separated list of band sizes"
+        },
+        {
+          "type": "text",
+          "id": "size_chart_cup_sizes",
+          "label": "Cup sizes",
+          "default": "D,DD,E,F,FF,G,GG,H",
+          "info": "Comma-separated list of cup sizes"
+        },
+        {
+          "type": "textarea",
+          "id": "size_chart_unavailable_sizes",
+          "label": "Unavailable sizes",
+          "info": "One size per line (e.g., 28D). Sizes listed here will be disabled.",
+          "default": "28D\n34D\n34DD\n36D\n36DD\n38D"
+        },
+        {
+          "type": "header",
+          "content": "Style/Feature",
+          "info": "Only used for Style/Feature layout"
+        },
+        {
+          "type": "textarea",
+          "id": "style_list",
+          "label": "Style list",
+          "info": "One style per line. Format: Style Name|URL|underline (optional). Example: Full Cup|/collections/by-style?filter=full-cup|underline"
+        },
+        {
+          "type": "image_picker",
+          "id": "style_feature_image",
+          "label": "Image"
+        },
+        {
+          "type": "textarea",
+          "id": "style_feature_description",
+          "label": "Description",
+          "default": "Different occasions call for different fits. Browse our collection of bras and panties, each crafted with fuller busts in mind."
+        },
+        {
+          "type": "text",
+          "id": "style_feature_button_text",
+          "label": "Button text",
+          "default": "SHOP BY STYLE"
+        },
+        {
+          "type": "url",
+          "id": "style_feature_button_url",
+          "label": "Button URL"
+        },
+        {
+          "type": "color",
+          "id": "style_feature_button_background",
+          "label": "Button background",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "style_feature_button_text_color",
+          "label": "Button text color",
+          "default": "#ffffff"
         },
         {
           "type": "select",
